@@ -1,7 +1,8 @@
 {
-  "tagline": "[30 characters]",
+  "tagline": "Custom widgets for dashboards",
   "repository": "https://github.com/newrelic/nr-labs-widget-pack.git",
-  "details": "[]",
+  "details": "A pack of custom visualizations to enhance your dashboarding experience",
+  "keywords": ["visualizations"],
   "support": {
     "issues": {
       "url": "https://github.com/newrelic/nr-labs-widget-pack/issues"
@@ -10,7 +11,7 @@
       "address": "opensource+nr-labs-widget-pack@newrelic.com"
     },
     "community": {
-      "url": "https://discuss.newrelic.com/t/[YOUR REPO SUPPORT TOPIC]"
+      "url": "https://github.com/newrelic/nr-labs-widget-pack/issues"
     }
   },
   "whatsNew": "\n-Feat: initial release"
