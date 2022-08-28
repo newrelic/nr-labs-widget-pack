@@ -4,11 +4,13 @@
 
 # Labs Widget Pack
 
-![GitHub release (latest SemVer including pre-releases)](https://img.shields.io/github/v/release/newrelic/nr-labs-widget-pack?include_prereleases&sort=semver) [![Snyk](https://snyk.io/test/github/newrelic/nr-labs-widget-pack/badge.svg)](https://snyk.io/test/github/newrelic/nr-labs-widget-pack)
+![GitHub release (latest SemVer including pre-releases)](https://img.shields.io/github/v/release/newrelic/nr-labs-widget-pack?include_prereleases&sort=semver) 
 
 
 A collection of custom visualizations to enhance your dashboarding experience.
 - Multi Line Compare
+
+---
 
 ## Multi Line Compare
 
