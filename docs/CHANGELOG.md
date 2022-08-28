@@ -1,3 +1,10 @@
+# [1.2.0](https://github.com/newrelic/nr-labs-widget-pack/compare/v1.1.0...v1.2.0) (2022-08-28)
+
+
+### Features
+
+* update icon ([9d6d2a9](https://github.com/newrelic/nr-labs-widget-pack/commit/9d6d2a9805246e130c8047b8a741a42a198f7cdd))
+
 # [1.1.0](https://github.com/newrelic/nr-labs-widget-pack/compare/v1.0.0...v1.1.0) (2022-08-28)
 
 
