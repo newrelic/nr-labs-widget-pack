@@ -1,3 +1,11 @@
+# [1.1.0](https://github.com/newrelic/nr-labs-widget-pack/compare/v1.0.0...v1.1.0) (2022-08-28)
+
+
+### Features
+
+* add screenshot ([bd68456](https://github.com/newrelic/nr-labs-widget-pack/commit/bd684567dc6bde9812a00b4416f8cd50874ac82c))
+* catalog update ([a264f6e](https://github.com/newrelic/nr-labs-widget-pack/commit/a264f6e9b42210cdc05bd585bc67bd7669677562))
+
 # 1.0.0 (2022-08-28)
 
 
