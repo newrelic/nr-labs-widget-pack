@@ -1,8 +1,7 @@
 # Third Party Notices
 
-<!-- NOTE - This is produced internally using a script, along with a 3rd party manfiest file, see @mdfrederick for usage or help. Below is an example which utilizes a small subset of common/core packages used -->
 
-The nr1-your-project uses source code from third party libraries which carry
+The nr-labs-widget-pack uses source code from third party libraries which carry
 their own copyright notices and license terms. These notices are provided
 below.
 
@@ -10,7 +9,7 @@ In the event that a required notice is missing or incorrect, please notify us
 by e-mailing [open-source@newrelic.com](mailto:open-source@newrelic.com).
 
 For any licenses that require the disclosure of source
-code, the source code can be found at [https://github.com/newrelic/nr1-your-project](https://github.com/newrelic/nr1-your-project).
+code, the source code can be found at [https://github.com/newrelic/nr-labs-widget-pack](https://github.com/newrelic/nr-labs-widget-pack).
 
 ## Content
 

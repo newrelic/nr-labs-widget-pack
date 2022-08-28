@@ -1,0 +1,50 @@
+{
+  "schemaType": "VISUALIZATION",
+  "id": "nr1-multi-line-compare",
+  "displayName": "Multi Line Compare",
+  "description": "",
+  "configuration": [
+    {
+      "name": "accountId",
+      "title": "Account ID",
+      "description": "Account ID to be associated with the query",
+      "type": "account-id"
+    },
+    {
+      "name": "query",
+      "title": "Query",
+      "description": "NRQL query for visualization",
+      "type": "nrql"
+    },
+    {
+      "name": "compareOver",
+      "title": "Compare over",
+      "description": "Since period",
+      "type": "enum",
+      "items": [
+        {
+          "title": "select",
+          "value": "select"
+        },
+        {
+          "title": "day",
+          "value": "day"
+        },
+        {
+          "title": "hour",
+          "value": "hour"
+        },
+        {
+          "title": "week",
+          "value": "week"
+        }
+      ]
+    },
+    {
+      "name": "comparePeriod",
+      "title": "Compare period eg. X days, hours, weeks (numeric)",
+      "description": "",
+      "type": "number"
+    }
+  ]
+}

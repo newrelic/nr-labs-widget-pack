@@ -1,20 +1,23 @@
 {
     "private": true,
-    "name": "{{ NERDPACK_NAME }}",
+    "name": "nr-labs-widget-pack",
     "description": "Nerdpack template",
-    "version": "0.1.0",
+    "version": "0.1.4",
     "scripts": {
         "start": "nr1 nerdpack:serve",
         "test": "exit 0",
-        "eslint-check": "eslint nerdlets/",
-        "eslint-fix": "eslint nerdlets/ --fix"
+        "eslint-check": "eslint visualizations/",
+        "eslint-fix": "eslint visualizations/ --fix"
+    },
+    "nr1": {
+        "uuid": "4121275e-901c-4a79-bd6b-d91703012b01"
     },
     "bugs": {
-        "email": "opensource+{{ NERDPACK_NAME }}@newrelic.com"
+        "email": "opensource+nrlabswidgetpack@newrelic.com"
     },
     "dependencies": {
         "@newrelic/nr1-community": "latest",
-        "prop-types": "^15.6.2"
+        "prop-types": "^15.7.2"
     },
     "browserslist": [
         "last 2 versions",
@@ -27,7 +30,7 @@
         "@semantic-release/git": "^9.0.0",
         "eslint": "^6.8.0",
         "prettier": "^1.19.1",
-        "react": "16.6.3",
-        "react-dom": "16.6.3"
+        "react": "17.0.2",
+        "react-dom": "17.0.2"
     }
 }

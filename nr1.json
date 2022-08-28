@@ -1,6 +1,6 @@
 {
   "schemaType": "NERDPACK",
-  "id": "",
-  "displayName": "{{NERDPACK_NAME}}",
-  "description": "My new nerdpack"
+  "id": "deb0e2c6-f366-4140-a509-f851fa579774",
+  "displayName": "Labs Widget Pack",
+  "description": "A collection of custom visualizations"
 }
