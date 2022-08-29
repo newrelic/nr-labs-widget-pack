@@ -11,7 +11,13 @@ import {
 const nrColors = require('../../utils/nrColors.json');
 
 function MultiLineRoot(props) {
-  const { query = '', accountId, compareOver, comparePeriod } = props;
+  const {
+    query = '',
+    accountId,
+    compareOver,
+    comparePeriod,
+    customSinceClause
+  } = props;
   const [errors, setErrors] = useState([]);
   const [dataSets, setDataSets] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -49,13 +55,15 @@ function MultiLineRoot(props) {
     if (tempErrors.length === 0) {
       const baseQuery = `${query} ${
         !lowerQuery.includes('timeseries') ? 'TIMESERIES' : ''
-      } SINCE 1 ${compareOver} ago COMPARE WITH`;
+      } ${customSinceClause || `SINCE 1 ${compareOver} ago`} COMPARE WITH`;
 
       const queries = [];
       for (let z = 1; z < parseInt(comparePeriod) + 1; z++) {
         const newQuery = `${baseQuery} ${z} ${compareOver} ago`;
         queries.push(newQuery);
       }
+      // eslint-disable-next-line
+      console.log(queries);
 
       const queryPromises = queries.map(q =>
         NrqlQuery.query({ query: q, accountId })
@@ -90,7 +98,7 @@ function MultiLineRoot(props) {
     }
 
     setLoading(false);
-  }, [query, accountId, compareOver, comparePeriod]);
+  }, [query, accountId, compareOver, comparePeriod, customSinceClause]);
 
   if (loading) {
     return <Spinner />;

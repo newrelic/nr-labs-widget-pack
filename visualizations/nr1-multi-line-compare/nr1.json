@@ -45,6 +45,12 @@
       "title": "Compare period eg. X days, hours, weeks (numeric)",
       "description": "",
       "type": "number"
+    },
+    {
+      "name": "customSinceClause",
+      "title": "Custom since clause eg. SINCE 12 hours ago (refresh)",
+      "description": "",
+      "type": "string"
     }
   ]
 }
