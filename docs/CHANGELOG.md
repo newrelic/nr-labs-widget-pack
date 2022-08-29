@@ -1,3 +1,10 @@
+# [1.3.0](https://github.com/newrelic/nr-labs-widget-pack/compare/v1.2.0...v1.3.0) (2022-08-29)
+
+
+### Features
+
+* allow custom since clause ([2f6a682](https://github.com/newrelic/nr-labs-widget-pack/commit/2f6a6829d6f2fd3aaee79301cb88f03b3f6ed1bf))
+
 # [1.2.0](https://github.com/newrelic/nr-labs-widget-pack/compare/v1.1.0...v1.2.0) (2022-08-28)
 
 
