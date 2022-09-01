@@ -1,3 +1,10 @@
+# [1.4.0](https://github.com/newrelic/nr-labs-widget-pack/compare/v1.3.0...v1.4.0) (2022-09-01)
+
+
+### Features
+
+* update catalog doc ([bff816b](https://github.com/newrelic/nr-labs-widget-pack/commit/bff816b0e36448fe558f68b28de59fc034cd8544))
+
 # [1.3.0](https://github.com/newrelic/nr-labs-widget-pack/compare/v1.2.0...v1.3.0) (2022-08-29)
 
 
