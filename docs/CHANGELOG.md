@@ -1,3 +1,10 @@
+# [1.5.0](https://github.com/newrelic/nr-labs-widget-pack/compare/v1.4.0...v1.5.0) (2022-09-20)
+
+
+### Features
+
+* allow filters - resolves [#3](https://github.com/newrelic/nr-labs-widget-pack/issues/3) ([4860d01](https://github.com/newrelic/nr-labs-widget-pack/commit/4860d0130a1c34ba62ad9e7091b1ee2b83517eb6))
+
 # [1.4.0](https://github.com/newrelic/nr-labs-widget-pack/compare/v1.3.0...v1.4.0) (2022-09-01)
 
 
