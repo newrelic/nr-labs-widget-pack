@@ -1,11 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import {
   Card,
   CardBody,
   HeadingText,
   NrqlQuery,
   Spinner,
-  LineChart
+  LineChart,
+  NerdletStateContext
 } from 'nr1';
 
 const nrColors = require('../../utils/nrColors.json');
@@ -21,6 +22,7 @@ function MultiLineRoot(props) {
   const [errors, setErrors] = useState([]);
   const [dataSets, setDataSets] = useState([]);
   const [loading, setLoading] = useState(true);
+  const { filters } = useContext(NerdletStateContext);
 
   useEffect(async () => {
     setLoading(true);
@@ -58,8 +60,9 @@ function MultiLineRoot(props) {
       } ${customSinceClause || `SINCE 1 ${compareOver} ago`} COMPARE WITH`;
 
       const queries = [];
+      const filterClause = filters ? `WHERE ${filters}` : '';
       for (let z = 1; z < parseInt(comparePeriod) + 1; z++) {
-        const newQuery = `${baseQuery} ${z} ${compareOver} ago`;
+        const newQuery = `${baseQuery} ${z} ${compareOver} ago ${filterClause}`;
         queries.push(newQuery);
       }
       // eslint-disable-next-line
@@ -98,7 +101,14 @@ function MultiLineRoot(props) {
     }
 
     setLoading(false);
-  }, [query, accountId, compareOver, comparePeriod, customSinceClause]);
+  }, [
+    query,
+    accountId,
+    compareOver,
+    comparePeriod,
+    customSinceClause,
+    filters
+  ]);
 
   if (loading) {
     return <Spinner />;

@@ -5,6 +5,12 @@
   "description": "Multi line timeseries comparison",
   "configuration": [
     {
+      "name": "enableFilters",
+      "title": "Enable dashboard filters",
+      "description": "Allows the use of dashboard filters",
+      "type": "boolean"
+    },
+    {
       "name": "accountId",
       "title": "Account ID",
       "description": "Account ID to be associated with the query",
