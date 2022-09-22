@@ -1,3 +1,10 @@
+# [1.6.0](https://github.com/newrelic/nr-labs-widget-pack/compare/v1.5.0...v1.6.0) (2022-09-22)
+
+
+### Features
+
+* update accountId to accountIds ([d8f780a](https://github.com/newrelic/nr-labs-widget-pack/commit/d8f780ac5c0f190f528e641b18fd906365149c57))
+
 # [1.5.0](https://github.com/newrelic/nr-labs-widget-pack/compare/v1.4.0...v1.5.0) (2022-09-20)
 
 
