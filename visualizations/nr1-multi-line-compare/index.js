@@ -69,7 +69,7 @@ function MultiLineRoot(props) {
       console.log(queries);
 
       const queryPromises = queries.map(q =>
-        NrqlQuery.query({ query: q, accountId })
+        NrqlQuery.query({ query: q, accountIds: [accountId] })
       );
       const queryData = await Promise.all(queryPromises);
       // console.log(queryData);
