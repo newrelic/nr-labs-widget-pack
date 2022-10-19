@@ -1,3 +1,11 @@
+# [1.7.0](https://github.com/newrelic/nr-labs-widget-pack/compare/v1.6.0...v1.7.0) (2022-10-19)
+
+
+### Features
+
+* add radar chart ([e015a16](https://github.com/newrelic/nr-labs-widget-pack/commit/e015a165355d032aea597d484f9b7ce10b9380cb))
+* add radar screenshot ([c72a485](https://github.com/newrelic/nr-labs-widget-pack/commit/c72a485cd13a171c877bfbdaba8a3530ea0c10bc))
+
 # [1.6.0](https://github.com/newrelic/nr-labs-widget-pack/compare/v1.5.0...v1.6.0) (2022-09-22)
 
 
