@@ -1,0 +1,50 @@
+{
+  "schemaType": "VISUALIZATION",
+  "id": "nr-radar-chart",
+  "displayName": "Radar Chart",
+  "description": "Labs Widget Pack - Radar Chart w/ChartJS",
+  "configuration": [
+    {
+      "name": "enableFilters",
+      "title": "Enable dashboard filters",
+      "description": "Allows the use of dashboard filters",
+      "type": "boolean"
+    },
+    {
+      "name": "accountId",
+      "title": "Account ID",
+      "description": "Account ID to be associated with the query",
+      "type": "account-id"
+    },
+    {
+      "name": "query",
+      "title": "Query",
+      "description": "NRQL query for visualization",
+      "type": "nrql"
+    },
+    {
+      "name": "chartKey",
+      "title": "Key",
+      "description": "",
+      "type": "string"
+    },
+    {
+      "name": "backgroundColor",
+      "title": "Background Color (eg. rgba(255, 99, 132, 0.2))",
+      "description": "",
+      "type": "string"
+    },
+    {
+      "name": "borderColor",
+      "title": "Border Color (eg. rgba(255, 99, 132, 1))",
+      "description": "",
+      "type": "string"
+    },
+    {
+      "name": "borderWidth",
+      "title": "Border Width",
+      "description": "",
+      "type": "number"
+    }
+  ]
+}

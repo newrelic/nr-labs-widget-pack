@@ -17,7 +17,9 @@
     },
     "dependencies": {
         "@newrelic/nr1-community": "latest",
-        "prop-types": "^15.7.2"
+        "chart.js": "^3.9.1",
+        "prop-types": "^15.7.2",
+        "react-chartjs-2": "^4.3.1"
     },
     "browserslist": [
         "last 2 versions",

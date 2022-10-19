@@ -2,7 +2,7 @@
   "schemaType": "VISUALIZATION",
   "id": "nr-multi-line-compare",
   "displayName": "Multi Line Compare",
-  "description": "Multi line timeseries comparison",
+  "description": "Labs Widget Pack - Multi line timeseries comparison",
   "configuration": [
     {
       "name": "enableFilters",
