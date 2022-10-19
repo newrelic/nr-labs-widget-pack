@@ -8,12 +8,18 @@
 
 A collection of custom visualizations to enhance your dashboarding experience.
 - Multi Line Compare
+- Radar Chart w/ChartJS
 
 ---
 
 ## Multi Line Compare
 
 ![Screenshot #1](screenshots/multiline_01.png)
+
+## Radar Chart
+
+![Screenshot #1](screenshots/radar_01.png)
+
 
 
 - Allow for multi timeseries line comparisons with correctly referenced times
