@@ -15,7 +15,8 @@ import {
   HeadingText,
   NrqlQuery,
   Spinner,
-  NerdletStateContext
+  NerdletStateContext,
+  PlatformStateContext
 } from 'nr1';
 
 ChartJS.register(
@@ -27,7 +28,29 @@ ChartJS.register(
   Legend
 );
 
-function MultiLineRoot(props) {
+const MINUTE = 60000;
+const HOUR = 60 * MINUTE;
+const DAY = 24 * HOUR;
+
+const timeRangeToNrql = timeRange => {
+  if (!timeRange) {
+    return 'SINCE 30 minutes ago';
+  }
+
+  if (timeRange.beginTime && timeRange.endTime) {
+    return `SINCE ${timeRange.beginTime} UNTIL ${timeRange.endTime}`;
+  } else if (timeRange.begin_time && timeRange.end_time) {
+    return `SINCE ${timeRange.begin_time} UNTIL ${timeRange.end_time}`;
+  } else if (timeRange.duration <= HOUR) {
+    return `SINCE ${timeRange.duration / MINUTE} MINUTES AGO`;
+  } else if (timeRange.duration <= DAY) {
+    return `SINCE ${timeRange.duration / HOUR} HOURS AGO`;
+  } else {
+    return `SINCE ${timeRange.duration / DAY} DAYS AGO`;
+  }
+};
+
+function RadarRoot(props) {
   const {
     query = '',
     accountId,
@@ -35,12 +58,15 @@ function MultiLineRoot(props) {
     borderColor,
     borderWidth = 1,
     chartKey = '# Key',
-    enableFilters
+    enableFilters,
+    useTimeRange
   } = props;
   const [errors, setErrors] = useState([]);
   const [dataSets, setDataSets] = useState([]);
   const [loading, setLoading] = useState(true);
+  const platformContext = useContext(PlatformStateContext);
   const { filters } = useContext(NerdletStateContext);
+  const { timeRange } = platformContext;
 
   useEffect(async () => {
     setLoading(true);
@@ -60,8 +86,21 @@ function MultiLineRoot(props) {
     setErrors(tempErrors);
 
     if (tempErrors.length === 0) {
+      let finalQuery = query;
+      if (useTimeRange) {
+        finalQuery += ` ${timeRangeToNrql(timeRange)}`;
+      }
+
+      if (enableFilters) {
+        const filterClause = filters ? `WHERE ${filters}` : '';
+        finalQuery += ` ${filterClause}`;
+      }
+
+      // eslint-disable-next-line
+      console.log(`NRQL Query: ${finalQuery}`);
+
       const queryData = await NrqlQuery.query({
-        query: `${query} ${enableFilters ? filters : ''}`,
+        query: finalQuery,
         accountIds: [accountId]
       });
       // eslint-disable-next-line
@@ -76,6 +115,7 @@ function MultiLineRoot(props) {
     accountId,
     filters,
     enableFilters,
+    useTimeRange,
     chartKey,
     backgroundColor,
     borderColor,
@@ -134,4 +174,4 @@ const ErrorState = errors => (
   </Card>
 );
 
-export default MultiLineRoot;
+export default RadarRoot;

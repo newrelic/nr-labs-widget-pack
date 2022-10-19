@@ -11,6 +11,12 @@
       "type": "boolean"
     },
     {
+      "name": "useTimeRange",
+      "title": "Use Time Range Picker",
+      "description": "Respects the time range picker",
+      "type": "boolean"
+    },
+    {
       "name": "accountId",
       "title": "Account ID",
       "description": "Account ID to be associated with the query",
