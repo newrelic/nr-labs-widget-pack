@@ -1,3 +1,10 @@
+# [1.8.0](https://github.com/newrelic/nr-labs-widget-pack/compare/v1.7.0...v1.8.0) (2022-10-19)
+
+
+### Features
+
+* add timepicker and filter support ([5135342](https://github.com/newrelic/nr-labs-widget-pack/commit/5135342199fa84f4c108ef5329fd4df9ebbef68b))
+
 # [1.7.0](https://github.com/newrelic/nr-labs-widget-pack/compare/v1.6.0...v1.7.0) (2022-10-19)
 
 
