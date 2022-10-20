@@ -1,3 +1,10 @@
+# [1.10.0](https://github.com/newrelic/nr-labs-widget-pack/compare/v1.9.0...v1.10.0) (2022-10-20)
+
+
+### Features
+
+* openNerdlet ([04fc7a4](https://github.com/newrelic/nr-labs-widget-pack/commit/04fc7a4949385244cffbd8bbf130fe5b9c0ad051))
+
 # [1.9.0](https://github.com/newrelic/nr-labs-widget-pack/compare/v1.8.0...v1.9.0) (2022-10-20)
 
 
