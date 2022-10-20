@@ -1,3 +1,10 @@
+# [1.9.0](https://github.com/newrelic/nr-labs-widget-pack/compare/v1.8.0...v1.9.0) (2022-10-20)
+
+
+### Features
+
+* add nerdlet loader ([d909e04](https://github.com/newrelic/nr-labs-widget-pack/commit/d909e04277ee29cc7fbc2fec4807b3edcba7477a))
+
 # [1.8.0](https://github.com/newrelic/nr-labs-widget-pack/compare/v1.7.0...v1.8.0) (2022-10-19)
 
 
