@@ -1,0 +1,20 @@
+{
+  "schemaType": "VISUALIZATION",
+  "id": "nr-nerdlet-loader",
+  "displayName": "Nerdlet Loader",
+  "description": "Intended for advanced usecases",
+  "configuration": [
+    {
+      "name": "nerdletId",
+      "title": "Nerdlet ID",
+      "description": "",
+      "type": "string"
+    },
+    {
+      "name": "urlState",
+      "title": "JSON URL State",
+      "description": "",
+      "type": "json"
+    }
+  ]
+}
