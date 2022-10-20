@@ -29,6 +29,14 @@ A collection of custom visualizations to enhance your dashboarding experience.
 
 - Allows button creation with configurable onClick actions
 
+#### Example w/Stacked Nerdlet
+```
+Nerdlet Id: service-maps.home
+
+URL State
+{"entityGuid":"MTYwNjg2MnxBUE18QVBQTElDQVRJT058NjI2OTA3NjE"}
+```
+
 ## Open source license
 
 This project is distributed under the [Apache 2 license](LICENSE).
