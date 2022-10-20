@@ -1,3 +1,11 @@
+# [1.11.0](https://github.com/newrelic/nr-labs-widget-pack/compare/v1.10.0...v1.11.0) (2022-10-20)
+
+
+### Features
+
+* add month/quarter ([d2dabdd](https://github.com/newrelic/nr-labs-widget-pack/commit/d2dabdd562ae5908e4ba379d4c5a470b08f4f1e6))
+* add month/quarter ([5ac417e](https://github.com/newrelic/nr-labs-widget-pack/commit/5ac417e3876a6f822b06cad669a991893dc27cd0))
+
 # [1.10.0](https://github.com/newrelic/nr-labs-widget-pack/compare/v1.9.0...v1.10.0) (2022-10-20)
 
 
