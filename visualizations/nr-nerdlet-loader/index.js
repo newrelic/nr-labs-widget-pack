@@ -20,7 +20,7 @@ function NerdletLoader(props) {
         urlState: json
       };
 
-      navigation.replaceNerdlet(nerdlet);
+      navigation.openNerdlet(nerdlet);
     }
   }, [nerdletId, urlState]);
 
