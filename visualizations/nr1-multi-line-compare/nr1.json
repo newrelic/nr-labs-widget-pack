@@ -56,7 +56,7 @@
     },
     {
       "name": "comparePeriod",
-      "title": "Compare period eg. X days, hours, weeks (numeric)",
+      "title": "Compare period eg. X days, hours, weeks, months, quarter (numeric)",
       "description": "",
       "type": "number"
     },
