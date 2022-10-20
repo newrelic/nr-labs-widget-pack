@@ -2,10 +2,14 @@ import React, { useEffect, useState } from 'react';
 import { navigation, Button, Card, CardBody, HeadingText } from 'nr1';
 
 function NerdletLoader(props) {
-  const { actions, textAlign } = props;
+  const { actions, textAlign, immediateUrlReplace } = props;
   const [errors, setErrors] = useState([]);
 
   useEffect(() => {
+    if (immediateUrlReplace) {
+      window.location.replace(immediateUrlReplace);
+    }
+
     const tempErrors = [];
 
     actions.forEach((action, index) => {

@@ -136,6 +136,12 @@
           ]
         }
       ]
+    },
+    {
+      "name": "immediateUrlReplace",
+      "title": "Immediate URL Replace (use with caution)",
+      "description": "",
+      "type": "string"
     }
   ]
 }
