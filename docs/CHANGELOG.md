@@ -1,3 +1,10 @@
+# [1.13.0](https://github.com/newrelic/nr-labs-widget-pack/compare/v1.12.0...v1.13.0) (2022-10-20)
+
+
+### Features
+
+* add immediate URL replace ([3c2dd8f](https://github.com/newrelic/nr-labs-widget-pack/commit/3c2dd8f5c63a7df1f32a6908ed02fb7c51337704))
+
 # [1.12.0](https://github.com/newrelic/nr-labs-widget-pack/compare/v1.11.0...v1.12.0) (2022-10-20)
 
 
