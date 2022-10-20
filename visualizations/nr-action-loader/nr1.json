@@ -1,0 +1,141 @@
+{
+  "schemaType": "VISUALIZATION",
+  "id": "nr-action-loader",
+  "displayName": "Action Loader",
+  "description": "Intended for advanced usecases",
+  "configuration": [
+    {
+      "name": "textAlign",
+      "title": "Text Align",
+      "description": "",
+      "type": "enum",
+      "items": [
+        {
+          "title": "Select",
+          "value": null
+        },
+        {
+          "title": "left",
+          "value": "left"
+        },
+        {
+          "title": "right",
+          "value": "right"
+        },
+        {
+          "title": "center",
+          "value": "center"
+        }
+      ]
+    },
+    {
+      "name": "actions",
+      "title": "Actions",
+      "type": "collection",
+      "items": [
+        {
+          "name": "name",
+          "title": "Name",
+          "description": "",
+          "type": "string"
+        },
+        {
+          "name": "actionType",
+          "title": "Action Type",
+          "description": "",
+          "type": "enum",
+          "items": [
+            {
+              "title": "Select",
+              "value": null
+            },
+            {
+              "title": "Stacked Nerdlet ID",
+              "value": "stackedNerdletId"
+            },
+            {
+              "title": "Stacked Entity GUID",
+              "value": "stackedEntityGuid"
+            },
+            {
+              "title": "Hyperlink",
+              "value": "hyperlink"
+            },
+            {
+              "title": "Stacked Link (experimental)",
+              "value": "stackedLink"
+            },
+            {
+              "title": "Window URL Replace (experimental)",
+              "value": "windowReplace"
+            }
+          ]
+        },
+        {
+          "name": "id",
+          "title": "Nerdlet ID or Hyperlink",
+          "description": "",
+          "type": "string"
+        },
+        {
+          "name": "urlState",
+          "title": "JSON URL State",
+          "description": "",
+          "type": "json"
+        },
+        {
+          "name": "sizeType",
+          "title": "Button Size",
+          "description": "",
+          "type": "enum",
+          "items": [
+            {
+              "title": "Select",
+              "value": null
+            },
+            {
+              "title": "Small",
+              "value": "SMALL"
+            },
+            {
+              "title": "Medium",
+              "value": "MEDIUM"
+            },
+            {
+              "title": "Large",
+              "value": "LARGE"
+            }
+          ]
+        },
+        {
+          "name": "buttonType",
+          "title": "Button Type",
+          "description": "",
+          "type": "enum",
+          "items": [
+            {
+              "title": "Select",
+              "value": null
+            },
+            {
+              "title": "Normal",
+              "value": "NORMAL"
+            },
+            {
+              "title": "Outline",
+              "value": "OUTLINE"
+            },
+            {
+              "title": "Plain Neutral",
+              "value": "PLAIN_NEUTRAL"
+            },
+            {
+              "title": "Primary",
+              "value": "PRIMARY"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
