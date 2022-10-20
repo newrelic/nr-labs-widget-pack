@@ -9,6 +9,7 @@
 A collection of custom visualizations to enhance your dashboarding experience.
 - Multi Line Compare
 - Radar Chart w/ChartJS
+- Nerdlet Loader
 
 ---
 
@@ -23,6 +24,18 @@ A collection of custom visualizations to enhance your dashboarding experience.
 
 
 - Allow for multi timeseries line comparisons with correctly referenced times
+
+## Nerdlet Loader
+
+- Allows loading other nerdlets within the frame
+
+Example settings.
+```
+Nerdlet ID: service-maps.home
+
+URL State: {"entityGuid":"MTYwNjg2MnxBUE18QVBQTElDQVRJT058NjI2OTA3NjE"}
+
+```
 
 ## Open source license
 
