@@ -1,3 +1,11 @@
+# [1.12.0](https://github.com/newrelic/nr-labs-widget-pack/compare/v1.11.0...v1.12.0) (2022-10-20)
+
+
+### Features
+
+* action loader ([e1b4ec5](https://github.com/newrelic/nr-labs-widget-pack/commit/e1b4ec52d3db6e4b760abb189ff27f28308bb122))
+* update readme ([9bcf902](https://github.com/newrelic/nr-labs-widget-pack/commit/9bcf90250ce64df72be86c25df2bb5df0db239d3))
+
 # [1.11.0](https://github.com/newrelic/nr-labs-widget-pack/compare/v1.10.0...v1.11.0) (2022-10-20)
 
 
