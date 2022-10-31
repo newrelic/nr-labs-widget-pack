@@ -255,7 +255,6 @@ function MapBoxRoot(props) {
             longitude={mapData.long}
             latitude={mapData.lat}
             color={marker?.markerColor || defaultMarkerColor}
-            // style={{ opacity: 50 }}
             onClick={e => {
               // If we let the click event propagates to the map, it will immediately close the popup
               // with `closeOnClick: true`
@@ -329,7 +328,6 @@ const ErrorState = errors => (
       >
         Setup Guide
       </HeadingText>
-
       <span
         className="ErrorState-headingText"
         onClick={() => window.open('https://account.mapbox.com/auth/signup/')}
@@ -339,7 +337,6 @@ const ErrorState = errors => (
         Box Access Token.
       </span>
       <br />
-
       <HeadingText
         className="ErrorState-headingText"
         spacingType={[HeadingText.SPACING_TYPE.LARGE]}
@@ -347,12 +344,24 @@ const ErrorState = errors => (
       >
         Your query must contain:
       </HeadingText>
-
       <span>
         - One alias with 'name:SOME_VALUE' which will be used as the marker name
       </span>
       <br />
-      <span>- Have a FACET for latitude and longitude</span>
+      <span>
+        - Have a FACET for latitude and longitude, use precision to ensure the
+        FACET does not round the number eg.
+      </span>
+      <br />
+      <span>
+        FACET string(lat, precision: 5) as 'lat', string(lng, precision: 5) as
+        'lng'
+      </span>
+      <br />
+      <span>
+        Rotation can optionally be set using the following alias with
+        'rotate:SOME_VALUE'
+      </span>
       <br />
       <span>
         - Example Query:{' '}
@@ -365,9 +374,7 @@ const ErrorState = errors => (
       </span>
       <br />
       <br />
-
       <hr />
-
       <HeadingText
         className="ErrorState-headingText"
         spacingType={[HeadingText.SPACING_TYPE.LARGE]}
@@ -375,7 +382,6 @@ const ErrorState = errors => (
       >
         Hey! you need to do a few more things to get started!
       </HeadingText>
-
       {errors.map(err => (
         <>
           {err}

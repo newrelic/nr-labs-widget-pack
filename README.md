@@ -46,7 +46,11 @@ URL State
 - Supports multiple NRQL queries and custom markers
 - Requires a Map Box Access Token from https://account.mapbox.com/auth/signup/
 - Query should contain one alias with 'name:SOME_VALUE' which will be used as the marker name
-- Query should have a FACET for latitude and longitude
+- Query should have a FACET for latitude and longitude, use precision to ensure the FACET does not round the number
+eg.
+```
+FACET string(lat, precision: 5) as 'lat', string(lng, precision: 5) as 'lng' 
+```
 - Rotation can be set using the following alias with 'rotate:SOME_VALUE'
 - Example Query:
 ```
