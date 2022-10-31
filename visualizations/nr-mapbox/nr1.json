@@ -2,7 +2,7 @@
   "schemaType": "VISUALIZATION",
   "id": "nr-mapbox",
   "displayName": "MapBox",
-  "description": "MapBox",
+  "description": "Labs Widget Pack - MapBox",
   "configuration": [
     {
       "name": "mapBoxToken",
@@ -85,13 +85,13 @@
       "name": "initialLat",
       "title": "Initial Latitude",
       "description": "",
-      "type": "number"
+      "type": "string"
     },
     {
       "name": "initialLong",
       "title": "Initial Longitude",
       "description": "",
-      "type": "number"
+      "type": "string"
     },
     {
       "name": "initialZoom",

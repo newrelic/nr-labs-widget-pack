@@ -67,11 +67,12 @@ function MapBoxRoot(props) {
   const [popupInfo, setPopupInfo] = useState(null);
   const [errors, setErrors] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [fetching, setFetching] = useState(false);
+  // const [fetching, setFetching] = useState(false);
   const [mapLocations, setMapLocations] = useState([]);
   const { filters } = useContext(NerdletStateContext);
   const platformContext = useContext(PlatformStateContext);
   const { timeRange } = platformContext;
+  const timeRangeStr = timeRangeToNrql(timeRange);
 
   useEffect(() => {
     const link = document.createElement('link');
@@ -87,9 +88,10 @@ function MapBoxRoot(props) {
       // eslint-disable-next-line
       console.log(`poll interval updated:  ${pollInterval}`);
     }
+
     fetchData();
     let POLL_INTERVAL =
-      !pollInterval || isNaN(pollInterval) ? 30000 : pollInterval * 1000;
+      !pollInterval || isNaN(pollInterval) ? 60000 : pollInterval * 1000;
     if (POLL_INTERVAL < 5000) POLL_INTERVAL = 5000;
 
     const pollData = setInterval(() => {
@@ -97,81 +99,82 @@ function MapBoxRoot(props) {
     }, POLL_INTERVAL);
 
     return () => clearInterval(pollData);
-  }, [pollInterval, nrqlQueries, markerThresholds]);
+  }, [pollInterval, nrqlQueries, markerThresholds, filters, timeRangeStr]);
 
   const fetchData = async () => {
-    setFetching(true);
+    // setFetching(true);
 
     if (errors.length === 0) {
-      if (fetching === false) {
-        // eslint-disable-next-line
-        console.log(`fetching data @ ${new Date().toLocaleTimeString()}`);
-        // build array of promises to fetch data
-        const dataPromises = nrqlQueries.map(nrql => {
-          let query = nrql.query;
+      // eslint-disable-next-line
+      console.log(`fetching data @ ${new Date().toLocaleTimeString()}`);
+      // build array of promises to fetch data
+      const dataPromises = nrqlQueries.map(nrql => {
+        const { query, accountId, enableFilters, enableTimePicker } = nrql;
+        let newQuery = query;
 
-          if (nrql.enableFilters) {
-            query += ` WHERE ${filters}`;
+        if (enableFilters && filters) {
+          newQuery += ` WHERE ${filters}`;
+        } else {
+          newQuery = newQuery.replace(`WHERE ${filters}`, '');
+        }
+
+        if (enableTimePicker) {
+          newQuery += ` ${timeRangeStr}`;
+        }
+
+        // eslint-disable-next-line
+        console.log(enableFilters, newQuery);
+
+        return NerdGraphQuery.query({
+          query: gqlNrqlQuery(accountId, newQuery)
+        });
+      });
+
+      const nrdbResults = await Promise.allSettled(dataPromises);
+
+      const cleanData = nrdbResults
+        .filter(result => result.status === 'fulfilled')
+        .map(result => result.value?.data?.actor?.account?.nrql?.results)
+        .filter(a => a)
+        .flat();
+
+      const newMapLocations = cleanData.map(sample => {
+        const { facet } = sample;
+        let targetName = 'name';
+        let targetRotate = 'rotate';
+
+        Object.keys(sample).forEach(key => {
+          if (key.startsWith('latest.')) {
+            const newKey = key.replace('latest.', '');
+            sample[newKey] = sample[key];
+            delete sample[key];
           }
 
-          if (nrql.enableTimePicker) {
-            query += ` ${timeRangeToNrql(timeRange)}`;
+          if (key.startsWith('name:')) {
+            targetName = key;
+          } else if (key.startsWith('rotate:')) {
+            targetRotate = key;
           }
-
-          return NerdGraphQuery.query({
-            query: gqlNrqlQuery(nrql.accountId, query)
-          });
         });
 
-        const nrdbResults = await Promise.allSettled(dataPromises);
+        const obj = {
+          lat: facet[0],
+          long: facet[1],
+          data: sample,
+          marker: evaluateMarker(sample, markerThresholds)
+        };
 
-        const cleanData = nrdbResults
-          .filter(result => result.status === 'fulfilled')
-          .map(result => result.value?.data?.actor?.account?.nrql?.results)
-          .filter(a => a)
-          .flat();
+        if (targetName) obj.targetName = targetName.replace('name:', '');
+        if (targetRotate)
+          obj.targetRotate = targetRotate.replace('rotate:', '');
 
-        const newMapLocations = cleanData.map(sample => {
-          const { facet } = sample;
-          let targetName = 'name';
-          let targetRotate = 'rotate';
+        return obj;
+      });
 
-          Object.keys(sample).forEach(key => {
-            if (key.startsWith('latest.')) {
-              const newKey = key.replace('latest.', '');
-              sample[newKey] = sample[key];
-              delete sample[key];
-            }
-
-            if (key.startsWith('name:')) {
-              targetName = key;
-            } else if (key.startsWith('rotate:')) {
-              targetRotate = key;
-            }
-          });
-
-          const obj = {
-            lat: facet[0],
-            long: facet[1],
-            data: sample,
-            marker: evaluateMarker(sample, markerThresholds)
-          };
-
-          if (targetName) obj.targetName = targetName.replace('name:', '');
-          if (targetRotate)
-            obj.targetRotate = targetRotate.replace('rotate:', '');
-
-          return obj;
-        });
-
-        setMapLocations(newMapLocations);
-      } else {
-        // eslint-disable-next-line
-        console.log(`already fetching data`);
-      }
+      setMapLocations(newMapLocations);
     }
 
-    setFetching(false);
+    // setFetching(false);
   };
 
   useEffect(async () => {
