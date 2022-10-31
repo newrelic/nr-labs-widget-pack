@@ -320,7 +320,10 @@ function MapBoxRoot(props) {
 
 const ErrorState = errors => (
   <Card className="ErrorState">
-    <CardBody className="ErrorState-cardBody">
+    <CardBody
+      className="ErrorState-cardBody"
+      style={{ marginTop: 0, marginBottom: 0 }}
+    >
       <HeadingText
         className="ErrorState-headingText"
         spacingType={[HeadingText.SPACING_TYPE.LARGE]}
