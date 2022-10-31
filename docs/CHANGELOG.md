@@ -1,3 +1,10 @@
+# [1.16.0](https://github.com/newrelic/nr-labs-widget-pack/compare/v1.15.0...v1.16.0) (2022-10-31)
+
+
+### Features
+
+* mapbox filter patch ([b9d0d52](https://github.com/newrelic/nr-labs-widget-pack/commit/b9d0d52ea3b1f496da330cef5d4c3fa6b2c1d502))
+
 # [1.15.0](https://github.com/newrelic/nr-labs-widget-pack/compare/v1.14.0...v1.15.0) (2022-10-31)
 
 
