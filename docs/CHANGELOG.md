@@ -1,3 +1,11 @@
+# [1.14.0](https://github.com/newrelic/nr-labs-widget-pack/compare/v1.13.0...v1.14.0) (2022-10-31)
+
+
+### Features
+
+* add mapbox widget ([2bd7cb8](https://github.com/newrelic/nr-labs-widget-pack/commit/2bd7cb82cfb3d6005e20ab59a3e917dc20f4cfce))
+* update nr1 id ([491cd55](https://github.com/newrelic/nr-labs-widget-pack/commit/491cd55f982ef7a6253f93600d22535faa710dad))
+
 # [1.13.0](https://github.com/newrelic/nr-labs-widget-pack/compare/v1.12.0...v1.13.0) (2022-10-20)
 
 
