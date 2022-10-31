@@ -1,3 +1,11 @@
+# [1.15.0](https://github.com/newrelic/nr-labs-widget-pack/compare/v1.14.0...v1.15.0) (2022-10-31)
+
+
+### Features
+
+* remove margins from mapbox err ([764456a](https://github.com/newrelic/nr-labs-widget-pack/commit/764456a91aed429ff054f92d7b59e3233f32406f))
+* update docs ([c4aa67c](https://github.com/newrelic/nr-labs-widget-pack/commit/c4aa67c2a438bf7f21f6d1cec892725cdcb8fe60))
+
 # [1.14.0](https://github.com/newrelic/nr-labs-widget-pack/compare/v1.13.0...v1.14.0) (2022-10-31)
 
 
