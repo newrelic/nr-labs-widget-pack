@@ -135,7 +135,32 @@ function MapBoxRoot(props) {
       const cleanData = nrdbResults
         .filter(result => result.status === 'fulfilled')
         .map(result => result.value?.data?.actor?.account?.nrql?.results)
-        .filter(a => a)
+        .filter(a => {
+          if (a) {
+            // this indicates we are receiving lat, lng in the facet and we should perform some validation to filter samples with bad coordinates
+            // this check is done to future proof the addition of when we do a reverse geo lookup
+            if (a.facet && a.facet.length > 1) {
+              try {
+                const lat = parseFloat(a.facet[0]);
+                const lng = parseFloat(a.facet[1]);
+
+                if (lat >= -90 && lat <= 90 && lng >= 180 && lng <= 180) {
+                  return true;
+                } else {
+                  // eslint-disable-next-line
+                  console.log('lat,lng validation failed', a);
+                  return false;
+                }
+              } catch (e) {
+                // eslint-disable-next-line
+                console.log('lat,lng validation failed', e);
+                return false;
+              }
+            }
+            return true;
+          }
+          return false;
+        })
         .flat();
 
       const newMapLocations = cleanData.map(sample => {
