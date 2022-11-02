@@ -1,3 +1,10 @@
+# [1.18.0](https://github.com/newrelic/nr-labs-widget-pack/compare/v1.17.0...v1.18.0) (2022-11-02)
+
+
+### Features
+
+* update lat,lng validation ([608cce2](https://github.com/newrelic/nr-labs-widget-pack/commit/608cce2185f50ef778cc48f7254528ad8dca9a99))
+
 # [1.17.0](https://github.com/newrelic/nr-labs-widget-pack/compare/v1.16.0...v1.17.0) (2022-11-02)
 
 
