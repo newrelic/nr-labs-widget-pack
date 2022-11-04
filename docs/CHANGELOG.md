@@ -1,3 +1,10 @@
+# [1.19.0](https://github.com/newrelic/nr-labs-widget-pack/compare/v1.18.0...v1.19.0) (2022-11-04)
+
+
+### Features
+
+* additional coordinate handling ([8d4decd](https://github.com/newrelic/nr-labs-widget-pack/commit/8d4decd7469a2e556375b0cf6a58a52df7273e53))
+
 # [1.18.0](https://github.com/newrelic/nr-labs-widget-pack/compare/v1.17.0...v1.18.0) (2022-11-02)
 
 
