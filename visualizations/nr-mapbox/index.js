@@ -17,7 +17,7 @@ import Map, {
   Popup
 } from 'react-map-gl';
 
-import { evaluateMarker } from './utils';
+import { deriveLatLng, evaluateMarker } from './utils';
 
 const MINUTE = 60000;
 const HOUR = 60 * MINUTE;
@@ -122,9 +122,6 @@ function MapBoxRoot(props) {
           newQuery += ` ${timeRangeStr}`;
         }
 
-        // eslint-disable-next-line
-        console.log(enableFilters, newQuery);
-
         return NerdGraphQuery.query({
           query: gqlNrqlQuery(accountId, newQuery)
         });
@@ -138,41 +135,28 @@ function MapBoxRoot(props) {
         .filter(a => a)
         .flat()
         .filter(r => {
-          // this indicates we are receiving lat, lng in the facet and we should perform some validation to filter samples with bad coordinates
-          // this check is also done to future proof the addition of when we do a reverse geo lookup and may have one facet
-          if (r.facet && r.facet.length > 1) {
-            try {
-              const lat = parseFloat(r.facet[0]);
-              const lng = parseFloat(r.facet[1]);
-
-              if (lat >= -90 && lat <= 90 && lng >= -180 && lng <= 180) {
-                return true;
-              } else {
-                // eslint-disable-next-line
-                console.log(`lat:${lat},lng:${lng} validation failed`, r);
-                return false;
-              }
-            } catch (e) {
-              // eslint-disable-next-line
-              console.log('lat,lng validation failed', e, r);
-              return false;
+          Object.keys(r).forEach(key => {
+            if (key.startsWith('latest.')) {
+              const newKey = key.replace('latest.', '');
+              r[newKey] = r[key];
+              delete r[key];
             }
+          });
+
+          r['mapWidget.coordinates'] = deriveLatLng(r);
+
+          if (r['mapWidget.coordinates']) {
+            return true;
           }
-          return true;
+
+          return false;
         });
 
       const newMapLocations = cleanData.map(sample => {
-        const { facet } = sample;
         let targetName = 'name';
         let targetRotate = 'rotate';
 
         Object.keys(sample).forEach(key => {
-          if (key.startsWith('latest.')) {
-            const newKey = key.replace('latest.', '');
-            sample[newKey] = sample[key];
-            delete sample[key];
-          }
-
           if (key.startsWith('name:')) {
             targetName = key;
           } else if (key.startsWith('rotate:')) {
@@ -180,9 +164,11 @@ function MapBoxRoot(props) {
           }
         });
 
+        const { lat, lng } = sample['mapWidget.coordinates'];
+
         const obj = {
-          lat: facet[0],
-          long: facet[1],
+          lat,
+          lng,
           data: sample,
           marker: evaluateMarker(sample, markerThresholds)
         };
@@ -214,9 +200,10 @@ function MapBoxRoot(props) {
       if (!lowerQuery) {
         tempErrors.push(`${index + 1}: Query undefined`);
       } else {
-        if (!lowerQuery.includes('facet')) {
-          tempErrors.push(`${index + 1}: Query should contain facet`);
-        }
+        // if (!lowerQuery.includes('facet')) {
+        //   tempErrors.push(`${index + 1}: Query should contain facet`);
+        // }
+        // eslint-disable-next-line
         if (!lowerQuery.includes('name:')) {
           tempErrors.push(
             `${index +
@@ -274,12 +261,13 @@ function MapBoxRoot(props) {
 
         const locName = data[`name:${targetName}`];
         const rotate = data[`rotate:${targetRotate}`];
+        const { lat, lng } = data['mapWidget.coordinates'];
 
         return (
           <Marker
             key={mapIndex}
-            longitude={mapData.long}
-            latitude={mapData.lat}
+            longitude={lng}
+            latitude={lat}
             color={marker?.markerColor || defaultMarkerColor}
             onClick={e => {
               // If we let the click event propagates to the map, it will immediately close the popup
@@ -288,8 +276,8 @@ function MapBoxRoot(props) {
               setPopupInfo({
                 ...data,
                 locName,
-                long: mapData.long,
-                lat: mapData.lat
+                lng,
+                lat
               });
             }}
           >
@@ -312,7 +300,7 @@ function MapBoxRoot(props) {
       {popupInfo && (
         <Popup
           anchor="top"
-          longitude={Number(popupInfo.long)}
+          longitude={Number(popupInfo.lng)}
           latitude={Number(popupInfo.lat)}
           onClose={() => setPopupInfo(null)}
         >
@@ -325,7 +313,8 @@ function MapBoxRoot(props) {
                 !key.includes('rotate:') &&
                 !key.includes('facet') &&
                 !key.includes('locName') &&
-                !key.includes('data')
+                !key.includes('data') &&
+                !key.includes('mapWidget.coordinates')
               ) {
                 return (
                   <>

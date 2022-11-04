@@ -1,8 +1,8 @@
 {
   "schemaType": "VISUALIZATION",
   "id": "nr-mapbox",
-  "displayName": "MapBox",
-  "description": "Labs Widget Pack - MapBox",
+  "displayName": "Map Widget",
+  "description": "Labs Widget Pack - Map Widget",
   "configuration": [
     {
       "name": "mapBoxToken",
