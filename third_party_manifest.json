@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "Sun Aug 28 2022 20:56:33 GMT+1000 (Australian Eastern Standard Time)",
+  "lastUpdated": "Fri Nov 04 2022 03:40:33 GMT+0000 (Coordinated Universal Time)",
   "projectName": "Labs Widget Pack",
   "projectUrl": "https://github.com/newrelic/nr-labs-widget-pack",
   "includeOptDeps": false,
@@ -17,6 +17,28 @@
       "licenseTextSource": "file",
       "publisher": "newrelic"
     },
+    "chart.js@3.9.1": {
+      "name": "chart.js",
+      "version": "3.9.1",
+      "range": "^3.9.1",
+      "licenses": "MIT",
+      "repoUrl": "https://github.com/chartjs/Chart.js",
+      "versionedRepoUrl": "https://github.com/chartjs/Chart.js/tree/v3.9.1",
+      "licenseFile": "node_modules/chart.js/LICENSE.md",
+      "licenseUrl": "https://github.com/chartjs/Chart.js/blob/v3.9.1/LICENSE.md",
+      "licenseTextSource": "file"
+    },
+    "mapbox-gl@2.10.0": {
+      "name": "mapbox-gl",
+      "version": "2.10.0",
+      "range": "^2.10.0",
+      "licenses": "UNKNOWN",
+      "repoUrl": "https://github.com/mapbox/mapbox-gl-js",
+      "versionedRepoUrl": "https://github.com/mapbox/mapbox-gl-js/tree/v2.10.0",
+      "licenseFile": "node_modules/mapbox-gl/LICENSE.txt",
+      "licenseUrl": "https://github.com/mapbox/mapbox-gl-js/blob/v2.10.0/LICENSE.txt",
+      "licenseTextSource": "file"
+    },
     "prop-types@15.8.1": {
       "name": "prop-types",
       "version": "15.8.1",
@@ -26,6 +48,29 @@
       "versionedRepoUrl": "https://github.com/facebook/prop-types/tree/v15.8.1",
       "licenseFile": "node_modules/prop-types/LICENSE",
       "licenseUrl": "https://github.com/facebook/prop-types/blob/v15.8.1/LICENSE",
+      "licenseTextSource": "file"
+    },
+    "react-chartjs-2@4.3.1": {
+      "name": "react-chartjs-2",
+      "version": "4.3.1",
+      "range": "^4.3.1",
+      "licenses": "MIT",
+      "repoUrl": "https://github.com/reactchartjs/react-chartjs-2",
+      "versionedRepoUrl": "https://github.com/reactchartjs/react-chartjs-2/tree/v4.3.1",
+      "licenseFile": "node_modules/react-chartjs-2/LICENSE",
+      "licenseUrl": "https://github.com/reactchartjs/react-chartjs-2/blob/v4.3.1/LICENSE",
+      "licenseTextSource": "file",
+      "publisher": "Jeremy Ayerst"
+    },
+    "react-map-gl@7.0.19": {
+      "name": "react-map-gl",
+      "version": "7.0.19",
+      "range": "^7.0.19",
+      "licenses": "MIT",
+      "repoUrl": "https://github.com/visgl/react-map-gl",
+      "versionedRepoUrl": "https://github.com/visgl/react-map-gl/tree/v7.0.19",
+      "licenseFile": "node_modules/react-map-gl/LICENSE",
+      "licenseUrl": "https://github.com/visgl/react-map-gl/blob/v7.0.19/LICENSE",
       "licenseTextSource": "file"
     }
   },
