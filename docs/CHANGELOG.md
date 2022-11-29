@@ -1,3 +1,10 @@
+# [1.21.0](https://github.com/newrelic/nr-labs-widget-pack/compare/v1.20.0...v1.21.0) (2022-11-29)
+
+
+### Features
+
+* update readme ([a804a35](https://github.com/newrelic/nr-labs-widget-pack/commit/a804a3508af9a51776b9fb7ad3976ab9c9b9407d))
+
 # [1.20.0](https://github.com/newrelic/nr-labs-widget-pack/compare/v1.19.0...v1.20.0) (2022-11-29)
 
 
