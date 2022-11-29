@@ -1,3 +1,11 @@
+# [1.20.0](https://github.com/newrelic/nr-labs-widget-pack/compare/v1.19.0...v1.20.0) (2022-11-29)
+
+
+### Features
+
+* add multi line event overlay chart ([6b2724e](https://github.com/newrelic/nr-labs-widget-pack/commit/6b2724e4b742b90e19752982bcec4fd47ef5227e))
+* remove old screenshot ([f9974b3](https://github.com/newrelic/nr-labs-widget-pack/commit/f9974b37624a0938a4d78f33509f286d60632735))
+
 # [1.19.0](https://github.com/newrelic/nr-labs-widget-pack/compare/v1.18.0...v1.19.0) (2022-11-04)
 
 
