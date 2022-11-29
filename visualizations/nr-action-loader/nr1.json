@@ -1,7 +1,7 @@
 {
   "schemaType": "VISUALIZATION",
   "id": "nr-action-loader",
-  "displayName": "Action Loader",
+  "displayName": "Labs Widget Pack - Action Loader",
   "description": "Intended for advanced usecases",
   "configuration": [
     {
