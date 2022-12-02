@@ -112,6 +112,18 @@
       "type": "string"
     },
     {
+      "name": "defaultImgWidth",
+      "title": "Image width (default 25)",
+      "description": "",
+      "type": "number"
+    },
+    {
+      "name": "defaultImgHeight",
+      "title": "Image height (default 25)",
+      "description": "",
+      "type": "number"
+    },
+    {
       "name": "mapStyle",
       "title": "Select Map Style",
       "description": "",

@@ -59,6 +59,8 @@ function MapBoxRoot(props) {
     initialZoom,
     defaultMarkerColor,
     defaultMarkerImgURL,
+    defaultImgWidth,
+    defaultImgHeight,
     mapStyle,
     markerThresholds,
     mapBoxToken,
@@ -284,8 +286,8 @@ function MapBoxRoot(props) {
             {!marker?.imgUrl && defaultMarkerImgURL && (
               <img
                 src={defaultMarkerImgURL}
-                width={marker?.imgWidth || 25}
-                height={marker?.imgHeight || 25}
+                width={marker?.imgWidth || defaultImgWidth || 25}
+                height={marker?.imgHeight || defaultImgHeight || 25}
                 style={{
                   transform: rotate ? `rotate(${rotate}deg)` : undefined
                 }}
@@ -294,8 +296,8 @@ function MapBoxRoot(props) {
             {marker?.imgUrl && (
               <img
                 src={marker?.imgUrl}
-                width={marker?.imgWidth || 25}
-                height={marker?.imgHeight || 25}
+                width={marker?.imgWidth || defaultImgWidth || 25}
+                height={marker?.imgHeight || defaultImgHeight || 25}
                 style={{
                   transform: rotate ? `rotate(${rotate}deg)` : undefined
                 }}
