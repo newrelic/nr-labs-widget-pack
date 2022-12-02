@@ -1,3 +1,10 @@
+# [1.22.0](https://github.com/newrelic/nr-labs-widget-pack/compare/v1.21.0...v1.22.0) (2022-12-02)
+
+
+### Features
+
+* extend rotate and default imgWidth & height ([c8a9420](https://github.com/newrelic/nr-labs-widget-pack/commit/c8a94201e6b0914428f25d0753b83a1130776e36))
+
 # [1.21.0](https://github.com/newrelic/nr-labs-widget-pack/compare/v1.20.0...v1.21.0) (2022-11-29)
 
 
