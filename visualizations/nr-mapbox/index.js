@@ -282,7 +282,14 @@ function MapBoxRoot(props) {
             }}
           >
             {!marker?.imgUrl && defaultMarkerImgURL && (
-              <img src={defaultMarkerImgURL} width={25} height={25} />
+              <img
+                src={defaultMarkerImgURL}
+                width={marker?.imgWidth || 25}
+                height={marker?.imgHeight || 25}
+                style={{
+                  transform: rotate ? `rotate(${rotate}deg)` : undefined
+                }}
+              />
             )}
             {marker?.imgUrl && (
               <img
