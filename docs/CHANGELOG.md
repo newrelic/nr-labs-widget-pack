@@ -1,3 +1,10 @@
+# [1.23.0](https://github.com/newrelic/nr-labs-widget-pack/compare/v1.22.0...v1.23.0) (2022-12-02)
+
+
+### Features
+
+* add defaultImgHeight and defaultImgWidth ([92bebf4](https://github.com/newrelic/nr-labs-widget-pack/commit/92bebf4b9bfac46dc1e56dec46ac8823a4cf013a))
+
 # [1.22.0](https://github.com/newrelic/nr-labs-widget-pack/compare/v1.21.0...v1.22.0) (2022-12-02)
 
 
