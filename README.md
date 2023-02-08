@@ -7,11 +7,12 @@
 
 
 A collection of custom visualizations to enhance your dashboarding experience.
-- Multi Line Compare
-- Multi Line & Event Overlay Chart
-- Radar Chart w/ChartJS
-- Action Loader
-- Map Box Widget
+- [Multi Line Compare](#multi-line-compare)
+- [Multi Line & Event Overlay Chart](#multi-line--event-overlay-chart)
+- [Radar Chart w/ChartJS](#radar-chart)
+- [Action Loader](#action-loader)
+- [Map Box Widget](#map-box-widget)
+- [ChatGPT Widget](#chatgpt-widget)
 
 ---
 
@@ -50,17 +51,22 @@ URL State
 
 - Supports multiple NRQL queries and custom markers
 - Requires a Map Box Access Token from https://account.mapbox.com/auth/signup/
-- Query should contain one alias with 'name:SOME_VALUE' which will be used as the marker name
-- Query should have a FACET for latitude and longitude, use precision to ensure the FACET does not round the number
-eg.
-```
-FACET string(lat, precision: 5) as 'lat', string(lng, precision: 5) as 'lng' 
-```
-- Rotation can be set using the following alias with 'rotate:SOME_VALUE'
-- Example Query:
-```
-FROM FlightData SELECT latest(flightNo) as 'name:Flight No', latest(track) as 'rotate:track', latest(departure), latest(destination) FACET string(lat, precision: 5) as 'lat', string(lng, precision: 5) as 'lng' SINCE 60 seconds ago LIMIT MAX
-```
+- Please see the [documention](visualizations/nr-mapbox/README.md)  for example queries and other available configuration
+## [Map Widget Documentation](visualizations/nr-mapbox/README.md) 
+
+
+## ChatGPT Widget
+
+![Screenshot #1](screenshots/chatgpt_01.png)
+
+- Ask ChatGPT anything and save the responses. 
+- If any responses contain NRQL queries the widget will attempt to parse them and allow you to open it in chart builder and preview you it within a widget.
+
+## [ChatGPT Widget Documentation](visualizations/nr-chatgpt/README.md) 
+
+---
+
+
 
 ## Open source license
 

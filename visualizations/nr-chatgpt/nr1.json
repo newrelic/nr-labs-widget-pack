@@ -1,0 +1,62 @@
+{
+  "schemaType": "VISUALIZATION",
+  "id": "nr-chatgpt",
+  "displayName": "ChatGPT Widget",
+  "description": "Labs Widget Pack - ChatGPT Loader",
+  "configuration":[
+    {
+      "name": "accountId",
+      "title": "Set default Account ID",
+      "description": "Default Account ID",
+      "type": "account-id"
+    },
+    {
+      "name": "cgptOrgId",
+      "title": "OpenAI Organization ID",
+      "description": "https://platform.openai.com/account/org-settings",
+      "type": "string"
+    },
+    {
+      "name": "cgptApiKey",
+      "title": "OpenAI API Key",
+      "description": "https://platform.openai.com/account/api-keys",
+      "type": "string"
+    },
+    {
+      "name": "cgptMaxTokens",
+      "title": "Max tokens (default 30, increase if response is too short)",
+      "description": "The token count of your prompt plus max_tokens cannot exceed the model's context length. Most models have a context length of 2048 tokens (except for the newest models, which support 4096).",
+      "type": "number"
+    },
+    {
+      "name": "cgptTemp",
+      "title": "Sampling Temperature (default 1)",
+      "description": "What sampling temperature to use. Higher values means the model will take more risks. Try 0.9 for more creative applications, and 0 (argmax sampling) for ones with a well-defined answer.",
+      "type": "number"
+    },
+    {
+      "name": "cgptModel",
+      "title": "Models (default text-davinci-003)",
+      "description": "https://platform.openai.com/docs/models/overview",
+      "type": "enum",
+      "items": [
+        {
+          "title": "text-davinci-003",
+          "value": "text-davinci-003"
+        },
+        {
+          "title": "text-curie-001",
+          "value": "text-curie-001"
+        },
+        {
+          "title": "text-davinci-003",
+          "value": "text-davinci-003"
+        },
+        {
+          "title": "text-babbage-001",
+          "value": "text-babbage-001"
+        }
+      ]
+    }
+  ]
+}
