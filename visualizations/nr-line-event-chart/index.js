@@ -202,7 +202,7 @@ function LineEventChart(props) {
     setLoading(false);
   }, [timeQueries, eventQueries]);
 
-  if (loading) {
+  if (loading || dataSets.length === 0) {
     return <Spinner />;
   }
 
