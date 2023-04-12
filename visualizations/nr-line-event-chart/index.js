@@ -4,6 +4,7 @@ import {
   CardBody,
   HeadingText,
   LineChart,
+  AreaChart,
   NrqlQuery,
   Spinner,
   NerdletStateContext,
@@ -34,10 +35,17 @@ const timeRangeToNrql = timeRange => {
 };
 
 function LineEventChart(props) {
-  const { pollInterval, enableTimePicker, timeQueries, eventQueries } = props;
+  const {
+    pollInterval,
+    enableTimePicker,
+    timeQueries,
+    eventQueries,
+    chartType
+  } = props;
   const [errors, setErrors] = useState([]);
   const [dataSets, setDataSets] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [_chartType, _setChartType] = useState('line');
   const platformContext = useContext(PlatformStateContext);
   const { filters } = useContext(NerdletStateContext);
   const { timeRange } = platformContext;
@@ -184,6 +192,13 @@ function LineEventChart(props) {
 
     setErrors(tempErrors);
 
+    // Set Chart Type
+    if (!chartType || chartType === 'line') {
+      _setChartType('line');
+    } else {
+      _setChartType('area');
+    }
+
     setLoading(false);
   }, [timeQueries, eventQueries]);
 
@@ -193,6 +208,10 @@ function LineEventChart(props) {
 
   if (errors.length > 0) {
     return ErrorState(errors);
+  }
+
+  if (_chartType === 'area') {
+    return <AreaChart data={dataSets} fullWidth fullHeight />;
   }
 
   return (

@@ -5,6 +5,22 @@
   "description": "Labs Widget Pack - Multi Line & Event Overlay Chart w/Custom Poll Intervals",
   "configuration": [
     {
+      "name": "chartType",
+      "title": "Chart Type",
+      "description": "Select the type of Timeseries chart to display",
+      "type": "enum",
+      "items": [
+        {
+          "title": "Line",
+          "value": "line"
+        },
+        {
+          "title": "Area",
+          "value": "area"
+        }
+      ]
+    },
+    {
       "name": "pollInterval",
       "title": "Select Poll Interval (seconds) default 60s",
       "description": "",
@@ -35,7 +51,7 @@
           "value": 45
         },
         {
-          "title": "1m",
+          "title": "60s",
           "value": 60
         },
         {
