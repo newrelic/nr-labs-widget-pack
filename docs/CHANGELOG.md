@@ -1,3 +1,15 @@
+# [1.24.0](https://github.com/newrelic/nr-labs-widget-pack/compare/v1.23.0...v1.24.0) (2023-05-02)
+
+
+### Bug Fixes
+
+* eslint ([146429e](https://github.com/newrelic/nr-labs-widget-pack/commit/146429ecab99465f969a352bf0efba633cd12193))
+
+
+### Features
+
+* add scatter & event overlay chart ([008d687](https://github.com/newrelic/nr-labs-widget-pack/commit/008d6871aec180e536930c08c21fe94c9d5574d0))
+
 # [1.23.0](https://github.com/newrelic/nr-labs-widget-pack/compare/v1.22.0...v1.23.0) (2022-12-02)
 
 
