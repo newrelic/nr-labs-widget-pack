@@ -108,7 +108,7 @@ function LineEventChart(props) {
 
         finalData.push(eventData);
       } else {
-        finalData.push(...(data||[]));
+        finalData.push(...(data || []));
       }
     });
 
