@@ -9,6 +9,7 @@
 A collection of custom visualizations to enhance your dashboarding experience.
 - Multi Line Compare
 - Multi Line & Event Overlay Chart
+- Scatter & Event Overlay Chart
 - Radar Chart w/ChartJS
 - Action Loader
 - Map Box Widget
@@ -22,6 +23,10 @@ A collection of custom visualizations to enhance your dashboarding experience.
 ## Multi Line & Event Overlay Chart
 
 ![Screenshot #1](screenshots/multiline_event_02.png)
+
+## Scatter & Event Overlay Chart
+
+![Screenshot #1](screenshots/scatter_event_01.png)
 
 ## Radar Chart
 
