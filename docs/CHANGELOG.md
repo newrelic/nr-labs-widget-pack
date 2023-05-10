@@ -1,3 +1,11 @@
+# [1.25.0](https://github.com/newrelic/nr-labs-widget-pack/compare/v1.24.0...v1.25.0) (2023-05-10)
+
+
+### Features
+
+* add area chart + editor issue ([7458054](https://github.com/newrelic/nr-labs-widget-pack/commit/7458054053ba95d1d68634ac22debd83115153dc))
+* add area chart + editor issue ([860353b](https://github.com/newrelic/nr-labs-widget-pack/commit/860353babc1ec15d35c36a1db606190c83b7b334))
+
 # [1.24.0](https://github.com/newrelic/nr-labs-widget-pack/compare/v1.23.0...v1.24.0) (2023-05-02)
 
 
