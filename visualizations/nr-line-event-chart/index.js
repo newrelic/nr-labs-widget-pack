@@ -62,7 +62,7 @@ function LineEventChart(props) {
       queries.push({ query: newQuery, accountId, type: 'line' });
     });
 
-    eventQueries
+    (eventQueries || [])
       .filter(e => e.accountId && e.query && e.name)
       .forEach(q => {
         const { accountId, query, enableFilters, color, name } = q;
@@ -108,7 +108,7 @@ function LineEventChart(props) {
 
         finalData.push(eventData);
       } else {
-        finalData.push(data[0]);
+        finalData.push(...(data || []));
       }
     });
 

@@ -3,7 +3,7 @@ import {
   Card,
   CardBody,
   HeadingText,
-  ScatterChart,
+  AreaChart,
   NrqlQuery,
   Spinner,
   NerdletStateContext,
@@ -197,7 +197,7 @@ function LineEventChart(props) {
 
   return (
     <>
-      <ScatterChart data={dataSets} fullWidth fullHeight />
+      <AreaChart data={dataSets} fullWidth fullHeight />
     </>
   );
 }

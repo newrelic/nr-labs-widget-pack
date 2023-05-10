@@ -1,0 +1,116 @@
+{
+  "schemaType": "VISUALIZATION",
+  "id": "nr-area-event-chart",
+  "displayName": "Scatter & Event Overlay Chart",
+  "description": "Labs Widget Pack - Scatter & Event Overlay Chart w/Custom Poll Intervals",
+  "configuration": [
+    {
+      "name": "pollInterval",
+      "title": "Select Poll Interval (seconds) default 60s",
+      "description": "",
+      "type": "enum",
+      "items": [
+        {
+          "title": "Select",
+          "value": 60
+        },
+        {
+          "title": "5s",
+          "value": 5
+        },
+        {
+          "title": "10s",
+          "value": 10
+        },
+        {
+          "title": "15s",
+          "value": 15
+        },
+        {
+          "title": "30s",
+          "value": 30
+        },
+        {
+          "title": "45s",
+          "value": 45
+        },
+        {
+          "title": "1m",
+          "value": 60
+        },
+        {
+          "title": "5m",
+          "value": 300
+        }
+      ]
+    },
+    {
+      "name": "enableTimePicker",
+      "title": "Enable Time Picker",
+      "description": "Allows the use of the time picker",
+      "type": "boolean"
+    },
+    {
+      "name": "timeQueries",
+      "title": "Timeseries Queries",
+      "type": "collection",
+      "items": [
+        {
+          "name": "accountId",
+          "title": "Account ID",
+          "description": "Account ID to be associated with the query",
+          "type": "account-id"
+        },
+        {
+          "name": "query",
+          "title": "Query",
+          "description": "NRQL query for the visualization",
+          "type": "nrql"
+        },
+        {
+          "name": "enableFilters",
+          "title": "Enable dashboard filters",
+          "description": "Allows the use of dashboard filters",
+          "type": "boolean"
+        }
+      ]
+    },
+    {
+      "name": "eventQueries",
+      "title": "Event Marker Queries",
+      "type": "collection",
+      "items": [
+        {
+          "name": "name",
+          "title": "Name of Event Marker",
+          "description": "",
+          "type": "string"
+        },
+        {
+          "name": "accountId",
+          "title": "Account ID",
+          "description": "Account ID to be associated with the query",
+          "type": "account-id"
+        },
+        {
+          "name": "query",
+          "title": "Query",
+          "description": "NRQL query for the visualization",
+          "type": "nrql"
+        },
+        {
+          "name": "enableFilters",
+          "title": "Enable dashboard filters",
+          "description": "Allows the use of dashboard filters",
+          "type": "boolean"
+        },
+        {
+          "name": "color",
+          "title": "Color of your marker",
+          "description": "",
+          "type": "string"
+        }
+      ]
+    }
+  ]
+}
