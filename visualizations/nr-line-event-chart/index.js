@@ -157,7 +157,7 @@ function LineEventChart(props) {
       });
     }
 
-    eventQueries
+    (eventQueries || [])
       .filter(e => e.accountId && e.query && e.name)
       .forEach((t, i) => {
         const { query, accountId, name } = t;
