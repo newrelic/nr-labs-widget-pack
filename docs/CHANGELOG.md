@@ -1,3 +1,10 @@
+# [1.26.0](https://github.com/newrelic/nr-labs-widget-pack/compare/v1.25.0...v1.26.0) (2023-05-11)
+
+
+### Features
+
+* trigger release ([2f99698](https://github.com/newrelic/nr-labs-widget-pack/commit/2f996984dce70d46848d1565f4cd9de17efc9b92))
+
 # [1.25.0](https://github.com/newrelic/nr-labs-widget-pack/compare/v1.24.0...v1.25.0) (2023-05-10)
 
 
