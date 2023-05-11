@@ -1,8 +1,8 @@
 {
   "schemaType": "VISUALIZATION",
   "id": "nr-area-event-chart",
-  "displayName": "Scatter & Event Overlay Chart",
-  "description": "Labs Widget Pack - Scatter & Event Overlay Chart w/Custom Poll Intervals",
+  "displayName": "Area & Event Overlay Chart",
+  "description": "Labs Widget Pack - Area & Event Overlay Chart w/Custom Poll Intervals",
   "configuration": [
     {
       "name": "pollInterval",
