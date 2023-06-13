@@ -62,7 +62,7 @@ function LineEventChart(props) {
       queries.push({ query: newQuery, accountId, type: 'scatter' });
     });
 
-    eventQueries
+    (eventQueries || [])
       .filter(e => e.accountId && e.query && e.name)
       .forEach(q => {
         const { accountId, query, enableFilters, color, name } = q;
