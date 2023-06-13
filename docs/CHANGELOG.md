@@ -1,3 +1,10 @@
+## [1.26.1](https://github.com/newrelic/nr-labs-widget-pack/compare/v1.26.0...v1.26.1) (2023-06-13)
+
+
+### Bug Fixes
+
+* allow for empty eventQueries array ([bf8288c](https://github.com/newrelic/nr-labs-widget-pack/commit/bf8288c2e1007f99a527b552604acb1c1d063498))
+
 # [1.26.0](https://github.com/newrelic/nr-labs-widget-pack/compare/v1.25.0...v1.26.0) (2023-05-11)
 
 
