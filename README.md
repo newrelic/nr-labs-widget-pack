@@ -13,6 +13,7 @@ A collection of custom visualizations to enhance your dashboarding experience.
 - Radar Chart w/ChartJS
 - Action Loader
 - Map Box Widget
+- List View
 
 ---
 
@@ -69,6 +70,19 @@ FACET string(lat, precision: 5) as 'lat', string(lng, precision: 5) as 'lng'
 ```
 FROM FlightData SELECT latest(flightNo) as 'name:Flight No', latest(track) as 'rotate:track', latest(departure), latest(destination) FACET string(lat, precision: 5) as 'lat', string(lng, precision: 5) as 'lng' SINCE 60 seconds ago LIMIT MAX
 ```
+
+## List View
+
+![list view screenshot](screenshots/list-view-screenshot-1.png)
+
+List View displays NRQL-queried data in a list. The list items are rows returned by the query, and formatted using a [template](./list-view-template.md). Below are a list of additional features.
+
+- Coerce values to number, date and boolean types
+- Format numbers and dates
+- Convert between digital size types (bytes, kilobytes, ...)
+- Search bar to filter list to the searched text
+
+Read the [Template String documentation](./list-view-template.md) for details.
 
 ## Open source license
 
