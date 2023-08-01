@@ -1,3 +1,10 @@
+# [1.27.0](https://github.com/newrelic/nr-labs-widget-pack/compare/v1.26.1...v1.27.0) (2023-08-01)
+
+
+### Features
+
+* add list view viz ([3c5b285](https://github.com/newrelic/nr-labs-widget-pack/commit/3c5b285f1f6a4442925e371e29a4f0dccacdc215))
+
 ## [1.26.1](https://github.com/newrelic/nr-labs-widget-pack/compare/v1.26.0...v1.26.1) (2023-06-13)
 
 
