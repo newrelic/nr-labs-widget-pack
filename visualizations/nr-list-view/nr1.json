@@ -1,0 +1,26 @@
+{
+  "schemaType": "VISUALIZATION",
+  "id": "nr-list-view",
+  "displayName": "List View",
+  "description": "Labs Widget Pack - List View to display lists",
+  "configuration": [
+    {
+      "name": "accountId",
+      "title": "Account ID",
+      "description": "Account ID to be associated with the query",
+      "type": "account-id"
+    },
+    {
+      "name": "query",
+      "title": "Query",
+      "description": "NRQL query for visualization",
+      "type": "nrql"
+    },
+    {
+      "name": "templateString",
+      "title": "Template String",
+      "description": "Template to display  item \n(use {{COLUMN_NAME}} to use values returned from the query)",
+      "type": "string"
+    }
+  ]
+}
