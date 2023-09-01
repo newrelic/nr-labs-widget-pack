@@ -203,10 +203,10 @@ export default function LineBarChart(props) {
     const lineData = {};
     const barData = {};
 
-    nrqlData.forEach(d => {
+    (nrqlData || []).forEach(d => {
       const { data, color, name, type, barSize } = d;
 
-      data.forEach(groupData => {
+      (data || []).forEach(groupData => {
         const hasFacet = groupData.metadata.groups.find(
           g => g.type === 'facet'
         );
