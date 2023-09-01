@@ -17,6 +17,9 @@ import {
   NrqlQuery,
   Spinner,
   AutoSizer,
+  BlockText,
+  List,
+  ListItem,
   NerdletStateContext,
   PlatformStateContext
 } from 'nr1';
@@ -47,29 +50,6 @@ const timeRangeToNrql = timeRange => {
     return `SINCE ${timeRange.duration / DAY} DAYS AGO`;
   }
 };
-
-// const transform = (views, load) => {
-//   const viewsSeries = views[0].data;
-//   const loadSeries = load[0].data;
-
-//   console.log(loadSeries);
-
-//   const data = viewsSeries.map((v, i) => {
-//     const entry = {};
-//     const d = new Date(v.begin_time);
-//     entry.day = d.toDateString();
-//     entry.views = v.count;
-//     entry.load = loadSeries[i].Load;
-//     return entry;
-//   });
-//   return data;
-// };
-
-// const buildRechartData = dataSets => {
-//   const rechartData = { bars: {}, lines: {} };
-
-//   return rechartData;
-// };
 
 export default function LineBarChart(props) {
   const {
@@ -369,9 +349,7 @@ const ErrorState = (errors, showDocs) => (
 
       <br />
 
-      {JSON.stringify(errors)}
-
-      {/* {(errors || []).map(err => (
+      {(errors || []).map(err => (
         <>
           <HeadingText>{err.name}</HeadingText>
           <BlockText>
@@ -383,7 +361,7 @@ const ErrorState = (errors, showDocs) => (
           </BlockText>
           <br />
         </>
-      ))} */}
+      ))}
     </CardBody>
   </Card>
 );
