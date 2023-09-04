@@ -13,13 +13,13 @@
     {
       "name": "tickFormat",
       "title": "Moment Tick Formatter (default: YYYY-MM-DD)",
-      "description": "",
+      "description": "The tick format is powered by moment. View their documentation for other configuration options.",
       "type": "string"
     },
     {
       "name": "pollInterval",
       "title": "Select Poll Interval (seconds) default 60s",
-      "description": "",
+      "description": "Configurable poll interval,  default 1 minute ",
       "type": "enum",
       "items": [
         {
@@ -59,6 +59,7 @@
     {
       "name": "barQueries",
       "title": "Bar Queries",
+      "description":"Collection of Bar Chart queries",
       "type": "collection",
       "items": [
         {
@@ -102,6 +103,7 @@
     {
       "name": "lineQueries",
       "title": "Line Queries",
+      "description":"Collection of Line Chart queries",
       "type": "collection",
       "items": [
         {
