@@ -16,6 +16,7 @@ const properties = require('../nr1.json');
 const additionalDocs = {
   tickFormat: {
     description: '', // optional override of the property config description
+    additionalInfo: '', // optional extra info
     links: [
       {
         name: 'Parsing documentation',
@@ -88,6 +89,12 @@ export default function Docs() {
                       extraDocs?.description ||
                       'No description provided.'}
                   </BlockText>
+
+                  {extraDocs?.additionalInfo && (
+                    <BlockText spacingType={[BlockText.SPACING_TYPE.MEDIUM]}>
+                      {extraDocs?.additionalInfo}
+                    </BlockText>
+                  )}
 
                   <BlockText spacingType={[BlockText.SPACING_TYPE.MEDIUM]}>
                     {extraDocs?.links && (
