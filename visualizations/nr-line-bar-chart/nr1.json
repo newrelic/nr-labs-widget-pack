@@ -12,8 +12,8 @@
     },
     {
       "name": "tickFormat",
-      "title": "Moment Tick Formatter (default: YYYY-MM-DD)",
-      "description": "The tick format is powered by moment. View their documentation for other configuration options.",
+      "title": "DayJS Tick Formatter (default: YYYY-MM-DD)",
+      "description": "The tick format is powered by dayjs. View their documentation for other configuration options.",
       "type": "string"
     },
     {

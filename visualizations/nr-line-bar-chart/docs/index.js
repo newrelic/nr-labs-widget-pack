@@ -20,7 +20,7 @@ const additionalDocs = {
     links: [
       {
         name: 'Parsing documentation',
-        link: 'https://momentjs.com/docs/#/parsing/string-format/'
+        link: 'https://day.js.org/docs/en/display/format'
       }
     ]
   }
@@ -62,8 +62,8 @@ export default function Docs() {
             </Spacing>
             <Spacing type={[Spacing.TYPE.MEDIUM, Spacing.TYPE.LARGE]}>
               <code>
-                SELECT count(*) as 'Views' from PageView where TIMESERIES 1 day
-                since last week
+                SELECT count(*) as 'Views' from PageView TIMESERIES 1 day since
+                last week
               </code>
             </Spacing>
           </BlockText>

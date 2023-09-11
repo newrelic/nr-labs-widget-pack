@@ -25,7 +25,7 @@ import {
 } from 'nr1';
 
 import { useInterval } from '@mantine/hooks';
-import moment from 'moment';
+import dayjs from 'dayjs';
 
 import Docs from './docs';
 
@@ -149,9 +149,9 @@ export default function LineBarChart(props) {
 
   const doNrql = data => {
     return new Promise(resolve => {
-      const { query, accountId, name, color, type } = data;
+      const { query, accountId, name, color, type, barSize } = data;
       NrqlQuery.query({ query, accountIds: [accountId] }).then(value => {
-        resolve({ ...value, name, color, type });
+        resolve({ ...value, name, color, type, barSize });
       });
     });
   };
@@ -210,7 +210,8 @@ export default function LineBarChart(props) {
         const hasFacet = groupData.metadata.groups.find(
           g => g.type === 'facet'
         );
-        groupData.metadata.color = hasFacet ? groupData.metadata.color : color;
+        groupData.metadata.color =
+          hasFacet || !color ? groupData.metadata.color : color;
 
         const dataKey = groupData.metadata.groups.find(
           g => g.type === 'function'
@@ -246,7 +247,7 @@ export default function LineBarChart(props) {
               if (!barData[`B:${baseName}`]) {
                 barData[`B:${baseName}`] = {
                   results: [entry],
-                  barSize,
+                  barSize: barSize > 0 ? barSize : 20,
                   name,
                   color: groupData.metadata.color
                 };
@@ -294,7 +295,7 @@ export default function LineBarChart(props) {
               domain={['auto', 'auto']}
               name="Time"
               tickFormatter={unixTime =>
-                moment(unixTime).format(tickFormat || 'YYYY-MM-DD')
+                dayjs(unixTime).format(tickFormat || 'YYYY-MM-DD')
               }
               type="number"
             />
@@ -308,7 +309,7 @@ export default function LineBarChart(props) {
               <Bar
                 key={bar}
                 dataKey={bar}
-                barSize={20}
+                barSize={parseInt(barData?.[bar]?.barSize || 20)}
                 fill={barData?.[bar]?.color}
               />
             ))}
