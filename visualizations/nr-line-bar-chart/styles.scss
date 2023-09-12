@@ -1,0 +1,21 @@
+.DocState {
+  text-align: left;
+
+  .ErrorState {
+    &-errors {
+      margin-bottom: 24px;
+    }
+
+    &-cardBody {
+      height: 100%;
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    &-errorBody {
+      margin: 0 12px 8px 12px;
+    }
+  }
+}

@@ -88,7 +88,7 @@ export default function LineBarChart(props) {
           errorObj.errors.push(`Query is undefined`);
         }
         if (!lowerQuery.includes('timeseries')) {
-          errorObj.errors.push(`Should contain TIMESERIES keyword`);
+          errorObj.errors.push(`Requires TIMESERIES keyword`);
         }
         if (!accountId) {
           errorObj.errors.push(`AccountID is undefined`);
@@ -117,7 +117,7 @@ export default function LineBarChart(props) {
           errorObj.errors.push(`Query is undefined`);
         }
         if (!lowerQuery.includes('timeseries')) {
-          errorObj.errors.push(`Should contain TIMESERIES keyword`);
+          errorObj.errors.push(`Requires TIMESERIES keyword`);
         }
         if (!accountId) {
           errorObj.errors.push(`AccountID is undefined`);
@@ -164,8 +164,9 @@ export default function LineBarChart(props) {
       const { accountId, query, enableFilters, color, name } = q;
 
       /* eslint-disable */
-      const newQuery = `${query} ${enableFilters ? filters || '' : ''} ${enableTimePicker ? timeQuery : ''
-        }`;
+      const newQuery = `${query} ${enableFilters ? filters || '' : ''} ${
+        enableTimePicker ? timeQuery : ''
+      }`;
       /* eslint-enable */
 
       queries.push({ query: newQuery, accountId, type: 'line', color, name });
@@ -177,8 +178,9 @@ export default function LineBarChart(props) {
         const { accountId, query, enableFilters, color, name, barSize } = q;
 
         /* eslint-disable */
-        const newQuery = `${query} ${enableFilters ? filters || '' : ''} ${enableTimePicker ? timeQuery : ''
-          }`;
+        const newQuery = `${query} ${enableFilters ? filters || '' : ''} ${
+          enableTimePicker ? timeQuery : ''
+        }`;
         /* eslint-enable */
 
         queries.push({
@@ -226,8 +228,7 @@ export default function LineBarChart(props) {
             /* eslint-disable */
             const entry = {
               time: gd.begin_time,
-              [`${type === 'line' ? 'L' : 'B'}:${baseName
-                }`]: value
+              [`${type === 'line' ? 'L' : 'B'}:${baseName}`]: value
             };
             /* eslint-enable */
 
@@ -332,37 +333,56 @@ export default function LineBarChart(props) {
 }
 
 const ErrorState = (errors, showDocs) => (
-  <Card style={{ textAlign: 'center' }}>
+  <Card className="DocState">
     <CardBody className="ErrorState-cardBody">
+      <div className="ErrorState-errors">
+        <HeadingText
+          spacingType={[
+            HeadingText.SPACING_TYPE.LARGE,
+            HeadingText.SPACING_TYPE.OMIT
+          ]}
+          type={HeadingText.TYPE.HEADING_2}
+        >
+          Sorry, there was a problem!
+        </HeadingText>
+
+        <HeadingText
+          type={HeadingText.TYPE.HEADING_6}
+          spacingType={[
+            HeadingText.SPACING_TYPE.OMIT,
+            HeadingText.SPACING_TYPE.LARGE,
+            HeadingText.SPACING_TYPE.LARGE,
+            HeadingText.SPACING_TYPE.LARGE
+          ]}
+        >
+          Enable the documentation toggle in the edit settings for more help.
+        </HeadingText>
+
+        {(errors || []).map((err, idx) => (
+          <div key={idx} className="ErrorState-errorBody">
+            <HeadingText
+              spacingType={[
+                HeadingText.SPACING_TYPE.OMIT,
+                HeadingText.SPACING_TYPE.OMIT,
+                HeadingText.SPACING_TYPE.SMALL,
+                HeadingText.SPACING_TYPE.OMIT
+              ]}
+            >
+              {err.name}
+            </HeadingText>
+            <BlockText>
+              <List>
+                {(err?.errors || []).map((err, i) => (
+                  <ListItem style={{ paddingBottom: '2px' }} key={i}>
+                    {err}
+                  </ListItem>
+                ))}
+              </List>
+            </BlockText>
+          </div>
+        ))}
+      </div>
       {showDocs && <Docs />}
-
-      <HeadingText
-        className="ErrorState-headingText"
-        spacingType={[HeadingText.SPACING_TYPE.LARGE]}
-        type={HeadingText.TYPE.HEADING_3}
-      >
-        Oops! Something went wrong.
-      </HeadingText>
-
-      <HeadingText>
-        Enable the documentation toggle in the edit settings for more help.
-      </HeadingText>
-
-      <br />
-
-      {(errors || []).map(err => (
-        <>
-          <HeadingText>{err.name}</HeadingText>
-          <BlockText>
-            <List>
-              {(err?.errors || []).map((err, i) => (
-                <ListItem key={i}>{err}</ListItem>
-              ))}
-            </List>
-          </BlockText>
-          <br />
-        </>
-      ))}
     </CardBody>
   </Card>
 );
