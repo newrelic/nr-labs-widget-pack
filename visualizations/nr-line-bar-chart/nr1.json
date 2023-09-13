@@ -11,8 +11,14 @@
       "type": "boolean"
     },
     {
+      "name": "enableTimePicker",
+      "title": "Enable Platform Time Picker",
+      "description": "",
+      "type": "boolean"
+    },
+    {
       "name": "tickFormat",
-      "title": "DayJS Tick Formatter (default: YYYY-MM-DD)",
+      "title": "Date Formatter (default: YYYY-MM-DD)",
       "description": "The tick format is powered by dayjs. View their documentation for other configuration options.",
       "type": "string"
     },

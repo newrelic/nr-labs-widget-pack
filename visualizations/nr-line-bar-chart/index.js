@@ -164,9 +164,8 @@ export default function LineBarChart(props) {
       const { accountId, query, enableFilters, color, name } = q;
 
       /* eslint-disable */
-      const newQuery = `${query} ${enableFilters ? filters || '' : ''} ${
-        enableTimePicker ? timeQuery : ''
-      }`;
+      const newQuery = `${query} ${enableFilters ? filters || '' : ''} ${enableTimePicker ? timeQuery : ''
+        }`;
       /* eslint-enable */
 
       queries.push({ query: newQuery, accountId, type: 'line', color, name });
@@ -178,9 +177,8 @@ export default function LineBarChart(props) {
         const { accountId, query, enableFilters, color, name, barSize } = q;
 
         /* eslint-disable */
-        const newQuery = `${query} ${enableFilters ? filters || '' : ''} ${
-          enableTimePicker ? timeQuery : ''
-        }`;
+        const newQuery = `${query} ${enableFilters ? filters || '' : ''} ${enableTimePicker ? timeQuery : ''
+          }`;
         /* eslint-enable */
 
         queries.push({
@@ -225,12 +223,10 @@ export default function LineBarChart(props) {
 
             const baseName = `${name} - ${groupData.metadata.name}`;
 
-            /* eslint-disable */
             const entry = {
               time: gd.begin_time,
               [`${type === 'line' ? 'L' : 'B'}:${baseName}`]: value
             };
-            /* eslint-enable */
 
             finalData.push(entry);
 

@@ -99,17 +99,21 @@ export default function Docs() {
                   <BlockText spacingType={[BlockText.SPACING_TYPE.MEDIUM]}>
                     {extraDocs?.links && (
                       <>
-                        <HeadingText type={HeadingText.TYPE.HEADING_6}>
+                        <HeadingText
+                          type={HeadingText.TYPE.HEADING_6}
+                          style={{ paddingBottom: '5px' }}
+                        >
                           Links
                         </HeadingText>
 
-                        <ul>
+                        <BlockText>
                           {extraDocs.links.map((l, i) => (
-                            <li key={i}>
+                            <code key={i}>
                               <Link to={l.link}>{l.name}</Link>
-                            </li>
+                              <br />
+                            </code>
                           ))}
-                        </ul>
+                        </BlockText>
                       </>
                     )}
                   </BlockText>

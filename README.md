@@ -9,6 +9,7 @@ A collection of custom visualizations to enhance your dashboarding experience.
 - Multi Line Compare
 - Multi Line & Event Overlay Chart
 - Scatter & Event Overlay Chart
+- Line & Bar Chart
 - Area & Event Overlay Chart
 - Radar Chart w/ChartJS
 - Action Loader
