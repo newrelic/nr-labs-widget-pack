@@ -46,6 +46,10 @@ export default function Docs() {
                   If using the <code>SINCE</code> clause it is strongly
                   recommended to be the same across all configured queries
                 </li>
+                <li>
+                  Only use unique names for your line and bar queries to avoid
+                  issues.
+                </li>
               </ul>
             </Spacing>
             <Spacing type={[Spacing.TYPE.MEDIUM]}>

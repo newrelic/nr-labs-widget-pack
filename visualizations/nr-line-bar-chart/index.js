@@ -199,9 +199,9 @@ export default function LineBarChart(props) {
     const nrqlData = await Promise.all(queries.map(q => doNrql(q)));
 
     // perform data merging
-    const finalData = [];
     const lineData = {};
     const barData = {};
+    const timeGroups = {};
 
     (nrqlData || []).forEach(d => {
       const { data, color, name, type, barSize } = d;
@@ -222,34 +222,45 @@ export default function LineBarChart(props) {
             const value = gd[dataKey];
 
             const baseName = `${name} - ${groupData.metadata.name}`;
+            const timeGroup = dayjs(gd.begin_time).format(
+              tickFormat || 'YYYY-MM-DD'
+            );
+
+            if (!timeGroups[timeGroup]) {
+              timeGroups[timeGroup] = {
+                timeGroup,
+                [`${baseName}`]: value
+              };
+            } else {
+              timeGroups[timeGroup][`${baseName}`] = value;
+            }
 
             const entry = {
               time: gd.begin_time,
-              [`${type === 'line' ? 'L' : 'B'}:${baseName}`]: value
+              timeGroup,
+              [`${baseName}`]: value
             };
 
-            finalData.push(entry);
-
             if (type === 'line') {
-              if (!lineData[`L:${baseName}`]) {
-                lineData[`L:${baseName}`] = {
+              if (!lineData[`${baseName}`]) {
+                lineData[`${baseName}`] = {
                   results: [entry],
                   name,
                   color: groupData.metadata.color
                 };
               } else {
-                lineData[`L:${baseName}`].results.push(entry);
+                lineData[`${baseName}`].results.push(entry);
               }
             } else if (type === 'bar') {
-              if (!barData[`B:${baseName}`]) {
-                barData[`B:${baseName}`] = {
+              if (!barData[`${baseName}`]) {
+                barData[`${baseName}`] = {
                   results: [entry],
                   barSize: barSize > 0 ? barSize : 20,
                   name,
                   color: groupData.metadata.color
                 };
               } else {
-                barData[`B:${baseName}`].results.push(entry);
+                barData[`${baseName}`].results.push(entry);
               }
             }
           }
@@ -259,7 +270,7 @@ export default function LineBarChart(props) {
 
     setBarData(barData);
     setLineData(lineData);
-    setDataSets(finalData);
+    setDataSets(Object.keys(timeGroups).map(tg => timeGroups[tg]));
   };
 
   if (loading) {
@@ -288,15 +299,11 @@ export default function LineBarChart(props) {
           >
             <CartesianGrid stroke="#f5f5f5" />
             <XAxis
-              dataKey="time"
+              dataKey="timeGroup"
               domain={['auto', 'auto']}
               name="Time"
-              tickFormatter={unixTime =>
-                dayjs(unixTime).format(tickFormat || 'YYYY-MM-DD')
-              }
-              type="number"
+              type="category"
             />
-            {/* <XAxis dataKey="day" scale="band" /> */}
             <YAxis />
             <YAxis yAxisId="right" orientation="right" />
             <Tooltip />
