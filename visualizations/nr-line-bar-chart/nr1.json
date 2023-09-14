@@ -23,6 +23,18 @@
       "type": "string"
     },
     {
+      "name": "yLabelRight",
+      "title": "Y Axis Right Label",
+      "description": "",
+      "type": "string"
+    },
+    {
+      "name": "xLabel",
+      "title": "X Axis Label",
+      "description": "",
+      "type": "string"
+    },
+    {
       "name": "pollInterval",
       "title": "Select Poll Interval (seconds) default 60s",
       "description": "Configurable poll interval,  default 1 minute ",

@@ -7,7 +7,8 @@ import {
   YAxis,
   CartesianGrid,
   Tooltip,
-  Legend
+  Legend,
+  Label
 } from 'recharts';
 
 import {
@@ -58,7 +59,9 @@ export default function LineBarChart(props) {
     lineQueries,
     barQueries,
     showDocs,
-    tickFormat
+    tickFormat,
+    yLabelRight,
+    xLabel
   } = props;
   const [errors, setErrors] = useState([]);
   const [dataSets, setDataSets] = useState([]);
@@ -303,9 +306,21 @@ export default function LineBarChart(props) {
               domain={['auto', 'auto']}
               name="Time"
               type="category"
-            />
+            >
+              {xLabel && (
+                <Label value={xLabel} offset={0} position="insideBottom" />
+              )}
+            </XAxis>
             <YAxis />
-            <YAxis yAxisId="right" orientation="right" />
+            <YAxis
+              yAxisId="right"
+              orientation="right"
+              label={
+                yLabelRight
+                  ? { value: yLabelRight, angle: -90, position: 'right' }
+                  : undefined
+              }
+            />
             <Tooltip />
             <Legend />
 
