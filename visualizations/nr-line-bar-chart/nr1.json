@@ -37,7 +37,7 @@
     {
       "name": "pollInterval",
       "title": "Select Poll Interval (seconds) default 60s",
-      "description": "Configurable poll interval,  default 1 minute ",
+      "description": "Frequency at which data is refreshed.",
       "type": "enum",
       "items": [
         {
@@ -77,13 +77,13 @@
     {
       "name": "barQueries",
       "title": "Bar Queries",
-      "description":"Collection of Bar Chart queries",
+      "description":"Each chart can include multiple bar charts. Click the section plus sign to add a new query definition.",
       "type": "collection",
       "items": [
         {
           "name": "name",
-          "title": "Name of Bar Query",
-          "description": "",
+          "title": "Name",
+          "description": "The name that will be pre-pended to the chart label.",
           "type": "string"
         },
         {
@@ -106,14 +106,14 @@
         },
         {
           "name": "barSize",
-          "title": "Bar Size (default: 20)",
+          "title": "Bar Width (default: 20)",
           "description": "",
           "type": "number"
         },
         {
           "name": "color",
-          "title": "Fill color (default: randomized) - Disabled with FACET query",
-          "description": "",
+          "title": "Bar fill color (default: randomized) - Disabled with FACET query",
+          "description": "A valid css color string. Not applicable if using a FACET query.",
           "type": "string"
         }
       ]
@@ -121,13 +121,13 @@
     {
       "name": "lineQueries",
       "title": "Line Queries",
-      "description":"Collection of Line Chart queries",
+      "description":"Each chart can include multiple list charts. Click the section plus sign to add a new query definition.",
       "type": "collection",
       "items": [
         {
           "name": "name",
-          "title": "Name of Line Query",
-          "description": "",
+          "title": "Name",
+          "description": "The name that will be pre-pended to the chart label.",
           "type": "string"
         },
         {
@@ -150,8 +150,8 @@
         },
         {
           "name": "color",
-          "title": "Fill color (default: randomized) - Disabled with FACET query",
-          "description": "",
+          "title": "Line color (default: randomized) - Disabled with FACET query",
+          "description": "A valid css color string. Not applicable if using a FACET query.",
           "type": "string"
         }
       ]
