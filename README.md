@@ -58,14 +58,8 @@ Click on the short description in each section to view chart details.
 
   <summary>Display multiple comparison periods in a single timeseries chart.</summary>
   
-  #### Overview
-  TBD
-
   <img src="screenshots/multiline_01.png" height="450" alt="Multi Line Compare chart screenshot" />
 
-  #### Requirements
-  In order to use this chart, there are a few requirements:
-  - TBD
   ---
 </details>
 
@@ -74,14 +68,8 @@ Click on the short description in each section to view chart details.
 
   <summary>Render events as markers on a line chart.</summary>
   
-  #### Overview
-  TBD
-
   <img src="screenshots/multiline_event_02.png" height="450" alt="Line and Event overlay screenshot" />
 
-  #### Requirements
-  In order to use this chart, there are a few requirements:
-  - TBD
   ---
 </details>
 
@@ -90,17 +78,8 @@ Click on the short description in each section to view chart details.
 
   <summary>Render events as markers on an area chart.</summary>
   
-  ### Overview
-  TBD
-
   <img src="screenshots/area_event_01.png" height="450" alt="Area and Event overlay screenshot" />
 
-  ### Requirements
-  In order to use this chart, there are a few requirements:
-  - TBD
-
-  ### Properties
-  TBD
   ---
 </details>
 
@@ -109,14 +88,8 @@ Click on the short description in each section to view chart details.
 
   <summary>Render events as markers on a scatter chart.</summary>
   
-  #### Overview
-  TBD
-
   <img src="screenshots/scatter_event_01.png" height="450" alt="Scatter and Event overlay screenshot" />
 
-  #### Requirements
-  In order to use this chart, there are a few requirements:
-  - TBD
   ---
 </details>
 
@@ -125,14 +98,8 @@ Click on the short description in each section to view chart details.
 
   <summary>Plot one or more groups of values over multiple variables, and compare them on a two-dimensional plane.</summary>
   
-  #### Overview
-  TBD
-
   <img src="screenshots/radar_01.png" height="450" alt="Radar chart screenshot" />
 
-  #### Requirements
-  In order to use this chart, there are a few requirements:
-  - TBD
   ---
 </details>
 
