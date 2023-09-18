@@ -16,7 +16,7 @@ To get started:
 Click on the short description in each section to view chart details.
 
 
-<h3 style="color: #4ca96d">Bar & Line Chart</h3>
+### Bar & Line Chart
 <details>
 
   <summary>Display changes in quantity alongside trends over time.</summary>
@@ -25,7 +25,7 @@ Click on the short description in each section to view chart details.
 
   <img src="screenshots/bar_line_01.png" height="450" alt="Bar and Line chart screenshot" />
 
-   ### Overview
+   #### Overview
   Use the Line & Bar chart to understand changes in quantity values (rendered as bars) alongside trends over time (rendered as lines). For instance, you may be interested in understanding how infrastructure load is impacted by throughput on your web site. Or you may want to see if web page response time effects the total number of orders processed - these are perfect use cases for a Line & Bar Chart.
 
   The Line & Bar chart plots data across three axes:
@@ -35,7 +35,7 @@ Click on the short description in each section to view chart details.
   
   The chart allows you to define multiple line and bar queries, so it is highly recommended that the queries are aligned in terms of units and time periods.
 
-  ### Requirements
+  #### Requirements
   In order to use this chart, there are a few requirements:
   - You must provide at least 1 bar query and 1 time query
   - Each query must use the `TIMESERIES` clause, with the same bucket eg. `TIMESERIES 1 day`
@@ -50,47 +50,42 @@ Click on the short description in each section to view chart details.
   To include multiple lines and/or bars in the chart, you can either:
   - define additional queries following the guidelines above
   - include a `FACET` clause in your query. Note that if you are faceting on the same attribute in both the line and the bar queries, you will need to alias one of those facets in order to avoid name collisions in the chart output.
+  ---
 </details>
 
-<h3 style="color: #4ca96d">Multi Line Compare</h3>
+### Multiline Compare Chart
 <details>
 
   <summary>Display multiple comparison periods in a single timeseries chart.</summary>
   
-  ### Overview
+  #### Overview
   TBD
 
   <img src="screenshots/multiline_01.png" height="450" alt="Multi Line Compare chart screenshot" />
 
-  ### Requirements
+  #### Requirements
   In order to use this chart, there are a few requirements:
   - TBD
-
-  ### Properties
-  TBD
-
+  ---
 </details>
 
-<h3 style="color: #4ca96d">Multi Line & Event Overlay Chart</h3>
+### Multiline and Event Overlay Chart
 <details>
 
   <summary>Render events as markers on a line chart.</summary>
   
-  ### Overview
+  #### Overview
   TBD
 
   <img src="screenshots/multiline_event_02.png" height="450" alt="Line and Event overlay screenshot" />
 
-  ### Requirements
+  #### Requirements
   In order to use this chart, there are a few requirements:
   - TBD
-
-  ### Properties
-  TBD
-
+  ---
 </details>
 
-<h3 style="color: #4ca96d">Area & Event Overlay Chart</h3>
+### Area and Event Overlay Chart
 <details>
 
   <summary>Render events as markers on an area chart.</summary>
@@ -106,58 +101,52 @@ Click on the short description in each section to view chart details.
 
   ### Properties
   TBD
-
+  ---
 </details>
 
-<h3 style="color: #4ca96d">Scatter & Event Overlay Chart</h3>
+### Scatter and Event Overlay Chart
 <details>
 
   <summary>Render events as markers on a scatter chart.</summary>
   
-  ### Overview
+  #### Overview
   TBD
 
   <img src="screenshots/scatter_event_01.png" height="450" alt="Scatter and Event overlay screenshot" />
 
-  ### Requirements
+  #### Requirements
   In order to use this chart, there are a few requirements:
   - TBD
-
-  ### Properties
-  TBD
-
+  ---
 </details>
 
-<h3 style="color: #4ca96d">Radar Chart</h3>
+### Radar Chart
 <details>
 
   <summary>Plot one or more groups of values over multiple variables, and compare them on a two-dimensional plane.</summary>
   
-  ### Overview
+  #### Overview
   TBD
 
   <img src="screenshots/radar_01.png" height="450" alt="Radar chart screenshot" />
 
-  ### Requirements
+  #### Requirements
   In order to use this chart, there are a few requirements:
   - TBD
-
-  ### Properties
-  TBD
-
+  ---
 </details>
 
-<h3 style="color: #4ca96d">Map Box Widget</h3>
+### Mapbox Widget
 <details>
 
-  <summary>Plot any data that includes latitude and longitude onto an interactive map, leveraging the Map Box API.</summary>
+  <summary>Plot any data that includes latitude and longitude onto an interactive map, leveraging the Mapbox API.</summary>
   
-  ### Overview
+  #### Overview
   <img src="screenshots/mapbox_01.png" height="450" alt="Mapbox screenshot" />
 
   Supports multiple NRQL queries and custom markers
 
-  ### Requirements
+  #### Requirements
   In order to use this chart, there are a few requirements:
   - Requires a Map Box Access Token from https://account.mapbox.com/auth/signup/
   - Query should contain one alias with 'name:SOME_VALUE' which will be used as the marker name
@@ -170,15 +159,15 @@ Click on the short description in each section to view chart details.
     ```
     FROM FlightData SELECT latest(flightNo) as 'name:Flight No', latest(track) as 'rotate:track', latest(departure), latest(destination) FACET string(lat, precision: 5) as 'lat', string(lng, precision: 5) as 'lng' SINCE 60 seconds ago LIMIT MAX
     ```
-
+    ---
 </details>
 
-<h3 style="color: #4ca96d">List View</h3>
+### List View
 <details>
 
   <summary>Display query results in a list, with smart formatting options.</summary>
   
-  ### Overview
+  #### Overview
   <img src="screenshots/list-view-screenshot-1.png" height="450" alt="List view screenshot" />
 
   List View displays NRQL-queried data in a list. The list items are rows returned by the query, and formatted using a [template](./list-view-template.md). Below are a list of additional features.
@@ -188,29 +177,28 @@ Click on the short description in each section to view chart details.
   - Convert between digital size types (bytes, kilobytes, ...)
   - Search bar to filter list to the searched text
 
-  ### Requirements
+  #### Requirements
   For full details on how to use and format results in this chart, read the [Template String documentation](./list-view-template.md). 
-
+  ---
 </details>
 
-<h3 style="color: #4ca96d">Action Loader</h3>
+### Action Loader
 <details>
 
   <summary>Incorporate buttons into your dashboards, with configurable onClick actions.</summary>
   
-  ### Overview
+  #### Overview
   Incorporate buttons into your dashboards, with configurable onClick actions.
 
-  ### Example w/ Stacked Nerdlet
+  #### Example w/ Stacked Nerdlet
   ```
   Nerdlet Id: service-maps.home
 
   URL State
   {"entityGuid":"MTYwNjg2MnxBUE18QVBQTElDQVRJT058NjI2OTA3NjE"}
   ```
+  ---
 </details>
-
-<br/>
 
 # Enabling this Nerdpack <a id="enable"></a>
 
