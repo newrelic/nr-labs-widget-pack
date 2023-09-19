@@ -26,9 +26,9 @@ Click on the short description in each section to view chart details.
   <img src="screenshots/bar_line_01.png" height="450" alt="Bar and Line chart screenshot" />
 
    #### Overview
-  Use the Line & Bar chart to understand changes in quantity values (rendered as bars) alongside trends over time (rendered as lines). For instance, you may be interested in understanding how infrastructure load is impacted by throughput on your web site. Or you may want to see if web page response time effects the total number of orders processed - these are perfect use cases for a Line & Bar Chart.
+  Use the Bar & Line chart to understand changes in quantity values (rendered as bars) alongside trends over time (rendered as lines). For instance, you may be interested in understanding how infrastructure load is impacted by throughput on your web site. Or you may want to see if web page response time effects the total number of orders processed - these are perfect use cases for a Bar & Line Chart.
 
-  The Line & Bar chart plots data across three axes:
+  The Bar & Line chart plots data across three axes:
   - the X axis represents time
   - the left Y axis represents the values for the Bar Charts
   - the right Y axis represents the values for the Line Charts
