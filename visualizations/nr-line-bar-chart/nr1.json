@@ -36,7 +36,7 @@
     },
     {
       "name": "pollInterval",
-      "title": "Select Poll Interval (seconds) default 60s",
+      "title": "Poll Interval (default: 60s)",
       "description": "Frequency at which data is refreshed.",
       "type": "enum",
       "items": [
@@ -107,12 +107,12 @@
         {
           "name": "barSize",
           "title": "Bar Width (default: 20)",
-          "description": "",
+          "description": "Bar width in pixels",
           "type": "number"
         },
         {
           "name": "color",
-          "title": "Bar fill color (default: randomized) - Disabled with FACET query",
+          "title": "Bar fill color (default: randomized)",
           "description": "A valid css color string. Not applicable if using a FACET query.",
           "type": "string"
         }
@@ -150,7 +150,7 @@
         },
         {
           "name": "color",
-          "title": "Line color (default: randomized) - Disabled with FACET query",
+          "title": "Line color (default: randomized)",
           "description": "A valid css color string. Not applicable if using a FACET query.",
           "type": "string"
         }

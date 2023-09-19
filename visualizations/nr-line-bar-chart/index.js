@@ -19,6 +19,7 @@ import {
   Spinner,
   AutoSizer,
   BlockText,
+  Icon,
   List,
   ListItem,
   NerdletStateContext,
@@ -167,8 +168,9 @@ export default function LineBarChart(props) {
       const { accountId, query, enableFilters, color, name } = q;
 
       /* eslint-disable */
-      const newQuery = `${query} ${enableFilters ? filters || '' : ''} ${enableTimePicker ? timeQuery : ''
-        }`;
+      const newQuery = `${query} ${enableFilters ? filters || '' : ''} ${
+        enableTimePicker ? timeQuery : ''
+      }`;
       /* eslint-enable */
 
       queries.push({ query: newQuery, accountId, type: 'line', color, name });
@@ -180,8 +182,9 @@ export default function LineBarChart(props) {
         const { accountId, query, enableFilters, color, name, barSize } = q;
 
         /* eslint-disable */
-        const newQuery = `${query} ${enableFilters ? filters || '' : ''} ${enableTimePicker ? timeQuery : ''
-          }`;
+        const newQuery = `${query} ${enableFilters ? filters || '' : ''} ${
+          enableTimePicker ? timeQuery : ''
+        }`;
         /* eslint-enable */
 
         queries.push({
@@ -361,11 +364,11 @@ const ErrorState = (errors, showDocs) => (
           ]}
           type={HeadingText.TYPE.HEADING_2}
         >
-          Sorry, there was a problem!
+          Just a few steps needed to finish up
         </HeadingText>
 
         <HeadingText
-          type={HeadingText.TYPE.HEADING_6}
+          type={HeadingText.TYPE.HEADING_5}
           spacingType={[
             HeadingText.SPACING_TYPE.OMIT,
             HeadingText.SPACING_TYPE.LARGE,
@@ -373,7 +376,15 @@ const ErrorState = (errors, showDocs) => (
             HeadingText.SPACING_TYPE.LARGE
           ]}
         >
-          Enable the documentation toggle in the edit settings for more help.
+          <span style={{ display: 'flex', alignItems: 'center' }}>
+            <Icon
+              type={Icon.TYPE.INTERFACE__SIGN__EXCLAMATION__V_ALTERNATE}
+              color="rgb(61, 157, 255)"
+              style={{ paddingRight: '4px' }}
+            />
+            Enable the documentation toggle in the visualization properites for
+            detailed help.
+          </span>
         </HeadingText>
 
         {(errors || []).map((err, idx) => (
