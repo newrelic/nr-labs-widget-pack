@@ -5,10 +5,11 @@ import {
   CardHeader,
   CardBody,
   HeadingText,
-  Link,
   BlockText,
   Spacing
 } from 'nr1';
+
+import RenderPropertyInfo from '../../../shared/PropertyInfo';
 
 const properties = require('../nr1.json');
 
@@ -24,70 +25,6 @@ const additionalDocs = {
       }
     ]
   }
-};
-
-const renderNr1Props = (config, isNested) => {
-  const { name, title, description, type, items } = config;
-  const extraDocs = additionalDocs[name];
-
-  if (type === 'collection') {
-    return (
-      <div>
-        <HeadingText type={HeadingText.TYPE.HEADING_5}>{title}</HeadingText>
-        <BlockText spacingType={[BlockText.SPACING_TYPE.MEDIUM]}>
-          {description || extraDocs?.description || 'No description provided.'}
-        </BlockText>
-
-        {items.map(item => {
-          return renderNr1Props(item, true);
-        })}
-      </div>
-    );
-  }
-
-  return (
-    <div key={name} style={{ paddingLeft: isNested ? '15px' : '0px' }}>
-      <HeadingText
-        type={
-          isNested ? HeadingText.TYPE.HEADING_6 : HeadingText.TYPE.HEADING_5
-        }
-      >
-        {title}
-      </HeadingText>
-      <BlockText spacingType={[BlockText.SPACING_TYPE.MEDIUM]}>
-        {description || extraDocs?.description || 'No description provided.'}
-      </BlockText>
-
-      {extraDocs?.additionalInfo && (
-        <BlockText spacingType={[BlockText.SPACING_TYPE.MEDIUM]}>
-          {extraDocs?.additionalInfo}
-        </BlockText>
-      )}
-
-      <BlockText spacingType={[BlockText.SPACING_TYPE.MEDIUM]}>
-        {extraDocs?.links && (
-          <>
-            <HeadingText
-              type={HeadingText.TYPE.HEADING_6}
-              style={{ paddingBottom: '5px' }}
-            >
-              Links
-            </HeadingText>
-
-            <BlockText>
-              {extraDocs.links.map((l, i) => (
-                <code key={i}>
-                  <Link to={l.link}>{l.name}</Link>
-                  <br />
-                </code>
-              ))}
-            </BlockText>
-          </>
-        )}
-      </BlockText>
-      <br />
-    </div>
-  );
 };
 
 export default function Docs() {
@@ -191,7 +128,7 @@ export default function Docs() {
           {properties.configuration
             .filter(c => c.name !== 'showDocs')
             .map(config => {
-              return renderNr1Props(config);
+              return RenderPropertyInfo(config, false, additionalDocs);
             })}
         </CardBody>
       </Card>
