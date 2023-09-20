@@ -146,7 +146,9 @@ Click on the short description in each section to view chart details.
   - Search bar to filter list to the searched text
 
   #### Requirements
+  
   For full details on how to use and format results in this chart, read the [Template String documentation](./list-view-template.md). 
+  
   ---
 </details>
 
