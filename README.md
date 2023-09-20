@@ -16,7 +16,8 @@ To get started:
 Click on the short description in each section to view chart details.
 
 
-### Bar & Line Chart
+### <code style="color: green;font-family:arial">Bar & Line Chart</code>
+
 <details>
 
   <summary>Display changes in quantity alongside trends over time.</summary>
