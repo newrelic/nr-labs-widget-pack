@@ -16,7 +16,7 @@ To get started:
 Click on the short description in each section to view chart details.
 
 
-### <code style="color: green;font-family:arial">Bar & Line Chart</code>
+### Bar & Line Chart
 
 <details>
 

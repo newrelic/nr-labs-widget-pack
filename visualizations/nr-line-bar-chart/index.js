@@ -12,16 +12,9 @@ import {
 } from 'recharts';
 
 import {
-  Card,
-  CardBody,
-  HeadingText,
   NrqlQuery,
   Spinner,
   AutoSizer,
-  BlockText,
-  Icon,
-  List,
-  ListItem,
   NerdletStateContext,
   PlatformStateContext
 } from 'nr1';
@@ -30,6 +23,7 @@ import { useInterval } from '@mantine/hooks';
 import dayjs from 'dayjs';
 
 import Docs from './docs';
+import ErrorState from '../../shared/ErrorState';
 
 const MINUTE = 60000;
 const HOUR = 60 * MINUTE;
@@ -168,9 +162,8 @@ export default function LineBarChart(props) {
       const { accountId, query, enableFilters, color, name } = q;
 
       /* eslint-disable */
-      const newQuery = `${query} ${enableFilters ? filters || '' : ''} ${
-        enableTimePicker ? timeQuery : ''
-      }`;
+      const newQuery = `${query} ${enableFilters ? filters || '' : ''} ${enableTimePicker ? timeQuery : ''
+        }`;
       /* eslint-enable */
 
       queries.push({ query: newQuery, accountId, type: 'line', color, name });
@@ -182,9 +175,8 @@ export default function LineBarChart(props) {
         const { accountId, query, enableFilters, color, name, barSize } = q;
 
         /* eslint-disable */
-        const newQuery = `${query} ${enableFilters ? filters || '' : ''} ${
-          enableTimePicker ? timeQuery : ''
-        }`;
+        const newQuery = `${query} ${enableFilters ? filters || '' : ''} ${enableTimePicker ? timeQuery : ''
+          }`;
         /* eslint-enable */
 
         queries.push({
@@ -284,7 +276,7 @@ export default function LineBarChart(props) {
   }
 
   if (errors.length > 0) {
-    return ErrorState(errors, showDocs);
+    return <ErrorState errors={errors} showDocs={showDocs} Docs={Docs} />;
   }
 
   return (
@@ -352,66 +344,3 @@ export default function LineBarChart(props) {
     </AutoSizer>
   );
 }
-
-const ErrorState = (errors, showDocs) => (
-  <Card className="DocState">
-    <CardBody className="ErrorState-cardBody">
-      <div className="ErrorState-errors">
-        <HeadingText
-          spacingType={[
-            HeadingText.SPACING_TYPE.LARGE,
-            HeadingText.SPACING_TYPE.OMIT
-          ]}
-          type={HeadingText.TYPE.HEADING_2}
-        >
-          Just a few steps needed to finish up
-        </HeadingText>
-
-        <HeadingText
-          type={HeadingText.TYPE.HEADING_5}
-          spacingType={[
-            HeadingText.SPACING_TYPE.OMIT,
-            HeadingText.SPACING_TYPE.LARGE,
-            HeadingText.SPACING_TYPE.LARGE,
-            HeadingText.SPACING_TYPE.LARGE
-          ]}
-        >
-          <span style={{ display: 'flex', alignItems: 'center' }}>
-            <Icon
-              type={Icon.TYPE.INTERFACE__SIGN__EXCLAMATION__V_ALTERNATE}
-              color="rgb(61, 157, 255)"
-              style={{ paddingRight: '4px' }}
-            />
-            Enable the documentation toggle in the visualization properites for
-            detailed help.
-          </span>
-        </HeadingText>
-
-        {(errors || []).map((err, idx) => (
-          <div key={idx} className="ErrorState-errorBody">
-            <HeadingText
-              spacingType={[
-                HeadingText.SPACING_TYPE.OMIT,
-                HeadingText.SPACING_TYPE.OMIT,
-                HeadingText.SPACING_TYPE.SMALL,
-                HeadingText.SPACING_TYPE.OMIT
-              ]}
-            >
-              {err.name}
-            </HeadingText>
-            <BlockText>
-              <List>
-                {(err?.errors || []).map((err, i) => (
-                  <ListItem style={{ paddingBottom: '2px' }} key={i}>
-                    {err}
-                  </ListItem>
-                ))}
-              </List>
-            </BlockText>
-          </div>
-        ))}
-      </div>
-      {showDocs && <Docs />}
-    </CardBody>
-  </Card>
-);
