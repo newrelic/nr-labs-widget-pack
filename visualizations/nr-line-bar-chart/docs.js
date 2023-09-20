@@ -9,9 +9,9 @@ import {
   Spacing
 } from 'nr1';
 
-import RenderPropertyInfo from '../../../shared/PropertyInfo';
+import RenderPropertyInfo from '../../shared/PropertyInfo';
 
-const properties = require('../nr1.json');
+const properties = require('./nr1.json');
 
 // if the key matches a config property name, the additional information will be added
 const additionalDocs = {
