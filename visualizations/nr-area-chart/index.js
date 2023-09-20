@@ -1,8 +1,5 @@
 import React, { useEffect, useState, useContext } from 'react';
 import {
-  Card,
-  CardBody,
-  HeadingText,
   AreaChart,
   NrqlQuery,
   Spinner,
@@ -10,6 +7,8 @@ import {
   PlatformStateContext
 } from 'nr1';
 import { useInterval } from '@mantine/hooks';
+import ErrorState from '../../shared/ErrorState';
+import Docs from './docs';
 
 const MINUTE = 60000;
 const HOUR = 60 * MINUTE;
@@ -34,7 +33,13 @@ const timeRangeToNrql = timeRange => {
 };
 
 function LineEventChart(props) {
-  const { pollInterval, enableTimePicker, timeQueries, eventQueries } = props;
+  const {
+    pollInterval,
+    enableTimePicker,
+    timeQueries,
+    eventQueries,
+    showDocs
+  } = props;
   const [errors, setErrors] = useState([]);
   const [dataSets, setDataSets] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -55,9 +60,10 @@ function LineEventChart(props) {
     timeQueries.forEach(q => {
       const { accountId, query, enableFilters } = q;
 
-      const newQuery = `${query} ${enableFilters ? filters || '' : ''} ${
-        enableTimePicker ? timeQuery : ''
-      }`;
+      /* eslint-disable */
+      const newQuery = `${query} ${enableFilters ? filters || '' : ''} ${enableTimePicker ? timeQuery : ''
+        }`;
+      /* eslint-enable */
 
       queries.push({ query: newQuery, accountId, type: 'scatter' });
     });
@@ -67,9 +73,11 @@ function LineEventChart(props) {
       .forEach(q => {
         const { accountId, query, enableFilters, color, name } = q;
 
-        const newQuery = `${query} ${enableFilters ? filters || '' : ''} ${
-          enableTimePicker ? timeQuery : ''
-        }`;
+        /* eslint-disable */
+        const newQuery = `${query} ${enableFilters ? filters || '' : ''} ${enableTimePicker ? timeQuery : ''
+          }`;
+
+        /* eslint-enable */
 
         queries.push({
           query: newQuery,
@@ -136,23 +144,30 @@ function LineEventChart(props) {
     const tempErrors = [];
 
     if (timeQueries.length === 0) {
-      tempErrors.push('You need to supply at least one timeseries query');
+      tempErrors.push({
+        name: 'You need to supply at least one timeseries query'
+      });
     } else {
       timeQueries.forEach((t, i) => {
         const { query, accountId } = t;
         const lowerQuery = (query || '').toLowerCase();
+        const errorObj = { name: `Time Query ${i + 1}`, errors: [] };
 
         if (!lowerQuery) {
-          tempErrors.push(`${i + 1}: Query is undefined`);
+          errorObj.errors.push(`Query is undefined`);
         }
         if (lowerQuery.trim() === 'from') {
-          tempErrors.push(`${i + 1}: Query is undefined`);
+          errorObj.errors.push(`Query is undefined`);
         }
         if (!lowerQuery.includes('timeseries')) {
-          tempErrors.push(`${i + 1}: Query should contain TIMESERIES keyword`);
+          errorObj.errors.push(`Requires TIMESERIES keyword`);
         }
         if (!accountId) {
-          tempErrors.push(`${i + 1}: AccountID is undefined`);
+          errorObj.errors.push(`AccountID is undefined`);
+        }
+
+        if (errorObj.errors.length > 0) {
+          tempErrors.push(errorObj);
         }
       });
     }
@@ -162,23 +177,26 @@ function LineEventChart(props) {
       .forEach((t, i) => {
         const { query, accountId, name } = t;
         const lowerQuery = (query || '').toLowerCase();
+        const errorObj = { name: `Bar Query ${i + 1}`, errors: [] };
 
         if (!name) {
-          tempErrors.push(`${i + 1}: Name is undefined`);
+          errorObj.errors.push(`Name is undefined`);
         }
         if (!lowerQuery) {
-          tempErrors.push(`${i + 1}: Query is undefined`);
+          errorObj.errors.push(`Query is undefined`);
         }
         if (lowerQuery.trim() === 'from') {
-          tempErrors.push(`${i + 1}: Query is undefined`);
+          errorObj.errors.push(`Query is undefined`);
         }
         if (lowerQuery.includes('timeseries')) {
-          tempErrors.push(
-            `${i + 1}: Query should NOT contain TIMESERIES keyword`
-          );
+          errorObj.errors.push(`Should NOT contain TIMESERIES keyword`);
         }
         if (!accountId) {
-          tempErrors.push(`${i + 1}: AccountID is undefined`);
+          errorObj.errors.push(`AccountID is undefined`);
+        }
+
+        if (errorObj.errors.length > 0) {
+          tempErrors.push(errorObj);
         }
       });
 
@@ -192,35 +210,16 @@ function LineEventChart(props) {
   }
 
   if (errors.length > 0) {
-    return ErrorState(errors);
+    return <ErrorState errors={errors} showDocs={showDocs} Docs={Docs} />;
   }
 
   return (
     <>
+      {showDocs && <Docs />}
+
       <AreaChart data={dataSets} fullWidth fullHeight />
     </>
   );
 }
-
-const ErrorState = errors => (
-  <Card className="ErrorState">
-    <CardBody className="ErrorState-cardBody">
-      <HeadingText
-        className="ErrorState-headingText"
-        spacingType={[HeadingText.SPACING_TYPE.LARGE]}
-        type={HeadingText.TYPE.HEADING_3}
-      >
-        Oops! Something went wrong.
-      </HeadingText>
-
-      {errors.map(err => (
-        <>
-          {err}
-          <br />
-        </>
-      ))}
-    </CardBody>
-  </Card>
-);
 
 export default LineEventChart;
