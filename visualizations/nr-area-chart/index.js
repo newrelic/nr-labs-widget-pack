@@ -177,7 +177,7 @@ function LineEventChart(props) {
       .forEach((t, i) => {
         const { query, accountId, name } = t;
         const lowerQuery = (query || '').toLowerCase();
-        const errorObj = { name: `Bar Query ${i + 1}`, errors: [] };
+        const errorObj = { name: `Event Query ${i + 1}`, errors: [] };
 
         if (!name) {
           errorObj.errors.push(`Name is undefined`);

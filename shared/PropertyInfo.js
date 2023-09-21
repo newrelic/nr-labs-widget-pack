@@ -15,14 +15,14 @@ export default function RenderPropertyInfo(config, isNested, additionalDocs) {
         </BlockText>
 
         {items.map(item => {
-          return RenderPropertyInfo(item, true, additionalDocs);
+          return RenderPropertyInfo(item, isNested + 1, additionalDocs);
         })}
       </div>
     );
   }
 
   return (
-    <div key={name} style={{ paddingLeft: isNested ? '15px' : '0px' }}>
+    <div key={name} style={{ paddingLeft: `${isNested * 15}px` }}>
       <HeadingText
         type={
           isNested ? HeadingText.TYPE.HEADING_6 : HeadingText.TYPE.HEADING_5

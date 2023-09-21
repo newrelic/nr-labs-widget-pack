@@ -5,6 +5,12 @@
   "description": "Labs Widget Pack - Multi Line & Event Overlay Chart w/Custom Poll Intervals",
   "configuration": [
     {
+      "name": "showDocs",
+      "title": "Show Documentation",
+      "description": "",
+      "type": "boolean"
+    },
+    {
       "name": "pollInterval",
       "title": "Select Poll Interval (seconds) default 60s",
       "description": "",

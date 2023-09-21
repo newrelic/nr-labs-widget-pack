@@ -21,8 +21,8 @@ export default function Docs() {
         <CardHeader title="Overview" />
         <CardBody style={{ marginLeft: '35px' }}>
           <BlockText spacingType={[BlockText.SPACING_TYPE.MEDIUM]}>
-            Use the Area & Event Chart to highlight changes in your environment
-            against other metrics. Eg. scaling events against load.
+            Use the Scatter & Event Chart to highlight changes in your
+            environment against other metrics. Eg. scaling events against load.
             <br />
             <br />
             The chart allows you to define multiple timeseries and event
@@ -64,7 +64,7 @@ export default function Docs() {
               </div>
             </Spacing>
             <Spacing type={[Spacing.TYPE.MEDIUM, Spacing.TYPE.LARGE]}>
-              <code>FROM TransactionError SELECT error.message</code>
+              <code>FROM TransactionError SELECT error.message </code>
             </Spacing>
           </BlockText>
         </CardBody>

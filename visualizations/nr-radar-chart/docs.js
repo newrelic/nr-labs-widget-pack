@@ -21,12 +21,8 @@ export default function Docs() {
         <CardHeader title="Overview" />
         <CardBody style={{ marginLeft: '35px' }}>
           <BlockText spacingType={[BlockText.SPACING_TYPE.MEDIUM]}>
-            Use the Area & Event Chart to highlight changes in your environment
-            against other metrics. Eg. scaling events against load.
-            <br />
-            <br />
-            The chart allows you to define multiple timeseries and event
-            queries.
+            Use the Radar Chart to compare two or more items or groups on
+            various features or characteristics.
           </BlockText>
         </CardBody>
       </Card>
@@ -38,33 +34,21 @@ export default function Docs() {
             <Spacing type={[Spacing.TYPE.MEDIUM, Spacing.TYPE.EXTRA_LARGE]}>
               <ul>
                 <li>
-                  At least 1 timeseries query and optionally 1 event query
+                  Query should contain a <code>FACET</code> clause
                 </li>
                 <li>
-                  Timeseries queries should contain the <code>TIMESERIES</code>{' '}
-                  clause
-                </li>
-                <li>
-                  Event queries should NOT contain the <code>TIMESERIES </code>{' '}
-                  clause
+                  The selected FACET attribute should ideally have two or more
+                  variants
                 </li>
               </ul>
             </Spacing>
             <Spacing type={[Spacing.TYPE.MEDIUM]}>
-              <div>
-                A valid timeseries query for the chart could look like this:{' '}
-              </div>
+              <div>A valid query for the chart could look like this: </div>
             </Spacing>
             <Spacing type={[Spacing.TYPE.MEDIUM, Spacing.TYPE.LARGE]}>
-              <code>SELECT count(*) FROM Transaction TIMESERIES</code>
-            </Spacing>
-            <Spacing type={[Spacing.TYPE.MEDIUM]}>
-              <div>
-                A valid event query for the chart could look like this:{' '}
-              </div>
-            </Spacing>
-            <Spacing type={[Spacing.TYPE.MEDIUM, Spacing.TYPE.LARGE]}>
-              <code>FROM TransactionError SELECT error.message</code>
+              <code>
+                FROM Transaction SELECT average(duration) FACET appName
+              </code>
             </Spacing>
           </BlockText>
         </CardBody>
@@ -76,7 +60,7 @@ export default function Docs() {
           {properties.configuration
             .filter(c => c.name !== 'showDocs')
             .map(config => {
-              return RenderPropertyInfo(config, false, {});
+              return RenderPropertyInfo(config, 0, {});
             })}
         </CardBody>
       </Card>

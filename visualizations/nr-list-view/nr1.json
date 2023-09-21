@@ -5,6 +5,12 @@
   "description": "Labs Widget Pack - List View to display lists",
   "configuration": [
     {
+      "name": "showDocs",
+      "title": "Show Documentation",
+      "description": "",
+      "type": "boolean"
+    },
+    {
       "name": "accountId",
       "title": "Account ID",
       "description": "Account ID to be associated with the query",
