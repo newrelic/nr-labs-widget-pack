@@ -5,6 +5,12 @@
   "description": "Intended for advanced usecases",
   "configuration": [
     {
+      "name": "showDocs",
+      "title": "Show Documentation",
+      "description": "",
+      "type": "boolean"
+    },
+    {
       "name": "textAlign",
       "title": "Text Align",
       "description": "",

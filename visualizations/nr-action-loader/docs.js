@@ -6,8 +6,7 @@ import {
   CardBody,
   HeadingText,
   BlockText,
-  Spacing,
-  Link
+  Spacing
 } from 'nr1';
 
 import RenderPropertyInfo from '../../shared/PropertyInfo';
@@ -25,26 +24,20 @@ export default function Docs() {
         <CardHeader title="Overview" />
         <CardBody style={{ marginLeft: '35px' }}>
           <BlockText spacingType={[BlockText.SPACING_TYPE.MEDIUM]}>
-            List View displays NRQL-queried data in a list. The list items are
-            rows returned by the query, and formatted using a template.
+            Action Loader, is used to trigger other platform actions and
+            features.
             <br />
             <br />
-            Below are a list of additional features:
+            Below are a list of action types available:
             <Spacing type={[Spacing.TYPE.MEDIUM, Spacing.TYPE.EXTRA_LARGE]}>
               <ul>
-                <li>Coerce values to number, date and boolean types</li>
-                <li>Format numbers and dates</li>
-                <li>
-                  Convert between digital size types (bytes, kilobytes, ...)
-                </li>
-                <li>Search bar to filter list to the searched text</li>
+                <li>Stacked Nerdlet ID</li>
+                <li>Stacked Nerdlet GUID</li>
+                <li>Hyperlink</li>
+                <li>Stacked Link (experimental)</li>
+                <li>Window URL Replace (experimental)</li>
               </ul>
             </Spacing>
-            Read the{' '}
-            <Link to="https://github.com/newrelic/nr-labs-widget-pack/blob/main/list-view-template.md">
-              Template String documentation
-            </Link>{' '}
-            for details.
           </BlockText>
         </CardBody>
       </Card>
