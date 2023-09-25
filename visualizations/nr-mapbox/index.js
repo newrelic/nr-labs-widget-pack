@@ -1,8 +1,5 @@
 import React, { useEffect, useState, useContext } from 'react';
 import {
-  Card,
-  CardBody,
-  HeadingText,
   Spinner,
   NerdletStateContext,
   NerdGraphQuery,
@@ -18,6 +15,8 @@ import Map, {
 } from 'react-map-gl';
 
 import { deriveLatLng, evaluateMarker } from './utils';
+import Docs from './docs';
+import ErrorState from '../../shared/ErrorState';
 
 const MINUTE = 60000;
 const HOUR = 60 * MINUTE;
@@ -64,7 +63,8 @@ function MapBoxRoot(props) {
     mapStyle,
     markerThresholds,
     mapBoxToken,
-    pollInterval
+    pollInterval,
+    showDocs
   } = props;
   const [popupInfo, setPopupInfo] = useState(null);
   const [errors, setErrors] = useState([]);
@@ -193,29 +193,32 @@ function MapBoxRoot(props) {
     const tempErrors = [];
 
     if (!mapBoxToken) {
-      tempErrors.push('Map Box Access Token required');
+      tempErrors.push({ name: 'Map Box Access Token required' });
     }
 
     nrqlQueries.forEach((nrql, index) => {
       const lowerQuery = (nrql.query || '').toLowerCase();
+      const errorObj = { name: `Line Query ${index + 1}`, errors: [] };
 
       if (!lowerQuery) {
-        tempErrors.push(`${index + 1}: Query undefined`);
+        errorObj.errors.push(`Query is undefined`);
       } else {
         // if (!lowerQuery.includes('facet')) {
         //   tempErrors.push(`${index + 1}: Query should contain facet`);
         // }
         // eslint-disable-next-line
         if (!lowerQuery.includes('name:')) {
-          tempErrors.push(
-            `${index +
-              1}: Query should specify a name eg. "SELECT latest(flightNo) as 'name:Flight No FROM..."' `
+          errorObj.errors.push(
+            `Query should specify a name eg. "SELECT latest(flightNo) as 'name:Flight No' FROM..."`
           );
         }
       }
 
-      if (!nrql.accountId)
-        tempErrors.push(`${index + 1}: Account ID undefined`);
+      if (!nrql.accountId) errorObj.errors.push(`AccountID is undefined`);
+
+      if (errorObj.errors.length > 0) {
+        tempErrors.push(errorObj);
+      }
     });
 
     setErrors(tempErrors);
@@ -228,195 +231,125 @@ function MapBoxRoot(props) {
   }
 
   if (errors.length > 0) {
-    return ErrorState(errors);
+    if (errors.length > 0) {
+      return <ErrorState errors={errors} showDocs={showDocs} Docs={Docs} />;
+    }
   }
 
   return (
-    <Map
-      initialViewState={{
-        longitude:
-          !initialLong || isNaN(initialLong)
-            ? -122.3929926594833
-            : parseFloat(initialLong),
-        latitude:
-          !initialLat || isNaN(initialLat)
-            ? 37.791536840426495
-            : parseFloat(initialLat),
-        zoom: !initialZoom || isNaN(initialZoom) ? 2 : parseFloat(initialZoom)
-      }}
-      // ref={this.mapRef}
-      mapboxAccessToken={mapBoxToken}
-      mapStyle={mapStyle || 'mapbox://styles/mapbox/streets-v11'}
+    <>
+      {showDocs && <Docs />}
+      <Map
+        initialViewState={{
+          longitude:
+            !initialLong || isNaN(initialLong)
+              ? -122.3929926594833
+              : parseFloat(initialLong),
+          latitude:
+            !initialLat || isNaN(initialLat)
+              ? 37.791536840426495
+              : parseFloat(initialLat),
+          zoom: !initialZoom || isNaN(initialZoom) ? 2 : parseFloat(initialZoom)
+        }}
+        // ref={this.mapRef}
+        mapboxAccessToken={mapBoxToken}
+        mapStyle={mapStyle || 'mapbox://styles/mapbox/streets-v11'}
+      /* eslint-disable */
       // onViewportChange={viewport =>
       //   this.handleViewportChanged(viewport, updateMapContext)
       // }
       // onClick={this.handleMapClick}
       // onHover={map => this.handleMapClick(map, true)}
-    >
-      <GeolocateControl position="top-left" />
-      <FullscreenControl position="top-left" />
-      <NavigationControl position="top-left" />
-      <ScaleControl />
+      /* eslint-enable */
+      >
+        <GeolocateControl position="top-left" />
+        <FullscreenControl position="top-left" />
+        <NavigationControl position="top-left" />
+        <ScaleControl />
 
-      {mapLocations.map((mapData, mapIndex) => {
-        const { data, marker, targetName, targetRotate } = mapData;
+        {mapLocations.map((mapData, mapIndex) => {
+          const { data, marker, targetName, targetRotate } = mapData;
 
-        const locName = data[`name:${targetName}`];
-        const rotate = data[`rotate:${targetRotate}`];
-        const { lat, lng } = data['mapWidget.coordinates'];
+          const locName = data[`name:${targetName}`];
+          const rotate = data[`rotate:${targetRotate}`];
+          const { lat, lng } = data['mapWidget.coordinates'];
 
-        return (
-          <Marker
-            key={mapIndex}
-            longitude={lng}
-            latitude={lat}
-            color={marker?.markerColor || defaultMarkerColor}
-            onClick={e => {
-              // If we let the click event propagates to the map, it will immediately close the popup
-              // with `closeOnClick: true`
-              e.originalEvent.stopPropagation();
-              setPopupInfo({
-                ...data,
-                locName,
-                lng,
-                lat
-              });
-            }}
+          return (
+            <Marker
+              key={mapIndex}
+              longitude={lng}
+              latitude={lat}
+              color={marker?.markerColor || defaultMarkerColor}
+              onClick={e => {
+                // If we let the click event propagates to the map, it will immediately close the popup
+                // with `closeOnClick: true`
+                e.originalEvent.stopPropagation();
+                setPopupInfo({
+                  ...data,
+                  locName,
+                  lng,
+                  lat
+                });
+              }}
+            >
+              {!marker?.imgUrl && defaultMarkerImgURL && (
+                <img
+                  src={defaultMarkerImgURL}
+                  width={marker?.imgWidth || defaultImgWidth || 25}
+                  height={marker?.imgHeight || defaultImgHeight || 25}
+                  style={{
+                    transform: rotate ? `rotate(${rotate}deg)` : undefined
+                  }}
+                />
+              )}
+              {marker?.imgUrl && (
+                <img
+                  src={marker?.imgUrl}
+                  width={marker?.imgWidth || defaultImgWidth || 25}
+                  height={marker?.imgHeight || defaultImgHeight || 25}
+                  style={{
+                    transform: rotate ? `rotate(${rotate}deg)` : undefined
+                  }}
+                />
+              )}
+            </Marker>
+          );
+        })}
+        {popupInfo && (
+          <Popup
+            anchor="top"
+            longitude={Number(popupInfo.lng)}
+            latitude={Number(popupInfo.lat)}
+            onClose={() => setPopupInfo(null)}
           >
-            {!marker?.imgUrl && defaultMarkerImgURL && (
-              <img
-                src={defaultMarkerImgURL}
-                width={marker?.imgWidth || defaultImgWidth || 25}
-                height={marker?.imgHeight || defaultImgHeight || 25}
-                style={{
-                  transform: rotate ? `rotate(${rotate}deg)` : undefined
-                }}
-              />
-            )}
-            {marker?.imgUrl && (
-              <img
-                src={marker?.imgUrl}
-                width={marker?.imgWidth || defaultImgWidth || 25}
-                height={marker?.imgHeight || defaultImgHeight || 25}
-                style={{
-                  transform: rotate ? `rotate(${rotate}deg)` : undefined
-                }}
-              />
-            )}
-          </Marker>
-        );
-      })}
-      {popupInfo && (
-        <Popup
-          anchor="top"
-          longitude={Number(popupInfo.lng)}
-          latitude={Number(popupInfo.lat)}
-          onClose={() => setPopupInfo(null)}
-        >
-          <div>
-            <span style={{ fontWeight: 'bold' }}>{popupInfo.locName}</span>
-            <br />
-            {Object.keys(popupInfo).map(key => {
-              if (
-                !key.includes('name:') &&
-                !key.includes('rotate:') &&
-                !key.includes('facet') &&
-                !key.includes('locName') &&
-                !key.includes('data') &&
-                !key.includes('mapWidget.coordinates')
-              ) {
-                return (
-                  <>
-                    {key}: {popupInfo[key]}
-                    <br />
-                  </>
-                );
-              } else {
-                return '';
-              }
-            })}
-          </div>
-        </Popup>
-      )}
-    </Map>
+            <div>
+              <span style={{ fontWeight: 'bold' }}>{popupInfo.locName}</span>
+              <br />
+              {Object.keys(popupInfo).map(key => {
+                if (
+                  !key.includes('name:') &&
+                  !key.includes('rotate:') &&
+                  !key.includes('facet') &&
+                  !key.includes('locName') &&
+                  !key.includes('data') &&
+                  !key.includes('mapWidget.coordinates')
+                ) {
+                  return (
+                    <>
+                      {key}: {popupInfo[key]}
+                      <br />
+                    </>
+                  );
+                } else {
+                  return '';
+                }
+              })}
+            </div>
+          </Popup>
+        )}
+      </Map>
+    </>
   );
 }
-
-const ErrorState = errors => (
-  <Card className="ErrorState">
-    <CardBody
-      className="ErrorState-cardBody"
-      style={{ marginTop: 0, marginBottom: 0 }}
-    >
-      <HeadingText
-        className="ErrorState-headingText"
-        spacingType={[HeadingText.SPACING_TYPE.LARGE]}
-        type={HeadingText.TYPE.HEADING_1}
-      >
-        Setup Guide
-      </HeadingText>
-      <span
-        className="ErrorState-headingText"
-        onClick={() => window.open('https://account.mapbox.com/auth/signup/')}
-        style={{ cursor: 'pointer', fontSize: '16px', color: 'blue' }}
-      >
-        Go to https://account.mapbox.com/auth/signup/ to sign up and get a Map
-        Box Access Token.
-      </span>
-      <br />
-      <HeadingText
-        className="ErrorState-headingText"
-        spacingType={[HeadingText.SPACING_TYPE.LARGE]}
-        type={HeadingText.TYPE.HEADING_4}
-      >
-        Your query must contain:
-      </HeadingText>
-      <span>
-        - One alias with 'name:SOME_VALUE' which will be used as the marker name
-      </span>
-      <br />
-      <span>
-        - Have a FACET for latitude and longitude, use precision to ensure the
-        FACET does not round the number eg.
-      </span>
-      <br />
-      <span>
-        FACET string(lat, precision: 5) as 'lat', string(lng, precision: 5) as
-        'lng'
-      </span>
-      <br />
-      <span>
-        Rotation can optionally be set using the following alias with
-        'rotate:SOME_VALUE'
-      </span>
-      <br />
-      <span>
-        - Example Query:{' '}
-        <b>
-          FROM FlightData SELECT latest(flightNo) as 'name:Flight No',
-          latest(track) as 'rotate:track', latest(departure),
-          latest(destination) FACET string(lat, precision: 5) as 'lat',
-          string(lng, precision: 5) as 'lng' SINCE 60 seconds ago LIMIT MAX
-        </b>
-      </span>
-      <br />
-      <br />
-      <hr />
-      <HeadingText
-        className="ErrorState-headingText"
-        spacingType={[HeadingText.SPACING_TYPE.LARGE]}
-        type={HeadingText.TYPE.HEADING_1}
-      >
-        Hey! you need to do a few more things to get started!
-      </HeadingText>
-      {errors.map(err => (
-        <>
-          {err}
-          <br />
-        </>
-      ))}
-    </CardBody>
-  </Card>
-);
 
 export default MapBoxRoot;

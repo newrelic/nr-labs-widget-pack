@@ -4,8 +4,14 @@ import PropTypes from 'prop-types';
 import { AutoSizer, EmptyState } from 'nr1';
 import useQueryData from './use-query-data';
 import { castAccountIdsAsArray, generateList } from './data';
+import Docs from './docs';
 
-const ListViewVisualization = ({ accountId, query, templateString }) => {
+const ListViewVisualization = ({
+  accountId,
+  query,
+  templateString,
+  showDocs
+}) => {
   const [list, setList] = useState([]);
   const [filterText, setFilterText] = useState('');
   const { data, attributes } = useQueryData({
@@ -34,24 +40,28 @@ const ListViewVisualization = ({ accountId, query, templateString }) => {
 
   if (!list?.length)
     return (
-      <EmptyState
-        fullHeight
-        fullWidth
-        iconType={EmptyState.ICON_TYPE.INTERFACE__INFO__INFO}
-        title="Account, NRQL query and template string are required"
-        description="Pick an account and enter a NRQL query and template string to get started. Template strings **need** to be regular-expression-safe. For more information, including details on how to format the template string, view the README."
-        additionalInfoLink={{
-          label: 'README',
-          to:
-            'https://github.com/newrelic/nr-labs-widget-pack/blob/main/README.md#list-view'
-        }}
-      />
+      <>
+        {showDocs && <Docs />}
+        <EmptyState
+          fullHeight
+          fullWidth
+          iconType={EmptyState.ICON_TYPE.INTERFACE__INFO__INFO}
+          title="Account, NRQL query and template string are required"
+          description="Pick an account and enter a NRQL query and template string to get started. Template strings **need** to be regular-expression-safe. For more information, including details on how to format the template string, view the README."
+          additionalInfoLink={{
+            label: 'README',
+            to:
+              'https://github.com/newrelic/nr-labs-widget-pack/blob/main/README.md#list-view'
+          }}
+        />
+      </>
     );
 
   return (
     <AutoSizer>
       {({ width, height }) => (
         <div className="list-container" style={{ width, height }}>
+          {showDocs && <Docs />}
           <div className="filter">
             <input
               type="search"

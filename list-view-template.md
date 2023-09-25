@@ -2,10 +2,9 @@
 
 List View uses a template string to construct each cell in the list. 
 
-![template string screenshot 1](screenshots/list-view-template-1.png)
+<img src="screenshots/list-view-template-1.png" height="80" alt="template string screenshot 1" />
 
-![template string screenshot 2](screenshots/list-view-template-2.png)
-
+<img src="screenshots/list-view-template-2.png" height="80" alt="template string screenshot 2" />
 
 ## Basics
 
@@ -21,7 +20,7 @@ Name: {{name}}\nResponse Time: {{duration}} s
 
 List View will loop through the results of the query, and for each row, it'll output a cell in the list with the format from the template. It replaces any references in double curly braces with the value for the specified column, for that specific row.
 
-![template example 1](screenshots/list-view-template-example-1.png)
+<img src="screenshots/list-view-template-example-1.png" height="300" alt="template example 1" />
 
 Use `\n` to add a line break.
 

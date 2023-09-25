@@ -1,13 +1,7 @@
 import React, { useEffect, useState, useContext } from 'react';
-import {
-  Card,
-  CardBody,
-  HeadingText,
-  NrqlQuery,
-  Spinner,
-  LineChart,
-  NerdletStateContext
-} from 'nr1';
+import { NrqlQuery, Spinner, LineChart, NerdletStateContext } from 'nr1';
+import Docs from './docs';
+import ErrorState from '../../shared/ErrorState';
 
 const nrColors = require('../../utils/nrColors.json');
 
@@ -17,7 +11,8 @@ function MultiLineRoot(props) {
     accountId,
     compareOver,
     comparePeriod,
-    customSinceClause
+    customSinceClause,
+    showDocs
   } = props;
   const [errors, setErrors] = useState([]);
   const [dataSets, setDataSets] = useState([]);
@@ -28,36 +23,42 @@ function MultiLineRoot(props) {
     setLoading(true);
     const tempErrors = [];
     const tempDataSets = [];
+    const errorObj = { name: `Query`, errors: [] };
 
     const lowerQuery = (query || '').toLowerCase();
 
     if (!accountId) {
-      tempErrors.push('configure Account ID');
+      errorObj.errors.push(`AccountID is undefined`);
     }
     if (!lowerQuery) {
-      tempErrors.push('configure query');
+      errorObj.errors.push(`Query is undefined`);
     }
     if (lowerQuery.includes('since')) {
-      tempErrors.push('should not contain SINCE');
+      errorObj.errors.push(`Should NOT contain SINCE `);
     }
     if (lowerQuery.includes('until')) {
-      tempErrors.push('should not contain UNTIL');
+      errorObj.errors.push(`Should NOT contain UNTIL `);
     }
     if (lowerQuery.includes('compare')) {
-      tempErrors.push('should not contain COMPARE');
+      errorObj.errors.push(`Should NOT contain COMPARE `);
     }
     if (!compareOver || compareOver === 'select') {
-      tempErrors.push('configure compare over');
+      errorObj.errors.push(`Configure compare over`);
     }
     if (!comparePeriod || isNaN(comparePeriod) || parseInt(comparePeriod) < 1) {
-      tempErrors.push('compare period should be 1 or more');
+      errorObj.errors.push(`compare period should be 1 or more`);
+    }
+
+    if (errorObj.errors.length > 0) {
+      tempErrors.push(errorObj);
     }
     setErrors(tempErrors);
 
     if (tempErrors.length === 0) {
-      const baseQuery = `${query} ${
-        !lowerQuery.includes('timeseries') ? 'TIMESERIES' : ''
-      } ${customSinceClause || `SINCE 1 ${compareOver} ago`} COMPARE WITH`;
+      /* eslint-disable */
+      const baseQuery = `${query} ${!lowerQuery.includes('timeseries') ? 'TIMESERIES' : ''
+        } ${customSinceClause || `SINCE 1 ${compareOver} ago`} COMPARE WITH`;
+      /* eslint-enable */
 
       const queries = [];
       const filterClause = filters ? `WHERE ${filters}` : '';
@@ -115,38 +116,20 @@ function MultiLineRoot(props) {
   }
 
   if (errors.length > 0) {
-    return ErrorState(errors);
+    return <ErrorState errors={errors} showDocs={showDocs} Docs={Docs} />;
   }
 
   return (
-    <LineChart
-      data={dataSets}
-      fullHeight
-      fullWidth
-      style={{ overflowX: 'hidden' }}
-    />
+    <>
+      {showDocs && <Docs />}
+      <LineChart
+        data={dataSets}
+        fullHeight
+        fullWidth
+        style={{ overflowX: 'hidden' }}
+      />
+    </>
   );
 }
-
-const ErrorState = errors => (
-  <Card className="ErrorState">
-    <CardBody className="ErrorState-cardBody">
-      <HeadingText
-        className="ErrorState-headingText"
-        spacingType={[HeadingText.SPACING_TYPE.LARGE]}
-        type={HeadingText.TYPE.HEADING_3}
-      >
-        Oops! Something went wrong.
-      </HeadingText>
-
-      {errors.map(err => (
-        <>
-          {err}
-          <br />
-        </>
-      ))}
-    </CardBody>
-  </Card>
-);
 
 export default MultiLineRoot;

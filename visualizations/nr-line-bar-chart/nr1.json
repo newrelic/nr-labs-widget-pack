@@ -1,8 +1,8 @@
 {
   "schemaType": "VISUALIZATION",
-  "id": "nr-line-event-chart",
-  "displayName": "Multi Line & Event Overlay Chart",
-  "description": "Labs Widget Pack - Multi Line & Event Overlay Chart w/Custom Poll Intervals",
+  "id": "nr-line-bar-chart",
+  "displayName": "Line & Bar Chart",
+  "description": "Labs Widget Pack -Line & Bar Chart w/Custom Poll Intervals",
   "configuration": [
     {
       "name": "showDocs",
@@ -11,9 +11,33 @@
       "type": "boolean"
     },
     {
-      "name": "pollInterval",
-      "title": "Select Poll Interval (seconds) default 60s",
+      "name": "enableTimePicker",
+      "title": "Enable Platform Time Picker",
+      "description": "Utilize the time range for this widget as selected in your dashboard",
+      "type": "boolean"
+    },
+    {
+      "name": "tickFormat",
+      "title": "Date Formatter (default: YYYY-MM-DD)",
+      "description": "The tick format is powered by dayjs. View their documentation for other configuration options.",
+      "type": "string"
+    },
+    {
+      "name": "yLabelRight",
+      "title": "Y Axis Right Label",
       "description": "",
+      "type": "string"
+    },
+    {
+      "name": "xLabel",
+      "title": "X Axis Label",
+      "description": "",
+      "type": "string"
+    },
+    {
+      "name": "pollInterval",
+      "title": "Poll Interval (default: 60s)",
+      "description": "Frequency at which data is refreshed.",
       "type": "enum",
       "items": [
         {
@@ -51,16 +75,17 @@
       ]
     },
     {
-      "name": "enableTimePicker",
-      "title": "Enable Time Picker",
-      "description": "Allows the use of the time picker",
-      "type": "boolean"
-    },
-    {
-      "name": "timeQueries",
-      "title": "Timeseries Queries",
+      "name": "barQueries",
+      "title": "Bar Queries",
+      "description":"Each chart can include multiple bar charts. Click the section plus sign to add a new query definition.",
       "type": "collection",
       "items": [
+        {
+          "name": "name",
+          "title": "Name",
+          "description": "The name that will be pre-pended to the chart label.",
+          "type": "string"
+        },
         {
           "name": "accountId",
           "title": "Account ID",
@@ -78,18 +103,31 @@
           "title": "Enable dashboard filters",
           "description": "Allows the use of dashboard filters",
           "type": "boolean"
+        },
+        {
+          "name": "barSize",
+          "title": "Bar Width (default: 20)",
+          "description": "Bar width in pixels",
+          "type": "number"
+        },
+        {
+          "name": "color",
+          "title": "Bar fill color (default: randomized)",
+          "description": "A valid css color string. Not applicable if using a FACET query.",
+          "type": "string"
         }
       ]
     },
     {
-      "name": "eventQueries",
-      "title": "Event Marker Queries",
+      "name": "lineQueries",
+      "title": "Line Queries",
+      "description":"Each chart can include multiple list charts. Click the section plus sign to add a new query definition.",
       "type": "collection",
       "items": [
         {
           "name": "name",
-          "title": "Name of Event Marker",
-          "description": "",
+          "title": "Name",
+          "description": "The name that will be pre-pended to the chart label.",
           "type": "string"
         },
         {
@@ -112,8 +150,8 @@
         },
         {
           "name": "color",
-          "title": "Color of your marker",
-          "description": "",
+          "title": "Line color (default: randomized)",
+          "description": "A valid css color string. Not applicable if using a FACET query.",
           "type": "string"
         }
       ]

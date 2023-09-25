@@ -5,9 +5,15 @@
   "description": "Labs Widget Pack - Map Widget",
   "configuration": [
     {
+      "name": "showDocs",
+      "title": "Show Documentation",
+      "description": "",
+      "type": "boolean"
+    },
+    {
       "name": "mapBoxToken",
       "title": "Map Box Access Token",
-      "description": "https://account.mapbox.com/auth/signup/",
+      "description": "Go to https://account.mapbox.com/auth/signup/ to sign up and get a Access Token.",
       "type": "string"
     },
     {

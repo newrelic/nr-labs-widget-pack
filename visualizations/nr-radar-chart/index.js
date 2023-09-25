@@ -10,14 +10,13 @@ import {
 } from 'chart.js';
 import { Radar } from 'react-chartjs-2';
 import {
-  Card,
-  CardBody,
-  HeadingText,
   NrqlQuery,
   Spinner,
   NerdletStateContext,
   PlatformStateContext
 } from 'nr1';
+import Docs from './docs';
+import ErrorState from '../../shared/ErrorState';
 
 ChartJS.register(
   RadialLinearScale,
@@ -59,7 +58,8 @@ function RadarRoot(props) {
     borderWidth = 1,
     chartKey = '# Key',
     enableFilters,
-    useTimeRange
+    useTimeRange,
+    showDocs
   } = props;
   const [errors, setErrors] = useState([]);
   const [dataSets, setDataSets] = useState([]);
@@ -72,15 +72,22 @@ function RadarRoot(props) {
     setLoading(true);
     const tempErrors = [];
     const lowerQuery = (query || '').toLowerCase();
+    const errorObj = { name: `Query`, errors: [] };
 
     if (!accountId) {
+      errorObj.errors.push(`AccountID is undefined`);
       tempErrors.push('configure Account ID');
     }
     if (!lowerQuery) {
+      errorObj.errors.push(`Query is undefined`);
       tempErrors.push('configure query');
     }
     if (!lowerQuery.includes('facet')) {
-      tempErrors.push('should contain FACET');
+      errorObj.errors.push(`Should contain FACET keyword`);
+    }
+
+    if (errorObj.errors.length > 0) {
+      tempErrors.push(errorObj);
     }
 
     setErrors(tempErrors);
@@ -127,14 +134,14 @@ function RadarRoot(props) {
   }
 
   if (errors.length > 0) {
-    return ErrorState(errors);
+    return <ErrorState errors={errors} showDocs={showDocs} Docs={Docs} />;
   }
 
   const data = {
     labels: (dataSets?.data || []).map(d => d.metadata?.name),
     datasets: [
       {
-        label: chartKey,
+        label: chartKey || '# Key',
         data: (dataSets?.data || []).map(d => d.data?.[0]?.y),
         backgroundColor: backgroundColor || 'rgba(255, 99, 132, 0.2)',
         borderColor: borderColor || 'rgba(255, 99, 132, 1)',
@@ -144,34 +151,16 @@ function RadarRoot(props) {
   };
 
   return (
-    <Radar
-      width={100}
-      height={50}
-      options={{ maintainAspectRatio: false }}
-      data={data}
-    />
+    <>
+      {showDocs && <Docs />}
+      <Radar
+        width={100}
+        height={50}
+        options={{ maintainAspectRatio: false }}
+        data={data}
+      />
+    </>
   );
 }
-
-const ErrorState = errors => (
-  <Card className="ErrorState">
-    <CardBody className="ErrorState-cardBody">
-      <HeadingText
-        className="ErrorState-headingText"
-        spacingType={[HeadingText.SPACING_TYPE.LARGE]}
-        type={HeadingText.TYPE.HEADING_3}
-      >
-        Oops! Something went wrong.
-      </HeadingText>
-
-      {errors.map(err => (
-        <>
-          {err}
-          <br />
-        </>
-      ))}
-    </CardBody>
-  </Card>
-);
 
 export default RadarRoot;

@@ -4,151 +4,205 @@
 
 ![GitHub release (latest SemVer including pre-releases)](https://img.shields.io/github/v/release/newrelic/nr-labs-widget-pack?include_prereleases&sort=semver) 
 
+A library of New Relic custom chart widgets created by the New Relic Labs team, for use in New Relic dashboards.
 
-A collection of custom visualizations to enhance your dashboarding experience.
-- Multi Line Compare
-- Multi Line & Event Overlay Chart
-- Scatter & Event Overlay Chart
-- Area & Event Overlay Chart
-- Radar Chart w/ChartJS
-- Action Loader
-- Map Box Widget
-- List View
+To get started:
+- [Review the set of widgets included in the pack](#widgets)
+- [Enable the pack in your account](#enable)
+- [Review how to get help](#help)
 
----
+## Widgets <a id="widgets"></a>
 
-## Multi Line Compare
-
-![Screenshot #1](screenshots/multiline_01.png)
-
-## Multi Line & Event Overlay Chart
-
-![Screenshot #1](screenshots/multiline_event_02.png)
-
-## Area & Event Overlay Chart
-
-![Screenshot #1](screenshots/area_event_01.png)
-## Scatter & Event Overlay Chart
-
-![Screenshot #1](screenshots/scatter_event_01.png)
-
-## Radar Chart
-
-![Screenshot #1](screenshots/radar_01.png)
+Click on the short description in each section to view chart details.
 
 
+### Bar & Line Chart
 
-- Allow for multi timeseries line comparisons with correctly referenced times
+<details>
 
-## Action Loader
+  <summary>Display changes in quantity alongside trends over time.</summary>
 
-- Allows button creation with configurable onClick actions
+  <br/>
 
-#### Example w/Stacked Nerdlet
-```
-Nerdlet Id: service-maps.home
+  <img src="screenshots/bar_line_01.png" height="450" alt="Bar and Line chart screenshot" />
 
-URL State
-{"entityGuid":"MTYwNjg2MnxBUE18QVBQTElDQVRJT058NjI2OTA3NjE"}
-```
+   #### Overview
+  Use the Bar & Line chart to understand changes in quantity values (rendered as bars) alongside trends over time (rendered as lines). For instance, you may be interested in understanding how infrastructure load is impacted by throughput on your web site. Or you may want to see if web page response time effects the total number of orders processed - these are perfect use cases for a Bar & Line Chart.
 
-## Map Box Widget
+  The Bar & Line chart plots data across three axes:
+  - the X axis represents time
+  - the left Y axis represents the values for the Bar Charts
+  - the right Y axis represents the values for the Line Charts
+  
+  The chart allows you to define multiple line and bar queries, so it is highly recommended that the queries are aligned in terms of units and time periods.
 
-![Screenshot #1](screenshots/mapbox_01.png)
+  #### Requirements
+  In order to use this chart, there are a few requirements:
+  - You must provide at least 1 bar query and 1 time query
+  - Each query must use the `TIMESERIES` clause, with the same bucket eg. `TIMESERIES 1 day`
+  - If using the `SINCE` clause it is strongly recommended to be the same across all configured queries
 
+  A valid bar query for the chart could look like this:
+  `SELECT percentile(duration, 80) as 'Load' from PageView TIMESERIES 1 day since last week`
 
-- Supports multiple NRQL queries and custom markers
-- Requires a Map Box Access Token from https://account.mapbox.com/auth/signup/
-- Query should contain one alias with 'name:SOME_VALUE' which will be used as the marker name
-- Query should have a FACET for latitude and longitude, use precision to ensure the FACET does not round the number
-eg.
-```
-FACET string(lat, precision: 5) as 'lat', string(lng, precision: 5) as 'lng' 
-```
-- Rotation can be set using the following alias with 'rotate:SOME_VALUE'
-- Example Query:
-```
-FROM FlightData SELECT latest(flightNo) as 'name:Flight No', latest(track) as 'rotate:track', latest(departure), latest(destination) FACET string(lat, precision: 5) as 'lat', string(lng, precision: 5) as 'lng' SINCE 60 seconds ago LIMIT MAX
-```
+  A valid line query for the chart could look like this:
+  `SELECT count(*) as 'Views' from PageView where TIMESERIES 1 day since last week`
 
-## List View
+  To include multiple lines and/or bars in the chart, you can either:
+  - define additional queries following the guidelines above
+  - include a `FACET` clause in your query. Note that if you are faceting on the same attribute in both the line and the bar queries, you will need to alias one of those facets in order to avoid name collisions in the chart output.
+  ---
+</details>
 
-![list view screenshot](screenshots/list-view-screenshot-1.png)
+### Multiline Compare Chart
+<details>
 
-List View displays NRQL-queried data in a list. The list items are rows returned by the query, and formatted using a [template](./list-view-template.md). Below are a list of additional features.
+  <summary>Display multiple comparison periods in a single timeseries chart.</summary>
+  
+  <img src="screenshots/multiline_01.png" height="450" alt="Multi Line Compare chart screenshot" />
 
-- Coerce values to number, date and boolean types
-- Format numbers and dates
-- Convert between digital size types (bytes, kilobytes, ...)
-- Search bar to filter list to the searched text
+  ---
+</details>
 
-Read the [Template String documentation](./list-view-template.md) for details.
+### Multiline and Event Overlay Chart
+<details>
 
-## Open source license
+  <summary>Render events as markers on a line chart.</summary>
+  
+  <img src="screenshots/multiline_event_02.png" height="450" alt="Line and Event overlay screenshot" />
 
-This project is distributed under the [Apache 2 license](LICENSE).
+  ---
+</details>
 
+### Area and Event Overlay Chart
+<details>
 
-## Deploying this Nerdpack
+  <summary>Render events as markers on an area chart.</summary>
+  
+  <img src="screenshots/area_event_01.png" height="450" alt="Area and Event overlay screenshot" />
 
-As this pack of visualizations is available via the New Relic Catalog, go to New Relic IO and search for "Labs Widget Pack", click the icon and subscribe this to your relevant accounts.
+  ---
+</details>
 
-Once subscribed you can browse to Apps -> Custom Visualizations to add to your dashboard.
+### Scatter and Event Overlay Chart
+<details>
 
+  <summary>Render events as markers on a scatter chart.</summary>
+  
+  <img src="screenshots/scatter_event_01.png" height="450" alt="Scatter and Event overlay screenshot" />
 
-## Manual Deployment
+  ---
+</details>
 
-Open a command prompt in the app's directory and run the following commands.
+### Radar Chart
+<details>
 
+  <summary>Plot one or more groups of values over multiple variables, and compare them on a two-dimensional plane.</summary>
+  
+  <img src="screenshots/radar_01.png" height="450" alt="Radar chart screenshot" />
 
-```bash
-# Typically you will need to regenerate the uuid for the account to which you're deploying this app, use the following command
-nr1 nerdpack:uuid -gf [--profile=your_profile_name]
-# to see a list of APIkeys / profiles available in your development environment, run nr1 credentials:list
-# after regenerating your uuid publish to your account
-nr1 nerdpack:publish [--profile=your_profile_name]
-```
+  ---
+</details>
 
-Visit [https://one.newrelic.com](https://one.newrelic.com), and launch your app in New Relic.
+### Mapbox Widget
+<details>
 
-## Getting started
+  <summary>Plot any data that includes latitude and longitude onto an interactive map, leveraging the Mapbox API.</summary>
+  
+  #### Overview
+  <img src="screenshots/mapbox_01.png" height="450" alt="Mapbox screenshot" />
 
+  Supports multiple NRQL queries and custom markers
 
-1. Ensure that you have [Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git) and [NPM](https://www.npmjs.com/get-npm) installed. If you're unsure whether you have one or both of them installed, run the following commands. (If you have them installed, these commands return a version number; if not, the commands aren't recognized.)
-```bash
-git --version
-npm -v
-```
-2. Install the [NR1 CLI](https://one.newrelic.com/launcher/developer-center.launcher) by going to [the developer center](https://one.newrelic.com/launcher/developer-center.launcher), and following the instructions to install and set up your New Relic development environment. This should take about 5 minutes.
-3. Execute the following command to clone this repository and run the code locally against your New Relic data:
+  #### Requirements
+  In order to use this chart, there are a few requirements:
+  - Requires a Map Box Access Token from https://account.mapbox.com/auth/signup/
+  - Query should contain one alias with 'name:SOME_VALUE' which will be used as the marker name
+  - Query should have a FACET for latitude and longitude, use precision to ensure the FACET does not round the number
+    ```
+    FACET string(lat, precision: 5) as 'lat', string(lng, precision: 5) as 'lng' 
+    ```
+  - Rotation can be set using the following alias with 'rotate:SOME_VALUE'
+  - Example Query:
+    ```
+    FROM FlightData SELECT latest(flightNo) as 'name:Flight No', latest(track) as 'rotate:track', latest(departure), latest(destination) FACET string(lat, precision: 5) as 'lat', string(lng, precision: 5) as 'lng' SINCE 60 seconds ago LIMIT MAX
+    ```
+    ---
+</details>
 
-```bash
-nr1 nerdpack:clone -r https://github.com/newrelic/nr-labs-widget-pack.git
-cd nr-labs-widget-pack
-nr1 nerdpack:serve
-```
+### List View
+<details>
 
-Visit [https://one.newrelic.com/?nerdpacks=local](https://one.newrelic.com/?nerdpacks=local) to launch your app locally.
+  <summary>Display query results in a list, with smart formatting options.</summary>
+  
+  #### Overview
+  <img src="screenshots/list-view-screenshot-1.png" height="450" alt="List view screenshot" />
 
+  List View displays NRQL-queried data in a list. The list items are rows returned by the query, and formatted using a [template](./list-view-template.md). Below are a list of additional features.
 
-# Support
+  - Coerce values to number, date and boolean types
+  - Format numbers and dates
+  - Convert between digital size types (bytes, kilobytes, ...)
+  - Search bar to filter list to the searched text
 
-New Relic has open-sourced this project. This project is provided AS-IS WITHOUT WARRANTY OR DEDICATED SUPPORT. Issues and contributions should be reported to the project here on GitHub.
+  #### Requirements
+  
+  For full details on how to use and format results in this chart, read the [Template String documentation](./list-view-template.md). 
+  
+  ---
+</details>
 
-We encourage you to bring your experiences and questions to the [Explorers Hub](https://discuss.newrelic.com) where our community members collaborate on solutions and new ideas.
+### Action Loader
+<details>
 
-## Issues / enhancement requests
+  <summary>Incorporate buttons into your dashboards, with configurable onClick actions.</summary>
+  
+  #### Overview
+  Incorporate buttons into your dashboards, with configurable onClick actions.
 
-Issues and enhancement requests can be submitted in the [Issues tab of this repository](../../issues). Please search for and review the existing open issues before submitting a new issue.
+  #### Example w/ Stacked Nerdlet
+  ```
+  Nerdlet Id: service-maps.home
 
-## Security
+  URL State
+  {"entityGuid":"MTYwNjg2MnxBUE18QVBQTElDQVRJT058NjI2OTA3NjE"}
+  ```
+  ---
+</details>
+
+# Enabling this Nerdpack <a id="enable"></a>
+
+This pack of visualizations is available via the New Relic Catalog. 
+
+To enable it in your account, go to `Add Data > Apps and Visualzations` and search for "Labs Widget Pack". Click the icon and subscribe this to your accounts.
+
+Once subscribed you can browse to `Apps -> Custom Visualizations` to [add any of the widgets to a dashboard](https://docs.newrelic.com/docs/query-your-data/explore-query-data/dashboards/add-custom-visualizations-your-dashboards/).
+
+#### Manual Deployment
+If you need to customize the widgets in this pack, you can fork the code base and follow the instructions on how to [Customize a Nerdpack](https://developer.newrelic.com/build-apps/customize-nerdpack). If you have a change you feel everyone can benefit from, [please submit a PR](#contrib)!
+
+# Support <a id="help"></a>
+
+This project is actively maintained by the New Relic Labs team. Connect with us directly by [creating issues](../../issues) or [asking questions in the discussions section](../../discussions) of this repo.
+
+We also encourage you to bring your experiences and questions to the [Explorers Hub](https://discuss.newrelic.com) where our community members collaborate on solutions and new ideas.
+
+New Relic has open-sourced this project, which is provided AS-IS WITHOUT WARRANTY OR DEDICATED SUPPORT.
+
+# Security
 
 As noted in our [security policy](https://github.com/newrelic/nr-labs-widget-pack/security/policy), New Relic is committed to the privacy and security of our customers and their data. We believe that providing coordinated disclosure by security researchers and engaging with the security community are important means to achieve our security goals.
 
 If you believe you have found a security vulnerability in this project or any of New Relic's products or websites, we welcome and greatly appreciate you reporting it to New Relic through [HackerOne](https://hackerone.com/newrelic).
 
-# Contributing
+# Contributing <a id="contrib"></a>
 
-Contributions are encouraged! If you submit an enhancement request, we'll invite you to contribute the change yourself. Please review our [Contributors Guide](CONTRIBUTING.md).
+Contributions are encouraged! If you open an enhancement request, we'll invite you to contribute the change yourself. Please review our [Contributors Guide](CONTRIBUTING.md).
 
 Keep in mind that when you submit your pull request, you'll need to sign the CLA via the click-through using CLA-Assistant. If you'd like to execute our corporate CLA, or if you have any questions, please drop us an email at opensource+nrlabswidgetpack@newrelic.com.
+
+# Open source license
+
+This project is distributed under the [Apache 2 license](LICENSE).
+
+

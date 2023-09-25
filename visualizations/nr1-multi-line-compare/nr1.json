@@ -5,6 +5,12 @@
   "description": "Labs Widget Pack - Multi line timeseries comparison",
   "configuration": [
     {
+      "name": "showDocs",
+      "title": "Show Documentation",
+      "description": "",
+      "type": "boolean"
+    },
+    {
       "name": "enableFilters",
       "title": "Enable dashboard filters",
       "description": "Allows the use of dashboard filters",
