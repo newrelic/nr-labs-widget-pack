@@ -1,3 +1,30 @@
+# [1.28.0](https://github.com/newrelic/nr-labs-widget-pack/compare/v1.27.0...v1.28.0) (2023-09-25)
+
+
+### Features
+
+* add action loader docs ([3ad47b8](https://github.com/newrelic/nr-labs-widget-pack/commit/3ad47b8c6edba5b6b1909c8448c677d3498f9498))
+* add bar line chart ([44c8a4f](https://github.com/newrelic/nr-labs-widget-pack/commit/44c8a4fa8de17394d1c3f60dd632043d1a4dc6c6))
+* add bar line chart ([5a199d1](https://github.com/newrelic/nr-labs-widget-pack/commit/5a199d14fd9245e20cd7db0da1310b6fe858907b))
+* add map docs ([75a6d58](https://github.com/newrelic/nr-labs-widget-pack/commit/75a6d5805d069b3228353d0ec2339edba300c4d0))
+* add more docs ([f9cd4ae](https://github.com/newrelic/nr-labs-widget-pack/commit/f9cd4ae87998598ba7b72df646ce25ff00c367c1))
+* add x/y label and nested docs ([f6235a2](https://github.com/newrelic/nr-labs-widget-pack/commit/f6235a2cf694a8c7f9c5a729b35d74244e7ee1a4))
+* area cheat docs ([433e98e](https://github.com/newrelic/nr-labs-widget-pack/commit/433e98e32dd1212a73be72b73417ee800fe8a8c6))
+* custom docs ([02b0bf4](https://github.com/newrelic/nr-labs-widget-pack/commit/02b0bf4d0b0da649cfb8f69168162473c030f317))
+* custom docs ([4f76ffe](https://github.com/newrelic/nr-labs-widget-pack/commit/4f76ffee94ffd193d6f48170ee54765b22b00128))
+* enable time picker + docs update ([d4e9c6f](https://github.com/newrelic/nr-labs-widget-pack/commit/d4e9c6fe31dbe413a84d831f4b100510ba4cfc52))
+* error state and props as shared ([3c5c715](https://github.com/newrelic/nr-labs-widget-pack/commit/3c5c715ce04233db70faf0cd20883c118b9cbee8))
+* flatten structure ([c889f06](https://github.com/newrelic/nr-labs-widget-pack/commit/c889f0684b72932c328bfab02524b7049bd8619e))
+* multi line docs ([3ff51c1](https://github.com/newrelic/nr-labs-widget-pack/commit/3ff51c19348a5ccc8b96a428c713b19a070e96f8))
+* re-enable errors ([2a7e75f](https://github.com/newrelic/nr-labs-widget-pack/commit/2a7e75f5dc2425a3038a74a1f7a04449cc58260d))
+* README updates ([84f697e](https://github.com/newrelic/nr-labs-widget-pack/commit/84f697e5fcf52a964bf6edb2837bfa6623fd30ab))
+* rework chart data handling ([a68cabe](https://github.com/newrelic/nr-labs-widget-pack/commit/a68cabe30ca40ec86a5d1efd910fe9520816a03d))
+* shared propertyinfo ([7435903](https://github.com/newrelic/nr-labs-widget-pack/commit/74359036dd98a0108e4b8681068e6d36d5d4dc11))
+* shared propertyinfo ([d6a7539](https://github.com/newrelic/nr-labs-widget-pack/commit/d6a753985e34647f498e1ea439318e5dc5572e79))
+* update docs ([52273ec](https://github.com/newrelic/nr-labs-widget-pack/commit/52273ec483462147218adff170c6582ebcfb0ec5))
+* update docs, barSize, colors ([c963aff](https://github.com/newrelic/nr-labs-widget-pack/commit/c963affe6de9cbf6c9dec901bd0e39fac1242338))
+* update error state css ([20c5379](https://github.com/newrelic/nr-labs-widget-pack/commit/20c5379c8854579b32ba60bd57761f1232c31788))
+
 # [1.27.0](https://github.com/newrelic/nr-labs-widget-pack/compare/v1.26.1...v1.27.0) (2023-08-01)
 
 
