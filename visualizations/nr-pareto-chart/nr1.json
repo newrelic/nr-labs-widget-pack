@@ -1,0 +1,102 @@
+{
+  "schemaType": "VISUALIZATION",
+  "id": "nr-pareto-chart",
+  "displayName": "Pareto Chart",
+  "description": "Labs Widget Pack - Pareto Chart w/Custom Poll Intervals",
+  "configuration": [
+    {
+      "name": "showDocs",
+      "title": "Show Documentation",
+      "description": "",
+      "type": "boolean"
+    },
+    {
+      "name": "enableTimePicker",
+      "title": "Enable Platform Time Picker",
+      "description": "Utilize the time range for this widget as selected in your dashboard",
+      "type": "boolean"
+    },
+    {
+      "name": "yLabelRight",
+      "title": "Y Axis Right Label",
+      "description": "",
+      "type": "string"
+    },
+    {
+      "name": "xLabel",
+      "title": "X Axis Label",
+      "description": "",
+      "type": "string"
+    },
+    {
+      "name": "pollInterval",
+      "title": "Poll Interval (default: 60s)",
+      "description": "Frequency at which data is refreshed.",
+      "type": "enum",
+      "items": [
+        {
+          "title": "Select",
+          "value": 60
+        },
+        {
+          "title": "5s",
+          "value": 5
+        },
+        {
+          "title": "10s",
+          "value": 10
+        },
+        {
+          "title": "15s",
+          "value": 15
+        },
+        {
+          "title": "30s",
+          "value": 30
+        },
+        {
+          "title": "45s",
+          "value": 45
+        },
+        {
+          "title": "1m",
+          "value": 60
+        },
+        {
+          "title": "5m",
+          "value": 300
+        }
+      ]
+    },
+    {
+      "name": "accountId",
+      "title": "Account ID",
+      "description": "Account ID to be associated with the query",
+      "type": "account-id"
+    },
+    {
+      "name": "query",
+      "title": "Query",
+      "description": "NRQL query for the visualization",
+      "type": "nrql"
+    },
+    {
+      "name": "enableFilters",
+      "title": "Enable dashboard filters",
+      "description": "Allows the use of dashboard filters",
+      "type": "boolean"
+    },
+    {
+      "name": "barSize",
+      "title": "Bar Width (default: 20)",
+      "description": "Bar width in pixels",
+      "type": "number"
+    },
+    {
+      "name": "ignoreOther",
+      "title": "Ignore 'Other' category from appearing in chart",
+      "description": "",
+      "type": "boolean"
+    }
+  ]
+}
