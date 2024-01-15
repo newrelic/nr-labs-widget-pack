@@ -1,3 +1,20 @@
+# [1.29.0](https://github.com/newrelic/nr-labs-widget-pack/compare/v1.28.0...v1.29.0) (2024-01-15)
+
+
+### Features
+
+* add granular timeseries chart ([f2d0be7](https://github.com/newrelic/nr-labs-widget-pack/commit/f2d0be7fd287253c2ba7c4bfd5d3993ac9ff3583))
+* bump actions and node versions ([30f664b](https://github.com/newrelic/nr-labs-widget-pack/commit/30f664bebcaa280ec934f4c3d865f59fbd2434c2))
+* regen package lock ([3bd9a0b](https://github.com/newrelic/nr-labs-widget-pack/commit/3bd9a0bb0dcab51c6ff57ad0c257d2b61f155b72))
+* regen package lock ([d0f5321](https://github.com/newrelic/nr-labs-widget-pack/commit/d0f5321a27446d174d7f0a5411536925c7d563c5))
+* update package.json ([b0722f0](https://github.com/newrelic/nr-labs-widget-pack/commit/b0722f028f3fbd79e7ef66d56a6307c1966eb434))
+* update package.json ([59a504f](https://github.com/newrelic/nr-labs-widget-pack/commit/59a504faf9a7847132db12a538fbfe6f96b8766d))
+* update package.json ([7b4b2ff](https://github.com/newrelic/nr-labs-widget-pack/commit/7b4b2ff12cbc87489c28e68f46b9084f499b1329))
+* update package.json ([c1187ef](https://github.com/newrelic/nr-labs-widget-pack/commit/c1187ef83bf315acb674e354f88a9480ee9fccf5))
+* update package.json ([ecf71f6](https://github.com/newrelic/nr-labs-widget-pack/commit/ecf71f621998b81aabeef722c3d961e48aef5a76))
+* update package.json ([d58daef](https://github.com/newrelic/nr-labs-widget-pack/commit/d58daef770e9c810715e72f97e758bfa39e467d9))
+* update package.json ([a2ce216](https://github.com/newrelic/nr-labs-widget-pack/commit/a2ce2165f96be8a110731506245c4088e94e31e5))
+
 # [1.28.0](https://github.com/newrelic/nr-labs-widget-pack/compare/v1.27.0...v1.28.0) (2023-09-25)
 
 
