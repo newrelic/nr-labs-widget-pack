@@ -16,8 +16,7 @@
     "email": "opensource+nrlabswidgetpack@newrelic.com"
   },
   "dependencies": {
-    "@mantine/hooks": "^5.8.4",
-    "@newrelic/nr1-community": "latest",
+    "@mantine/hooks": "^5.10.5",
     "chart.js": "^3.9.1",
     "dayjs": "^1.11.9",
     "mapbox-gl": "^2.10.0",
