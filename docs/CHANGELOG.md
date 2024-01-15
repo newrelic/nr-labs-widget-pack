@@ -1,3 +1,10 @@
+# [1.30.0](https://github.com/newrelic/nr-labs-widget-pack/compare/v1.29.0...v1.30.0) (2024-01-15)
+
+
+### Features
+
+* g-ts update on ts change ([61da5d0](https://github.com/newrelic/nr-labs-widget-pack/commit/61da5d07d74c3ce43e7921a76a5272b3aafa042d))
+
 # [1.29.0](https://github.com/newrelic/nr-labs-widget-pack/compare/v1.28.0...v1.29.0) (2024-01-15)
 
 
