@@ -220,7 +220,7 @@ export default function Widget(props) {
     interval.stop();
     interval.start();
     return interval.stop;
-  }, [finalQuery, accountId, pollInterval]);
+  }, [finalQuery, accountId, pollInterval, timeRange]);
 
   if (inputErrors.length > 0) {
     return <ErrorState errors={inputErrors} />;
