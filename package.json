@@ -16,14 +16,14 @@
     "email": "opensource+nrlabswidgetpack@newrelic.com"
   },
   "dependencies": {
-    "@mantine/hooks": "^6.0.0",
     "chart.js": "^3.9.1",
     "dayjs": "^1.11.9",
     "mapbox-gl": "^2.10.0",
     "prop-types": "^15.7.2",
     "react-chartjs-2": "^4.3.1",
     "react-map-gl": "^7.0.19",
-    "recharts": "^2.8.0"
+    "recharts": "^2.8.0",
+    "@mantine/hooks": "^6.0.0"
   },
   "ids": {
     "am": "c2fab1ee-57c3-43d6-bc5c-c7343ecaff0c",
