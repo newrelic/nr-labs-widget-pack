@@ -2,7 +2,7 @@
   "schemaType": "VISUALIZATION",
   "id": "nr-line-bar-chart",
   "displayName": "Line & Bar Chart",
-  "description": "Labs Widget Pack -Line & Bar Chart w/Custom Poll Intervals",
+  "description": "Labs Widget Pack - Line & Bar Chart w/Custom Poll Intervals",
   "configuration": [
     {
       "name": "showDocs",

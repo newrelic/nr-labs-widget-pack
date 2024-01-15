@@ -54,6 +54,33 @@ Click on the short description in each section to view chart details.
   ---
 </details>
 
+### Granular Timeseries Charts
+
+<details>
+
+  <summary>Perform timeseries queries above the default 366 bucket allowance.</summary>
+
+  <!-- <br/> -->
+
+  <!-- <img src="screenshots/bar_line_01.png" height="450" alt="Bar and Line chart screenshot" /> -->
+
+   #### Overview
+  Use the Granular Timeseries Chart to see longer periods of data in high granularity above the default 366 allowance.
+
+  The Granular Timeseries Chart, supports Line, Area & Sparkline chart types.
+
+  #### Requirements
+  In order to use this chart, there are a few requirements:
+  - Each query must use and end with the `TIMESERIES` clause, and also contain the bucket eg. `TIMESERIES 1 second`
+  - Do not use SINCE or UNTIL clauses as they will automatically be determined based on the time range picker
+  - If using the LIMIT clause, this should be placed before and not after the TIMESERIES clause
+
+  A valid query for the chart could look like this:
+  `SELECT count(*) FROM Transaction FACET appName TIMESERIES 1 second`
+
+  ---
+</details>
+
 ### Multiline Compare Chart
 <details>
 

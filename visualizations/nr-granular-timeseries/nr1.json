@@ -1,0 +1,92 @@
+{
+  "schemaType": "VISUALIZATION",
+  "id": "nr-granular-timeseries-chart",
+  "displayName": "Granular Timeseries",
+  "description": "Labs Widget Pack - Granular Timeseries",
+  "configuration": [
+    {
+      "name": "disableWarnings",
+      "title": "Disable Warning",
+      "description": "",
+      "type": "boolean"
+    },
+    {
+      "name": "pollInterval",
+      "title": "Poll Interval (default: 60s)",
+      "description": "Frequency at which data is refreshed.",
+      "type": "enum",
+      "items": [
+        {
+          "title": "Select",
+          "value": 60
+        },
+        {
+          "title": "5s",
+          "value": 5
+        },
+        {
+          "title": "10s",
+          "value": 10
+        },
+        {
+          "title": "15s",
+          "value": 15
+        },
+        {
+          "title": "30s",
+          "value": 30
+        },
+        {
+          "title": "45s",
+          "value": 45
+        },
+        {
+          "title": "1m",
+          "value": 60
+        },
+        {
+          "title": "5m",
+          "value": 300
+        }
+      ]
+    },
+    {
+      "name": "accountId",
+      "title": "Account ID",
+      "description": "Account ID to be associated with the query",
+      "type": "number"
+    },
+    {
+      "name": "query",
+      "title": "Query (Must end in eg. TIMESERIES 1 second)",
+      "description": "NRQL query eg. FROM Transaction SELECT count(*) FACET appName TIMESERIES 1 second",
+      "type": "nrql"
+    },
+    {
+      "name": "enableFilters",
+      "title": "Enable dashboard filters",
+      "description": "Allows the use of dashboard filters",
+      "type": "boolean"
+    },
+    {
+      "name": "chartType",
+      "title": "Chart Type (default line)",
+      "description": "",
+      "type": "enum",
+      "items": [
+        {
+          "title": "line",
+          "value": "line"
+        },
+        {
+          "title": "area",
+          "value": "area"
+        },
+        {
+          "title": "sparkline",
+          "value": "sparkline"
+        }
+      ]
+    }
+  ]
+}
