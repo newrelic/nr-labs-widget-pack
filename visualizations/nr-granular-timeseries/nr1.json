@@ -5,8 +5,8 @@
   "description": "Labs Widget Pack - Granular Timeseries",
   "configuration": [
     {
-      "name": "disableWarnings",
-      "title": "Disable Warning",
+      "name": "showDocs",
+      "title": "Show Documentation",
       "description": "",
       "type": "boolean"
     },

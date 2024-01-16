@@ -4,13 +4,13 @@ import {
   LineChart,
   AreaChart,
   SparklineChart,
-  SectionMessage,
   NerdletStateContext
 } from 'nr1';
-import ErrorState from '../shared/errorState';
+import ErrorState from '../../shared/ErrorState';
 import { discoverErrors } from './utils';
 import { subVariables } from '../shared/utils';
 import { useInterval } from '@mantine/hooks';
+import Docs from './docs';
 
 const MINUTE = 60000;
 const HOUR = 60 * MINUTE;
@@ -122,13 +122,12 @@ export default function Widget(props) {
     query,
     pollInterval,
     chartType,
-    disableWarnings
+    showDocs
   } = props;
   const { timeRange } = platformContext;
   const nerdletContext = useContext(NerdletStateContext);
   const { filters, selectedVariables } = nerdletContext;
   const [finalData, setFinalData] = useState(null);
-  const [warnings, setWarnings] = useState(null);
   const [finalQuery, setQuery] = useState(null);
   const [inputErrors, setInputErrors] = useState([]);
   const filterClause = filters ? `WHERE ${filters}` : '';
@@ -145,28 +144,17 @@ export default function Widget(props) {
     }
 
     const inputErrors = discoverErrors(props);
-    setInputErrors(inputErrors);
+    if (inputErrors.length > 0) {
+      const errorObj = { name: `Input Errors`, errors: inputErrors };
+      setInputErrors([errorObj]);
+    } else {
+      setInputErrors([]);
+    }
   }, [query, selectedVariables, enableFilters, filterClause, timeRange]);
 
   const fetchData = async () => {
     if (finalQuery && accountId) {
-      const {
-        windows,
-        totalWindowInSeconds,
-        bucketInSeconds
-      } = timeRangeToWindowBuckets(timeRange, finalQuery);
-
-      const excessiveBucketWarning = Math.ceil(
-        totalWindowInSeconds / bucketInSeconds / MAX_BUCKETS
-      );
-
-      // if this figure is above excessiveBucketWarning figure set warning
-      if (excessiveBucketWarning > 5) {
-        const message = `Your query is ~${excessiveBucketWarning}x more then the default ${MAX_BUCKETS} buckets`;
-        setWarnings(message);
-      } else {
-        setWarnings(null);
-      }
+      const { windows } = timeRangeToWindowBuckets(timeRange, finalQuery);
 
       const queries = windows.map(
         w => `${finalQuery} SINCE ${w.startTime} UNTIL ${w.endTime}`
@@ -223,25 +211,27 @@ export default function Widget(props) {
   }, [finalQuery, accountId, pollInterval, timeRange]);
 
   if (inputErrors.length > 0) {
-    return <ErrorState errors={inputErrors} />;
+    return (
+      <>
+        <ErrorState errors={inputErrors} showDocs={showDocs} Docs={Docs} />
+      </>
+    );
   }
 
   if (finalQuery && finalData) {
     return (
       <>
-        {warnings && !disableWarnings && (
-          <SectionMessage
-            type={SectionMessage.TYPE.WARNING}
-            title={warnings}
-            description="You can disable this warning in the configuration."
-          />
-        )}
+        {showDocs && <Docs />}
         {renderChart(chartType, finalData)}
       </>
     );
   } else {
     // eslint-disable-next-line
     console.log('unhandled case', props);
-    return <></>;
+    return (
+      <>
+        <ErrorState errors={inputErrors} showDocs={showDocs} Docs={Docs} />
+      </>
+    );
   }
 }
