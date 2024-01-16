@@ -1,3 +1,10 @@
+# [1.31.0](https://github.com/newrelic/nr-labs-widget-pack/compare/v1.30.0...v1.31.0) (2024-01-16)
+
+
+### Features
+
+* add inline docs to granular-ts ([e19e815](https://github.com/newrelic/nr-labs-widget-pack/commit/e19e815d0c09b7ea2c83bebe43c801165d7f217b))
+
 # [1.30.0](https://github.com/newrelic/nr-labs-widget-pack/compare/v1.29.0...v1.30.0) (2024-01-15)
 
 
