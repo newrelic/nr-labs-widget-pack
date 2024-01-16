@@ -1,5 +1,6 @@
 [![New Relic One Catalog Project header](https://github.com/newrelic/opensource-website/raw/master/src/images/categories/New_Relic_One_Catalog_Project.png)](https://opensource.newrelic.com/oss-category/#new-relic-one-catalog-project)
 
+
 # Labs Widget Pack
 
 ![GitHub release (latest SemVer including pre-releases)](https://img.shields.io/github/v/release/newrelic/nr-labs-widget-pack?include_prereleases&sort=semver) 
@@ -74,6 +75,7 @@ Click on the short description in each section to view chart details.
   - Each query must use and end with the `TIMESERIES` clause, and also contain the bucket eg. `TIMESERIES 1 second`
   - Do not use SINCE or UNTIL clauses as they will automatically be determined based on the time range picker
   - If using the LIMIT clause, this should be placed before and not after the TIMESERIES clause
+  - Be aware that with longer time ranges, the chart will need more time to load. Use of this chart is ideal for shorter ranges, such as 7 - 14 days.
 
   A valid query for the chart could look like this:
   `SELECT count(*) FROM Transaction FACET appName TIMESERIES 1 second`
