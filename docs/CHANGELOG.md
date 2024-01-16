@@ -1,3 +1,10 @@
+# [1.32.0](https://github.com/newrelic/nr-labs-widget-pack/compare/v1.31.0...v1.32.0) (2024-01-16)
+
+
+### Features
+
+* dummy commit ([183bc25](https://github.com/newrelic/nr-labs-widget-pack/commit/183bc2523d1380c37f268abce006bb0caeb81830))
+
 # [1.31.0](https://github.com/newrelic/nr-labs-widget-pack/compare/v1.30.0...v1.31.0) (2024-01-16)
 
 
