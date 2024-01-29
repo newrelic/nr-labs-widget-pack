@@ -1,3 +1,10 @@
+# [1.37.0](https://github.com/newrelic/nr-labs-widget-pack/compare/v1.36.0...v1.37.0) (2024-01-29)
+
+
+### Features
+
+* add leaflet support to map widget ([4de574a](https://github.com/newrelic/nr-labs-widget-pack/commit/4de574a8f9e793ab32850f9f7c7d7021b65594ba))
+
 # [1.36.0](https://github.com/newrelic/nr-labs-widget-pack/compare/v1.35.0...v1.36.0) (2024-01-16)
 
 
