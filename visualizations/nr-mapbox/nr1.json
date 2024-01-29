@@ -11,8 +11,24 @@
       "type": "boolean"
     },
     {
+      "name": "mapSystem",
+      "title": "Map System (default: leaflet)",
+      "description": "",
+      "type": "enum",
+      "items": [
+        {
+          "title": "Leaflet",
+          "value": "leaflet"
+        },
+        {
+          "title": "Map Box",
+          "value": "mapbox"
+        }
+      ]
+    },
+    {
       "name": "mapBoxToken",
-      "title": "Map Box Access Token",
+      "title": "Map Box Access Token (required for Mapbox)",
       "description": "Go to https://account.mapbox.com/auth/signup/ to sign up and get a Access Token.",
       "type": "string"
     },
@@ -131,7 +147,7 @@
     },
     {
       "name": "mapStyle",
-      "title": "Select Map Style",
+      "title": "Select MapBox Style (MapBox only)",
       "description": "",
       "type": "enum",
       "items": [

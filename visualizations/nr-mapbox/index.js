@@ -5,18 +5,12 @@ import {
   NerdGraphQuery,
   PlatformStateContext
 } from 'nr1';
-import Map, {
-  Marker,
-  GeolocateControl,
-  FullscreenControl,
-  NavigationControl,
-  ScaleControl,
-  Popup
-} from 'react-map-gl';
 
 import { deriveLatLng, evaluateMarker } from './utils';
 import Docs from './docs';
 import ErrorState from '../../shared/ErrorState';
+import MapBoxRoot from './mapbox';
+import LeafletRoot from './leaflet';
 
 const MINUTE = 60000;
 const HOUR = 60 * MINUTE;
@@ -50,23 +44,15 @@ const gqlNrqlQuery = (accountId, query) => `{
   }
 }`;
 
-function MapBoxRoot(props) {
+function MapSystemRoot(props) {
   const {
     nrqlQueries,
-    initialLat,
-    initialLong,
-    initialZoom,
-    defaultMarkerColor,
-    defaultMarkerImgURL,
-    defaultImgWidth,
-    defaultImgHeight,
-    mapStyle,
     markerThresholds,
     mapBoxToken,
     pollInterval,
+    mapSystem,
     showDocs
   } = props;
-  const [popupInfo, setPopupInfo] = useState(null);
   const [errors, setErrors] = useState([]);
   const [loading, setLoading] = useState(true);
   // const [fetching, setFetching] = useState(false);
@@ -77,13 +63,21 @@ function MapBoxRoot(props) {
   const timeRangeStr = timeRangeToNrql(timeRange);
 
   useEffect(() => {
-    const link = document.createElement('link');
-    link.type = 'text/css';
-    link.rel = 'stylesheet';
-    link.href =
-      'https://api.tiles.mapbox.com/mapbox-gl-js/v2.10.0/mapbox-gl.css';
-    document.head.appendChild(link);
-  }, []);
+    if (mapSystem === 'mapbox') {
+      const link = document.createElement('link');
+      link.type = 'text/css';
+      link.rel = 'stylesheet';
+      link.href =
+        'https://api.tiles.mapbox.com/mapbox-gl-js/v2.10.0/mapbox-gl.css';
+      document.head.appendChild(link);
+    } else if (!mapSystem || mapSystem === 'leaflet') {
+      // const link = document.createElement('link');
+      // link.type = 'text/css';
+      // link.rel = 'stylesheet';
+      // link.href = 'http://cdn.leafletjs.com/leaflet-0.5.1/leaflet.css';
+      // document.head.appendChild(link);
+    }
+  }, [mapSystem]);
 
   useEffect(() => {
     if (pollInterval) {
@@ -192,7 +186,7 @@ function MapBoxRoot(props) {
     setLoading(true);
     const tempErrors = [];
 
-    if (!mapBoxToken) {
+    if (mapSystem === 'mapbox' && !mapBoxToken) {
       tempErrors.push({ name: 'Map Box Access Token required' });
     }
 
@@ -236,120 +230,20 @@ function MapBoxRoot(props) {
     }
   }
 
+  const renderMapSystem = () => {
+    if (!mapSystem || mapSystem === 'leaflet') {
+      return <LeafletRoot {...props} mapLocations={mapLocations} />;
+    } else if (mapSystem === 'mapbox') {
+      return <MapBoxRoot {...props} mapLocations={mapLocations} />;
+    }
+  };
+
   return (
     <>
       {showDocs && <Docs />}
-      <Map
-        initialViewState={{
-          longitude:
-            !initialLong || isNaN(initialLong)
-              ? -122.3929926594833
-              : parseFloat(initialLong),
-          latitude:
-            !initialLat || isNaN(initialLat)
-              ? 37.791536840426495
-              : parseFloat(initialLat),
-          zoom: !initialZoom || isNaN(initialZoom) ? 2 : parseFloat(initialZoom)
-        }}
-        // ref={this.mapRef}
-        mapboxAccessToken={mapBoxToken}
-        mapStyle={mapStyle || 'mapbox://styles/mapbox/streets-v11'}
-      /* eslint-disable */
-      // onViewportChange={viewport =>
-      //   this.handleViewportChanged(viewport, updateMapContext)
-      // }
-      // onClick={this.handleMapClick}
-      // onHover={map => this.handleMapClick(map, true)}
-      /* eslint-enable */
-      >
-        <GeolocateControl position="top-left" />
-        <FullscreenControl position="top-left" />
-        <NavigationControl position="top-left" />
-        <ScaleControl />
-
-        {mapLocations.map((mapData, mapIndex) => {
-          const { data, marker, targetName, targetRotate } = mapData;
-
-          const locName = data[`name:${targetName}`];
-          const rotate = data[`rotate:${targetRotate}`];
-          const { lat, lng } = data['mapWidget.coordinates'];
-
-          return (
-            <Marker
-              key={mapIndex}
-              longitude={lng}
-              latitude={lat}
-              color={marker?.markerColor || defaultMarkerColor}
-              onClick={e => {
-                // If we let the click event propagates to the map, it will immediately close the popup
-                // with `closeOnClick: true`
-                e.originalEvent.stopPropagation();
-                setPopupInfo({
-                  ...data,
-                  locName,
-                  lng,
-                  lat
-                });
-              }}
-            >
-              {!marker?.imgUrl && defaultMarkerImgURL && (
-                <img
-                  src={defaultMarkerImgURL}
-                  width={marker?.imgWidth || defaultImgWidth || 25}
-                  height={marker?.imgHeight || defaultImgHeight || 25}
-                  style={{
-                    transform: rotate ? `rotate(${rotate}deg)` : undefined
-                  }}
-                />
-              )}
-              {marker?.imgUrl && (
-                <img
-                  src={marker?.imgUrl}
-                  width={marker?.imgWidth || defaultImgWidth || 25}
-                  height={marker?.imgHeight || defaultImgHeight || 25}
-                  style={{
-                    transform: rotate ? `rotate(${rotate}deg)` : undefined
-                  }}
-                />
-              )}
-            </Marker>
-          );
-        })}
-        {popupInfo && (
-          <Popup
-            anchor="top"
-            longitude={Number(popupInfo.lng)}
-            latitude={Number(popupInfo.lat)}
-            onClose={() => setPopupInfo(null)}
-          >
-            <div>
-              <span style={{ fontWeight: 'bold' }}>{popupInfo.locName}</span>
-              <br />
-              {Object.keys(popupInfo).map(key => {
-                if (
-                  !key.includes('name:') &&
-                  !key.includes('rotate:') &&
-                  !key.includes('facet') &&
-                  !key.includes('locName') &&
-                  !key.includes('data') &&
-                  !key.includes('mapWidget.coordinates')
-                ) {
-                  return (
-                    <>
-                      {key}: {popupInfo[key]}
-                      <br />
-                    </>
-                  );
-                } else {
-                  return '';
-                }
-              })}
-            </div>
-          </Popup>
-        )}
-      </Map>
+      {renderMapSystem()}
     </>
   );
 }
 
-export default MapBoxRoot;
+export default MapSystemRoot;
