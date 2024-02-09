@@ -7,6 +7,7 @@ import Map, {
   ScaleControl,
   Popup
 } from 'react-map-gl';
+import { parseLatLngBoundsForMapbox } from '../utils';
 
 function MapBoxRoot(props) {
   const {
@@ -19,13 +20,19 @@ function MapBoxRoot(props) {
     defaultImgHeight,
     mapStyle,
     mapBoxToken,
-    mapLocations
+    mapLocations,
+    maxBoundsSouthWest,
+    maxBoundsNorthEast
   } = props;
   const [popupInfo, setPopupInfo] = useState(null);
 
   return (
     <>
       <Map
+        maxBounds={parseLatLngBoundsForMapbox(
+          maxBoundsSouthWest,
+          maxBoundsNorthEast
+        )}
         initialViewState={{
           longitude:
             !initialLong || isNaN(initialLong)
