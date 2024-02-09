@@ -4,6 +4,7 @@ import { Icon } from 'leaflet';
 import 'leaflet-color-markers';
 
 import 'leaflet/dist/leaflet.css';
+import { parseLatLngBounds } from '../utils';
 
 const availableMarkerColors = [
   'blue',
@@ -26,7 +27,9 @@ function LeafletRoot(props) {
     defaultMarkerImgURL,
     defaultImgWidth,
     defaultImgHeight,
-    mapLocations
+    mapLocations,
+    maxBoundsSouthWest,
+    maxBoundsNorthEast
   } = props;
   //   const [popupInfo, setPopupInfo] = useState(null);
 
@@ -40,12 +43,15 @@ function LeafletRoot(props) {
       : parseFloat(initialLong)
   ];
 
+  const maxBounds = parseLatLngBounds(maxBoundsSouthWest, maxBoundsNorthEast);
+
   return (
     <>
       <MapContainer
         style={{ height: '100vh', width: '100wh' }}
         center={position}
         zoom={!initialZoom || isNaN(initialZoom) ? 7 : parseFloat(initialZoom)}
+        maxBounds={maxBounds}
       >
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'

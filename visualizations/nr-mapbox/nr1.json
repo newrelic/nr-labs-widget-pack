@@ -122,6 +122,18 @@
       "type": "number"
     },
     {
+      "name": "maxBoundsSouthWest",
+      "title": "Max Bounds - Southwest corner eg. '35.5249, -124.6694' - Northeast config required, refresh to apply",
+      "description": "Restricts the view to the given geographical bounds, bouncing the user back if the user tries to pan outside the view",
+      "type": "string"
+    },
+    {
+      "name": "maxBoundsNorthEast",
+      "title": "Max Bounds - Northeast corner eg. '40.0249, -120.1694' - Southeast config required, refresh to apply",
+      "description": "Restricts the view to the given geographical bounds, bouncing the user back if the user tries to pan outside the view",
+      "type": "string"
+    },
+    {
       "name": "defaultMarkerColor",
       "title": "Default Marker Color (refresh)",
       "description": "",

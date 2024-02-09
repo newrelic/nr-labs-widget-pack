@@ -203,3 +203,73 @@ export const confirmLatLng = (lat, lng) => {
 
   return false;
 };
+
+export const parseLatLngBounds = (southWestCorner, northEastCorner) => {
+  try {
+    // Split the input strings by comma to separate latitude and longitude
+    const swCoords = southWestCorner
+      .split(',')
+      .map(coord => parseFloat(coord.trim()));
+    const neCoords = northEastCorner
+      .split(',')
+      .map(coord => parseFloat(coord.trim()));
+
+    // Check if any of the parsing failed or if we didn't get exactly two numbers for each corner
+    if (
+      swCoords.length !== 2 ||
+      neCoords.length !== 2 ||
+      swCoords.some(isNaN) ||
+      neCoords.some(isNaN)
+    ) {
+      throw new Error(
+        'Parsing error: One of the inputs is not a valid lat,lng pair.'
+      );
+    }
+
+    // Return the parsed bounds
+    return [swCoords, neCoords];
+  } catch (error) {
+    // eslint-disable-next-line
+    console.log(error.message, southWestCorner, northEastCorner);
+    return undefined;
+  }
+};
+
+export const parseLatLngBoundsForMapbox = (
+  southWestCorner,
+  northEastCorner
+) => {
+  try {
+    // Split the input strings by comma to separate latitude and longitude
+    const swCoords = southWestCorner
+      .split(',')
+      .map(coord => parseFloat(coord.trim()));
+    const neCoords = northEastCorner
+      .split(',')
+      .map(coord => parseFloat(coord.trim()));
+
+    // Check if any of the parsing failed or if we didn't get exactly two numbers for each corner
+    if (
+      swCoords.length !== 2 ||
+      neCoords.length !== 2 ||
+      swCoords.some(isNaN) ||
+      neCoords.some(isNaN)
+    ) {
+      throw new Error(
+        'Parsing error: One of the inputs is not a valid lat,lng pair.'
+      );
+    }
+
+    // Convert to Mapbox bounds format: [[westLng, southLat], [eastLng, northLat]]
+    const mapboxBounds = [
+      [swCoords[1], swCoords[0]], // Southwest corner (longitude, latitude)
+      [neCoords[1], neCoords[0]] // Northeast corner (longitude, latitude)
+    ];
+
+    return mapboxBounds;
+  } catch (error) {
+    // eslint-disable-next-line
+    console.log(error.message, southWestCorner, northEastCorner);
+    return undefined;
+  }
+};
