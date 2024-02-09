@@ -1,3 +1,10 @@
+# [1.38.0](https://github.com/newrelic/nr-labs-widget-pack/compare/v1.37.0...v1.38.0) (2024-02-09)
+
+
+### Features
+
+* map widget add max bounds ([304f668](https://github.com/newrelic/nr-labs-widget-pack/commit/304f6689602810a827f0500de08b1c8bf74e2ea9))
+
 # [1.37.0](https://github.com/newrelic/nr-labs-widget-pack/compare/v1.36.0...v1.37.0) (2024-01-29)
 
 
