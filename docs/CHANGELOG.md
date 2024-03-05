@@ -1,3 +1,10 @@
+## [1.38.2](https://github.com/newrelic/nr-labs-widget-pack/compare/v1.38.1...v1.38.2) (2024-03-05)
+
+
+### Bug Fixes
+
+* eslint ([a6074e3](https://github.com/newrelic/nr-labs-widget-pack/commit/a6074e304738ebfe7ef20cc6bac2abd146ba1afb))
+
 ## [1.38.1](https://github.com/newrelic/nr-labs-widget-pack/compare/v1.38.0...v1.38.1) (2024-03-05)
 
 
