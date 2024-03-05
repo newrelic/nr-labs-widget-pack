@@ -47,7 +47,8 @@ export const evaluateMarker = (sample, markerThresholds) => {
             return marker;
           } else if (!isEmpty(valueBelow) && targetValue < valueBelow) {
             return marker;
-          } else if (!isEmpty(valueEqual) && targetValue === valueEqual) {
+          // eslint-disable-next-line  
+          } else if (!isEmpty(valueEqual) && targetValue == valueEqual) { // loose equality to support string and number
             return marker;
           }
         } else if (!isEmpty(regexMatch)) {
