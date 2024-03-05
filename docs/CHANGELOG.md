@@ -1,3 +1,10 @@
+## [1.38.1](https://github.com/newrelic/nr-labs-widget-pack/compare/v1.38.0...v1.38.1) (2024-03-05)
+
+
+### Bug Fixes
+
+* map equal condition  ([7fba809](https://github.com/newrelic/nr-labs-widget-pack/commit/7fba809ef5ac9bd24d39ae004b4a93f1e2e1cd8f))
+
 # [1.38.0](https://github.com/newrelic/nr-labs-widget-pack/compare/v1.37.0...v1.38.0) (2024-02-09)
 
 
