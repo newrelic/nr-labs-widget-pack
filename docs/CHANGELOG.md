@@ -1,3 +1,10 @@
+# [1.40.0](https://github.com/newrelic/nr-labs-widget-pack/compare/v1.39.0...v1.40.0) (2024-03-06)
+
+
+### Features
+
+* change map widget interval system ([627f65a](https://github.com/newrelic/nr-labs-widget-pack/commit/627f65a47f5037df1056887c3a4865219b84a5b9))
+
 # [1.39.0](https://github.com/newrelic/nr-labs-widget-pack/compare/v1.38.2...v1.39.0) (2024-03-05)
 
 
