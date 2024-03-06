@@ -5,6 +5,7 @@ import {
   NerdGraphQuery,
   PlatformStateContext
 } from 'nr1';
+import { useInterval } from '@mantine/hooks';
 
 import { deriveLatLng, evaluateMarker } from './utils';
 import Docs from './docs';
@@ -80,22 +81,15 @@ function MapSystemRoot(props) {
   }, [mapSystem]);
 
   useEffect(() => {
-    if (pollInterval) {
-      // eslint-disable-next-line
-      console.log(`poll interval updated:  ${pollInterval}`);
-    }
-
     fetchData();
-    let POLL_INTERVAL =
-      !pollInterval || isNaN(pollInterval) ? 60000 : pollInterval * 1000;
-    if (POLL_INTERVAL < 5000) POLL_INTERVAL = 5000;
-
-    const pollData = setInterval(() => {
-      fetchData();
-    }, POLL_INTERVAL);
-
-    return () => clearInterval(pollData);
+    interval.stop();
+    interval.start();
+    return interval.stop;
   }, [pollInterval, nrqlQueries, markerThresholds, filters, timeRangeStr]);
+
+  const interval = useInterval(() => {
+    fetchData();
+  }, (pollInterval || 60) * 1000);
 
   const fetchData = async () => {
     // setFetching(true);
@@ -192,7 +186,7 @@ function MapSystemRoot(props) {
 
     nrqlQueries.forEach((nrql, index) => {
       const lowerQuery = (nrql.query || '').toLowerCase();
-      const errorObj = { name: `Line Query ${index + 1}`, errors: [] };
+      const errorObj = { name: ` Query ${index + 1}`, errors: [] };
 
       if (!lowerQuery) {
         errorObj.errors.push(`Query is undefined`);
