@@ -47,7 +47,7 @@ const gqlNrqlQuery = (accountId, query) => `{
 
 function MapSystemRoot(props) {
   const {
-    nrqlQueries,
+    nrqlQueriesCollection,
     markerThresholds,
     mapBoxToken,
     pollInterval,
@@ -85,7 +85,13 @@ function MapSystemRoot(props) {
     interval.stop();
     interval.start();
     return interval.stop;
-  }, [pollInterval, nrqlQueries, markerThresholds, filters, timeRangeStr]);
+  }, [
+    pollInterval,
+    nrqlQueriesCollection,
+    markerThresholds,
+    filters,
+    timeRangeStr
+  ]);
 
   const interval = useInterval(() => {
     fetchData();
@@ -98,7 +104,7 @@ function MapSystemRoot(props) {
       // eslint-disable-next-line
       console.log(`fetching data @ ${new Date().toLocaleTimeString()}`);
       // build array of promises to fetch data
-      const dataPromises = nrqlQueries.map(nrql => {
+      const dataPromises = nrqlQueriesCollection.map(nrql => {
         const { query, accountId, enableFilters, enableTimePicker } = nrql;
         let newQuery = query;
 
@@ -184,7 +190,7 @@ function MapSystemRoot(props) {
       tempErrors.push({ name: 'Map Box Access Token required' });
     }
 
-    nrqlQueries.forEach((nrql, index) => {
+    nrqlQueriesCollection.forEach((nrql, index) => {
       const lowerQuery = (nrql.query || '').toLowerCase();
       const errorObj = { name: ` Query ${index + 1}`, errors: [] };
 
@@ -212,7 +218,7 @@ function MapSystemRoot(props) {
     setErrors(tempErrors);
 
     setLoading(false);
-  }, [nrqlQueries, mapBoxToken]);
+  }, [nrqlQueriesCollection, mapBoxToken]);
 
   if (loading) {
     return <Spinner />;

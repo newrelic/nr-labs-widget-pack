@@ -33,7 +33,7 @@
       "type": "string"
     },
     {
-      "name": "nrqlQueries",
+      "name": "nrqlQueriesCollection",
       "title": "NRQL Queries",
       "type": "collection",
       "items": [
