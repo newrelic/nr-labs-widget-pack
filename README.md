@@ -134,10 +134,10 @@ Click on the short description in each section to view chart details.
   ---
 </details>
 
-### Mapbox Widget
+### Map Widget (aka Mapbox Widget)
 <details>
 
-  <summary>Plot any data that includes latitude and longitude onto an interactive map, leveraging the Mapbox API.</summary>
+  <summary>Plot any data that includes latitude and longitude onto an interactive map, leveraging the Mapbox or Leaflet APIs.</summary>
   
   #### Overview
   <img src="screenshots/mapbox_01.png" height="450" alt="Mapbox screenshot" />
@@ -146,7 +146,7 @@ Click on the short description in each section to view chart details.
 
   #### Requirements
   In order to use this chart, there are a few requirements:
-  - Requires a Map Box Access Token from https://account.mapbox.com/auth/signup/
+  - If using Mapbox, requires a Map Box Access Token from https://account.mapbox.com/auth/signup/
   - Query should contain one alias with 'name:SOME_VALUE' which will be used as the marker name
   - Query should have a FACET for latitude and longitude, use precision to ensure the FACET does not round the number
     ```
