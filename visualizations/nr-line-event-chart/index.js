@@ -59,10 +59,9 @@ function LineEventChart(props) {
 
     timeQueries.forEach(q => {
       const { accountId, query, enableFilters } = q;
-      /* eslint-disable */
-      const newQuery = `${query} ${enableFilters ? filters || '' : ''} ${enableTimePicker ? timeQuery : ''
-        }`;
-      /* eslint-enable */
+      const newQuery = `${query} ${enableFilters ? filters || '' : ''} ${
+        enableTimePicker ? timeQuery : ''
+      }`;
 
       queries.push({ query: newQuery, accountId, type: 'line' });
     });
@@ -72,10 +71,9 @@ function LineEventChart(props) {
       .forEach(q => {
         const { accountId, query, enableFilters, color, name } = q;
 
-        /* eslint-disable */
-        const newQuery = `${query} ${enableFilters ? filters || '' : ''} ${enableTimePicker ? timeQuery : ''
-          }`;
-        /* eslint-enable */
+        const newQuery = `${query} ${enableFilters ? filters || '' : ''} ${
+          enableTimePicker ? timeQuery : ''
+        }`;
 
         queries.push({
           query: newQuery,
@@ -106,7 +104,7 @@ function LineEventChart(props) {
             color: color || '#000000',
             viz: 'event'
           },
-          data: data[0].data.map(d => ({
+          data: (data[0]?.data || []).map(d => ({
             x0: d?.begin_time || d?.timestamp,
             x1: d?.begin_time + 1 || d?.timestamp + 1
           }))
