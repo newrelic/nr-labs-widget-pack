@@ -1,3 +1,10 @@
+# [1.41.0](https://github.com/newrelic/nr-labs-widget-pack/compare/v1.40.0...v1.41.0) (2024-05-08)
+
+
+### Features
+
+* event handling patch ([a8ba1d2](https://github.com/newrelic/nr-labs-widget-pack/commit/a8ba1d20c086872768011766d1bf030ab52fd61f))
+
 # [1.40.0](https://github.com/newrelic/nr-labs-widget-pack/compare/v1.39.0...v1.40.0) (2024-03-06)
 
 
