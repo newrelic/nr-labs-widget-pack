@@ -134,25 +134,26 @@ Click on the short description in each section to view chart details.
   ---
 </details>
 
-### Mapbox Widget
+### Map Widget
 <details>
 
-  <summary>Plot any data that includes latitude and longitude onto an interactive map, leveraging the Mapbox API.</summary>
+  <summary>Plot any data that includes latitude and longitude onto an interactive map, leveraging the Leaflet or Mapbox API.</summary>
   
   #### Overview
-  <img src="screenshots/mapbox_01.png" height="450" alt="Mapbox screenshot" />
+  <img src="screenshots/mapbox_01.png" height="450" alt="Map screenshot" />
 
   Supports multiple NRQL queries and custom markers
 
   #### Requirements
   In order to use this chart, there are a few requirements:
-  - Requires a Map Box Access Token from https://account.mapbox.com/auth/signup/
+  - Leaflet requires no additional api key to setup (default)
+  - Map Box provides additional features, but will require an Access Token from https://account.mapbox.com/auth/signup/
   - Query should contain one alias with 'name:SOME_VALUE' which will be used as the marker name
   - Query should have a FACET for latitude and longitude, use precision to ensure the FACET does not round the number
     ```
     FACET string(lat, precision: 5) as 'lat', string(lng, precision: 5) as 'lng' 
     ```
-  - Rotation can be set using the following alias with 'rotate:SOME_VALUE'
+  - Rotation can be set using the following alias with 'rotate:SOME_VALUE' (Map Box only)
   - Example Query:
     ```
     FROM FlightData SELECT latest(flightNo) as 'name:Flight No', latest(track) as 'rotate:track', latest(departure), latest(destination) FACET string(lat, precision: 5) as 'lat', string(lng, precision: 5) as 'lng' SINCE 60 seconds ago LIMIT MAX
