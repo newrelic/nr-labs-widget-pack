@@ -1,0 +1,413 @@
+{
+    "schemaType": "VISUALIZATION",
+    "id": "dynamic-viz",
+    "displayName": "Dynamic Viz (demo)",
+    "description": "",
+    "configuration": [
+        {
+            "name": "showDocs",
+            "title": "Show Documentation",
+            "description": "",
+            "type": "boolean"
+        },
+        {
+            "name": "pollInterval",
+            "title": "Select Poll Interval (seconds) default 60s",
+            "description": "",
+            "type": "enum",
+            "items": [
+                {
+                    "title": "Select",
+                    "value": 60
+                },
+                {
+                    "title": "5s",
+                    "value": 5
+                },
+                {
+                    "title": "10s",
+                    "value": 10
+                },
+                {
+                    "title": "15s",
+                    "value": 15
+                },
+                {
+                    "title": "30s",
+                    "value": 30
+                },
+                {
+                    "title": "45s",
+                    "value": 45
+                },
+                {
+                    "title": "1m",
+                    "value": 60
+                },
+                {
+                    "title": "5m",
+                    "value": 300
+                }
+            ]
+        },
+        {
+            "name": "httpSources",
+            "title": "HTTP Sources",
+            "type": "collection",
+            "items": [
+                {
+                    "name": "url",
+                    "title": "URL",
+                    "description": "",
+                    "type": "string"
+                },
+                {
+                    "name": "method",
+                    "title": "Method (default: GET)",
+                    "description": "",
+                    "type": "string"
+                },
+                {
+                    "name": "options",
+                    "title": "Options (JSON) - Optional",
+                    "description": "",
+                    "type": "json"
+                },
+                {
+                    "name": "payload",
+                    "title": "Body Payload JSON - Optional",
+                    "description": "",
+                    "type": "json"
+                },
+                {
+                    "name": "basicAuthUser",
+                    "title": "Basic Auth User - Optional",
+                    "description": "",
+                    "type": "string"
+                },
+                {
+                    "name": "basicAuthPass",
+                    "title": "Basic Auth Password - Optional",
+                    "description": "",
+                    "type": "string"
+                },
+                {
+                    "name": "jsonSelector",
+                    "title": "JS Path Selector - Optional",
+                    "description": "Get the value at the path of the object. If the resolved value is undefined, the default value is returned in its place",
+                    "type": "string"
+                }
+            ]
+        },
+        {
+            "name": "alaQuery",
+            "title": "SQL",
+            "description": "",
+            "type": "string"
+        },
+        {
+            "name": "chartType",
+            "title": "Chart Type",
+            "description": "",
+            "type": "enum",
+            "items": [
+                {
+                    "title": "billboard",
+                    "value": "billboard"
+                },
+                {
+                    "title": "bar",
+                    "value": "bar"
+                },
+                {
+                    "title": "table",
+                    "value": "table"
+                }
+            ]
+        },
+        {
+            "name": "defaultSortNo",
+            "title": "Table: Sort column number (refresh to take effect, starts from 0)",
+            "description": "",
+            "type": "number"
+        },
+        {
+            "name": "defaultSortDir",
+            "title": "Table: Sort column direction (refresh to take effect, requires sort column number)",
+            "description": "",
+            "type": "enum",
+            "items": [
+                {
+                    "title": "Select",
+                    "value": null
+                },
+                {
+                    "title": "ASCENDING",
+                    "value": "ASCENDING"
+                },
+                {
+                    "title": "DESCENDING",
+                    "value": "DESCENDING"
+                }
+            ]
+        },
+        {
+            "name": "columnSort",
+            "title": "Table: Column sort (refresh to take effect)",
+            "description": "",
+            "type": "enum",
+            "items": [
+                {
+                    "title": "Select",
+                    "value": null
+                },
+                {
+                    "title": "Facets first",
+                    "value": "FIRST"
+                },
+                {
+                    "title": "Facets last",
+                    "value": "LAST"
+                }
+            ]
+        },
+        {
+            "name": "cellConfigs",
+            "title": "Table: Cell Configuration",
+            "type": "collection",
+            "items": [
+                {
+                    "name": "priority",
+                    "title": "Validation priority (0 is highest) (optional)",
+                    "description": "",
+                    "type": "number"
+                },
+                {
+                    "name": "targetAttribute",
+                    "title": "Target Attribute eg. count, appName etc. (not the renamed header)",
+                    "description": "",
+                    "type": "string"
+                },
+                {
+                    "name": "keyLabel",
+                    "title": "Key Label (Used when show key is used)",
+                    "description": "",
+                    "type": "string"
+                },
+                {
+                    "name": "regexMatch",
+                    "title": "Regex Match (cannot be used with value equal, above, below)",
+                    "description": "",
+                    "type": "string"
+                },
+                {
+                    "name": "valueEqual",
+                    "title": "Value equal =",
+                    "description": "",
+                    "type": "string"
+                },
+                {
+                    "name": "valueAbove",
+                    "title": "Value above >",
+                    "description": "",
+                    "type": "number"
+                },
+                {
+                    "name": "valueBelow",
+                    "title": "Value below <",
+                    "description": "",
+                    "type": "number"
+                },
+                {
+                    "name": "nullHandling",
+                    "title": "Trigger if undefined or null",
+                    "description": "",
+                    "type": "boolean"
+                },
+                {
+                    "name": "zeroHandling",
+                    "title": "Trigger if zero",
+                    "description": "",
+                    "type": "boolean"
+                },
+                {
+                    "name": "emptyHandling",
+                    "title": "Trigger if empty string",
+                    "description": "",
+                    "type": "boolean"
+                },
+                {
+                    "name": "bgColor",
+                    "title": "Background Color",
+                    "description": "",
+                    "type": "string"
+                },
+                {
+                    "name": "fontColor",
+                    "title": "Font Color",
+                    "description": "",
+                    "type": "string"
+                },
+                {
+                    "name": "highlightRow",
+                    "title": "Highlight Entire Row if cell is triggered",
+                    "description": "",
+                    "type": "boolean"
+                },
+                {
+                    "name": "alignmentType",
+                    "title": "Alignment Type",
+                    "description": "",
+                    "type": "enum",
+                    "items": [
+                        {
+                            "title": "LEFT",
+                            "value": "LEFT"
+                        },
+                        {
+                            "title": "RIGHT",
+                            "value": "RIGHT"
+                        },
+                        {
+                            "title": "CENTER",
+                            "value": "CENTER"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "headerConfigs",
+            "title": "Table: Header Configuration",
+            "type": "collection",
+            "items": [
+                {
+                    "name": "targetAttribute",
+                    "title": "Target Attribute eg. count, appName etc.",
+                    "description": "",
+                    "type": "string"
+                },
+                {
+                    "name": "hideHeader",
+                    "title": "Hide Header",
+                    "description": "",
+                    "type": "boolean"
+                },
+                {
+                    "name": "renameHeader",
+                    "title": "Rename Header",
+                    "description": "",
+                    "type": "string"
+                },
+                {
+                    "name": "valueType",
+                    "title": "Value Type",
+                    "description": "",
+                    "type": "enum",
+                    "items": [
+                        {
+                            "title": "Normal",
+                            "value": "normal"
+                        },
+                        {
+                            "title": "APDEX",
+                            "value": "APDEX"
+                        },
+                        {
+                            "title": "BITS",
+                            "value": "BITS"
+                        },
+                        {
+                            "title": "BITS_PER_MS",
+                            "value": "BITS_PER_MS"
+                        },
+                        {
+                            "title": "BYTES",
+                            "value": "BYTES"
+                        },
+                        {
+                            "title": "BYTES_PER_MS",
+                            "value": "BYTES_PER_MS"
+                        },
+                        {
+                            "title": "BYTES_PER_SECOND",
+                            "value": "BYTES_PER_SECOND"
+                        },
+                        {
+                            "title": "CELSIUS",
+                            "value": "CELSIUS"
+                        },
+                        {
+                            "title": "COUNT",
+                            "value": "COUNT"
+                        },
+                        {
+                            "title": "HERTZ",
+                            "value": "HERTZ"
+                        },
+                        {
+                            "title": "MS",
+                            "value": "MS"
+                        },
+                        {
+                            "title": "PAGES_PER_SECOND",
+                            "value": "PAGES_PER_SECOND"
+                        },
+                        {
+                            "title": "PERCENTAGE",
+                            "value": "PERCENTAGE"
+                        },
+                        {
+                            "title": "REQUESTS_PER_SECOND",
+                            "value": "REQUESTS_PER_SECOND"
+                        },
+                        {
+                            "title": "SECONDS",
+                            "value": "SECONDS"
+                        },
+                        {
+                            "title": "TIMESTAMP",
+                            "value": "TIMESTAMP"
+                        },
+                        {
+                            "title": "UNKNOWN",
+                            "value": "UNKNOWN"
+                        }
+                    ]
+                },
+                {
+                    "name": "alignmentType",
+                    "title": "Alignment Type",
+                    "description": "",
+                    "type": "enum",
+                    "items": [
+                        {
+                            "title": "LEFT",
+                            "value": "LEFT"
+                        },
+                        {
+                            "title": "RIGHT",
+                            "value": "RIGHT"
+                        },
+                        {
+                            "title": "CENTER",
+                            "value": "CENTER"
+                        }
+                    ]
+                },
+                {
+                    "name": "headerWidth",
+                    "title": "Width",
+                    "description": "",
+                    "type": "string"
+                }
+            ]
+        },
+        {
+            "name": "showKey",
+            "title": "Table: Show Key",
+            "description": "",
+            "type": "boolean"
+        }
+    ]
+}
