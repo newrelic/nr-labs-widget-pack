@@ -1,17 +1,17 @@
-import React, { useEffect, useState, useContext } from "react";
-import { Spinner, AutoSizer, NerdletStateContext } from "nr1";
-import DynamicWidget from "./viz";
+import React, { useEffect, useState, useContext } from 'react';
+import { Spinner, AutoSizer, NerdletStateContext } from 'nr1';
+import DynamicWidget from './viz';
 
-const { version } = require("../../package.json");
+const { version } = require('../../package.json');
 
 function DynamicWidgetRoot(props) {
   const [loading, setLoading] = useState(true);
   const { filters } = useContext(NerdletStateContext);
 
   useEffect(() => {
-    const script = document.createElement("script");
+    const script = document.createElement('script');
     script.src =
-      "https://cdnjs.cloudflare.com/ajax/libs/alasql/4.2.7/alasql.min.js";
+      'https://cdnjs.cloudflare.com/ajax/libs/alasql/4.2.7/alasql.min.js';
     script.async = true;
     document.head.appendChild(script);
 
@@ -19,11 +19,12 @@ function DynamicWidgetRoot(props) {
       setLoading(false);
     };
 
-    script.onerror = (error) => {
-      console.error("Error loading the Alasql script:", error);
+    script.onerror = error => {
+      // eslint-disable-next-line
+      console.error('Error loading the Alasql script:', error);
     };
   }, []);
-
+  // eslint-disable-next-line
   console.log(`widget version: ${version}`);
 
   return (
@@ -31,7 +32,7 @@ function DynamicWidgetRoot(props) {
       {loading ? (
         <Spinner />
       ) : (
-        <div style={{ height: "100%", overflowX: "hidden" }}>
+        <div style={{ height: '100%', overflowX: 'hidden' }}>
           <AutoSizer>
             {({ width, height }) => (
               <DynamicWidget

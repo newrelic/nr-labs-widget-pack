@@ -1,34 +1,41 @@
-import React, { useEffect, useState } from "react";
-import { LineChart, Spinner, BillboardChart, BarChart } from "nr1";
-import { useInterval } from "@mantine/hooks";
-import Docs from "./docs";
-import ErrorState from "../../shared/ErrorState";
-import { toBar, toBillboard, transformData } from "./transform";
-import DynamicTable from "./table";
-import { parseFiltersToJSON, performFilterSubstitutions } from "./utils";
+/* eslint-disable */
+import React, { useEffect, useState } from 'react';
+import { LineChart, Spinner, BillboardChart, BarChart } from 'nr1';
+import { useInterval } from '@mantine/hooks';
+import Docs from './docs';
+import ErrorState from '../../shared/ErrorState';
+import { toBar, toBillboard, transformData } from './transform';
+import DynamicTable from './table';
+import { parseFiltersToJSON, performFilterSubstitutions } from './utils';
 
 var alasql = window.alasql;
-const _ = require("lodash");
+const _ = require('lodash');
 
 function fetchWithRetry(source, jsonFilters, retries = 3, backoff = 300) {
   return new Promise(async (resolve, reject) => {
-    let { url, basicAuthUser, basicAuthPass, options, payload, method } =
-      source;
+    let {
+      url,
+      basicAuthUser,
+      basicAuthPass,
+      options,
+      payload,
+      method
+    } = source;
     url = performFilterSubstitutions(url, jsonFilters);
     basicAuthUser = performFilterSubstitutions(basicAuthUser, jsonFilters);
     basicAuthPass = performFilterSubstitutions(basicAuthPass, jsonFilters);
-    options = performFilterSubstitutions(options || "", jsonFilters);
-    payload = performFilterSubstitutions(payload || "", jsonFilters);
+    options = performFilterSubstitutions(options || '', jsonFilters);
+    payload = performFilterSubstitutions(payload || '', jsonFilters);
     method = performFilterSubstitutions(method, jsonFilters);
 
-    const parsedOptions = JSON.parse(options || "{}");
+    const parsedOptions = JSON.parse(options || '{}');
     console.log(options, parsedOptions);
 
-    const finalOptions = { ...parsedOptions, method: method || "GET" };
+    const finalOptions = { ...parsedOptions, method: method || 'GET' };
     const headers = {};
     if (basicAuthUser) {
       headers.Authorization =
-        "Basic " + btoa(basicAuthUser + ":" + (basicAuthPass || ""));
+        'Basic ' + btoa(basicAuthUser + ':' + (basicAuthPass || ''));
     }
 
     if (payload) {
@@ -38,14 +45,14 @@ function fetchWithRetry(source, jsonFilters, retries = 3, backoff = 300) {
     finalOptions.headers = headers;
 
     const proxiedUrl =
-      "https://rfm21dgppf.execute-api.us-east-1.amazonaws.com/dev?url=" +
+      'https://rfm21dgppf.execute-api.us-east-1.amazonaws.com/dev?url=' +
       encodeURIComponent(url);
 
     // const proxiedUrl = "https://corsproxy.io/?" + encodeURIComponent(url);
     for (let i = 0; i <= retries; i++) {
       try {
         const response = await fetch(proxiedUrl, finalOptions);
-        if (!response.ok) throw new Error("Network response was not ok");
+        if (!response.ok) throw new Error('Network response was not ok');
         const data = await response.json();
         const { jsonSelector } = source;
         const result = jsonSelector ? _.get(data, jsonSelector) : data;
@@ -53,7 +60,7 @@ function fetchWithRetry(source, jsonFilters, retries = 3, backoff = 300) {
       } catch (error) {
         console.error(`Fetch attempt ${i + 1} failed:`, error.message);
         if (i === retries) return resolve(null); // Last attempt also failed, resolve with null
-        await new Promise((resolve) =>
+        await new Promise(resolve =>
           setTimeout(resolve, backoff * Math.pow(2, i))
         ); // Exponential backoff
       }
@@ -62,8 +69,14 @@ function fetchWithRetry(source, jsonFilters, retries = 3, backoff = 300) {
 }
 
 function DynamicWidget(props) {
-  const { pollInterval, httpSources, alaQuery, chartType, showDocs, filters } =
-    props;
+  const {
+    pollInterval,
+    httpSources,
+    alaQuery,
+    chartType,
+    showDocs,
+    filters
+  } = props;
   const [errors, setErrors] = useState([]);
   const [loading, setLoading] = useState(true);
   const [isFetching, setFetching] = useState(false);
@@ -73,10 +86,10 @@ function DynamicWidget(props) {
   // const jsonFilters = parseFiltersToJSON(filters || "");
 
   const jsonFilters = filters;
-  console.log("parsed filters => ", jsonFilters);
+  console.log('parsed filters => ', jsonFilters);
 
   useEffect(() => {
-    console.log("new filters", filters);
+    console.log('new filters', filters);
   }, [filters]);
 
   useEffect(() => {
@@ -93,22 +106,22 @@ function DynamicWidget(props) {
     if (errors.length === 0 && isFetching === false) {
       setFetching(true);
 
-      console.log("fetch filters =>", jsonFilters);
+      console.log('fetch filters =>', jsonFilters);
 
-      const httpPromises = httpSources.map((source) =>
+      const httpPromises = httpSources.map(source =>
         fetchWithRetry(source, jsonFilters)
       );
       const httpDataJson = await Promise.all(httpPromises);
       setFetching(false);
 
-      console.log("raw data ->", httpDataJson);
+      console.log('raw data ->', httpDataJson);
 
-      if (httpDataJson.some((a) => !a)) {
-        console.log("null values detected, do not update chartData");
+      if (httpDataJson.some(a => !a)) {
+        console.log('null values detected, do not update chartData');
       } else {
         const alaData = alasql(alaQuery, httpDataJson);
 
-        console.log("in memory query ->", alaData);
+        console.log('in memory query ->', alaData);
 
         setChartData(alaData);
       }
@@ -129,13 +142,13 @@ function DynamicWidget(props) {
 
     if (!alaQuery) {
       tempErrors.push({
-        name: "SQL Query missing",
+        name: 'SQL Query missing'
       });
     }
 
     if (httpSources.length === 0) {
       tempErrors.push({
-        name: "You need to supply at least one http source",
+        name: 'You need to supply at least one http source'
       });
     } else {
       httpSources.forEach((t, i) => {
@@ -155,7 +168,7 @@ function DynamicWidget(props) {
         }
 
         if (payload) {
-          if (!method || method.toLowerCase() === "GET") {
+          if (!method || method.toLowerCase() === 'GET') {
             errorObj.errors.push(`Payload not supported with GET method`);
           }
           try {
@@ -184,7 +197,7 @@ function DynamicWidget(props) {
   }
 
   const renderViz = (chartType, chartData, props) => {
-    if (!chartData || chartData.length === 0 || chartData.some((a) => !a)) {
+    if (!chartData || chartData.length === 0 || chartData.some(a => !a)) {
       return (
         <>
           <Spinner />
@@ -192,17 +205,17 @@ function DynamicWidget(props) {
       );
     }
 
-    if (!chartType || chartType === "billboard") {
+    if (!chartType || chartType === 'billboard') {
       return (
         <BillboardChart data={toBillboard(chartData)} fullWidth fullHeight />
       );
     }
 
-    if (chartType === "bar") {
+    if (chartType === 'bar') {
       return <BarChart data={toBar(chartData)} fullWidth fullHeight />;
     }
 
-    if (chartType === "table") {
+    if (chartType === 'table') {
       return <DynamicTable chartData={chartData || []} {...props} />;
     }
 

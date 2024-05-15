@@ -1,4 +1,6 @@
-import React, { useState, useContext, useEffect } from "react";
+/* eslint-disable */
+
+import React, { useState, useContext, useEffect } from 'react';
 import {
   Spinner,
   Table,
@@ -6,10 +8,10 @@ import {
   TableHeaderCell,
   TableRow,
   TableRowCell,
-  MetricTableRowCell,
-} from "nr1";
-import { assessValue, isEmpty } from "./utils";
-import { useInterval, useSetState } from "@mantine/hooks";
+  MetricTableRowCell
+} from 'nr1';
+import { assessValue, isEmpty } from './utils';
+import { useInterval, useSetState } from '@mantine/hooks';
 
 export default function DynamicTable(props) {
   const {
@@ -21,14 +23,14 @@ export default function DynamicTable(props) {
     width,
     defaultSortNo,
     defaultSortDir,
-    showKey,
+    showKey
   } = props;
   const [column, setColumn] = useState(parseInt(defaultSortNo || 0));
   const [cellConfigsOriginal, setCellConfigsOriginal] = useState(cellConfigs);
   const [sortedCellConfigs, setCellConfigs] = useState([]);
   const [sortingType, setSortingType] = useState(
     TableHeaderCell.SORTING_TYPE[
-      defaultSortNo ? defaultSortDir || "NONE" : "NONE"
+      defaultSortNo ? defaultSortDir || 'NONE' : 'NONE'
     ]
   );
 
@@ -54,10 +56,10 @@ export default function DynamicTable(props) {
   const items = JSON.parse(JSON.stringify(chartData));
   const headers = Object.keys(items?.[0] || {});
 
-  sortedCellConfigs.forEach((config) => {
+  sortedCellConfigs.forEach(config => {
     const { targetAttribute, highlightRow } = config;
 
-    items.forEach((item) => {
+    items.forEach(item => {
       const assessment = assessValue(item[targetAttribute], config);
 
       if (assessment?.check) {
@@ -80,19 +82,19 @@ export default function DynamicTable(props) {
         items={items}
         style={{
           height: showKey ? height - 40 : height,
-          width: width + 52,
+          width: width + 52
         }}
       >
         <TableHeader>
           {(headers || [])
             .filter(
-              (h) =>
-                !headerConfigs.find((c) => c.targetAttribute === h)
+              h =>
+                !headerConfigs.find(c => c.targetAttribute === h)
                   ?.hideHeader === true
             )
             .map((h, i) => {
               const headerConfig = headerConfigs.find(
-                (c) => c.targetAttribute === h
+                c => c.targetAttribute === h
               );
 
               let headerWidth = headerConfig?.headerWidth || 0;
@@ -111,10 +113,10 @@ export default function DynamicTable(props) {
                   value={({ item }) => item[h]}
                   alignmentType={
                     TableHeaderCell.ALIGNMENT_TYPE[
-                      headerConfig?.alignmentType || "LEFT"
+                      headerConfig?.alignmentType || 'LEFT'
                     ]
                   }
-                  width={headerWidth || "1fr"}
+                  width={headerWidth || '1fr'}
                   sortable
                   sortingType={
                     column === i
@@ -135,22 +137,22 @@ export default function DynamicTable(props) {
             <TableRow>
               {(headers || [])
                 .filter(
-                  (h) =>
-                    !headerConfigs.find((c) => c.targetAttribute === h)
+                  h =>
+                    !headerConfigs.find(c => c.targetAttribute === h)
                       ?.hideHeader === true
                 )
-                .map((h) => {
+                .map(h => {
                   const value =
                     item[h] !== undefined && item[h] !== null
                       ? item[h]
-                      : (item?.groups || []).find((g) => g.name === h)?.value;
+                      : (item?.groups || []).find(g => g.name === h)?.value;
 
                   const headerConfig = headerConfigs.find(
-                    (c) => c.targetAttribute === h
+                    c => c.targetAttribute === h
                   );
 
                   const cellConfig = cellConfigs.find(
-                    (c) => c.targetAttribute === h
+                    c => c.targetAttribute === h
                   );
 
                   const style = {};
@@ -165,13 +167,13 @@ export default function DynamicTable(props) {
                   }
 
                   if (headerConfig?.valueType) {
-                    if (headerConfig?.valueType === "TIMESTAMP") {
+                    if (headerConfig?.valueType === 'TIMESTAMP') {
                       return (
                         <TableRowCell
                           key={`${h}_${value}`}
                           alignmentType={
                             TableRowCell.ALIGNMENT_TYPE[
-                              cellConfig?.alignmentType || "LEFT"
+                              cellConfig?.alignmentType || 'LEFT'
                             ]
                           }
                           style={style}
@@ -185,7 +187,7 @@ export default function DynamicTable(props) {
                           key={`${h}_${value}`}
                           type={
                             MetricTableRowCell.TYPE[
-                              headerConfig?.valueType || "UNKNOWN"
+                              headerConfig?.valueType || 'UNKNOWN'
                             ]
                           }
                           value={value}
@@ -200,7 +202,7 @@ export default function DynamicTable(props) {
                       key={`${h}_${value}`}
                       alignmentType={
                         TableRowCell.ALIGNMENT_TYPE[
-                          cellConfig?.alignmentType || "LEFT"
+                          cellConfig?.alignmentType || 'LEFT'
                         ]
                       }
                       style={style}
@@ -216,59 +218,59 @@ export default function DynamicTable(props) {
       {showKey && (
         <div
           style={{
-            position: "sticky",
-            bottom: "0px",
-            textAlign: "center",
-            padding: "10px",
-            backgroundColor: "white",
+            position: 'sticky',
+            bottom: '0px',
+            textAlign: 'center',
+            padding: '10px',
+            backgroundColor: 'white'
           }}
         >
-          {(cellConfigs || []).map((t) => {
+          {(cellConfigs || []).map(t => {
             const value = {};
             const { bgColor, fontColor } = t;
 
             const headerConfig = headerConfigs.find(
-              (c) => c.targetAttribute === t.targetAttribute
+              c => c.targetAttribute === t.targetAttribute
             );
 
-            if (bgColor === "healthy" || bgColor === "green") {
-              value.bgColor = "#3a845e";
-              value.fontColor = "white";
+            if (bgColor === 'healthy' || bgColor === 'green') {
+              value.bgColor = '#3a845e';
+              value.fontColor = 'white';
             }
 
-            if (fontColor === "healthy" || fontColor === "green") {
-              value.fontColor = "#3a845e";
+            if (fontColor === 'healthy' || fontColor === 'green') {
+              value.fontColor = '#3a845e';
             }
 
-            if (bgColor === "critical" || bgColor === "red") {
-              value.bgColor = "#a1251a";
-              value.fontColor = "white";
+            if (bgColor === 'critical' || bgColor === 'red') {
+              value.bgColor = '#a1251a';
+              value.fontColor = 'white';
             }
 
-            if (fontColor === "critical" || fontColor === "red") {
-              value.fontColor = "#a1251a";
+            if (fontColor === 'critical' || fontColor === 'red') {
+              value.fontColor = '#a1251a';
             }
 
-            if (bgColor === "warning" || bgColor === "orange") {
-              value.bgColor = "#f8d45c";
-              value.fontColor = "black";
+            if (bgColor === 'warning' || bgColor === 'orange') {
+              value.bgColor = '#f8d45c';
+              value.fontColor = 'black';
             }
 
-            if (fontColor === "warning" || fontColor === "orange") {
-              value.fontColor = "#f8d45c";
+            if (fontColor === 'warning' || fontColor === 'orange') {
+              value.fontColor = '#f8d45c';
             }
 
-            if (bgColor === "unknown" || bgColor === "grey") {
-              value.bgColor = "#9fa5a5";
+            if (bgColor === 'unknown' || bgColor === 'grey') {
+              value.bgColor = '#9fa5a5';
             }
 
-            if (fontColor === "unknown" || fontColor === "grey") {
-              value.fontColor = "#9fa5a5";
+            if (fontColor === 'unknown' || fontColor === 'grey') {
+              value.fontColor = '#9fa5a5';
             }
 
             return (
               <>
-                <div style={{ display: "inline" }}>
+                <div style={{ display: 'inline' }}>
                   <span style={{ color: value.bgColor }}>&#9632;</span>
                   &nbsp;
                   {t?.keyLabel ||

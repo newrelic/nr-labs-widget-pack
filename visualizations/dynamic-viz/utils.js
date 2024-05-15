@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 export const assessValue = (value, config) => {
   const {
     targetAttribute,
@@ -9,40 +11,39 @@ export const assessValue = (value, config) => {
     fontColor,
     nullHandling,
     zeroHandling,
-    emptyHandling,
+    emptyHandling
   } = config;
   const result = {};
 
   if (!isNaN(value)) {
     if (!isEmpty(valueBelow) && !isEmpty(valueAbove)) {
       if (value < valueBelow && value > valueAbove) {
-        result.check = "valueBetween";
+        result.check = 'valueBetween';
       }
     } else if (!isEmpty(valueAbove) && Number(value) > Number(valueAbove)) {
-      result.check = "valueAbove";
+      result.check = 'valueAbove';
     } else if (!isEmpty(valueBelow) && Number(value) < Number(valueBelow)) {
-      result.check = "valueBelow";
-      // eslint-disable-next-line
+      result.check = 'valueBelow';
     } else if (!isEmpty(valueEqual) && value == valueEqual) {
-      result.check = "valueEqual";
+      result.check = 'valueEqual';
     }
   } else if (!isEmpty(regexMatch)) {
     const valueRegex = new RegExp(regexMatch);
     if (valueRegex.test(value)) {
-      result.check = "regexMatch";
+      result.check = 'regexMatch';
     }
   }
 
   if (value === 0 && zeroHandling) {
-    result.check = "isZero";
+    result.check = 'isZero';
   }
 
-  if (value === "" && emptyHandling) {
-    result.check = "isEmpty";
+  if (value === '' && emptyHandling) {
+    result.check = 'isEmpty';
   }
 
   if ((value === undefined || value === null) && nullHandling) {
-    result.check = "isNullOrUndefined";
+    result.check = 'isNullOrUndefined';
   }
 
   if (result.check) {
@@ -52,39 +53,39 @@ export const assessValue = (value, config) => {
     result.value = value;
 
     // massage status levels and colors
-    if (bgColor === "healthy" || bgColor === "green") {
-      result.bgColor = "#3a845e";
-      result.fontColor = "white";
+    if (bgColor === 'healthy' || bgColor === 'green') {
+      result.bgColor = '#3a845e';
+      result.fontColor = 'white';
     }
 
-    if (fontColor === "healthy" || fontColor === "green") {
-      result.fontColor = "#3a845e";
+    if (fontColor === 'healthy' || fontColor === 'green') {
+      result.fontColor = '#3a845e';
     }
 
-    if (bgColor === "critical" || bgColor === "red") {
-      result.bgColor = "#a1251a";
-      result.fontColor = "white";
+    if (bgColor === 'critical' || bgColor === 'red') {
+      result.bgColor = '#a1251a';
+      result.fontColor = 'white';
     }
 
-    if (fontColor === "critical" || fontColor === "red") {
-      result.fontColor = "#a1251a";
+    if (fontColor === 'critical' || fontColor === 'red') {
+      result.fontColor = '#a1251a';
     }
 
-    if (bgColor === "warning" || bgColor === "orange") {
-      result.bgColor = "#f8d45c";
-      result.fontColor = "black";
+    if (bgColor === 'warning' || bgColor === 'orange') {
+      result.bgColor = '#f8d45c';
+      result.fontColor = 'black';
     }
 
-    if (fontColor === "warning" || fontColor === "orange") {
-      result.fontColor = "#f8d45c";
+    if (fontColor === 'warning' || fontColor === 'orange') {
+      result.fontColor = '#f8d45c';
     }
 
-    if (bgColor === "unknown" || bgColor === "grey") {
-      result.bgColor = "#9fa5a5";
+    if (bgColor === 'unknown' || bgColor === 'grey') {
+      result.bgColor = '#9fa5a5';
     }
 
-    if (fontColor === "unknown" || fontColor === "grey") {
-      result.fontColor = "#9fa5a5";
+    if (fontColor === 'unknown' || fontColor === 'grey') {
+      result.fontColor = '#9fa5a5';
     }
   }
 
@@ -98,21 +99,20 @@ export const assessValue = (value, config) => {
  * @returns {boolean}
  */
 export function isEmpty(value) {
-  return [null, undefined, ""].includes(value);
+  return [null, undefined, ''].includes(value);
 }
 
 export function parseFiltersToJSON(criteria) {
-  if (!criteria || typeof criteria !== "string") {
-    console.log("Invalid or no filters set", criteria);
+  if (!criteria || typeof criteria !== 'string') {
+    console.log('Invalid or no filters set', criteria);
     return {};
   }
 
-  const operatorsRegex =
-    /\s*=\s*|\s*!=\s*|\s*>\s*|\s*<\s*|\s*"NOT LIKE"\s*|\s*"LIKE"\s*|\s*"IN"\s*|\s*"NOT IN"\s*/;
+  const operatorsRegex = /\s*=\s*|\s*!=\s*|\s*>\s*|\s*<\s*|\s*"NOT LIKE"\s*|\s*"LIKE"\s*|\s*"IN"\s*|\s*"NOT IN"\s*/;
   let jsonResult = {};
 
-  criteria.split("AND").forEach((part) => {
-    part = part.trim().replace(/^\(|\)$/g, "");
+  criteria.split('AND').forEach(part => {
+    part = part.trim().replace(/^\(|\)$/g, '');
     let operatorMatch = part.match(operatorsRegex);
     if (!operatorMatch) {
       console.error(`No valid operator found in part: "${part}".`);
@@ -121,17 +121,17 @@ export function parseFiltersToJSON(criteria) {
     let operatorx = operatorMatch[0];
     let [key, value] = part
       .split(operatorx)
-      .map((s) => s.trim().replace(/['"]/g, ""));
+      .map(s => s.trim().replace(/['"]/g, ''));
 
     if (!key || !value) {
       console.error(`Invalid key or value in part: "${part}".`);
       return;
     }
 
-    if (operatorx.includes("IN") || operatorx.includes("NOT IN")) {
+    if (operatorx.includes('IN') || operatorx.includes('NOT IN')) {
       jsonResult[key] = value
-        .split(",")
-        .map((val) => val.trim().replace(/^\(|\)$/g, ""));
+        .split(',')
+        .map(val => val.trim().replace(/^\(|\)$/g, ''));
     } else {
       jsonResult[key] = value;
     }
@@ -141,7 +141,7 @@ export function parseFiltersToJSON(criteria) {
 }
 
 export function performFilterSubstitutions(template, variables) {
-  return (template || "").replace(/\$\{(\w+)\}/g, (match, key) => {
+  return (template || '').replace(/\$\{(\w+)\}/g, (match, key) => {
     if (variables.hasOwnProperty(key)) {
       return variables[key];
     }

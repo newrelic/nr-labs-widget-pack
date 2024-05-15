@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 import {
   Card,
@@ -6,20 +6,20 @@ import {
   CardBody,
   HeadingText,
   BlockText,
-  Spacing,
-} from "nr1";
+  Spacing
+} from 'nr1';
 
-import RenderPropertyInfo from "../../shared/PropertyInfo";
+import RenderPropertyInfo from '../../shared/PropertyInfo';
 
-const properties = require("./nr1.json");
+const properties = require('./nr1.json');
 
 export default function Docs() {
   return (
-    <div style={{ textAlign: "left" }}>
+    <div style={{ textAlign: 'left' }}>
       <HeadingText type={HeadingText.TYPE.HEADING_2}>Documentation</HeadingText>
       <Card collapsible>
         <CardHeader title="Overview" />
-        <CardBody style={{ marginLeft: "35px" }}>
+        <CardBody style={{ marginLeft: '35px' }}>
           <BlockText spacingType={[BlockText.SPACING_TYPE.MEDIUM]}>
             Use the Line & Event Chart to highlight changes in your environment
             against other metrics. Eg. scaling events against load.
@@ -32,7 +32,7 @@ export default function Docs() {
       </Card>
       <Card collapsible defaultCollapsed>
         <CardHeader title="Query Syntax" />
-        <CardBody style={{ marginLeft: "35px" }}>
+        <CardBody style={{ marginLeft: '35px' }}>
           <BlockText spacingType={[BlockText.SPACING_TYPE.MEDIUM]}>
             In order to populate the chart, there are a few requirements:
             <Spacing type={[Spacing.TYPE.MEDIUM, Spacing.TYPE.EXTRA_LARGE]}>
@@ -41,18 +41,18 @@ export default function Docs() {
                   At least 1 timeseries query and optionally 1 event query
                 </li>
                 <li>
-                  Timeseries queries should contain the <code>TIMESERIES</code>{" "}
+                  Timeseries queries should contain the <code>TIMESERIES</code>{' '}
                   clause
                 </li>
                 <li>
-                  Event queries should NOT contain the <code>TIMESERIES </code>{" "}
+                  Event queries should NOT contain the <code>TIMESERIES </code>{' '}
                   clause
                 </li>
               </ul>
             </Spacing>
             <Spacing type={[Spacing.TYPE.MEDIUM]}>
               <div>
-                A valid timeseries query for the chart could look like this:{" "}
+                A valid timeseries query for the chart could look like this:{' '}
               </div>
             </Spacing>
             <Spacing type={[Spacing.TYPE.MEDIUM, Spacing.TYPE.LARGE]}>
@@ -60,7 +60,7 @@ export default function Docs() {
             </Spacing>
             <Spacing type={[Spacing.TYPE.MEDIUM]}>
               <div>
-                A valid event query for the chart could look like this:{" "}
+                A valid event query for the chart could look like this:{' '}
               </div>
             </Spacing>
             <Spacing type={[Spacing.TYPE.MEDIUM, Spacing.TYPE.LARGE]}>
@@ -72,10 +72,10 @@ export default function Docs() {
 
       <Card collapsible defaultCollapsed>
         <CardHeader title="Properties" />
-        <CardBody style={{ marginLeft: "35px" }}>
+        <CardBody style={{ marginLeft: '35px' }}>
           {properties.configuration
-            .filter((c) => c.name !== "showDocs")
-            .map((config) => {
+            .filter(c => c.name !== 'showDocs')
+            .map(config => {
               return RenderPropertyInfo(config, false, {});
             })}
         </CardBody>
