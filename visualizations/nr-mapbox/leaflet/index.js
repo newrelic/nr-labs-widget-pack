@@ -43,7 +43,10 @@ function LeafletRoot(props) {
       : parseFloat(initialLong)
   ];
 
-  const maxBounds = parseLatLngBounds(maxBoundsSouthWest, maxBoundsNorthEast);
+  const maxBounds =
+    !maxBoundsNorthEast && !maxBoundsSouthWest
+      ? undefined
+      : parseLatLngBounds(maxBoundsSouthWest, maxBoundsNorthEast);
 
   return (
     <>

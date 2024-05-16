@@ -11,6 +11,12 @@
       "type": "boolean"
     },
     {
+      "name": "debugEnabled",
+      "title": "Log additional information to the console",
+      "description": "",
+      "type": "boolean"
+    },
+    {
       "name": "mapSystem",
       "title": "Map System (default: leaflet)",
       "description": "",

@@ -103,7 +103,7 @@ export default function Docs() {
                   <br />
                   <b>
                     <code>
-                      'SELECT latest(city) ...' / SELECT lastest(myCol) as
+                      'SELECT latest(city) ...' / SELECT latest(myCol) as
                       'city'). This feature is in beta - if your city is not
                       found, please open an issue on the github repo.
                     </code>
@@ -137,9 +137,9 @@ export default function Docs() {
             <Spacing type={[Spacing.TYPE.MEDIUM, Spacing.TYPE.LARGE]}>
               <b>
                 <code>
-                  FROM BrowserInteraction SELECT count(*) as 'name:Views',
-                  latest(city) WHERE appName = 'WebPortal' SINCE 60 seconds ago
-                  FACET asnLatitude, asnLongitude LIMIT MAX
+                  FROM BrowserInteraction SELECT latest(city) as 'name:City',
+                  count(*) as 'Views' WHERE appName = 'WebPortal' SINCE 60
+                  seconds ago FACET asnLatitude, asnLongitude LIMIT MAX
                 </code>
               </b>
             </Spacing>

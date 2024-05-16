@@ -52,7 +52,8 @@ function MapSystemRoot(props) {
     mapBoxToken,
     pollInterval,
     mapSystem,
-    showDocs
+    showDocs,
+    debugEnabled
   } = props;
   const [errors, setErrors] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -141,6 +142,11 @@ function MapSystemRoot(props) {
 
           return false;
         });
+
+      if (debugEnabled) {
+        // eslint-disable-next-line
+        console.log('processedData=>', cleanData);
+      }
 
       const newMapLocations = cleanData.map(sample => {
         let targetName = 'name';
