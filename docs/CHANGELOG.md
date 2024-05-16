@@ -1,3 +1,10 @@
+# [1.42.0](https://github.com/newrelic/nr-labs-widget-pack/compare/v1.41.0...v1.42.0) (2024-05-16)
+
+
+### Features
+
+* docs and debug flag ([e3a1bf3](https://github.com/newrelic/nr-labs-widget-pack/commit/e3a1bf3d9b6ea0b5ad8ae337da1a5d0804f341f1))
+
 # [1.41.0](https://github.com/newrelic/nr-labs-widget-pack/compare/v1.40.0...v1.41.0) (2024-05-08)
 
 
