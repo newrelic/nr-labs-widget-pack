@@ -38,7 +38,7 @@ const timeRangeToNrql = timeRange => {
 const gqlNrqlQuery = (accountId, query) => `{
   actor {
     account(id: ${accountId}) {
-      nrql(query: "${query}") {
+      nrql(query: "${query}", timeout: 120) {
         results
       }
     }
