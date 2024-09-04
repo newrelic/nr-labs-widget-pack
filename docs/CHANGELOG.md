@@ -1,3 +1,10 @@
+# [1.43.0](https://github.com/newrelic/nr-labs-widget-pack/compare/v1.42.0...v1.43.0) (2024-09-04)
+
+
+### Features
+
+* update map viz timeout to 120s (max) ([0dadb4c](https://github.com/newrelic/nr-labs-widget-pack/commit/0dadb4cfadfb4da1a061f454f829300015656bfe))
+
 # [1.42.0](https://github.com/newrelic/nr-labs-widget-pack/compare/v1.41.0...v1.42.0) (2024-05-16)
 
 
