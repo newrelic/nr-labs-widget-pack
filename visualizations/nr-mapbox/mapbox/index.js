@@ -7,7 +7,8 @@ import Map, {
   ScaleControl,
   Popup
 } from 'react-map-gl';
-import { parseLatLngBoundsForMapbox } from '../utils';
+import { excludedKeys, parseLatLngBoundsForMapbox } from '../utils';
+import { Button } from 'nr1';
 
 function MapBoxRoot(props) {
   const {
@@ -123,7 +124,8 @@ function MapBoxRoot(props) {
                   !key.includes('facet') &&
                   !key.includes('locName') &&
                   !key.includes('data') &&
-                  !key.includes('mapWidget.coordinates')
+                  !key.includes('mapWidget.coordinates') &&
+                  !excludedKeys.includes(key)
                 ) {
                   return (
                     <>
@@ -135,6 +137,23 @@ function MapBoxRoot(props) {
                   return '';
                 }
               })}
+
+              {popupInfo['entity.guid'] && (
+                <div>
+                  <br />
+                  <Button
+                    type={Button.TYPE.NORMAL}
+                    onClick={() => {
+                      // console.log(popupInfo['entity.guid']);
+                      window.open(
+                        `https://one.newrelic.com/redirect/entity/${popupInfo['entity.guid']}`
+                      );
+                    }}
+                  >
+                    Open Entity
+                  </Button>
+                </div>
+              )}
             </div>
           </Popup>
         )}

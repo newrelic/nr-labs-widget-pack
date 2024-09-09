@@ -1,10 +1,11 @@
 import React from 'react';
 import { MapContainer, Marker, Popup, TileLayer } from 'react-leaflet';
+import { Button } from 'nr1';
 import { Icon } from 'leaflet';
 import 'leaflet-color-markers';
 
 import 'leaflet/dist/leaflet.css';
-import { parseLatLngBounds } from '../utils';
+import { excludedKeys, parseLatLngBounds } from '../utils';
 
 const availableMarkerColors = [
   'blue',
@@ -156,7 +157,8 @@ function LeafletRoot(props) {
                       !key.includes('facet') &&
                       !key.includes('locName') &&
                       !key.includes('data') &&
-                      !key.includes('mapWidget.coordinates')
+                      !key.includes('mapWidget.coordinates') &&
+                      !excludedKeys.includes(key)
                     ) {
                       return (
                         <>
@@ -168,6 +170,23 @@ function LeafletRoot(props) {
                       return '';
                     }
                   })}
+
+                  {popupData['entity.guid'] && (
+                    <div>
+                      <br />
+                      <Button
+                        type={Button.TYPE.NORMAL}
+                        onClick={() => {
+                          // console.log(popupInfo['entity.guid']);
+                          window.open(
+                            `https://one.newrelic.com/redirect/entity/${popupData['entity.guid']}`
+                          );
+                        }}
+                      >
+                        Open Entity
+                      </Button>
+                    </div>
+                  )}
                 </div>
               </Popup>
             </Marker>

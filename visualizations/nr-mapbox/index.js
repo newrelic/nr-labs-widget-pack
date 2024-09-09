@@ -99,9 +99,12 @@ function MapSystemRoot(props) {
       // eslint-disable-next-line
       console.log(`fetching data @ ${new Date().toLocaleTimeString()}`);
       // build array of promises to fetch data
+
+      let outerQuery = '';
       const dataPromises = nrqlQueries.map(nrql => {
         const { query, accountId, enableFilters, enableTimePicker } = nrql;
         let newQuery = query;
+        outerQuery = query;
 
         if (enableFilters && filters) {
           newQuery += ` WHERE ${filters}`;
@@ -122,7 +125,10 @@ function MapSystemRoot(props) {
 
       const cleanData = nrdbResults
         .filter(result => result.status === 'fulfilled')
-        .map(result => result.value?.data?.actor?.account?.nrql?.results)
+        .map(result => {
+          // console.log(result.value?.data?.actor?.account?.nrql);
+          return result.value?.data?.actor?.account?.nrql?.results;
+        })
         .filter(a => a)
         .flat()
         .filter(r => {
@@ -133,6 +139,15 @@ function MapSystemRoot(props) {
               delete r[key];
             }
           });
+
+          if (r.entityGuid) {
+            r['entity.guid'] = r.entityGuid;
+            delete r.entityGuid;
+          }
+
+          if (outerQuery.includes('WorkloadStatus')) {
+            r.isWorkload = true;
+          }
 
           r['mapWidget.coordinates'] = deriveLatLng(r);
 

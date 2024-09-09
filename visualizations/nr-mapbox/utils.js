@@ -1,5 +1,7 @@
 const cities = require('./cities.json');
 
+export const excludedKeys = ['entity.guid'];
+
 export const evaluateMarker = (sample, markerThresholds) => {
   if (sample && markerThresholds && markerThresholds.length > 0) {
     const sortedThresholds = markerThresholds.sort((a, b) => {
