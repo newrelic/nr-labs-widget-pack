@@ -8,7 +8,7 @@ import Map, {
   Popup
 } from 'react-map-gl';
 import { excludedKeys, parseLatLngBoundsForMapbox } from '../utils';
-import { Button, navigation } from 'nr1';
+import { Button } from 'nr1';
 
 function MapBoxRoot(props) {
   const {
@@ -148,7 +148,6 @@ function MapBoxRoot(props) {
                       window.open(
                         `https://one.newrelic.com/redirect/entity/${popupInfo['entity.guid']}`
                       );
-                      // navigation.openEntity(popupInfo['entity.guid']);
                     }}
                   >
                     Open Entity

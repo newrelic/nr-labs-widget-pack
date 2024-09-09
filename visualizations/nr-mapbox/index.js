@@ -7,7 +7,7 @@ import {
 } from 'nr1';
 import { useInterval } from '@mantine/hooks';
 
-import { deriveLatLng, evaluateMarker, excludedKeys } from './utils';
+import { deriveLatLng, evaluateMarker } from './utils';
 import Docs from './docs';
 import ErrorState from '../../shared/ErrorState';
 import MapBoxRoot from './mapbox';
@@ -126,7 +126,7 @@ function MapSystemRoot(props) {
       const cleanData = nrdbResults
         .filter(result => result.status === 'fulfilled')
         .map(result => {
-          console.log(result.value?.data?.actor?.account?.nrql);
+          // console.log(result.value?.data?.actor?.account?.nrql);
           return result.value?.data?.actor?.account?.nrql?.results;
         })
         .filter(a => a)

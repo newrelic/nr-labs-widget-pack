@@ -1,6 +1,6 @@
 import React from 'react';
 import { MapContainer, Marker, Popup, TileLayer } from 'react-leaflet';
-import { Button, navigation } from 'nr1';
+import { Button } from 'nr1';
 import { Icon } from 'leaflet';
 import 'leaflet-color-markers';
 
