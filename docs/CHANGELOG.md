@@ -1,3 +1,13 @@
+# [1.44.0](https://github.com/newrelic/nr-labs-widget-pack/compare/v1.43.0...v1.44.0) (2024-09-09)
+
+
+### Features
+
+* bump map viz timeout to 120 (max) ([3f1d94d](https://github.com/newrelic/nr-labs-widget-pack/commit/3f1d94db6442aa25bf21cd1c4fc792ec7e950197))
+* eslint updates ([8597fb5](https://github.com/newrelic/nr-labs-widget-pack/commit/8597fb532ce0d334b5a42776b633e0148d8a488d))
+* open entity in new window ([a3237c8](https://github.com/newrelic/nr-labs-widget-pack/commit/a3237c86a54705d3f193186cc7c493d9cf8c5dc1))
+* remove unused dep ([32aa124](https://github.com/newrelic/nr-labs-widget-pack/commit/32aa124ba6b9cc0c9471e2c73dea375f8e6f60d2))
+
 # [1.43.0](https://github.com/newrelic/nr-labs-widget-pack/compare/v1.42.0...v1.43.0) (2024-09-04)
 
 
