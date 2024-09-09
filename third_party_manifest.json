@@ -1,21 +1,57 @@
 {
-  "lastUpdated": "Fri Nov 04 2022 03:40:33 GMT+0000 (Coordinated Universal Time)",
+  "lastUpdated": "Mon Sep 09 2024 03:51:03 GMT+0000 (Coordinated Universal Time)",
   "projectName": "Labs Widget Pack",
   "projectUrl": "https://github.com/newrelic/nr-labs-widget-pack",
   "includeOptDeps": false,
   "includeDev": true,
   "dependencies": {
-    "@newrelic/nr1-community@1.2.0": {
-      "name": "@newrelic/nr1-community",
-      "version": "1.2.0",
-      "range": "latest",
-      "licenses": "Apache-2.0",
-      "repoUrl": "https://github.com/newrelic/nr1-community",
-      "versionedRepoUrl": "https://github.com/newrelic/nr1-community/tree/v1.2.0",
-      "licenseFile": "node_modules/@newrelic/nr1-community/LICENSE",
-      "licenseUrl": "https://github.com/newrelic/nr1-community/blob/v1.2.0/LICENSE",
+    "@ant-design/charts@1.4.3": {
+      "name": "@ant-design/charts",
+      "version": "1.4.3",
+      "range": "^1.4.3",
+      "licenses": "MIT",
+      "repoUrl": "https://github.com/ant-design/ant-design-charts",
+      "versionedRepoUrl": "https://github.com/ant-design/ant-design-charts/tree/v1.4.3",
+      "licenseFile": "node_modules/@ant-design/charts/README.md",
+      "licenseUrl": "https://github.com/ant-design/ant-design-charts/blob/v1.4.3/README.md",
+      "licenseTextSource": "spdx"
+    },
+    "@ant-design/plots@1.2.6": {
+      "name": "@ant-design/plots",
+      "version": "1.2.6",
+      "range": "^1.2.6",
+      "licenses": "MIT",
+      "repoUrl": "https://github.com/ant-design/ant-design-charts",
+      "versionedRepoUrl": "https://github.com/ant-design/ant-design-charts/tree/v1.2.6",
+      "licenseFile": "node_modules/@ant-design/plots/README.md",
+      "licenseUrl": "https://github.com/ant-design/ant-design-charts/blob/v1.2.6/README.md",
+      "licenseTextSource": "spdx"
+    },
+    "@mantine/hooks@6.0.21": {
+      "name": "@mantine/hooks",
+      "version": "6.0.21",
+      "range": "^6.0.0",
+      "licenses": "MIT",
+      "repoUrl": "https://github.com/mantinedev/mantine",
+      "versionedRepoUrl": "https://github.com/mantinedev/mantine/tree/v6.0.21",
+      "licenseFile": "node_modules/@mantine/hooks/README.md",
+      "licenseUrl": "https://github.com/mantinedev/mantine/blob/v6.0.21/README.md",
+      "licenseTextSource": "spdx",
+      "publisher": "Vitaly Rtishchev",
+      "email": "rtivital@gmail.com"
+    },
+    "@react-leaflet/core@1.0.2": {
+      "name": "@react-leaflet/core",
+      "version": "1.0.2",
+      "range": "^1.0.2",
+      "licenses": "Hippocratic-2.1",
+      "repoUrl": "https://github.com/PaulLeCam/react-leaflet",
+      "versionedRepoUrl": "https://github.com/PaulLeCam/react-leaflet/tree/v1.0.2",
+      "licenseFile": "node_modules/@react-leaflet/core/LICENSE.md",
+      "licenseUrl": "https://github.com/PaulLeCam/react-leaflet/blob/v1.0.2/LICENSE.md",
       "licenseTextSource": "file",
-      "publisher": "newrelic"
+      "publisher": "Paul Le Cam",
+      "email": "paul@ulem.net"
     },
     "chart.js@3.9.1": {
       "name": "chart.js",
@@ -28,15 +64,64 @@
       "licenseUrl": "https://github.com/chartjs/Chart.js/blob/v3.9.1/LICENSE.md",
       "licenseTextSource": "file"
     },
-    "mapbox-gl@2.10.0": {
+    "dayjs@1.11.10": {
+      "name": "dayjs",
+      "version": "1.11.10",
+      "range": "^1.11.9",
+      "licenses": "MIT",
+      "repoUrl": "https://github.com/iamkun/dayjs",
+      "versionedRepoUrl": "https://github.com/iamkun/dayjs/tree/v1.11.10",
+      "licenseFile": "node_modules/dayjs/LICENSE",
+      "licenseUrl": "https://github.com/iamkun/dayjs/blob/v1.11.10/LICENSE",
+      "licenseTextSource": "file",
+      "publisher": "iamkun"
+    },
+    "leaflet-color-markers@0.1.0": {
+      "name": "leaflet-color-markers",
+      "version": "0.1.0",
+      "range": "^0.1.0",
+      "licenses": "BSD-2-Clause",
+      "repoUrl": "https://github.com/patrickp-rthinfo/leaflet-color-markers",
+      "versionedRepoUrl": "https://github.com/patrickp-rthinfo/leaflet-color-markers/tree/v0.1.0",
+      "licenseFile": "node_modules/leaflet-color-markers/LICENSE",
+      "licenseUrl": "https://github.com/patrickp-rthinfo/leaflet-color-markers/blob/v0.1.0/LICENSE",
+      "licenseTextSource": "file",
+      "publisher": "Thomas Pointhuber"
+    },
+    "leaflet-rotatedmarker@0.2.0": {
+      "name": "leaflet-rotatedmarker",
+      "version": "0.2.0",
+      "range": "^0.2.0",
+      "licenses": "MIT",
+      "repoUrl": "https://github.com/bbecquet/Leaflet.RotatedMarker",
+      "versionedRepoUrl": "https://github.com/bbecquet/Leaflet.RotatedMarker/tree/v0.2.0",
+      "licenseFile": "node_modules/leaflet-rotatedmarker/LICENSE",
+      "licenseUrl": "https://github.com/bbecquet/Leaflet.RotatedMarker/blob/v0.2.0/LICENSE",
+      "licenseTextSource": "file",
+      "publisher": "Benjamin Becquet",
+      "email": "benjamin.becquet@gmail.com",
+      "url": "http://bbecquet.net"
+    },
+    "leaflet@1.9.4": {
+      "name": "leaflet",
+      "version": "1.9.4",
+      "range": "^1.9.4",
+      "licenses": "BSD-2-Clause",
+      "repoUrl": "https://github.com/Leaflet/Leaflet",
+      "versionedRepoUrl": "https://github.com/Leaflet/Leaflet/tree/v1.9.4",
+      "licenseFile": "node_modules/leaflet/LICENSE",
+      "licenseUrl": "https://github.com/Leaflet/Leaflet/blob/v1.9.4/LICENSE",
+      "licenseTextSource": "file"
+    },
+    "mapbox-gl@2.15.0": {
       "name": "mapbox-gl",
-      "version": "2.10.0",
+      "version": "2.15.0",
       "range": "^2.10.0",
       "licenses": "UNKNOWN",
       "repoUrl": "https://github.com/mapbox/mapbox-gl-js",
-      "versionedRepoUrl": "https://github.com/mapbox/mapbox-gl-js/tree/v2.10.0",
+      "versionedRepoUrl": "https://github.com/mapbox/mapbox-gl-js/tree/v2.15.0",
       "licenseFile": "node_modules/mapbox-gl/LICENSE.txt",
-      "licenseUrl": "https://github.com/mapbox/mapbox-gl-js/blob/v2.10.0/LICENSE.txt",
+      "licenseUrl": "https://github.com/mapbox/mapbox-gl-js/blob/v2.15.0/LICENSE.txt",
       "licenseTextSource": "file"
     },
     "prop-types@15.8.1": {
@@ -62,16 +147,53 @@
       "licenseTextSource": "file",
       "publisher": "Jeremy Ayerst"
     },
-    "react-map-gl@7.0.19": {
+    "react-leaflet-marker@1.1.4": {
+      "name": "react-leaflet-marker",
+      "version": "1.1.4",
+      "range": "^1.1.4",
+      "licenses": "MIT",
+      "repoUrl": "https://github.com/holytrips/react-leaflet-marker",
+      "versionedRepoUrl": "https://github.com/holytrips/react-leaflet-marker/tree/v1.1.4",
+      "licenseFile": "node_modules/react-leaflet-marker/LICENSE",
+      "licenseUrl": "https://github.com/holytrips/react-leaflet-marker/blob/v1.1.4/LICENSE",
+      "licenseTextSource": "file",
+      "publisher": "Valentin Kruglikov"
+    },
+    "react-leaflet@3.1.0": {
+      "name": "react-leaflet",
+      "version": "3.1.0",
+      "range": "^3.1.0",
+      "licenses": "Hippocratic-2.1",
+      "repoUrl": "https://github.com/PaulLeCam/react-leaflet",
+      "versionedRepoUrl": "https://github.com/PaulLeCam/react-leaflet/tree/v3.1.0",
+      "licenseFile": "node_modules/react-leaflet/LICENSE.md",
+      "licenseUrl": "https://github.com/PaulLeCam/react-leaflet/blob/v3.1.0/LICENSE.md",
+      "licenseTextSource": "file",
+      "publisher": "Paul Le Cam",
+      "email": "paul@ulem.net"
+    },
+    "react-map-gl@7.1.7": {
       "name": "react-map-gl",
-      "version": "7.0.19",
+      "version": "7.1.7",
       "range": "^7.0.19",
       "licenses": "MIT",
       "repoUrl": "https://github.com/visgl/react-map-gl",
-      "versionedRepoUrl": "https://github.com/visgl/react-map-gl/tree/v7.0.19",
+      "versionedRepoUrl": "https://github.com/visgl/react-map-gl/tree/v7.1.7",
       "licenseFile": "node_modules/react-map-gl/LICENSE",
-      "licenseUrl": "https://github.com/visgl/react-map-gl/blob/v7.0.19/LICENSE",
+      "licenseUrl": "https://github.com/visgl/react-map-gl/blob/v7.1.7/LICENSE",
       "licenseTextSource": "file"
+    },
+    "recharts@2.10.4": {
+      "name": "recharts",
+      "version": "2.10.4",
+      "range": "^2.8.0",
+      "licenses": "MIT",
+      "repoUrl": "https://github.com/recharts/recharts",
+      "versionedRepoUrl": "https://github.com/recharts/recharts/tree/v2.10.4",
+      "licenseFile": "node_modules/recharts/LICENSE",
+      "licenseUrl": "https://github.com/recharts/recharts/blob/v2.10.4/LICENSE",
+      "licenseTextSource": "file",
+      "publisher": "recharts group"
     }
   },
   "devDependencies": {
