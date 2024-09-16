@@ -1,6 +1,6 @@
 const cities = require('./cities.json');
 
-export const excludedKeys = ['entity.guid'];
+export const excludedKeys = ['entity.guid', 'isWorkload'];
 
 export const evaluateMarker = (sample, markerThresholds) => {
   if (sample && markerThresholds && markerThresholds.length > 0) {
