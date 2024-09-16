@@ -1,3 +1,10 @@
+# [1.46.0](https://github.com/newrelic/nr-labs-widget-pack/compare/v1.45.0...v1.46.0) (2024-09-16)
+
+
+### Features
+
+* dummy version bump ([b3fba26](https://github.com/newrelic/nr-labs-widget-pack/commit/b3fba26ee5562877369e8e2722ab8fc4b4586446))
+
 # [1.45.0](https://github.com/newrelic/nr-labs-widget-pack/compare/v1.44.0...v1.45.0) (2024-09-16)
 
 
