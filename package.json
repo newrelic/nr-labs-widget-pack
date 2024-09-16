@@ -17,7 +17,7 @@
         "email": "opensource+nrlabswidgetpack@newrelic.com"
     },
     "dependencies": {
-        "@ant-design/charts": "^1.4.3",
+        "@ant-design/charts": "^2.2.1",
         "@ant-design/plots": "^1.2.6",
         "@mantine/hooks": "^6.0.0",
         "@react-leaflet/core": "^1.0.2",
