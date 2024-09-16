@@ -23,7 +23,8 @@ function MapBoxRoot(props) {
     mapBoxToken,
     mapLocations,
     maxBoundsSouthWest,
-    maxBoundsNorthEast
+    maxBoundsNorthEast,
+    setWorkloadStatus
   } = props;
   const [popupInfo, setPopupInfo] = useState(null);
 
@@ -151,6 +152,18 @@ function MapBoxRoot(props) {
                     }}
                   >
                     Open Entity
+                  </Button>
+                </div>
+              )}
+
+              {popupInfo.isWorkload && (
+                <div>
+                  <br />
+                  <Button
+                    type={Button.TYPE.NORMAL}
+                    onClick={() => setWorkloadStatus(popupInfo)}
+                  >
+                    View Workload
                   </Button>
                 </div>
               )}

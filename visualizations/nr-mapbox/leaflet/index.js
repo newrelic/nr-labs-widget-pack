@@ -30,7 +30,8 @@ function LeafletRoot(props) {
     defaultImgHeight,
     mapLocations,
     maxBoundsSouthWest,
-    maxBoundsNorthEast
+    maxBoundsNorthEast,
+    setWorkloadStatus
   } = props;
   //   const [popupInfo, setPopupInfo] = useState(null);
 
@@ -184,6 +185,18 @@ function LeafletRoot(props) {
                         }}
                       >
                         Open Entity
+                      </Button>
+                    </div>
+                  )}
+
+                  {popupData.isWorkload && (
+                    <div>
+                      <br />
+                      <Button
+                        type={Button.TYPE.NORMAL}
+                        onClick={() => setWorkloadStatus(popupData)}
+                      >
+                        View Workload
                       </Button>
                     </div>
                   )}

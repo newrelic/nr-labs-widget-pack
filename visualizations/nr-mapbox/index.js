@@ -12,6 +12,7 @@ import Docs from './docs';
 import ErrorState from '../../shared/ErrorState';
 import MapBoxRoot from './mapbox';
 import LeafletRoot from './leaflet';
+import WorkloadModal from './workloadModal';
 
 const MINUTE = 60000;
 const HOUR = 60 * MINUTE;
@@ -63,6 +64,7 @@ function MapSystemRoot(props) {
   const platformContext = useContext(PlatformStateContext);
   const { timeRange } = platformContext;
   const timeRangeStr = timeRangeToNrql(timeRange);
+  const [workloadStatus, setWorkloadStatus] = useState(null);
 
   useEffect(() => {
     if (mapSystem === 'mapbox') {
@@ -247,14 +249,30 @@ function MapSystemRoot(props) {
 
   const renderMapSystem = () => {
     if (!mapSystem || mapSystem === 'leaflet') {
-      return <LeafletRoot {...props} mapLocations={mapLocations} />;
+      return (
+        <LeafletRoot
+          {...props}
+          mapLocations={mapLocations}
+          setWorkloadStatus={setWorkloadStatus}
+        />
+      );
     } else if (mapSystem === 'mapbox') {
-      return <MapBoxRoot {...props} mapLocations={mapLocations} />;
+      return (
+        <MapBoxRoot
+          {...props}
+          mapLocations={mapLocations}
+          setWorkloadStatus={setWorkloadStatus}
+        />
+      );
     }
   };
 
   return (
     <>
+      <WorkloadModal
+        workloadStatus={workloadStatus}
+        setWorkloadStatus={setWorkloadStatus}
+      />
       {showDocs && <Docs />}
       {renderMapSystem()}
     </>

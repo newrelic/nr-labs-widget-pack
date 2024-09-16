@@ -21,6 +21,7 @@
         "@ant-design/plots": "^1.2.6",
         "@mantine/hooks": "^6.0.0",
         "@react-leaflet/core": "^1.0.2",
+        "async": "^3.2.6",
         "chart.js": "^3.9.1",
         "dayjs": "^1.11.9",
         "leaflet": "^1.9.4",
