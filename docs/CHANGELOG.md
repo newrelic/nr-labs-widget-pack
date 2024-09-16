@@ -1,3 +1,11 @@
+# [1.45.0](https://github.com/newrelic/nr-labs-widget-pack/compare/v1.44.0...v1.45.0) (2024-09-16)
+
+
+### Features
+
+* add workload modal ([149dd72](https://github.com/newrelic/nr-labs-widget-pack/commit/149dd72eaf57b466c43a57b7aecd0090801f56a3))
+* map widget on click to entity/workload ([ac31ed8](https://github.com/newrelic/nr-labs-widget-pack/commit/ac31ed8362b0259222cc3ff4e6f137cc3d7dd5fa))
+
 # [1.44.0](https://github.com/newrelic/nr-labs-widget-pack/compare/v1.43.0...v1.44.0) (2024-09-09)
 
 
