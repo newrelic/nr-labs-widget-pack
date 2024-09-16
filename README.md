@@ -136,7 +136,6 @@ Click on the short description in each section to view chart details.
 
 ### Map Widget
 <details>
-
   <summary>Plot any data that includes latitude and longitude onto an interactive map, leveraging the Leaflet or Mapbox API.</summary>
   
   #### Overview
