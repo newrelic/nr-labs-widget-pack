@@ -89,7 +89,7 @@ Click on the short description in each section to view chart details.
 
   <summary>Trend cumulative values over time as a line or area chart.</summary>
 
-  <img src="screenshots/cumulative_01.png" height="450" alt="Cumulative chart screenshot" />
+  <img src="screenshots/cumulative_01.png" height="250" alt="Cumulative chart screenshot" />
 
    #### Overview
    Use the Cumulative Chart to see running totals, or the total sum of a given data set as it grows with time.
