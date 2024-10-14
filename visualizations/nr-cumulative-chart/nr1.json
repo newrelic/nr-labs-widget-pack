@@ -1,0 +1,88 @@
+{
+    "schemaType": "VISUALIZATION",
+    "id": "nr-cumulative-line-chart",
+    "displayName": "Cumulative Chart",
+    "description": "Labs Widget Pack - Cumulative timeseries chart w/ custom poll intervals",
+    "configuration": [
+      {
+        "name": "showDocs",
+        "title": "Show Documentation",
+        "description": "",
+        "type": "boolean"
+      },
+      {
+        "name": "accountId",
+        "title": "Account ID",
+        "description": "Account ID to be associated with the query",
+        "type": "account-id"
+      },
+      {
+        "name": "query",
+        "title": "Query",
+        "description": "NRQL query for the visualization",
+        "type": "nrql"
+      },
+      {
+        "name": "chartType",
+        "title": "Chart Type (default: line)",
+        "description": "",
+        "type": "enum",
+        "items": [
+          {
+            "title": "line",
+            "value": "line"
+          },
+          {
+            "title": "area",
+            "value": "area"
+          }
+        ]
+      },
+      {
+        "name": "enableFilters",
+        "title": "Enable dashboard filters",
+        "description": "Allows the use of dashboard filters",
+        "type": "boolean"
+      },
+      {
+        "name": "pollInterval",
+        "title": "Poll Interval (default: 60s)",
+        "description": "Frequency at which data is refreshed.",
+        "type": "enum",
+        "items": [
+          {
+            "title": "Select",
+            "value": 60
+          },
+          {
+            "title": "5s",
+            "value": 5
+          },
+          {
+            "title": "10s",
+            "value": 10
+          },
+          {
+            "title": "15s",
+            "value": 15
+          },
+          {
+            "title": "30s",
+            "value": 30
+          },
+          {
+            "title": "45s",
+            "value": 45
+          },
+          {
+            "title": "1m",
+            "value": 60
+          },
+          {
+            "title": "5m",
+            "value": 300
+          }
+        ]
+      }
+    ]
+}
