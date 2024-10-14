@@ -2,7 +2,7 @@
     "private": true,
     "name": "nr-labs-widget-pack",
     "description": "Nerdpack template",
-    "version": "1.46.0",
+    "version": "1.46.4",
     "scripts": {
         "start": "nr1 nerdpack:serve",
         "test": "exit 0",
@@ -33,7 +33,7 @@
         "react-leaflet": "^3.1.0",
         "react-leaflet-marker": "^1.1.4",
         "react-map-gl": "^7.0.19",
-        "recharts": "^2.8.0"
+        "recharts": "^2.12.7"
     },
     "ids": {
         "am": "c2fab1ee-57c3-43d6-bc5c-c7343ecaff0c",

@@ -3,7 +3,7 @@
 
 # Labs Widget Pack
 
-![GitHub release (latest SemVer including pre-releases)](https://img.shields.io/github/v/release/newrelic/nr-labs-widget-pack?include_prereleases&sort=semver) 
+![GitHub release (latest SemVer including pre-releases)](https://img.shields.io/github/v/release/newrelic/nr-labs-widget-pack?include_prereleases&sort=semver)
 
 A library of New Relic custom chart widgets created by the New Relic Labs team, for use in New Relic dashboards.
 
@@ -34,7 +34,7 @@ Click on the short description in each section to view chart details.
   - the X axis represents time
   - the left Y axis represents the values for the Bar Charts
   - the right Y axis represents the values for the Line Charts
-  
+
   The chart allows you to define multiple line and bar queries, so it is highly recommended that the queries are aligned in terms of units and time periods.
 
   #### Requirements
@@ -83,12 +83,37 @@ Click on the short description in each section to view chart details.
   ---
 </details>
 
+### Cumulative Timeseries Chart
+
+<details>
+
+  <summary>Trend cumulative values over time as a line or area chart.</summary>
+
+  <img src="screenshots/cumulative_01.png" height="250" alt="Cumulative chart screenshot" />
+
+   #### Overview
+   Use the Cumulative Chart to see running totals, or the total sum of a given data set as it grows with time.
+
+   The Cumulative Timeseries chart supports Line & Area chart types.
+
+  #### Requirements
+  In order to use this chart, there are a few requirements:
+  - Each query must use and end with the `TIMESERIES` clause, and also contain the bucket eg. `TIMESERIES 1 second`
+  - Do not use SINCE or UNTIL clauses as they will automatically be determined based on the time range picker
+  - If using the LIMIT clause, this should be placed before and not after the TIMESERIES clause
+
+  A valid query for the chart could look like this:
+  `SELECT count(*) FROM Transaction FACET appName TIMESERIES`
+
+  ---
+</details>
+
 
 ### Multiline Compare Chart
 <details>
 
   <summary>Display multiple comparison periods in a single timeseries chart.</summary>
-  
+
   <img src="screenshots/multiline_01.png" height="450" alt="Multi Line Compare chart screenshot" />
 
   ---
@@ -98,7 +123,7 @@ Click on the short description in each section to view chart details.
 <details>
 
   <summary>Render events as markers on a line chart.</summary>
-  
+
   <img src="screenshots/multiline_event_02.png" height="450" alt="Line and Event overlay screenshot" />
 
   ---
@@ -108,7 +133,7 @@ Click on the short description in each section to view chart details.
 <details>
 
   <summary>Render events as markers on an area chart.</summary>
-  
+
   <img src="screenshots/area_event_01.png" height="450" alt="Area and Event overlay screenshot" />
 
   ---
@@ -118,7 +143,7 @@ Click on the short description in each section to view chart details.
 <details>
 
   <summary>Render events as markers on a scatter chart.</summary>
-  
+
   <img src="screenshots/scatter_event_01.png" height="450" alt="Scatter and Event overlay screenshot" />
 
   ---
@@ -128,7 +153,7 @@ Click on the short description in each section to view chart details.
 <details>
 
   <summary>Plot one or more groups of values over multiple variables, and compare them on a two-dimensional plane.</summary>
-  
+
   <img src="screenshots/radar_01.png" height="450" alt="Radar chart screenshot" />
 
   ---
@@ -137,7 +162,7 @@ Click on the short description in each section to view chart details.
 ### Map Widget
 <details>
   <summary>Plot any data that includes latitude and longitude onto an interactive map, leveraging the Leaflet or Mapbox API.</summary>
-  
+
   #### Overview
   <img src="screenshots/mapbox_01.png" height="450" alt="Map screenshot" />
 
@@ -150,7 +175,7 @@ Click on the short description in each section to view chart details.
   - Query should contain one alias with 'name:SOME_VALUE' which will be used as the marker name
   - Query should have a FACET for latitude and longitude, use precision to ensure the FACET does not round the number
     ```
-    FACET string(lat, precision: 5) as 'lat', string(lng, precision: 5) as 'lng' 
+    FACET string(lat, precision: 5) as 'lat', string(lng, precision: 5) as 'lng'
     ```
   - Rotation can be set using the following alias with 'rotate:SOME_VALUE' (Map Box only)
   - Example Query:
@@ -164,7 +189,7 @@ Click on the short description in each section to view chart details.
 <details>
 
   <summary>Display query results in a list, with smart formatting options.</summary>
-  
+
   #### Overview
   <img src="screenshots/list-view-screenshot-1.png" height="450" alt="List view screenshot" />
 
@@ -176,9 +201,9 @@ Click on the short description in each section to view chart details.
   - Search bar to filter list to the searched text
 
   #### Requirements
-  
-  For full details on how to use and format results in this chart, read the [Template String documentation](./list-view-template.md). 
-  
+
+  For full details on how to use and format results in this chart, read the [Template String documentation](./list-view-template.md).
+
   ---
 </details>
 
@@ -186,7 +211,7 @@ Click on the short description in each section to view chart details.
 <details>
 
   <summary>Incorporate buttons into your dashboards, with configurable onClick actions.</summary>
-  
+
   #### Overview
   Incorporate buttons into your dashboards, with configurable onClick actions.
 
@@ -202,7 +227,7 @@ Click on the short description in each section to view chart details.
 
 # Enabling this Nerdpack <a id="enable"></a>
 
-This pack of visualizations is available via the New Relic Catalog. 
+This pack of visualizations is available via the New Relic Catalog.
 
 To enable it in your account, go to `Add Data > Apps and Visualzations` and search for "Labs Widget Pack". Click the icon and subscribe this to your accounts.
 
@@ -234,5 +259,3 @@ Keep in mind that when you submit your pull request, you'll need to sign the CLA
 # Open source license
 
 This project is distributed under the [Apache 2 license](LICENSE).
-
-
