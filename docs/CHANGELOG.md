@@ -1,3 +1,11 @@
+# [1.47.0](https://github.com/newrelic/nr-labs-widget-pack/compare/v1.46.0...v1.47.0) (2024-10-22)
+
+
+### Features
+
+* add cumulative chart ([0ec22af](https://github.com/newrelic/nr-labs-widget-pack/commit/0ec22afa83d437c4c95a109dd87bb128d4821ea3))
+* update readme ([2bd006a](https://github.com/newrelic/nr-labs-widget-pack/commit/2bd006abb48de6f38e33f736f0388e4d3cd83090))
+
 # [1.46.0](https://github.com/newrelic/nr-labs-widget-pack/compare/v1.45.0...v1.46.0) (2024-09-16)
 
 
