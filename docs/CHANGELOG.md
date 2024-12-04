@@ -1,3 +1,12 @@
+# [1.48.0](https://github.com/newrelic/nr-labs-widget-pack/compare/v1.47.0...v1.48.0) (2024-12-04)
+
+
+### Features
+
+* add entity navigator chart ([a6c3908](https://github.com/newrelic/nr-labs-widget-pack/commit/a6c39085172d7f06118d237c68bd995f103d4cd3))
+* fix errorState ref ([962d1f9](https://github.com/newrelic/nr-labs-widget-pack/commit/962d1f9890333797df56bdcd7419c91146213a3a))
+* update workflows ([c0e2b2c](https://github.com/newrelic/nr-labs-widget-pack/commit/c0e2b2c9e1ed8edf6e9d2459b40412139857c912))
+
 # [1.47.0](https://github.com/newrelic/nr-labs-widget-pack/compare/v1.46.0...v1.47.0) (2024-10-22)
 
 
