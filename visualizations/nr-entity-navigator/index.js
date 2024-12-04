@@ -4,7 +4,7 @@ import async from 'async';
 import Docs from './docs';
 import HighDensity from './views/high-density';
 import DataMode from './views/data-mode';
-import ErrorState from '../shared/ErrorState';
+import ErrorState from '../shared/errorState';
 import { EmptyState, NerdGraphQuery, Spinner } from 'nr1';
 import { useInterval } from '@mantine/hooks';
 
