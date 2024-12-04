@@ -1,0 +1,98 @@
+{
+    "schemaType": "VISUALIZATION",
+    "id": "nr-entity-navigator",
+    "displayName": "Entity Navigator",
+    "description": "Entity Explorer navigator view as a dashboard widget",
+    "configuration": [
+      {
+        "name": "showDocs",
+        "title": "Show Documentation",
+        "description": "",
+        "type": "boolean"
+      },
+      {
+        "name": "includeData",
+        "title": "Include Data",
+        "description": "Expands hexagons to display up to 3 golden signals for each entity when enabled.",
+        "type": "boolean"
+      },
+      {
+        "name": "numberOfEntitiesDisplayed",
+        "title": "Maximum number of entities to display",
+        "description": "Only applies when `Include Data` is enabled. Default: 10, Maximum: 50",
+        "type": "string"
+      },
+      {
+        "name": "showAlertingOnly",
+        "title": "Show only alerting entities",
+        "description": "Show only entities in a unhealthy state.",
+        "type": "boolean"
+      },
+      {
+        "name": "entityDomain",
+        "title": "Entity Domain",
+        "description": "The entity domain to fetch.",
+        "type": "enum",
+        "items": [
+          {"title": "Select", "value": "Select"},
+          {"title": "APM", "value": "APM"},
+          {"title": "Browser", "value": "BROWSER"},
+          {"title": "Mobile", "value": "MOBILE"},
+          {"title": "Infrastructure", "value": "INFRA"},
+          {"title": "Synthetic Monitor", "value": "SYNTH"},
+          {"title": "External (Other)", "value": "EXT"},
+          {"title": "NR1", "value": "NR1"}
+        ]
+      },
+      {
+        "name": "entitySearchQuery",
+        "title": "Entity Search Query",
+        "description": "An entity filter to apply that targets specific entities.",
+        "type": "string"
+      },
+      {
+        "name": "pollInterval",
+        "title": "Poll Interval (default: 120s)",
+        "description": "Frequency at which data is refreshed.",
+        "type": "enum",
+        "items": [
+          {
+            "title": "Select",
+            "value": 120
+          },
+          {
+            "title": "5s",
+            "value": 5
+          },
+          {
+            "title": "10s",
+            "value": 10
+          },
+          {
+            "title": "15s",
+            "value": 15
+          },
+          {
+            "title": "30s",
+            "value": 30
+          },
+          {
+            "title": "45s",
+            "value": 45
+          },
+          {
+            "title": "1m",
+            "value": 60
+          },
+          {
+            "title": "2m",
+            "value": 120
+          },
+          {
+            "title": "5m",
+            "value": 300
+          }
+        ]
+      }
+    ]
+}
