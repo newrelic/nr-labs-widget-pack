@@ -1,0 +1,233 @@
+//Status variables
+$success: #01A76A;
+$warning: #FFD23D;
+$critical: #F5554B;
+$unknown: #9EA5A9;
+
+
+//High Density
+$small-hex-width: 18px;
+$small-hex-height: 20px;
+$small-columns: 50;
+$small-gap: 2.5px;
+$small-container-width: ($small-hex-width + $small-gap) * $small-columns;
+$small-row-height: $small-hex-width * 0.85;
+$small-offset: calc($small-hex-width / 2) + calc($small-gap / 2);
+
+.small-remaining-entities {
+  margin-left: 10px;
+  margin-top: 4px;
+  font-weight: bold;
+  white-space: nowrap;
+}
+
+.small-container {
+  display: grid;
+  width: $small-container-width;
+  transform: translate(calc(-#{small-offset} / 2));
+  grid-template-columns: repeat($small-columns, minmax($small-hex-width, 1fr));
+  grid-auto-rows: $small-row-height;
+  gap: $small-gap;
+  margin: 4px 0;
+}
+
+.status-icon-small {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+  height: $small-hex-height;
+  width: $small-hex-width;
+  margin: 0;
+  transition: all .2s ease;
+
+  &.success {
+    background-color: $success;
+  }
+  &.warning {
+    background-color: $warning;
+  }
+  &.critical {
+    background-color: $critical;
+  }
+  &.unknown {
+    background-color: $unknown;
+  }
+
+  &:hover {
+    transform: scale(1.2);
+  }
+}
+
+@for $i from 1 through $small-columns {
+  .status-icon-small:nth-child(#{$small-columns *2}n + #{$small-columns + $i}) {
+    margin-left: $small-offset;
+  }
+}
+
+//Data Mode
+$large-hex-width: 164px;
+$large-hex-height: 166px;
+$large-columns: 6;
+$large-gap: 2.5px;
+$large-container-width: ($large-hex-width + $large-gap) * $large-columns;
+$large-row-height: $large-hex-width * 0.762;
+$large-offset: calc($large-hex-width / 2) + calc($large-gap / 2);
+
+.large-container {
+  display: grid;
+  width: $large-container-width;
+  transform: translate(calc(-#{large-offset} / 2));
+  grid-template-columns: repeat($large-columns, minmax($large-hex-width, 1fr));
+  grid-auto-rows: $large-row-height;
+  gap: $large-gap;
+  margin: 4px 0;
+}
+
+.status-icon-large {
+  display: flex;
+  flex-direction: column;
+  clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+  height: $large-hex-height;
+  width: $large-hex-width;
+  margin: 0;
+  padding: 10px;
+  overflow: hidden;
+  box-sizing: border-box;
+  position: relative;
+
+  &.clickable {
+    cursor: pointer;
+  }
+
+  &.success {
+    background-color: $success;
+  }
+  &.warning {
+    background-color: $warning;
+  }
+  &.critical {
+    background-color: $critical;
+  }
+  &.unknown {
+    background-color: $unknown;
+  }
+}
+
+@for $i from 1 through $large-columns {
+  .status-icon-large:nth-child(#{$large-columns *2}n + #{$large-columns + $i}) {
+    margin-left: $large-offset;
+  }
+}
+
+.entity-name {
+  margin: 0;
+  text-align: center;
+  margin-bottom: 18px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 1em;
+
+  &.entity {
+    padding-top: 20%
+  }
+
+  &.last {
+    padding-top: 45%
+  }
+}
+
+.golden-metric {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.9em;
+  margin: 0;
+  width: 100%;
+  overflow: hidden;
+  max-width: 100%;
+}
+
+.golden-metric-key {
+  text-align: left;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  flex: 1;
+}
+
+.golden-metric-value {
+  text-align: right;
+  white-space: nowrap;
+  overflow: hidden;
+  flex: 0 0 auto;
+}
+
+//Tooltip
+.EntityTooltip {
+  $self: &;
+  background-color: #202d32;
+  box-shadow: rgba(#283636, 0.15) 16px 8px 32px;
+  box-sizing: border-box;
+  padding: 4px 0;
+  width: 288px;
+  z-index: 10;
+}
+
+.EntityTooltipHeader {
+  border-bottom: #e7e9ea 1px solid;
+  margin-left: 8px;
+  margin-right: 8px;
+  padding-bottom: 8px;
+  padding-left: 8px;
+  padding-right: 0;
+
+  &-titleBar {
+    align-items: center;
+    display: flex;
+    justify-content: flex-end;
+    padding: 0 calc(-1 * 8px);
+  }
+
+  &-title {
+    color: #f1f5f5;
+    flex: 1;
+    font-size: 12px;
+  }
+
+}
+
+.EntityTypeAndAccountLabel {
+  $self: &;
+  color: #f1f5f5;
+
+  &-type {
+    & + #{$self}-account {
+      &::before {
+        border-left: 1px solid;
+        content: '';
+        height: 100%;
+        margin-left: 4px;
+        padding-left: 4px;
+      }
+    }
+  }
+
+  &-account,
+  &-type {
+    display: inline;
+    word-break: break-all;
+  }
+
+}
+
+.EntityTooltipContent {
+  margin-top: 5px;
+  margin-left: 8px;
+  margin-right: 8px;
+  padding-bottom: 8px;
+  padding-left: 8px;
+  padding-right: 0;
+  color: #f1f5f5;
+}

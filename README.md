@@ -225,6 +225,26 @@ Click on the short description in each section to view chart details.
   ---
 </details>
 
+### Entity Navigator
+<details>
+
+  <summary>Display entity navigator views directly in dashboards.</summary>
+
+  #### Overview
+  <img src="screenshots/entity-navigator-screenshot-1.png" height="250" alt="high density screenshot" />
+  <img src="screenshots/entity-navigator-screenshot-2.png" height="250" alt="data mode screenshot" />
+
+  Entity Navigator supports both `High Density` mode (to display many entities' status efficiently) or `Include Data` mode (display up to 3 golden signals alongside status). Additional features include:
+
+  - Configurable polling interval
+  - Custom `entitySearch` query to filter entities further
+  - Display only entities in an unhealthy state
+
+  **NOTE: Only a single entity domain is configurable per widget**
+
+  ---
+</details>
+
 # Enabling this Nerdpack <a id="enable"></a>
 
 This pack of visualizations is available via the New Relic Catalog.
