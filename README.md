@@ -108,6 +108,16 @@ Click on the short description in each section to view chart details.
   ---
 </details>
 
+### Condition Summary Chart
+
+<details>
+
+  <summary>Display status of alert conditions or groups of conditions (based on tags).</summary>
+
+  <img src="screenshots/condition-summary-01.png" height="250" alt="Condition summary screenshot" />
+
+  ---
+</details>
 
 ### Multiline Compare Chart
 <details>
