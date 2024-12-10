@@ -52,7 +52,7 @@ export const getTooltip = (mode, header) => {
       break;
     case 'count':
       if (mode === 'None') {
-        text = 'The count of active issues for the condition';
+        text = 'The count of active issues for the condition (since 30 days ago)';
       } else {
         text = 'The total number of conditions under each status';
       }
