@@ -1,0 +1,48 @@
+{
+    "schemaType": "VISUALIZATION",
+    "id": "nr-condition-summary",
+    "displayName": "Alert Condition Summary",
+    "description": "Summarize status of alert conditions",
+    "configuration": [
+      {
+        "name": "showDocs",
+        "title": "Show Documentation",
+        "description": "",
+        "type": "boolean"
+      },
+      {
+        "name": "conditionFilter",
+        "title": "Condition Filter",
+        "description": "A filter that targets specific conditions to display.",
+        "type": "string"
+      },
+      {
+        "name": "showAlertingOnly",
+        "title": "Show only alerting conditions/groups",
+        "description": "Show only conditions or groups of conditions with open alerts.",
+        "type": "boolean"
+      },
+      {
+        "name": "sortBy",
+        "title": "Sort By",
+        "description": "Default sorting of conditions (default: Status)",
+        "type": "enum",
+        "items": [
+          {"title": "Status", "value": "status"},
+          {"title": "Name", "value": "name"},
+          {"title": "Issue Count", "value": "issueCount"},
+          {"title": "Last Occurrence", "value": "lastOccurrence"}
+        ]
+      },
+      {
+        "name": "sortOrder",
+        "title": "Sort Order",
+        "description": "Default sort order of conditions (default: Descending)",
+        "type": "enum",
+        "items": [
+          {"title": "Descending", "value": "DESCENDING"},
+          {"title": "Ascending", "value": "ASCENDING"}
+        ]
+      }
+    ]
+}
