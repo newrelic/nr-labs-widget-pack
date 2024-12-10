@@ -1,3 +1,11 @@
+# [1.49.0](https://github.com/newrelic/nr-labs-widget-pack/compare/v1.48.0...v1.49.0) (2024-12-10)
+
+
+### Features
+
+* add condition summary widget ([41da7b4](https://github.com/newrelic/nr-labs-widget-pack/commit/41da7b4bc4161ae0bb4c5f8f8b382f05570aea78))
+* update readme ([193e39f](https://github.com/newrelic/nr-labs-widget-pack/commit/193e39f94750d0643f312b85c3d1c8a8c3b43d7f))
+
 # [1.48.0](https://github.com/newrelic/nr-labs-widget-pack/compare/v1.47.0...v1.48.0) (2024-12-04)
 
 
