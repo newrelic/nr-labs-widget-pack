@@ -49,6 +49,9 @@ export default function Docs() {
                 <li>
                   <code>tags.accountId in (1,2,3)</code>
                 </li>
+                <li>
+                  <code>tags.policyId = '123'</code>
+                </li>
               </ul>
             </Spacing>
             <Spacing type={[Spacing.TYPE.MEDIUM, Spacing.TYPE.LARGE]}>
