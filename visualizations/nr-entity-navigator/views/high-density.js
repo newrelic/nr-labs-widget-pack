@@ -14,13 +14,6 @@ const HighDensity = ({ entities, totalCount, showAlertingOnly }) => {
     ? totalCount - displayedEntities.length
     : totalCount - MAX_ENTITIES;
 
-    console.log("****************")
-    console.log(showAlertingOnly)
-    console.log(totalCount)
-    console.log(displayedEntities.length)
-    console.log(remainingCount);
-    console.log("****************")
-
   return (
     <div className="status-icons-wrapper">
       <div className="status-icons-container-small">
