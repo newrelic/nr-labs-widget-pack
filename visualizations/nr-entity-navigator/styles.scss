@@ -4,43 +4,38 @@ $warning: #FFD23D;
 $critical: #F5554B;
 $unknown: #9EA5A9;
 
-
-//High Density
+//Hexagon sizes
 $small-hex-width: 18px;
 $small-hex-height: 20px;
-$small-columns: 50;
-$small-gap: 2.5px;
-$small-container-width: ($small-hex-width + $small-gap) * $small-columns;
-$small-row-height: $small-hex-width * 0.85;
-$small-offset: calc($small-hex-width / 2) + calc($small-gap / 2);
+$large-hex-width: 158px;
+$large-hex-height: 160px;
 
-.small-remaining-entities {
-  margin-left: 10px;
-  margin-top: 4px;
-  font-weight: bold;
-  white-space: nowrap;
+.status-icons-wrapper {
+  display: flex;
+  margin-bottom: 3px;
 }
 
-.small-container {
-  display: grid;
-  width: $small-container-width;
-  transform: translate(calc(-#{small-offset} / 2));
-  grid-template-columns: repeat($small-columns, minmax($small-hex-width, 1fr));
-  grid-auto-rows: $small-row-height;
-  gap: $small-gap;
-  margin: 4px 0;
+.status-icons-container-small {
+  font-size: 0;
+
+  &::before {
+    content: "";
+    width: calc($small-hex-height / 2);
+    float: left;
+    height: 120%;
+    shape-outside: repeating-linear-gradient(#0000 0 34px, #000 0 35px);
+  }
 }
 
 .status-icon-small {
   cursor: pointer;
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+  display: inline-block;
+  clip-path: polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%);
   height: $small-hex-height;
   width: $small-hex-width;
-  margin: 0;
   transition: all .2s ease;
+  margin-left: 2px;
+  margin-bottom: -2.5px;
 
   &.success {
     background-color: $success;
@@ -60,42 +55,32 @@ $small-offset: calc($small-hex-width / 2) + calc($small-gap / 2);
   }
 }
 
-@for $i from 1 through $small-columns {
-  .status-icon-small:nth-child(#{$small-columns *2}n + #{$small-columns + $i}) {
-    margin-left: $small-offset;
+.small-remaining-entities {
+  display: inline;
+  margin-left: 4px;
+  font-size: small;
+  font-weight: bold;
+  white-space: nowrap;
+}
+
+.status-icons-container-large {
+  &::before {
+    content: "";
+    width: 81px;
+    float: left;
+    height: 90%;
+    shape-outside: repeating-linear-gradient(#0000 0 182px, #000 0 240px);
   }
 }
 
-//Data Mode
-$large-hex-width: 164px;
-$large-hex-height: 166px;
-$large-columns: 6;
-$large-gap: 2.5px;
-$large-container-width: ($large-hex-width + $large-gap) * $large-columns;
-$large-row-height: $large-hex-width * 0.762;
-$large-offset: calc($large-hex-width / 2) + calc($large-gap / 2);
-
-.large-container {
-  display: grid;
-  width: $large-container-width;
-  transform: translate(calc(-#{large-offset} / 2));
-  grid-template-columns: repeat($large-columns, minmax($large-hex-width, 1fr));
-  grid-auto-rows: $large-row-height;
-  gap: $large-gap;
-  margin: 4px 0;
-}
 
 .status-icon-large {
-  display: flex;
-  flex-direction: column;
-  clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+  display: inline-block;
+  clip-path: polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%);
   height: $large-hex-height;
   width: $large-hex-width;
-  margin: 0;
-  padding: 10px;
-  overflow: hidden;
-  box-sizing: border-box;
-  position: relative;
+  margin-left: 4px;
+  margin-bottom: -36px;
 
   &.clickable {
     cursor: pointer;
@@ -115,28 +100,38 @@ $large-offset: calc($large-hex-width / 2) + calc($large-gap / 2);
   }
 }
 
-@for $i from 1 through $large-columns {
-  .status-icon-large:nth-child(#{$large-columns *2}n + #{$large-columns + $i}) {
-    margin-left: $large-offset;
+.data-container {
+  margin-top: 25%;
+
+  &.signal-two {
+    padding-top: 2%;
+  }
+
+  &.last-none {
+    padding-top: -1%;
+  }
+
+  &.last-one {
+    padding-top: 4%;
+  }
+
+  &.last-two {
+    padding-top: 16.5%;
+  }
+
+  &.last-three {
+    padding-top: 17%;
   }
 }
 
 .entity-name {
   margin: 0;
   text-align: center;
-  margin-bottom: 18px;
+  margin: 10px 2px 18px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
   font-size: 1em;
-
-  &.entity {
-    padding-top: 20%
-  }
-
-  &.last {
-    padding-top: 45%
-  }
 }
 
 .golden-metric {
@@ -155,6 +150,7 @@ $large-offset: calc($large-hex-width / 2) + calc($large-gap / 2);
   white-space: nowrap;
   overflow: hidden;
   flex: 1;
+  padding-left: 2px;
 }
 
 .golden-metric-value {
@@ -162,6 +158,7 @@ $large-offset: calc($large-hex-width / 2) + calc($large-gap / 2);
   white-space: nowrap;
   overflow: hidden;
   flex: 0 0 auto;
+  padding-right: 2px;
 }
 
 //Tooltip

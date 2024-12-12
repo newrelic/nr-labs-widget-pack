@@ -13,29 +13,36 @@ const DataMode = ({ entities, displayCount, totalCount, showAlertingOnly }) => {
     ? totalCount - displayedEntities.length
     : totalCount - MAX_ENTITIES;
 
+  const domainGoldenSignalLength =
+    displayedEntities[0]?.goldenMetricsData?.length || 0;
+
   return (
-    <div className="large-container">
-      {displayedEntities.map((e, i) => (
-        <EntityWidget
-          key={i}
-          status={e.alertSeverity}
-          permalink={e.permalink}
-          entityName={e.name}
-          goldenMetrics={e.goldenMetricsData}
-          dataMode
-        />
-      ))}
-      {remainingCount <= 0 ? (
-        ''
-      ) : (
-        <EntityWidget
-          key="last"
-          status="unknown"
-          permalink="remainderCount"
-          entityName={`${remainingCount} more`}
-          dataMode
-        />
-      )}
+    <div className="status-icons-wrapper">
+      <div className="status-icons-container-large">
+        {displayedEntities.map((e, i) => (
+          <EntityWidget
+            key={i}
+            status={e.alertSeverity}
+            permalink={e.permalink}
+            entityName={e.name}
+            goldenMetrics={e.goldenMetricsData}
+            goldenMetricLength={e.goldenMetricsData?.length || 0}
+            dataMode
+          />
+        ))}
+        {remainingCount <= 0 ? (
+          ''
+        ) : (
+          <EntityWidget
+            key="last"
+            status="NOT_CONFIGURED"
+            permalink="remainderCount"
+            entityName={`${remainingCount} more`}
+            goldenMetricLength={domainGoldenSignalLength}
+            dataMode
+          />
+        )}
+      </div>
     </div>
   );
 };

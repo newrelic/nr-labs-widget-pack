@@ -15,27 +15,29 @@ const HighDensity = ({ entities, totalCount, showAlertingOnly }) => {
     : totalCount - MAX_ENTITIES;
 
   return (
-    <div className="small-container">
-      {displayedEntities.map((e, i) => (
-        <ToolTip
-          key={i}
-          entityGuid={e.guid}
-          triggerElement={
-            <EntityWidget
-              key={i}
-              status={e.alertSeverity}
-              permalink={e.permalink}
-              entityName={e.name}
-              dataMode={false}
-            />
-          }
-        />
-      ))}
-      {remainingCount <= 0 ? (
-        ''
-      ) : (
-        <p className="small-remaining-entities">{remainingCount} more</p>
-      )}
+    <div className="status-icons-wrapper">
+      <div className="status-icons-container-small">
+        {displayedEntities.map((e, i) => (
+          <ToolTip
+            key={i}
+            entityGuid={e.guid}
+            triggerElement={
+              <EntityWidget
+                key={i}
+                status={e.alertSeverity}
+                permalink={e.permalink}
+                entityName={e.name}
+                dataMode={false}
+              />
+            }
+          />
+        ))}
+        {remainingCount <= 0 ? (
+          ''
+        ) : (
+          <p className="small-remaining-entities">{remainingCount} more</p>
+        )}
+      </div>
     </div>
   );
 };
