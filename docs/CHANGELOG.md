@@ -1,3 +1,10 @@
+# [1.50.0](https://github.com/newrelic/nr-labs-widget-pack/compare/v1.49.0...v1.50.0) (2024-12-12)
+
+
+### Features
+
+* entity navigator dynamic layout ([ad2922e](https://github.com/newrelic/nr-labs-widget-pack/commit/ad2922e3976b7d03ea1cc4454dcc3f7579d7a165))
+
 # [1.49.0](https://github.com/newrelic/nr-labs-widget-pack/compare/v1.48.0...v1.49.0) (2024-12-10)
 
 
