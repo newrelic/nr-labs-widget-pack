@@ -196,7 +196,12 @@ const ConditionTable = ({
               <TableRowCell
                 alignmentType={TableHeaderCell.ALIGNMENT_TYPE.CENTER}
               >
-                <a href={item.permalink} target="_blank" rel="noreferrer">
+                <a
+                  className="condition-name"
+                  href={item.permalink}
+                  target="_blank"
+                  rel="noreferrer"
+                >
                   {item.name}
                 </a>
               </TableRowCell>
