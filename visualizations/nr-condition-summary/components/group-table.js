@@ -124,7 +124,7 @@ const GroupTable = ({
                 </TableRowCell>
                 <TableRowCell>
                   <a
-                    className="modal-condition-name"
+                    className="condition-name"
                     href={item.permalink}
                     target="_blank"
                     rel="noreferrer"
