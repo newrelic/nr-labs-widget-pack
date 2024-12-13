@@ -2,7 +2,7 @@
     "private": true,
     "name": "nr-labs-widget-pack",
     "description": "Nerdpack template",
-    "version": "1.50.0",
+    "version": "1.50.1",
     "scripts": {
         "start": "nr1 nerdpack:serve",
         "test": "exit 0",

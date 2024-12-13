@@ -1,3 +1,10 @@
+## [1.50.1](https://github.com/newrelic/nr-labs-widget-pack/compare/v1.50.0...v1.50.1) (2024-12-13)
+
+
+### Bug Fixes
+
+* condition name text overflow ([85e7a16](https://github.com/newrelic/nr-labs-widget-pack/commit/85e7a16179cadcbf8a4ceff7f4946d7daade3f8d))
+
 # [1.50.0](https://github.com/newrelic/nr-labs-widget-pack/compare/v1.49.0...v1.50.0) (2024-12-12)
 
 
