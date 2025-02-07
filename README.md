@@ -108,6 +108,34 @@ Click on the short description in each section to view chart details.
   ---
 </details>
 
+### Custom Timeseries Chart
+
+<details>
+
+  <summary>Plot your own values over custom defined timestamps (instead of default ingest timestamps)</summary>
+
+  <img src="screenshots/custom_ts_01.png" height="250" alt="Custom timeseries chart screenshot" />
+
+   #### Overview
+   Use the Custom Timeseries Chart to plot data over your own timestamp fields ingested into New Relic.
+
+   The Custom Timeseries chart supports Line & Area chart types.
+
+   **NOTE: A maximum of 5000 timestamps can be plotted, when using `LIMIT MAX` clause**
+
+  #### Requirements
+  In order to use this chart, there are a few requirements:
+  - Each query must have the custom timestamp field as the _only_ facet clause
+  - Do not use SINCE or UNTIL clauses as they will automatically be determined based on the time range picker
+  - Do not use the TIMESERIES keyword
+  - Custom timestamps must be in epoch format (seconds or milliseconds)
+
+  A valid query for the chart could look like this:
+  `SELECT count(*) FROM Transaction FACET customTimestamp`
+
+  ---
+</details>
+
 ### Condition Summary Chart
 
 <details>
