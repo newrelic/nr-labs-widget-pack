@@ -1,3 +1,10 @@
+# [1.51.0](https://github.com/newrelic/nr-labs-widget-pack/compare/v1.50.1...v1.51.0) (2025-02-07)
+
+
+### Features
+
+* add custom timeseries chart ([f701f7d](https://github.com/newrelic/nr-labs-widget-pack/commit/f701f7d7d4a613756a5800d48c548018d87c84a5))
+
 ## [1.50.1](https://github.com/newrelic/nr-labs-widget-pack/compare/v1.50.0...v1.50.1) (2024-12-13)
 
 
