@@ -82,11 +82,8 @@ const ConditionSummary = ({
           .map(id => `'${id}'`)
           .join(',')})`;
         const associatedIssues = await fetchIssues(idFilter);
-        if (associatedIssues && associatedIssues.length > 0) {
-          setDataFetchErrors([]);
-          const finalData = await mergeData(conditions, associatedIssues);
-          setData(finalData);
-        }
+        const finalData = await mergeData(conditions, associatedIssues);
+        setData(finalData);
       } else {
         setData({});
       }
