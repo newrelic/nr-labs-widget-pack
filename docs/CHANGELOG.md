@@ -1,3 +1,13 @@
+## [1.51.1](https://github.com/newrelic/nr-labs-widget-pack/compare/v1.51.0...v1.51.1) (2025-03-06)
+
+
+### Bug Fixes
+
+* all cachev1 refs ([25a73ff](https://github.com/newrelic/nr-labs-widget-pack/commit/25a73ffec0cbd400d76a79070a7dd4e6f83d532c))
+* more cachev1 refs ([8de89e1](https://github.com/newrelic/nr-labs-widget-pack/commit/8de89e1ec8e6bd58036e6dc396d91bee4b75ce9d))
+* release cachev1 -> v4 ([a76443d](https://github.com/newrelic/nr-labs-widget-pack/commit/a76443dd02204838561d1f75b1f2f3f7f0592f19))
+* render non-empty state when no issues returned ([e7d76c3](https://github.com/newrelic/nr-labs-widget-pack/commit/e7d76c369025a271caa643203874d5928c59ef60))
+
 # [1.51.0](https://github.com/newrelic/nr-labs-widget-pack/compare/v1.50.1...v1.51.0) (2025-02-07)
 
 
