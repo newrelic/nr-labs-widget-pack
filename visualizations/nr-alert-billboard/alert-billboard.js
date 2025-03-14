@@ -144,7 +144,6 @@ const AlertBillboard = ({
   const fetchEntities = useCallback(
     async (type, filter) => {
       const allEntities = [];
-      let entityErrors = [];
 
       if (filter) {
         const entityQ = async.queue(async (task, cb) => {
@@ -154,10 +153,10 @@ const AlertBillboard = ({
           const results = data?.actor?.entitySearch?.results || null;
 
           if (errors) {
-            entityErrors = errors.length > 0 ? errors[0].message : [];
-            setDataFetchErrors([entityErrors]);
-          } else {
-            setDataFetchErrors([]);
+            setDataFetchErrors([
+              `Error fetching entity type: ${entityType} | Errors: ${errors.toString()}`
+            ]);
+            return;
           }
 
           if (results) {
@@ -182,6 +181,9 @@ const AlertBillboard = ({
         await entityQ.drain();
       }
 
+      if (dataFetchErrors) {
+        setDataFetchErrors([]);
+      }
       return allEntities;
     },
     [conditionFilter, entityType]
@@ -195,15 +197,16 @@ const AlertBillboard = ({
       const issueCount = data?.actor?.entitySearch?.counts[0]?.count || null;
 
       if (errors) {
-        const issueCountErrors = errors.length > 0 ? errors[0].message : [];
-        setDataFetchErrors([issueCountErrors]);
-      } else {
-        setDataFetchErrors([]);
+        setDataFetchErrors([`Error Fetching Issues: ${errors.toString()}`]);
+        return;
       }
 
+      if (dataFetchErrors) {
+        setDataFetchErrors([]);
+      }
       return issueCount;
     },
-    [fetchEntities]
+    [conditionFilter, entityType]
   );
 
   const fetchTimeData = useCallback(
@@ -219,8 +222,7 @@ const AlertBillboard = ({
 
         if (error) {
           setDataFetchErrors([error]);
-        } else {
-          setDataFetchErrors([]);
+          return;
         }
 
         if (data) {
@@ -232,18 +234,23 @@ const AlertBillboard = ({
         cb();
       }, 10);
 
+      const timeString = enableTimePicker
+        ? timeRangeToNrql(timeRange)
+        : `since 1 day ago`;
       condMap.forEach(c => {
         const filter = `(${c.conditionIds.map(id => `${id}`).join(',')})`;
         const accountId = c.accountId;
-        const timeString = enableTimePicker ? timeRangeToNrql(timeRange) : null;
         timestampQ.push({ accountId, filter, type, timeString });
       });
 
       await timestampQ.drain();
 
+      if (dataFetchErrors) {
+        setDataFetchErrors([]);
+      }
       return allTimestamps;
     },
-    [fetchData, enableTimePicker, timeRange]
+    [fetchData]
   );
 
   if (inputErrors.length > 0) {
@@ -309,27 +316,7 @@ const AlertBillboard = ({
     );
   }
 
-  if (!loading && JSON.stringify(data) === '{}') {
-    return (
-      <>
-        {showDocs && <Docs />}
-        <EmptyState
-          fullHeight
-          fullWidth
-          iconType={EmptyState.ICON_TYPE.INTERFACE__INFO__INFO}
-          title="No data returned"
-          description="Validate filter inputs are correct"
-          additionalInfoLink={{
-            label: 'DOCS',
-            to:
-              'https://docs.newrelic.com/docs/apis/nerdgraph/examples/nerdgraph-entities-api-tutorial/#search-querybuilder'
-          }}
-        />
-      </>
-    );
-  }
-
-  return <h1>Unknown Error</h1>;
+  return <Spinner />;
 };
 
 AlertBillboard.propTypes = {

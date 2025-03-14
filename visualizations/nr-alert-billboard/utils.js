@@ -75,13 +75,10 @@ export const generateConditionMap = conds => {
 };
 
 export const fetchTimestampsQuery = (filter, type, timeRange) => {
-  let nrql = `FROM NrAiIncident SELECT count(*) where event = 'open' and conditionId in ${filter} ${timeRange ||
-    'since 1 day ago'} TIMESERIES AUTO`;
+  let nrql = `FROM NrAiIncident SELECT count(*) where event = 'open' and conditionId in ${filter} ${timeRange} TIMESERIES AUTO`;
   if (type) {
-    nrql = `FROM NrAiIncident SELECT count(*) where event = 'open' and conditionId in ${filter} and entity.type = '${type}' ${timeRange ||
-      'since 1 day ago'} TIMESERIES AUTO`;
+    nrql = `FROM NrAiIncident SELECT count(*) where event = 'open' and conditionId in ${filter} and entity.type = '${type}' ${timeRange} TIMESERIES AUTO`;
   }
-
   return nrql;
 };
 
@@ -130,8 +127,9 @@ export const formatTimeseries = (timeData, chartlineColor) => {
   });
 
   const final = Array.from(timestampMap.entries()).map(([x, y]) => ({ x, y }));
+  const sortedFinal = final.sort((a, b) => b.x - a.x);
 
-  sparkLine[0].data = final;
+  sparkLine[0].data = sortedFinal;
 
   return sparkLine;
 };
