@@ -1,0 +1,84 @@
+{
+    "schemaType": "VISUALIZATION",
+    "id": "nr-alert-billboard",
+    "displayName": "Alert Billboard",
+    "description": "Display current active count and trend of issues over time across many accounts.",
+    "configuration": [
+        {
+            "name": "showDocs",
+            "title": "Show Documentation",
+            "description": "",
+            "type": "boolean"
+          },
+          {
+            "name": "conditionFilter",
+            "title": "Condition Filter",
+            "description": "A filter that targets specific conditions to fetch alerts for",
+            "type": "string"
+          },
+          {
+            "name": "entityType",
+            "title": "Entity Type [Optional]",
+            "description": "If set to a valid entity type, alert counts/trend targeting entities matching that type will be displayed",
+            "type": "string"
+          },
+          {
+            "name": "enableTimePicker",
+            "title": "Enable Time Picker",
+            "description": "Allows the use of the time picker for timeseries only. If disabled, default timeseries window is 1 day",
+            "type": "boolean"
+        },
+          {
+            "name": "title",
+            "title": "Chart Title",
+            "description": "Title of widget",
+            "type": "string"
+        },
+        {
+            "name": "widgetColor",
+            "title": "Widget Color",
+            "description": "Color of widget value and timeseries. Accepts hex values or color names. Default: red",
+            "type": "string"
+        },
+        {
+            "name": "pollInterval",
+            "title": "Select Poll Interval (seconds) default 60s",
+            "description": "",
+            "type": "enum",
+            "items": [
+              {
+                "title": "Select",
+                "value": 60
+              },
+              {
+                "title": "5s",
+                "value": 5
+              },
+              {
+                "title": "10s",
+                "value": 10
+              },
+              {
+                "title": "15s",
+                "value": 15
+              },
+              {
+                "title": "30s",
+                "value": 30
+              },
+              {
+                "title": "45s",
+                "value": 45
+              },
+              {
+                "title": "1m",
+                "value": 60
+              },
+              {
+                "title": "5m",
+                "value": 300
+              }
+            ]
+          }
+    ]
+}

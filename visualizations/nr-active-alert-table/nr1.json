@@ -1,0 +1,66 @@
+{
+    "schemaType": "VISUALIZATION",
+    "id": "nr-active-alert-table",
+    "displayName": "Active Alerts Table",
+    "description": "Display a table of active issues across many accounts based on specific conditions",
+    "configuration": [
+        {
+            "name": "showDocs",
+            "title": "Show Documentation",
+            "description": "",
+            "type": "boolean"
+        },
+        {
+            "name": "conditionFilter",
+            "title": "Condition Filter",
+            "description": "A filter that targets specific conditions to fetch alerts for",
+            "type": "string"
+        },
+        {
+            "name": "title",
+            "title": "Chart Title",
+            "description": "Title of widget",
+            "type": "string"
+        },
+        {
+            "name": "pollInterval",
+            "title": "Select Poll Interval (seconds) default 60s",
+            "description": "",
+            "type": "enum",
+            "items": [
+              {
+                "title": "Select",
+                "value": 60
+              },
+              {
+                "title": "5s",
+                "value": 5
+              },
+              {
+                "title": "10s",
+                "value": 10
+              },
+              {
+                "title": "15s",
+                "value": 15
+              },
+              {
+                "title": "30s",
+                "value": 30
+              },
+              {
+                "title": "45s",
+                "value": 45
+              },
+              {
+                "title": "1m",
+                "value": 60
+              },
+              {
+                "title": "5m",
+                "value": 300
+              }
+            ]
+          }
+    ]
+}
