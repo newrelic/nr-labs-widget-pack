@@ -1,0 +1,120 @@
+{
+    "schemaType": "VISUALIZATION",
+    "id": "nr-billboard-line-chart",
+    "displayName": "Billboard & Line Chart",
+    "description": "Display a single value alongside a timeseries line",
+    "configuration": [
+        {
+            "name": "showDocs",
+            "title": "Show Documentation",
+            "description": "",
+            "type": "boolean"
+        },
+        {
+            "name": "pollInterval",
+            "title": "Select Poll Interval (seconds) default 60s",
+            "description": "",
+            "type": "enum",
+            "items": [
+              {
+                "title": "Select",
+                "value": 60
+              },
+              {
+                "title": "5s",
+                "value": 5
+              },
+              {
+                "title": "10s",
+                "value": 10
+              },
+              {
+                "title": "15s",
+                "value": 15
+              },
+              {
+                "title": "30s",
+                "value": 30
+              },
+              {
+                "title": "45s",
+                "value": 45
+              },
+              {
+                "title": "1m",
+                "value": 60
+              },
+              {
+                "title": "5m",
+                "value": 300
+              }
+            ]
+        },
+        {
+            "name": "enableTimePicker",
+            "title": "Enable Time Picker",
+            "description": "Allows the use of the time picker",
+            "type": "boolean"
+        },
+        {
+            "name": "enableFilters",
+            "title": "Enable dashboard filters",
+            "description": "Allows the use of dashboard filters",
+            "type": "boolean"
+        },
+        {
+          "name": "title",
+          "title": "Widget Title",
+          "description": "Title of Widget",
+          "type": "string"
+      },
+        {
+          "name": "billboardAccount",
+          "title": "Billboard - Account ID",
+          "description": "Account ID to be associated with billboard query",
+          "type": "account-id"
+        },
+        {
+          "name": "billboardQuery",
+          "title": "Billboard Query",
+          "description": "NRQL query to populate billboard component",
+          "type": "nrql"
+        },
+        {
+          "name": "billboardColor",
+          "title": "Billboard Color",
+          "description": "Color of billboard value",
+          "type": "string"
+        },
+        {
+          "name": "compareWithAccount",
+          "title": "Compare With - Account ID",
+          "description": "Account ID to be associated with billboard query",
+          "type": "account-id"
+        },
+        {
+          "name": "compareWithQuery",
+          "title": "Compare With Query",
+          "description": "NRQL query to compare billboard query result against to determine percent change",
+          "type": "nrql"
+        },
+        {
+          "name": "timeseriesAccount",
+          "title": "Timeseries - Account ID",
+          "description": "Account ID to be associated with billboard query",
+          "type": "account-id"
+        },
+        {
+          "name": "timeseriesQuery",
+          "title": "Timeseries Query",
+          "description": "NRQL query to populate timeseries component",
+          "type": "nrql"
+        },
+        {
+          "name": "timeseriesColor",
+          "title": "Timeseries Line Color",
+          "description": "Color of timeseries line",
+          "type": "string"
+        }
+    ]
+}

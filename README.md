@@ -83,6 +83,8 @@ Click on the short description in each section to view chart details.
   ---
 </details>
 
+###
+
 ### Cumulative Timeseries Chart
 
 <details>
@@ -107,6 +109,37 @@ Click on the short description in each section to view chart details.
 
   ---
 </details>
+
+### Billboard & Line Chart
+
+<details>
+
+  <summary>Plot a single value and a timeseries in the same chart. e.g. Latest active alerts vs the trend of alerts</summary>
+
+  <img src="screenshots/billboard_line_01.png" height="250" alt="Billboard-line chart screenshot" />
+  ---
+</details>
+
+### Alert Billboard Chart
+
+<details>
+
+  <summary>Display the current count of active issues alongside a count of issue open events over a time range selected. This widget also supports optional filtering by a specific entity type</summary>
+
+  <img src="screenshots/alert_billboard_01.png" height="250" alt="Alert billboard chart screenshot" />
+  ---
+</details>
+
+### Active Alerts Table Chart
+
+<details>
+
+  <summary>Display all active issues (across many sub accounts) derived from specific conditions based on  a filter input.</summary>
+
+  <img src="screenshots/alert_table_01.png" height="250" alt="Alert table chart screenshot" />
+  ---
+</details>
+
 
 ### Custom Timeseries Chart
 
