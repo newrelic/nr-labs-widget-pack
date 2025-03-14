@@ -1,3 +1,15 @@
+# [1.52.0](https://github.com/newrelic/nr-labs-widget-pack/compare/v1.51.1...v1.52.0) (2025-03-14)
+
+
+### Bug Fixes
+
+* setState loop, sort timeseries aggregation ([65f39e7](https://github.com/newrelic/nr-labs-widget-pack/commit/65f39e77b9294bfe6aa8884b836b672c72bc00a4))
+
+
+### Features
+
+* alert table/billboard, line & billboard chart ([bce6bcc](https://github.com/newrelic/nr-labs-widget-pack/commit/bce6bccd75e7f1e8d6dec3f7b60ae9f5d8d5f07b))
+
 ## [1.51.1](https://github.com/newrelic/nr-labs-widget-pack/compare/v1.51.0...v1.51.1) (2025-03-06)
 
 
