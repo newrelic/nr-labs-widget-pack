@@ -82,7 +82,7 @@ const AlertTable = ({ showDocs, conditionFilter, title, pollInterval }) => {
 
         setData(sortedFinal);
       } else {
-        setData({});
+        setData([]);
       }
     }
     setLoading(false);
