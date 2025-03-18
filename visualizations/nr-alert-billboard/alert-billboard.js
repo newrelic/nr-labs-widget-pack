@@ -294,14 +294,17 @@ const AlertBillboard = ({
     return (
       <>
         {showDocs && <Docs />}
-        <div className="square-window">
-          <HeadingText className="title" type={HeadingText.TYPE.HEADING_3}>
+        <div className="alert-square-window">
+          <HeadingText
+            className="alert-title"
+            type={HeadingText.TYPE.HEADING_3}
+          >
             {title || 'Untitled Widget'}
           </HeadingText>
-          <div className="billboard-container">
+          <div className="alert-billboard-container">
             <HeadingText
               style={{ color: widgetColor || 'red' }}
-              className="billboard"
+              className="alert-billboard"
               type={HeadingText.TYPE.HEADING_1}
             >
               {data.activeIssueCount || 0}
@@ -312,6 +315,26 @@ const AlertBillboard = ({
             data={formatTimeseries(data.issueTimeseries, widgetColor)}
           />
         </div>
+      </>
+    );
+  }
+
+  if (!loading && JSON.stringify(data) === '{}') {
+    return (
+      <>
+        {showDocs && <Docs />}
+        <EmptyState
+          fullHeight
+          fullWidth
+          iconType={EmptyState.ICON_TYPE.INTERFACE__INFO__INFO}
+          title="No conditions returned"
+          description="Validate condition filter is correct."
+          additionalInfoLink={{
+            label: 'DOCS',
+            to:
+              'https://docs.newrelic.com/docs/apis/nerdgraph/examples/nerdgraph-entities-api-tutorial/#search-querybuilder'
+          }}
+        />
       </>
     );
   }
