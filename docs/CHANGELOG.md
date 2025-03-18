@@ -1,3 +1,10 @@
+## [1.52.1](https://github.com/newrelic/nr-labs-widget-pack/compare/v1.52.0...v1.52.1) (2025-03-18)
+
+
+### Bug Fixes
+
+* alert billboard dynamic sizing ([829d419](https://github.com/newrelic/nr-labs-widget-pack/commit/829d41976ecb7d1c726d8e8cf885788ba2e406bb))
+
 # [1.52.0](https://github.com/newrelic/nr-labs-widget-pack/compare/v1.51.1...v1.52.0) (2025-03-14)
 
 
