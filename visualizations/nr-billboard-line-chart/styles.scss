@@ -4,13 +4,8 @@
     align-items: center;
     box-sizing: border-box;
     overflow: hidden;
-}
-
-.title {
-    align-self: flex-start;
-    margin: 0;
-    margin-left: 8px;
-    margin-top: 4px;
+    width: 100%;
+    height: 100%;
 }
 
 .billboard-container {
@@ -18,27 +13,51 @@
     align-items: center;
     justify-content: center;
     width: 100%;
+    margin-top: 10vh;
+}
+
+.billboard-all {
+    font-size: 15vw;
+    margin: 0;
+}
+
+.billboard-standalone {
+    font-size: 20vw;
     margin-top: 10%;
 }
 
-.billboard {
-    font-size: 80px;
+.billboard-compare {
+    font-size: 20vw;
     margin: 0;
+    margin-bottom: 5vw;
+}
+
+.billboard-line {
+    font-size: 20vw;
+    margin: 0;
+    margin-bottom: 5vw;
 }
 
 .compare {
     display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin-top: 5vw;
+    margin-bottom: 12px;
 }
 
 .compare-elements {
-    margin-top: 18px;
-    font-size: 24px;
-    display: inline-flex;
+    font-size: 12vw;
+}
+
+[class*='wnd-Icon'].compare-icon {
+    font-size: 8vw !important;
 }
 
 [class*='wnd-Chart'].spark-line-chart {
     width: 100%;
-    height: 100px;
+    height: 100%;
 
     [class*='vz--component'] {
         background-color: transparent;
@@ -49,7 +68,7 @@
     }
 
     svg {
-        height: 100px;
+        height: 100%;
         margin: 0;
         min-height: auto;
       }

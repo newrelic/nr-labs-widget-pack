@@ -63,12 +63,6 @@
             "type": "boolean"
         },
         {
-          "name": "title",
-          "title": "Widget Title",
-          "description": "Title of Widget",
-          "type": "string"
-      },
-        {
           "name": "billboardAccount",
           "title": "Billboard - Account ID",
           "description": "Account ID to be associated with billboard query",
@@ -81,39 +75,161 @@
           "type": "nrql"
         },
         {
-          "name": "billboardColor",
-          "title": "Billboard Color",
-          "description": "Color of billboard value",
+          "name": "billboardCriticalThresholdDirection",
+          "title": "Billboard Critical Threshold Direction: above, below, or equal (default: above)",
+          "description": "Threshold Direction: above, below, between or outside (default: above)",
+          "type": "enum",
+          "items": [
+            {
+              "title": "above",
+              "value": "above"
+            },
+            {
+              "title": "below",
+              "value": "below"
+            },
+            {
+              "title": "equal",
+              "value": "equal"
+            }
+          ]
+        },
+        {
+          "name": "billboardCriticalThreshold",
+          "title": "Billboard Threshold - Critical",
+          "description": "Numeric value that controls when critical will be rendered",
+          "type": "string"
+        },
+        {
+          "name": "billboardCriticalThresholdColor",
+          "title": "Billboard Critical Threshold Color",
+          "description": "Override the default color (red) of the billboard value when critical threshold is breached",
+          "type": "string"
+        },
+        {
+          "name": "billboardWarningThresholdDirection",
+          "title": "Billboard Warning Threshold Direction: above, below, or equal (default: above)",
+          "description": "Threshold Direction: above, below, between or outside (default: above)",
+          "type": "enum",
+          "items": [
+            {
+              "title": "above",
+              "value": "above"
+            },
+            {
+              "title": "below",
+              "value": "below"
+            },
+            {
+              "title": "equal",
+              "value": "equal"
+            }
+          ]
+        },
+        {
+          "name": "billboardWarningThreshold",
+          "title": "Billboard Threshold - Warning",
+          "description": "Numeric value that controls when warning will be rendered",
+          "type": "string"
+        },
+        {
+          "name": "billboardWarningThresholdColor",
+          "title": "Billboard Warning Threshold Color",
+          "description": "Override the default color (orange) of the billboard value when warning threshold is breached",
           "type": "string"
         },
         {
           "name": "compareWithAccount",
-          "title": "Compare With - Account ID",
-          "description": "Account ID to be associated with billboard query",
+          "title": "Compare With - Account ID [Optional]",
+          "description": "Account ID to be associated with compare with query",
           "type": "account-id"
         },
         {
           "name": "compareWithQuery",
-          "title": "Compare With Query",
-          "description": "NRQL query to compare billboard query result against to determine percent change",
+          "title": "Compare With Query [Optional]",
+          "description": "NRQL query to compare billboard query result against to determine percent change. Only valid if no `compare with` clause in base billboard query",
           "type": "nrql"
         },
         {
+          "name": "compareWithCriticalThresholdDirection",
+          "title": "Compare With Critical Threshold Direction: above, below, or equal (default: above)",
+          "description": "Threshold Direction: above, below, or equal (default: above)",
+          "type": "enum",
+          "items": [
+            {
+              "title": "above",
+              "value": "above"
+            },
+            {
+              "title": "below",
+              "value": "below"
+            },
+            {
+              "title": "equal",
+              "value": "equal"
+            }
+          ]
+        },
+        {
+          "name": "compareWithCriticalThreshold",
+          "title": "Compare With Threshold - Critical",
+          "description": "Numeric value that controls when critical will be rendered",
+          "type": "string"
+        },
+        {
+          "name": "compareWithCriticalColor",
+          "title": "Compare With Threshold Color - Critical",
+          "description": "Override the default color (red) of the compare with value when critical threshold is breached",
+          "type": "string"
+        },
+        {
+          "name": "compareWithWarningThresholdDirection",
+          "title": "Compare With Warning Threshold Direction: above, below, or equal (default: above)",
+          "description": "Threshold Direction: above, below, or equal(default: above)",
+          "type": "enum",
+          "items": [
+            {
+              "title": "above",
+              "value": "above"
+            },
+            {
+              "title": "below",
+              "value": "below"
+            },
+            {
+              "title": "equal",
+              "value": "equal"
+            }
+          ]
+        },
+        {
+          "name": "compareWithWarningThreshold",
+          "title": "Compare With Threshold - Warning",
+          "description": "Numeric value that controls when warning will be rendered",
+          "type": "string"
+        },
+        {
+          "name": "compareWithWarningColor",
+          "title": "Compare With Threshold Color - Warning",
+          "description": "Override the default color (orange) of the compare with value when warning threshold is breached",
+          "type": "string"
+        },
+        {
           "name": "timeseriesAccount",
-          "title": "Timeseries - Account ID",
+          "title": "Timeseries - Account ID [Optional]",
           "description": "Account ID to be associated with billboard query",
           "type": "account-id"
         },
         {
           "name": "timeseriesQuery",
-          "title": "Timeseries Query",
+          "title": "Timeseries Query [Optional]",
           "description": "NRQL query to populate timeseries component",
           "type": "nrql"
         },
         {
           "name": "timeseriesColor",
           "title": "Timeseries Line Color",
-          "description": "Color of timeseries line",
+          "description": "Override color of timeseries line",
           "type": "string"
         }
     ]
