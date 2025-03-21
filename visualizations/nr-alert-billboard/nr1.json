@@ -28,12 +28,6 @@
             "description": "Allows the use of the time picker for timeseries only. If disabled, default timeseries window is 1 day",
             "type": "boolean"
         },
-          {
-            "name": "title",
-            "title": "Chart Title",
-            "description": "Title of widget",
-            "type": "string"
-        },
         {
             "name": "widgetColor",
             "title": "Widget Color",

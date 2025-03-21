@@ -21,14 +21,18 @@ export default function Docs() {
         <CardHeader title="Overview" />
         <CardBody style={{ marginLeft: '35px' }}>
           <BlockText spacingType={[BlockText.SPACING_TYPE.MEDIUM]}>
-            Use the Billboard & Line Chart to plot a single value and a
-            timeseries in the same chart. e.g. Latest active alerts vs the trend
-            of alerts.
+            Use the Billboard & Line Chart to plot a single value and an
+            optional timeseries in the same chart. e.g. Latest active alerts vs
+            the trend of alerts.
             <br />
             <br />
             The chart allows for definition of a single billboard query and
-            timeseries query, as well as an optional compare with query (that
-            will be used to determine a percent change value)
+            timeseries query, as well as an optional separate compare with query
+            (that will be used to determine a percent change value)
+            <br />
+            <br />
+            Compare with clauses can also be used directly within the billboard
+            query itself.
           </BlockText>
         </CardBody>
       </Card>
@@ -40,8 +44,8 @@ export default function Docs() {
             <Spacing type={[Spacing.TYPE.MEDIUM, Spacing.TYPE.EXTRA_LARGE]}>
               <ul>
                 <li>
-                  1 billboard query, 1 timeseries query and optionally 1 compare
-                  with query.
+                  1 billboard query and optionally 1 compare with query and
+                  timeseries query.
                 </li>
                 <li>
                   Billboard and compare with queries should not contain the{' '}

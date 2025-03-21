@@ -50,7 +50,6 @@ const AlertBillboard = ({
   conditionFilter,
   entityType,
   enableTimePicker,
-  title,
   widgetColor,
   pollInterval
 }) => {
@@ -295,12 +294,6 @@ const AlertBillboard = ({
       <>
         {showDocs && <Docs />}
         <div className="alert-square-window">
-          <HeadingText
-            className="alert-title"
-            type={HeadingText.TYPE.HEADING_3}
-          >
-            {title || 'Untitled Widget'}
-          </HeadingText>
           <div className="alert-billboard-container">
             <HeadingText
               style={{ color: widgetColor || 'red' }}
@@ -345,7 +338,6 @@ const AlertBillboard = ({
 AlertBillboard.propTypes = {
   showDocs: PropTypes.bool,
   conditionFilter: PropTypes.string,
-  title: PropTypes.string,
   widgetColor: PropTypes.string
 };
 
