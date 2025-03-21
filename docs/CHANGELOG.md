@@ -1,3 +1,10 @@
+## [1.52.2](https://github.com/newrelic/nr-labs-widget-pack/compare/v1.52.1...v1.52.2) (2025-03-21)
+
+
+### Bug Fixes
+
+* improve billboard chart styling;add thresholds ([167647b](https://github.com/newrelic/nr-labs-widget-pack/commit/167647bebc4086accd9ca3f42001c1aa8e728e57))
+
 ## [1.52.1](https://github.com/newrelic/nr-labs-widget-pack/compare/v1.52.0...v1.52.1) (2025-03-18)
 
 
