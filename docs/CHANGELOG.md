@@ -1,3 +1,11 @@
+## [1.52.3](https://github.com/newrelic/nr-labs-widget-pack/compare/v1.52.2...v1.52.3) (2025-03-25)
+
+
+### Bug Fixes
+
+* alert bb sparkline spacing ([71d014a](https://github.com/newrelic/nr-labs-widget-pack/commit/71d014ad2073eb46fea60961a8191009c69b7dcc))
+* remove v* styling ([da749ee](https://github.com/newrelic/nr-labs-widget-pack/commit/da749ee9794a6d0078f9999c59071279a4b63b23))
+
 ## [1.52.2](https://github.com/newrelic/nr-labs-widget-pack/compare/v1.52.1...v1.52.2) (2025-03-21)
 
 
