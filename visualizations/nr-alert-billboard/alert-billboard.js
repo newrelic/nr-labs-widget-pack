@@ -152,6 +152,7 @@ const AlertBillboard = ({
           const results = data?.actor?.entitySearch?.results || null;
 
           if (errors) {
+            console.debug(errors); // eslint-disable-line
             setDataFetchErrors([
               `Error fetching entity type: ${entityType} | Errors: ${errors.toString()}`
             ]);
@@ -196,6 +197,7 @@ const AlertBillboard = ({
       const issueCount = data?.actor?.entitySearch?.counts[0]?.count || null;
 
       if (errors) {
+        console.debug(errors); // eslint-disable-line
         setDataFetchErrors([`Error Fetching Issues: ${errors.toString()}`]);
         return;
       }
@@ -220,6 +222,7 @@ const AlertBillboard = ({
         });
 
         if (error) {
+          console.debug(error); // eslint-disable-line
           setDataFetchErrors([error]);
           return;
         }
