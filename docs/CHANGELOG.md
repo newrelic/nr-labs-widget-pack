@@ -1,3 +1,10 @@
+# [1.53.0](https://github.com/newrelic/nr-labs-widget-pack/compare/v1.52.3...v1.53.0) (2025-04-02)
+
+
+### Features
+
+* log wl ([7d4a3f9](https://github.com/newrelic/nr-labs-widget-pack/commit/7d4a3f9e3dd9fe1a0eea4a5dbf16dac1cb37f662))
+
 ## [1.52.3](https://github.com/newrelic/nr-labs-widget-pack/compare/v1.52.2...v1.52.3) (2025-03-25)
 
 
