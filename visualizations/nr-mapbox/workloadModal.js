@@ -67,13 +67,14 @@ export default function WorkloadModal({ workloadStatus, setWorkloadStatus }) {
 
   useEffect(async () => {
     setLoading(true);
+    console.log('Loading workload ->',workloadStatus)
     await getWorkloadData();
     setLoading(false);
   }, [workloadStatus]);
 
   const getWorkloadData = () => {
-    // const workloadGuids = [workloadStatus['entity.guid']];
-    const workloadGuids = ['MTYwNjg2MnxOUjF8V09SS0xPQUR8MjI0MDk4'];
+    const workloadGuids = [workloadStatus['entity.guid']];
+    // const workloadGuids = ['MTYwNjg2MnxOUjF8V09SS0xPQUR8MjI0MDk4'];
 
     return new Promise(resolve => {
       // do not chunk workload entity guids, work on them separately
