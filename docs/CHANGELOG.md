@@ -1,3 +1,10 @@
+## [1.53.1](https://github.com/newrelic/nr-labs-widget-pack/compare/v1.53.0...v1.53.1) (2025-04-24)
+
+
+### Bug Fixes
+
+* remove ack nrql depdendency, using tags instead ([aabc8ca](https://github.com/newrelic/nr-labs-widget-pack/commit/aabc8caf7003a05ce12cb72e37f9ede7370a0b99))
+
 # [1.53.0](https://github.com/newrelic/nr-labs-widget-pack/compare/v1.52.3...v1.53.0) (2025-04-02)
 
 
