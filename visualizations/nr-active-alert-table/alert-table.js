@@ -12,12 +12,7 @@ import {
   TableRowCell,
   TextField
 } from 'nr1';
-import {
-  fetchEntityQuery,
-  fetchAckEvents,
-  pluckTagValue,
-  constructTable
-} from './utils';
+import { fetchEntityQuery, pluckTagValue, constructTable } from './utils';
 import async from 'async';
 import { useInterval } from '@mantine/hooks';
 import ErrorState from '../shared/errorState';
@@ -68,13 +63,12 @@ const AlertTable = ({ showDocs, conditionFilter, title, pollInterval }) => {
           .map(id => `'${id}'`)
           .join(',')})`;
         const associatedIssues = await fetchIssues(idFilter);
-        const ackEvents = await fetchAckEvents(associatedIssues); // temporary until product fixes stamping tags
-        const final = constructTable(associatedIssues, ackEvents);
+        const final = constructTable(associatedIssues);
         const sortedFinal = final.sort((a, b) => {
-          if (a.acknowledgedAt === null && b.acknowledgedAt !== null) {
+          if (a.acknowledged === 'false' && b.acknowledged === 'true') {
             return -1;
           }
-          if (a.acknowledgedAt !== null && b.acknowledgedAt === null) {
+          if (a.acknowledged === 'true' && b.acknowledged === 'false') {
             return 1;
           }
           return a.issueMttd - b.issueMttd;
@@ -276,7 +270,7 @@ const AlertTable = ({ showDocs, conditionFilter, title, pollInterval }) => {
                 <b>MTTD (min)</b>
               </TableHeaderCell>
               <TableHeaderCell
-                value={({ item }) => item.acknowledgedAt}
+                value={({ item }) => item.acknowledged}
                 sortable
                 sortingOrder={0}
                 sortingType={
@@ -323,10 +317,10 @@ const AlertTable = ({ showDocs, conditionFilter, title, pollInterval }) => {
                 <TableRowCell>{item.issueMttd}</TableRowCell>
                 <TableRowCell
                   style={{
-                    color: item.acknowledgedAt === null ? '#df2d24' : '#1ce783'
+                    color: item.acknowledged === 'false' ? '#df2d24' : '#1ce783'
                   }}
                 >
-                  {item.acknowledgedAt === null ? 'false' : 'true'}
+                  {item.acknowledged}
                 </TableRowCell>
                 <TableRowCell>{item.relatedEntityName || 'n/a'}</TableRowCell>
                 <TableRowCell>{item.conditionName}</TableRowCell>
