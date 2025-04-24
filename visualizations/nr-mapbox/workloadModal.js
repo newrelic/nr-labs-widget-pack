@@ -67,7 +67,7 @@ export default function WorkloadModal({ workloadStatus, setWorkloadStatus }) {
 
   useEffect(async () => {
     setLoading(true);
-    console.log('Loading workload ->',workloadStatus)
+    console.log('Loading workload ->', workloadStatus); // eslint-disable-line
     await getWorkloadData();
     setLoading(false);
   }, [workloadStatus]);
