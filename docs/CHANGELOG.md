@@ -1,3 +1,10 @@
+## [1.53.2](https://github.com/newrelic/nr-labs-widget-pack/compare/v1.53.1...v1.53.2) (2025-04-28)
+
+
+### Bug Fixes
+
+* active alert table search with nulls ([49c4f2f](https://github.com/newrelic/nr-labs-widget-pack/commit/49c4f2fe26640cb5b642348e1d056fd9b7d39415))
+
 ## [1.53.1](https://github.com/newrelic/nr-labs-widget-pack/compare/v1.53.0...v1.53.1) (2025-04-24)
 
 
