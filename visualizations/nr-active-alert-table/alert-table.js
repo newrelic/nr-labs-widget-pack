@@ -232,9 +232,12 @@ const AlertTable = ({ showDocs, conditionFilter, title, pollInterval }) => {
     data.length > 0
   ) {
     const filteredIssues = data.filter(i => {
+      const conditionName = i.conditionName?.toLowerCase() ?? '';
+      const relatedEntityName = i.relatedEntityName?.toLowerCase() ?? '';
+
       return (
-        i.conditionName.toLowerCase().includes(search.toLowerCase()) ||
-        i.relatedEntityName.toLowerCase().includes(search.toLowerCase())
+        conditionName.includes(search.toLowerCase()) ||
+        relatedEntityName.includes(search.toLowerCase())
       );
     });
     return (
