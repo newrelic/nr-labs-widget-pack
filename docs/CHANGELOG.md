@@ -1,3 +1,10 @@
+# [1.54.0](https://github.com/newrelic/nr-labs-widget-pack/compare/v1.53.2...v1.54.0) (2025-05-29)
+
+
+### Features
+
+* media player viz ([3ec5907](https://github.com/newrelic/nr-labs-widget-pack/commit/3ec5907d300ccb27564cae7c22a066b7d7db7e90))
+
 ## [1.53.2](https://github.com/newrelic/nr-labs-widget-pack/compare/v1.53.1...v1.53.2) (2025-04-28)
 
 
