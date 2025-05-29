@@ -1,0 +1,32 @@
+{
+    "schemaType": "VISUALIZATION",
+    "id": "nr-media-player",
+    "displayName": "Media Player",
+    "description": "Render videos directly in New Relic dashboards.",
+    "configuration": [
+        {
+            "name": "showDocs",
+            "title": "Show Documentation",
+            "description": "",
+            "type": "boolean"
+        },
+        {
+            "name": "videoUrl",
+            "title": "Video URL",
+            "description": "Full uri to video",
+            "type": "string"
+        },
+        {
+            "name": "loopVideo",
+            "title": "Loop Video",
+            "description": "When enabled, will replay the video (loop) continuously.",
+            "type": "boolean"
+        },
+        {
+            "name": "enableDebugMode",
+            "title": "Enable Debug Mode",
+            "description": "When enabled, player events will be logged below the video.",
+            "type": "boolean"
+        }
+    ]
+}
