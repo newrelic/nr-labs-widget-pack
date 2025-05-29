@@ -200,6 +200,17 @@ Click on the short description in each section to view chart details.
   ---
 </details>
 
+### Media Player
+
+<details>
+
+  <summary>Render media streams/videos in dashboards.</summary>
+
+  <img src="screenshots/media_player_01.png" height="450" alt="Media player screenshot" />
+
+  ---
+</details>
+
 ### Area and Event Overlay Chart
 <details>
 
