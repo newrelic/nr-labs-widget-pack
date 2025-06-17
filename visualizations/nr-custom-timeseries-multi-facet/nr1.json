@@ -1,0 +1,65 @@
+{
+    "schemaType": "VISUALIZATION",
+    "id": "nr-custom-timeseries-multi-facet-chart",
+    "displayName": "Custom Timeseries - Multi Facet",
+    "description": "Labs Widget Pack - Custom Timeseries Multi Facet",
+    "configuration": [
+     {
+          "name": "showDocs",
+          "title": "Show Documentation",
+          "description": "",
+          "type": "boolean"
+      },
+      {
+          "name": "chartType",
+          "title": "Chart Type",
+          "description": "The type of timeseries chart you want to plot queries within",
+          "type": "enum",
+          "items": [
+            {
+              "title": "Line",
+              "value": "line"
+            },
+            {
+              "title": "Area",
+              "value": "area"
+            },
+            {
+              "title": "Bar",
+              "value": "bar"
+            }
+          ]
+      },
+      {
+        "name": "queries",
+        "title": "Queries",
+        "type": "collection",
+        "items": [
+          {
+              "name": "accountId",
+              "title": "Account ID",
+              "description": "Account ID to be associated with the query",
+              "type": "account-id"
+          },
+          {
+              "name": "query",
+              "title": "Query",
+              "description": "NRQL query for visualization. You must SELECT your Y value (value to plot), an optional facet (1 Max is allowed)",
+              "type": "nrql"
+          },
+          {
+            "name": "customTimestamp",
+            "title": "Custom Timestamp Name",
+            "description": "Name of custom timestamp attribute to plot along the x-axis. Must be in seconds or millseconds",
+            "type": "string"
+          },
+          {
+            "name": "limit",
+            "title": "Custom Timestamp Count",
+            "description": "How many timestamps to plot along the x-axis. Default: 2000, Max: 5000",
+            "type": "string"
+          }
+        ]
+      }
+    ]
+}

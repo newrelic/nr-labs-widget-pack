@@ -152,9 +152,9 @@ Click on the short description in each section to view chart details.
    #### Overview
    Use the Custom Timeseries Chart to plot data over your own timestamp fields ingested into New Relic.
 
-   The Custom Timeseries chart supports Line & Area chart types.
+   The Custom Timeseries chart supports Line, Area, and Bar chart types.
 
-   **NOTE: A maximum of 5000 timestamps can be plotted, when using `LIMIT MAX` clause**
+   **NOTE: A maximum of 5000 timestamps can be plotted per group/series**
 
   #### Requirements
   In order to use this chart, there are a few requirements:
@@ -165,6 +165,35 @@ Click on the short description in each section to view chart details.
 
   A valid query for the chart could look like this:
   `SELECT count(*) FROM Transaction FACET customTimestamp`
+
+  ---
+</details>
+
+### Custom Timeseries Multi Facet Chart
+
+<details>
+
+  <summary>Plot your own values over custom defined timestamps (instead of default ingest timestamps) while allowing to group by a single facet</summary>
+
+  <img src="screenshots/custom_ts_multi_01.png" height="250" alt="Custom timeseries multi chart screenshot" />
+
+   #### Overview
+   Use the Custom Timeseries Multi Facet Chart to plot data over your own timestamp fields ingested into New Relic, grouped by a facet. This chart will automatically facet by the custom timestamp field input for each unique group returned from a single facet, in order to plot values.
+
+   The Custom Timeseries chart supports Line, Area, and Bar chart types.
+
+   **NOTE: A maximum of 5000 timestamps can be plotted**
+
+  #### Requirements
+  In order to use this chart, there are a few requirements:
+  - Each query must _only_ have a single value in the `SELECT` statement, as well as the facet clause
+  - Do not use SINCE or UNTIL clauses as they will automatically be determined based on the time range picker
+  - Do not use the TIMESERIES keyword
+  - `LIMIT` clauses are only allowed when using a facet, to limit the number of unique groups plotted
+  - Custom timestamp field must be in epoch format (seconds or milliseconds) - the name of the attribute is required
+
+  A valid query for the chart could look like this:
+  `SELECT count(*) FROM Transaction FACET myAttribute LIMIT 10`
 
   ---
 </details>
