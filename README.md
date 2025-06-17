@@ -182,7 +182,7 @@ Click on the short description in each section to view chart details.
 
    The Custom Timeseries chart supports Line, Area, and Bar chart types.
 
-   **NOTE: A maximum of 5000 timestamps can be plotted**
+   **NOTE: A maximum of 5000 timestamps can be plotted per group/series**
 
   #### Requirements
   In order to use this chart, there are a few requirements:
