@@ -1,3 +1,10 @@
+# [1.55.0](https://github.com/newrelic/nr-labs-widget-pack/compare/v1.54.0...v1.55.0) (2025-06-17)
+
+
+### Features
+
+* add bar chart to custom timeseries + version that supports faceting ([0c65db4](https://github.com/newrelic/nr-labs-widget-pack/commit/0c65db48268f027b3d3c3951ad50463499e01197))
+
 # [1.54.0](https://github.com/newrelic/nr-labs-widget-pack/compare/v1.53.2...v1.54.0) (2025-05-29)
 
 
