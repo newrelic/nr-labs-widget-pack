@@ -1,5 +1,6 @@
-import React, { useState, useEffect, useMemo, useContext } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import {
+  AutoSizer,
   NrqlQuery,
   Spinner,
   LineChart,
@@ -7,6 +8,7 @@ import {
   NerdletStateContext,
   PlatformStateContext
 } from 'nr1';
+import { BarChart, Bar, XAxis, YAxis, Tooltip, Legend } from 'recharts';
 import Docs from './docs';
 import ErrorState from '../../shared/ErrorState';
 
@@ -14,6 +16,8 @@ const CustomTimeseries = props => {
   let { chartType, queries, showDocs } = props;
   const platformContext = useContext(PlatformStateContext);
   const nerdletContext = useContext(NerdletStateContext);
+  const { filters } = nerdletContext;
+  const { timeRange } = platformContext;
   const [errors, setErrors] = useState([]);
   const [nrqlResults, setNrqlResults] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -27,18 +31,17 @@ const CustomTimeseries = props => {
 
     for (let i = 0; i < data.length; i++) {
       let chartTitle = qs[i].legend;
+      const chartColor = qs[i].lineColor ? qs[i].lineColor : 'green';
 
-      if (nerdletContext) {
-        if (nerdletContext.filters) {
-          chartTitle += ` WHERE ${nerdletContext.filters}`;
-        }
+      if (filters) {
+        chartTitle += ` WHERE ${nerdletContext.filters}`;
       }
 
       const aSeries = {
         metadata: {
           id: `series-${i + 1}`,
           name: chartTitle,
-          color: qs[i].lineColor ? qs[i].lineColor : 'green',
+          color: chartColor,
           viz: 'main',
           units_data: {
             x: 'TIMESTAMP',
@@ -60,7 +63,7 @@ const CustomTimeseries = props => {
         const y = r.data[0].y;
         // console.log({ x, y });
         if (!isNaN(x)) {
-          aSeries.data.push({ x: x, y: y });
+          aSeries.data.push({ x, y });
         }
       }
 
@@ -75,6 +78,68 @@ const CustomTimeseries = props => {
     return timeData;
   };
 
+  const formatBarData = (data, qs) => {
+    const barData = [];
+
+    for (let i = 0; i < data.length; i++) {
+      let chartTitle = qs[i].legend;
+      const chartColor = qs[i].lineColor || 'green';
+
+      if (filters) {
+        chartTitle += ` WHERE ${filters}`;
+      }
+
+      for (const r of data[i].data) {
+        let x = null;
+        if (qs[i].timestampUnit === 'SECONDS') {
+          x = Number(r.metadata.name); // Milliseconds
+        } else {
+          x = Number(r.metadata.name) * 1000; // Seconds
+        }
+        const y = r.data[0].y;
+        // console.log({ x, y });
+        if (!isNaN(x)) {
+          barData.push({
+            x,
+            [chartTitle]: y,
+            color: chartColor,
+            legend: chartTitle
+          });
+        }
+      }
+    }
+
+    let combinedData = barData.reduce((acc, obj) => {
+      const existing = acc.find(item => item.x === obj.x);
+      if (existing) {
+        Object.keys(obj).forEach(key => {
+          if (key !== 'x' && key !== 'color' && key !== 'legend') {
+            existing[key] = obj[key];
+            existing[`${key}_color`] = obj.color;
+            existing[`${key}_legend`] = obj.legend;
+          }
+        });
+      } else {
+        const newObj = { x: obj.x };
+        Object.keys(obj).forEach(key => {
+          if (key !== 'x' && key !== 'color' && key !== 'legend') {
+            newObj[key] = obj[key];
+            newObj[`${key}_color`] = obj.color;
+            newObj[`${key}_legend`] = obj.legend;
+          }
+        });
+        acc.push(newObj);
+      }
+      return acc;
+    }, []);
+
+    const sorted = combinedData.sort((x, y) => x.x - y.x);
+
+    combinedData = sorted;
+
+    return combinedData;
+  };
+
   const fetchData = async () => {
     const allData = [];
 
@@ -83,16 +148,11 @@ const CustomTimeseries = props => {
 
       let since = '';
 
-      if (platformContext && platformContext.timeRange) {
-        if (platformContext.timeRange.duration) {
-          since = ` since ${platformContext.timeRange.duration /
-            60 /
-            1000} MINUTES AGO`;
-        } else if (
-          platformContext.timeRange.begin_time &&
-          platformContext.timeRange.end_time
-        ) {
-          since = ` since ${platformContext.timeRange.begin_time} until ${platformContext.timeRange.end_time}`;
+      if (timeRange) {
+        if (timeRange.duration) {
+          since = ` since ${timeRange.duration / 60 / 1000} MINUTES AGO`;
+        } else if (timeRange.begin_time && timeRange.end_time) {
+          since = ` since ${timeRange.begin_time} until ${timeRange.end_time}`;
         }
       }
 
@@ -100,10 +160,8 @@ const CustomTimeseries = props => {
         filteredQuery += since;
       }
 
-      if (nerdletContext) {
-        if (nerdletContext.filters) {
-          filteredQuery += ` WHERE ${nerdletContext.filters} `;
-        }
+      if (filters) {
+        filteredQuery += ` WHERE ${nerdletContext.filters} `;
       }
       const resp = await NrqlQuery.query({
         accountIds: [queries[c].accountId],
@@ -115,18 +173,77 @@ const CustomTimeseries = props => {
     return allData;
   };
 
-  const customTimeseries = useMemo(() => {
-    if (nrqlResults && errors.length === 0 && !loading) {
+  const customTimeseries = (width, height) => {
+    if (nrqlResults && errors.length === 0) {
       if (chartType === 'line') {
         return <LineChart data={nrqlResults} fullHeight fullWidth />;
       }
       if (chartType === 'area') {
         return <AreaChart data={nrqlResults} fullHeight fullWidth />;
       }
+
+      if (chartType === 'bar') {
+        const uniqueKeys = new Set();
+        nrqlResults.forEach(obj => {
+          Object.keys(obj).forEach(key => {
+            if (
+              !key.includes('color') &&
+              !key.includes('legend') &&
+              key !== 'x'
+            ) {
+              uniqueKeys.add(key);
+            }
+          });
+        });
+
+        return (
+          <BarChart
+            width={width * 0.99}
+            height={height * 0.99}
+            data={nrqlResults}
+            margin={{
+              top: 20,
+              right: 20,
+              bottom: 20,
+              left: 20
+            }}
+          >
+            <XAxis
+              dataKey="x"
+              tickFormatter={date => {
+                const d = new Date(date);
+                const mm = String(d.getMonth() + 1).padStart(2, '0');
+                const dd = String(d.getDate()).padStart(2, '0');
+                const hour = String(d.getHours()).padStart(2, '0');
+                const min = String(d.getMinutes()).padStart(2, '0');
+                return `${mm}-${dd} ${hour}:${min}`;
+              }}
+            />
+            <YAxis />
+            <Tooltip
+              labelFormatter={value => {
+                const date = new Date(value);
+                return date.toLocaleString();
+              }}
+            />
+            <Legend />
+            {[...uniqueKeys].map(key => (
+              <Bar
+                key={key}
+                dataKey={key}
+                fill={nrqlResults
+                  .map(r => r[`${key}_color`])
+                  .find(color => color)}
+                stackId="x"
+              />
+            ))}
+          </BarChart>
+        );
+      }
     }
 
     return '';
-  }, [nrqlResults, errors, loading]);
+  };
 
   useEffect(() => {
     setLoading(true);
@@ -171,15 +288,20 @@ const CustomTimeseries = props => {
   useEffect(() => {
     if (errors.length === 0) {
       const loadData = async () => {
-        setLoading(true);
         const data = await fetchData();
-        const formattedData = await formatTimeData(data, queries);
+        const flattened = data.flat();
+        let formattedData;
+        if (chartType === 'line' || chartType === 'area') {
+          formattedData = await formatTimeData(flattened, queries);
+        } else {
+          formattedData = await formatBarData(flattened, queries);
+        }
         setNrqlResults(formattedData);
         setLoading(false);
       };
       loadData();
     }
-  }, [platformContext, nerdletContext, queries]);
+  }, [filters, timeRange, queries, chartType]);
 
   if (loading) {
     return <Spinner />;
@@ -190,10 +312,14 @@ const CustomTimeseries = props => {
   }
 
   return (
-    <>
-      {showDocs && <Docs />}
-      {customTimeseries}
-    </>
+    <AutoSizer>
+      {({ width, height }) => (
+        <>
+          {showDocs && <Docs />}
+          {customTimeseries(width, height)}
+        </>
+      )}
+    </AutoSizer>
   );
 };
 

@@ -21,12 +21,14 @@ export default function Docs() {
         <CardHeader title="Overview" />
         <CardBody style={{ marginLeft: '35px' }}>
           <BlockText spacingType={[BlockText.SPACING_TYPE.MEDIUM]}>
-            Use the Custom Timeseries chart to plot your own timestamp field on
-            a line, area, or bar chart.
+            Use the Custom Timeseries Multi Facet chart to plot your own
+            timestamp field on a line, area, or bar chart, while grouping by a
+            single attribute of your choosing.
             <br />
             <br />
             The chart allows you to define multiple timeseries queries. Note
-            that a maximum of 5000 timestamps can be returned, per query.
+            that a maximum of 5000 timestamps can be returned in any given time
+            period.
           </BlockText>
         </CardBody>
       </Card>
@@ -38,16 +40,25 @@ export default function Docs() {
             <Spacing type={[Spacing.TYPE.MEDIUM, Spacing.TYPE.EXTRA_LARGE]}>
               <ul>
                 <li>
-                  At least 1 query that includes a single facet for your custom
-                  timestamp attribute
+                  At least 1 query that may include a single select value and
+                  single facet of the attribute you want to group by
                 </li>
                 <li>
                   Queries should not contain <code>TIMESERIES</code> or{' '}
                   <code>SINCE</code> clauses
                 </li>
                 <li>
-                  Required fields Account ID, Value Unit, Timestamp Unit, Legend
-                  Title must be filled in
+                  Queries may only use the <code>LIMIT</code> clause when using
+                  a facet. This controls the number of groups plotted.
+                </li>
+                <li>
+                  Queries may only use the <code>SELECT .. as ..</code> clause
+                  when no facet is supplied. This will be used as the title of
+                  the single group.
+                </li>
+                <li>
+                  Required fields Account ID and Custom Timestamp Name must be
+                  filled in
                 </li>
                 <li>
                   Custom timestamp field must be formatted as seconds or
@@ -60,7 +71,7 @@ export default function Docs() {
             </Spacing>
             <Spacing type={[Spacing.TYPE.MEDIUM, Spacing.TYPE.LARGE]}>
               <code>
-                SELECT count(*) FROM Transaction facet customTimestamp LIMIT MAX
+                SELECT count(*) FROM Transaction facet myGroup LIMIT MAX
               </code>
             </Spacing>
           </BlockText>
