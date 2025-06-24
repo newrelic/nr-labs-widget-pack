@@ -92,9 +92,10 @@ const CustomTimeseries = props => {
       for (const r of data[i].data) {
         let x = null;
         if (qs[i].timestampUnit === 'SECONDS') {
-          x = Number(r.metadata.name); // Milliseconds
-        } else {
           x = Number(r.metadata.name) * 1000; // Seconds
+        }
+        if (qs[i].timestampUnit === 'MILLISECONDS') {
+          x = Number(r.metadata.name);
         }
         const y = r.data[0].y;
         // console.log({ x, y });
