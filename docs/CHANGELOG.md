@@ -1,3 +1,10 @@
+## [1.55.1](https://github.com/newrelic/nr-labs-widget-pack/compare/v1.55.0...v1.55.1) (2025-06-24)
+
+
+### Bug Fixes
+
+* custom-timeseries time formatting ([272b30c](https://github.com/newrelic/nr-labs-widget-pack/commit/272b30cbce89dc199b216efdfdb7a7d5e6045942))
+
 # [1.55.0](https://github.com/newrelic/nr-labs-widget-pack/compare/v1.54.0...v1.55.0) (2025-06-17)
 
 
