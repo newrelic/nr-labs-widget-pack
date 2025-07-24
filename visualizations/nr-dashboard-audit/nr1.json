@@ -1,0 +1,38 @@
+{
+    "schemaType": "VISUALIZATION",
+    "id": "nr-dashboard-audit",
+    "displayName": "Dashboard Audit",
+    "description": "Display dashboard usage or audit information.",
+    "configuration": [
+        {
+            "name": "showDocs",
+            "title": "Show Documentation",
+            "description": "",
+            "type": "boolean"
+        },
+        {
+            "name": "accountId",
+            "title": "Account ID",
+            "description": "Account ID query will be executed against",
+            "type": "account-id"
+        },
+        {
+            "name": "query",
+            "title": "Query",
+            "description": "NRQL query for visualization. Must contain at least 1 dashboard identifier (i.e-guid, id)",
+            "type": "nrql"
+        },
+        {
+            "name": "dashboardKey",
+            "title": "Dashboard Identifier",
+            "description": "Unique identifier for dashboard (i.e-source.dashboardId, entityGuid, etc)",
+            "type": "string"
+          },
+        {
+            "name": "enableTimePicker",
+            "title": "Enable Time Picker",
+            "description": "Allows the use of the time picker when enabled",
+            "type": "boolean"
+        }
+    ]
+}

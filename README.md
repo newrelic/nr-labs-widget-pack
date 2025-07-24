@@ -209,6 +209,17 @@ Click on the short description in each section to view chart details.
   ---
 </details>
 
+### Dashboard Audit Chart
+
+<details>
+
+  <summary>Display table of dashboard usage or audit events where dashboard name is added automatically to dataset based on provided guid field.</summary>
+
+  <img src="screenshots/dash-audit-01.png" height="250" alt="Dashboard audit screenshot" />
+
+  ---
+</details>
+
 ### Multiline Compare Chart
 <details>
 
