@@ -1,3 +1,10 @@
+# [1.56.0](https://github.com/newrelic/nr-labs-widget-pack/compare/v1.55.1...v1.56.0) (2025-07-24)
+
+
+### Features
+
+* dashboard audit widget ([8d75248](https://github.com/newrelic/nr-labs-widget-pack/commit/8d752484e79e6e136d1235b87700dc2f49892464))
+
 ## [1.55.1](https://github.com/newrelic/nr-labs-widget-pack/compare/v1.55.0...v1.55.1) (2025-06-24)
 
 
