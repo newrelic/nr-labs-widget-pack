@@ -34,7 +34,7 @@
         "react-leaflet-marker": "^1.1.4",
         "react-map-gl": "^7.0.19",
         "react-player": "^2.16.0",
-        "recharts": "^2.15.3"
+        "recharts": "^2.15.4"
     },
     "ids": {
         "am": "c2fab1ee-57c3-43d6-bc5c-c7343ecaff0c",
