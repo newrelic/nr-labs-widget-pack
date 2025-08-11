@@ -1,0 +1,125 @@
+{
+    "schemaType": "VISUALIZATION",
+    "id": "nr-status-page",
+    "displayName": "Status Page",
+    "description": "Display various status page feeds in a dashboard.",
+    "configuration": [
+      {
+        "name": "showDocs",
+        "title": "Show Documentation",
+        "description": "",
+        "type": "boolean"
+      },
+      {
+        "name": "provider",
+        "title": "Status Provider",
+        "description": "Provider of desired status page (Required)",
+        "type": "enum",
+        "items": [
+          {
+            "title": "Select",
+            "value": "select"
+          },
+          {
+            "title": "Status Page",
+            "value": "statusPage"
+          },
+          {
+            "title": "Google",
+            "value": "google"
+          },
+          {
+            "title": "Status IO",
+            "value": "statusIO"
+          },
+          {
+            "title": "NRQL",
+            "value": "nrql"
+          },
+          {
+            "title": "Workload",
+            "value": "workload"
+          },
+          {
+            "title": "RSS Feed",
+            "value": "rss"
+          },
+          {
+            "title": "Status Pal",
+            "value": "statusPal"
+          }
+        ]
+      },
+      {
+        "name": "serviceTitle",
+        "title": "Service Title/Image",
+        "description": "Title of Status Widget - accepts a public URL to a logo or plain text (Required)",
+        "type": "string"
+      },
+      {
+        "name": "statusInput",
+        "title": "Status Input",
+        "description": "Status URL, NRQL Query, or Workload Guid of desired status data to render (Required)",
+        "type": "string"
+      },
+      {
+        "name": "accountId",
+        "title": "Account ID",
+        "description": "Account ID associated with query or workload guid (only applicable for NRQL or Workload providers)",
+        "type": "account-id"
+      },
+      {
+        "name": "corsProxy",
+        "title": "CORS Proxy",
+        "description": "A CORS proxy to access status page service (Optional)",
+        "type": "string"
+      },
+      {
+        "name": "statusPalPageLink",
+        "title": "StatusPal Page Link",
+        "description": "A direct link to the Status Pal based page (Optional)",
+        "type": "string"
+      },
+      {
+        "name": "pollInterval",
+        "title": "Select Poll Interval (seconds) default 60s",
+        "description": "",
+        "type": "enum",
+        "items": [
+          {
+            "title": "Select",
+            "value": 60
+          },
+          {
+            "title": "5s",
+            "value": 5
+          },
+          {
+            "title": "10s",
+            "value": 10
+          },
+          {
+            "title": "15s",
+            "value": 15
+          },
+          {
+            "title": "30s",
+            "value": 30
+          },
+          {
+            "title": "45s",
+            "value": 45
+          },
+          {
+            "title": "1m",
+            "value": 60
+          },
+          {
+            "title": "5m",
+            "value": 300
+          }
+        ]
+      }
+
+    ]
+}

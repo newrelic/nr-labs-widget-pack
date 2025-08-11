@@ -307,6 +307,72 @@ Click on the short description in each section to view chart details.
     ---
 </details>
 
+### Status Page
+
+<details>
+
+  <summary> Display a single status feed in a dashboard.</summary>
+
+  <img src="screenshots/status_page_01.png" height="250" alt="Status Page screenshot" />
+
+   #### Overview
+   Use the Status Page widget to display a single status feed in a dashboard. Currently supported providers are Status Page, Google, Status IO, NRQL, New Relic Workload, RSS, and Status Pal.
+
+   Clicking the header will navigate to the status page configured in a new tab. Clicking the current status or any of the most 5 recent incidents will open a modal with more details on the incident selected, or a list of all past incidents.
+
+   **NOTE: For Status Pal providers, the Status Input must be a valid subdomain. For NRQL/Workload providers, an accountId must be provided.**
+
+  #### Requirements
+  In order to use this chart, there are a few requirements:
+  - A provider, service title/image, and status input must be filled in at minimum
+  - A custom CORS proxy can be used to access a status page. The format must include `{url}` in the string that will be replaced with the provided status input. Example:
+
+  ```bash
+  https://cors-anywhere.herokuapp.com/{url}
+  ```
+
+ - When using a `Status Pal` provider with no CORS proxy configured, you must request access to the public proxy used in the viz each time the widget is loaded by navigating to `https://cors-anywhere.herokuapp.com` and clicking `request access` button.
+
+ ### Example Inputs
+
+ The following are example status inputs for each provider type:
+
+ #### Status Page
+  - [https://www.githubstatus.com/](https://www.githubstatus.com/)
+  - [https://jira-software.status.atlassian.com/](https://jira-software.status.atlassian.com/)
+  - [https://status.digitalocean.com/](https://status.digitalocean.com/)
+  - [https://status.hashicorp.com/](https://status.hashicorp.com/)
+
+ #### Google
+  - [https://status.cloud.google.com](https://status.cloud.google.com)
+
+#### Status IO
+  - [https://ezidebit.status.io/pages/history/598a973f96a8201305000142](https://ezidebit.status.io/pages/history/598a973f96a8201305000142)
+  - [https://status.docker.com/pages/history/533c6539221ae15e3f000031](https://status.docker.com/pages/history/533c6539221ae15e3f000031)
+
+#### NRQL
+  NRQL queries require three fields/aliases to be returned: EventTimeStamp, EventStatus,EventName
+
+  - ```FROM NrAiIncident SELECT timestamp as EventTimeStamp, priority as EventStatus, conditionName as EventName, entity.name LIMIT 50```
+
+#### Workload
+  Workloads require the entity guid of the workload.
+
+  - ```MTYwNjg2MnxOUjF8V09SS0xPQUR8M3fimMTM4```
+
+#### RSS
+  - [https://status.newrelic.com/history.rss](https://status.newrelic.com/history.rss)
+  - [https://www.githubstatus.com/history.rss](https://www.githubstatus.com/history.rss)
+
+#### Status Pal
+  Status Pal requires the sub domain of the status page (not the full status URL).
+
+  - [galaxygate](https://status.galaxygate.net/) --> From https://status.galaxygate.net/
+  - [smtp](https://smtp.statuspal.io) --> From https://smtp.statuspal.io
+
+  ---
+</details>
+
 ### List View
 <details>
 
