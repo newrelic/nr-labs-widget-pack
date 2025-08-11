@@ -1,3 +1,10 @@
+# [1.57.0](https://github.com/newrelic/nr-labs-widget-pack/compare/v1.56.0...v1.57.0) (2025-08-11)
+
+
+### Features
+
+* status page widget ([9ec037a](https://github.com/newrelic/nr-labs-widget-pack/commit/9ec037a10b9781c02c748576a62a27106ddca6bb))
+
 # [1.56.0](https://github.com/newrelic/nr-labs-widget-pack/compare/v1.55.1...v1.56.0) (2025-07-24)
 
 
