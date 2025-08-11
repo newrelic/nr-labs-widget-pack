@@ -333,24 +333,24 @@ Click on the short description in each section to view chart details.
 
  - When using a `Status Pal` provider with no CORS proxy configured, you must request access to the public proxy used in the viz each time the widget is loaded by navigating to `https://cors-anywhere.herokuapp.com` and clicking `request access` button.
 
- ### Example Inputs
+ #### Example Inputs
 
  The following are example status inputs for each provider type:
 
- #### Status Page
+ ##### Status Page
   - [https://www.githubstatus.com/](https://www.githubstatus.com/)
   - [https://jira-software.status.atlassian.com/](https://jira-software.status.atlassian.com/)
   - [https://status.digitalocean.com/](https://status.digitalocean.com/)
   - [https://status.hashicorp.com/](https://status.hashicorp.com/)
 
- #### Google
+ ##### Google
   - [https://status.cloud.google.com](https://status.cloud.google.com)
 
-#### Status IO
+##### Status IO
   - [https://ezidebit.status.io/pages/history/598a973f96a8201305000142](https://ezidebit.status.io/pages/history/598a973f96a8201305000142)
   - [https://status.docker.com/pages/history/533c6539221ae15e3f000031](https://status.docker.com/pages/history/533c6539221ae15e3f000031)
 
-#### NRQL
+##### NRQL
   NRQL queries require three fields/aliases to be returned: EventTimeStamp, EventStatus,EventName
 
   - ```FROM NrAiIncident SELECT timestamp as EventTimeStamp, priority as EventStatus, conditionName as EventName, entity.name LIMIT 50```
@@ -360,11 +360,11 @@ Click on the short description in each section to view chart details.
 
   - ```MTYwNjg2MnxOUjF8V09SS0xPQUR8M3fimMTM4```
 
-#### RSS
+##### RSS
   - [https://status.newrelic.com/history.rss](https://status.newrelic.com/history.rss)
   - [https://www.githubstatus.com/history.rss](https://www.githubstatus.com/history.rss)
 
-#### Status Pal
+##### Status Pal
   Status Pal requires the sub domain of the status page (not the full status URL).
 
   - [galaxygate](https://status.galaxygate.net/) --> From https://status.galaxygate.net/
