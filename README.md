@@ -120,6 +120,24 @@ Click on the short description in each section to view chart details.
   ---
 </details>
 
+### Status Gauge Chart
+
+<details>
+
+  <summary>Display the distribution of a single value into a horizontal bar based on defined thresholds, in conjunction with an optional status table</summary>
+
+  <img src="screenshots/status_billboard_01.png" height="250" alt="Status billboard chart screenshot" />
+
+  #### Requirements
+  In order to use this chart, there are a few requirements:
+  - Each query must return a single value result (only a single select value, no facet clauses)
+  - An accountId, thresholds, and unit definition must be specified
+
+  A valid query could look like this:
+  `FROM PageViewTiming SELECT percentile(largestContentfulPaint, 75) where entityGuid = 'MTYwNjg2MnxCUk9XU0VSfEFQUExJQ0FUSU9OfDQzMTkyMzEx'`
+  ---
+</details>
+
 ### Alert Billboard Chart
 
 <details>

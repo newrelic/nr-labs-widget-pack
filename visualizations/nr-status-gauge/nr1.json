@@ -1,0 +1,174 @@
+{
+    "schemaType": "VISUALIZATION",
+    "id": "nr-status-gauge",
+    "displayName": "Status Gauge",
+    "description": "Display a single value in conjunction with a status bar and optional table based on defined thresholds",
+    "configuration": [
+        {
+            "name": "showDocs",
+            "title": "Show Documentation",
+            "description": "",
+            "type": "boolean"
+        },
+        {
+            "name": "pollInterval",
+            "title": "Select Poll Interval (seconds) default 60s",
+            "description": "",
+            "type": "enum",
+            "items": [
+              {
+                "title": "Select",
+                "value": 60
+              },
+              {
+                "title": "5s",
+                "value": 5
+              },
+              {
+                "title": "10s",
+                "value": 10
+              },
+              {
+                "title": "15s",
+                "value": 15
+              },
+              {
+                "title": "30s",
+                "value": 30
+              },
+              {
+                "title": "45s",
+                "value": 45
+              },
+              {
+                "title": "1m",
+                "value": 60
+              },
+              {
+                "title": "5m",
+                "value": 300
+              }
+            ]
+        },
+        {
+            "name": "enableTimePicker",
+            "title": "Enable Time Picker",
+            "description": "Allows the use of the time picker",
+            "type": "boolean"
+        },
+        {
+            "name": "enableFilters",
+            "title": "Enable dashboard filters",
+            "description": "Allows the use of dashboard filters",
+            "type": "boolean"
+        },
+        {
+          "name": "account",
+          "title": "Account ID",
+          "description": "Account ID to be associated with query",
+          "type": "account-id"
+        },
+        {
+          "name": "query",
+          "title": "NRQL Query",
+          "description": "NRQL query to populate component",
+          "type": "nrql"
+        },
+        {
+          "name": "criticalThreshold",
+          "title": "Threshold - Critical",
+          "description": "Numeric value that controls when critical will be rendered (greater than this threshold)",
+          "type": "string"
+        },
+        {
+          "name": "healthyThreshold",
+          "title": "Threshold - Healthy",
+          "description": "Numeric value that controls when healthy will be rendered (less than or equal to this value)",
+          "type": "string"
+        },
+        {
+          "name": "billboardUnits",
+          "title": "Billboard Units",
+          "description": "",
+          "type": "enum",
+          "items": [
+            {
+              "title": "SELECT",
+              "value": "select"
+            },
+            {
+              "title": "BYTES",
+              "value": "bytes"
+            },
+            {
+              "title": "BYTES_PER_MS",
+              "value": "bpms"
+            },
+            {
+              "title": "BYTES_PER_SECOND",
+              "value": "bps"
+            },
+            {
+              "title": "COUNT",
+              "value": " "
+            },
+            {
+              "title": "MS",
+              "value": "ms"
+            },
+            {
+              "title": "PAGES_PER_SECOND",
+              "value": "pps"
+            },
+            {
+              "title": "PERCENTAGE",
+              "value": "%"
+            },
+            {
+              "title": "REQUESTS_PER_SECOND",
+              "value": "rps"
+            },
+            {
+              "title": "SECONDS",
+              "value": "s"
+            }
+          ]
+        },
+        {
+            "name": "barSize",
+            "title": "Status Bar Size",
+            "description": "Controls the height of the status bar",
+            "type": "enum",
+            "items": [
+            {
+              "title": "Small (default)",
+              "value": "small"
+            },
+            {
+              "title": "Medium",
+              "value": "medium"
+            },
+            {
+              "title": "Large",
+              "value": "large"
+            },
+            {
+              "title": "Extra Large",
+              "value": "extra-large"
+            }
+          ]
+        },
+        {
+            "name": "showTable",
+            "title": "Show Breakdown Table",
+            "description": "Displays percentage breakdown table of counts that fall under each threshold bucket",
+            "type": "boolean"
+        },
+        {
+          "name": "tableTitle",
+          "title": "Table Title",
+          "description": "Title of percentage breakdown table",
+          "type": "string"
+        }
+    ]
+}
