@@ -124,7 +124,7 @@ Click on the short description in each section to view chart details.
 
 <details>
 
-  <summary>Display a single value in conjunction with status table based on defined thresholds</summary>
+  <summary>Display the distribution of a single value into a horizontal bar based on defined thresholds, in conjunction with an optional status table</summary>
 
   <img src="screenshots/status_billboard_01.png" height="250" alt="Status billboard chart screenshot" />
 

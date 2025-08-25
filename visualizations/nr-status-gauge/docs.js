@@ -22,7 +22,7 @@ export default function Docs() {
         <CardBody style={{ marginLeft: '35px' }}>
           <BlockText spacingType={[BlockText.SPACING_TYPE.MEDIUM]}>
             Use the Status Gauge widget to display a single value result in
-            conjunction with thresholds that render a status, as well as an
+            conjunction with thresholds that render a status bar, as well as an
             optional table that breaks down the result value into percentage
             buckets of a user defined count unit (i.e - page views,
             transactions, etc).
