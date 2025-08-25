@@ -1,0 +1,108 @@
+//Status variables
+$success: #01A76A;
+$warning: #ffd23d;
+$critical: #F5554B;
+$unknown: #9EA5A9;
+
+.billboard {
+    display: inline-flex;
+}
+
+.threshold {
+    margin-left: 8px;
+    margin-top: 4px;
+
+    &.success {
+        color: $success;
+      }
+    &.warning {
+        color: $warning;
+    }
+    &.critical {
+        color: $critical;
+    }
+    &.unknown {
+        color: $unknown;
+    }
+}
+
+.status-bar {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+
+.status-bar-value {
+    position: relative;
+    left: 75%;
+    justify-content: center;
+    margin-bottom: 2px;
+    width: 100px;
+    text-align: center;
+}
+
+.status-bar-gauge {
+    font-size: 20px;
+    margin: 0;
+}
+
+.status-bar-lines {
+    display: flex;
+    width: 100%;
+}
+
+.good-line {
+    height: 8px;
+    width: 100%;
+    background-color: $success;
+}
+
+.warning-line {
+    height: 8px;
+    width: 100%;
+    background-color: $warning;
+}
+
+.critical-line {
+    height: 8px;
+    width: 100%;
+    background-color: $critical
+}
+
+.table-title {
+    text-align: right;
+    margin-bottom: 2px;
+}
+
+.table-hr {
+  margin: 4px 0 4px 0;
+  border: 0.5px solid #3a444b
+}
+
+.table-row {
+    display: flex;
+    justify-content: space-between;
+}
+
+.table-score {
+    display: flex;
+}
+
+.good-text {
+    color: $success;
+    margin-right: 4px;
+}
+
+.warning-text {
+    color: $warning;
+    margin-right: 4px;
+}
+
+.critical-text {
+    color: $critical;
+    margin-right: 4px;
+}
+
+.percent-text {
+    text-align: right;
+}

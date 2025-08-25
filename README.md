@@ -120,6 +120,24 @@ Click on the short description in each section to view chart details.
   ---
 </details>
 
+### Status Billboard Chart
+
+<details>
+
+  <summary>Display a single value in conjunction with status table based on defined thresholds</summary>
+
+  <img src="screenshots/status_billboard_01.png" height="250" alt="Status billboard chart screenshot" />
+
+  #### Requirements
+  In order to use this chart, there are a few requirements:
+  - Each query must return a single value result (only a single select value, no facet clauses)
+  - An accountId, thresholds, and unit definition must be specified
+
+  A valid query could look like this:
+  `FROM PageViewTiming SELECT percentile(largestContentfulPaint, 75) where entityGuid = 'MTYwNjg2MnxCUk9XU0VSfEFQUExJQ0FUSU9OfDQzMTkyMzEx'`
+  ---
+</details>
+
 ### Alert Billboard Chart
 
 <details>
