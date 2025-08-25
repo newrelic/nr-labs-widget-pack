@@ -1,3 +1,16 @@
+# [1.58.0](https://github.com/newrelic/nr-labs-widget-pack/compare/v1.57.0...v1.58.0) (2025-08-25)
+
+
+### Bug Fixes
+
+* add sizing prop for status bar ([ac6c484](https://github.com/newrelic/nr-labs-widget-pack/commit/ac6c484d19e115125b6982d56856fa80377de6c2))
+* rename widget;make table optional ([0bf7b3c](https://github.com/newrelic/nr-labs-widget-pack/commit/0bf7b3c5e84acbabb290fc7648a802197cbc529e))
+
+
+### Features
+
+* status billboard chart ([17d6be1](https://github.com/newrelic/nr-labs-widget-pack/commit/17d6be14a4a07419f7fbe56f2a6173b379da1ca0))
+
 # [1.57.0](https://github.com/newrelic/nr-labs-widget-pack/compare/v1.56.0...v1.57.0) (2025-08-11)
 
 
