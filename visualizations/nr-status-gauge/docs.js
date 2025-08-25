@@ -21,12 +21,11 @@ export default function Docs() {
         <CardHeader title="Overview" />
         <CardBody style={{ marginLeft: '35px' }}>
           <BlockText spacingType={[BlockText.SPACING_TYPE.MEDIUM]}>
-            Use the Status Billboard widget to display a single value result in
-            conjunction with thresholds that render a status, as well as a table
-            that breaks down the result value into percentage buckets of a user
-            defined count unit (i.e - page views, transactions, etc). This viz
-            replicates the Core Web Vitals widgets present for browser-based
-            entities.
+            Use the Status Gauge widget to display a single value result in
+            conjunction with thresholds that render a status, as well as an
+            optional table that breaks down the result value into percentage
+            buckets of a user defined count unit (i.e - page views,
+            transactions, etc).
             <br />
             <br />
             For example, if an average duration for a microservice has a value

@@ -1,8 +1,8 @@
 {
     "schemaType": "VISUALIZATION",
-    "id": "nr-status-billboard",
-    "displayName": "Status Billboard",
-    "description": "Display a single value in conjunction with status table based on defined thresholds",
+    "id": "nr-status-gauge",
+    "displayName": "Status Gauge",
+    "description": "Display a single value in conjunction with a status bar and optional table based on defined thresholds",
     "configuration": [
         {
             "name": "showDocs",
@@ -110,7 +110,7 @@
             },
             {
               "title": "COUNT",
-              "value": ""
+              "value": " "
             },
             {
               "title": "MS",
@@ -133,6 +133,12 @@
               "value": "s"
             }
           ]
+        },
+        {
+            "name": "showTable",
+            "title": "Show Breakdown Table",
+            "description": "Displays percentage breakdown table of counts that fall under each threshold bucket",
+            "type": "boolean"
         },
         {
           "name": "tableTitle",

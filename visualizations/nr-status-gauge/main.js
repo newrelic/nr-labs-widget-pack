@@ -47,6 +47,7 @@ export default function StatusBillboard(props) {
     criticalThreshold,
     healthyThreshold,
     billboardUnits,
+    showTable,
     tableTitle
   } = props;
 
@@ -106,6 +107,10 @@ export default function StatusBillboard(props) {
     }
 
     setErrors(tempErrors);
+
+    if (!firstLoadComplete) {
+      setFirstLoadComplete(true);
+    }
   }, [
     account,
     query,
@@ -147,9 +152,6 @@ export default function StatusBillboard(props) {
       healthyThreshold,
       timeQuery
     );
-    if (!firstLoadComplete) {
-      setFirstLoadComplete(true);
-    }
     await setData(final);
     await setLoading(false);
   };
@@ -200,13 +202,15 @@ export default function StatusBillboard(props) {
           tableData={data.tableResult}
           unit={billboardUnits || ''}
         />
-        <StatusTable
-          tableData={data.tableResult}
-          criticalThreshold={criticalThreshold}
-          healthyThreshold={healthyThreshold}
-          tableTitle={tableTitle || ''}
-          unit={billboardUnits || ''}
-        />
+        {showTable && (
+          <StatusTable
+            tableData={data.tableResult}
+            criticalThreshold={criticalThreshold}
+            healthyThreshold={healthyThreshold}
+            tableTitle={tableTitle || ''}
+            unit={billboardUnits || ''}
+          />
+        )}
       </>
     );
   }

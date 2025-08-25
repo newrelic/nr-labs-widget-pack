@@ -120,7 +120,7 @@ Click on the short description in each section to view chart details.
   ---
 </details>
 
-### Status Billboard Chart
+### Status Gauge Chart
 
 <details>
 
