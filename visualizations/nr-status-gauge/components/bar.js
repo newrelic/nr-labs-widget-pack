@@ -1,7 +1,7 @@
 import React from 'react';
 import { HeadingText, Icon } from 'nr1';
 
-const Bar = ({ billboardGauge, tableData, unit }) => {
+const Bar = ({ billboardGauge, tableData, unit, barSize }) => {
   const offsets = {
     offset1: Number(tableData.healthy) / 100,
     offset2: Number(tableData.warning) / 100,
@@ -24,13 +24,13 @@ const Bar = ({ billboardGauge, tableData, unit }) => {
       </div>
       <div className="status-bar-lines">
         <span style={{ flexGrow: `${offsets.offset1}` }}>
-          <div className="good-line" />
+          <div className={`good-line ${barSize}`} />
         </span>
         <span style={{ flexGrow: `${offsets.offset2}` }}>
-          <div className="warning-line" />
+          <div className={`warning-line ${barSize}`} />
         </span>
         <span style={{ flexGrow: `${offsets.offset3}` }}>
-          <div className="critical-line" />
+          <div className={`critical-line ${barSize}`} />
         </span>
       </div>
     </div>

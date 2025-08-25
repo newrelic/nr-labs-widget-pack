@@ -135,6 +135,30 @@
           ]
         },
         {
+            "name": "barSize",
+            "title": "Status Bar Size",
+            "description": "Controls the height of the status bar",
+            "type": "enum",
+            "items": [
+            {
+              "title": "Small (default)",
+              "value": "small"
+            },
+            {
+              "title": "Medium",
+              "value": "medium"
+            },
+            {
+              "title": "Large",
+              "value": "large"
+            },
+            {
+              "title": "Extra Large",
+              "value": "extra-large"
+            }
+          ]
+        },
+        {
             "name": "showTable",
             "title": "Show Breakdown Table",
             "description": "Displays percentage breakdown table of counts that fall under each threshold bucket",

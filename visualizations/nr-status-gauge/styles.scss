@@ -4,6 +4,12 @@ $warning: #ffd23d;
 $critical: #F5554B;
 $unknown: #9EA5A9;
 
+//Bar size variables
+$small: 8px;
+$medium: 16px;
+$large: 24px;
+$xl: 32px;
+
 .billboard {
     display: inline-flex;
 }
@@ -52,21 +58,66 @@ $unknown: #9EA5A9;
 }
 
 .good-line {
-    height: 8px;
     width: 100%;
     background-color: $success;
+
+    &.small {
+        height: $small;
+    }
+
+    &.medium {
+        height: $medium;
+    }
+
+    &.large {
+        height: $large;
+    }
+
+    &.extra-large {
+        height: $xl;
+    }
 }
 
 .warning-line {
-    height: 8px;
     width: 100%;
     background-color: $warning;
+
+    &.small {
+        height: $small;
+    }
+
+    &.medium {
+        height: $medium;
+    }
+
+    &.large {
+        height: $large;
+    }
+
+    &.extra-large {
+        height: $xl;
+    }
 }
 
 .critical-line {
-    height: 8px;
     width: 100%;
-    background-color: $critical
+    background-color: $critical;
+
+    &.small {
+        height: $small;
+    }
+
+    &.medium {
+        height: $medium;
+    }
+
+    &.large {
+        height: $large;
+    }
+
+    &.extra-large {
+        height: $xl;
+    }
 }
 
 .table-title {

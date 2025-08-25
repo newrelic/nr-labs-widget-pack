@@ -47,6 +47,7 @@ export default function StatusBillboard(props) {
     criticalThreshold,
     healthyThreshold,
     billboardUnits,
+    barSize,
     showTable,
     tableTitle
   } = props;
@@ -201,6 +202,7 @@ export default function StatusBillboard(props) {
           billboardGauge={data.billboardResult || null}
           tableData={data.tableResult}
           unit={billboardUnits || ''}
+          barSize={barSize || 'small'}
         />
         {showTable && (
           <StatusTable
