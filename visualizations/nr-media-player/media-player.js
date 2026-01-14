@@ -58,6 +58,7 @@ const MediaPlayer = ({ showDocs, videoUrl, loopVideo, enableDebugMode }) => {
     <>
       {showDocs && <Docs />}
       <ReactPlayer
+        className="disable-dark-mode"
         url={videoUrl}
         playing={!!videoUrl}
         width="100%"
