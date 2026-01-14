@@ -1,3 +1,10 @@
+## [1.58.1](https://github.com/newrelic/nr-labs-widget-pack/compare/v1.58.0...v1.58.1) (2026-01-14)
+
+
+### Bug Fixes
+
+* add disable-dark-mode class [media-player] ([98bd90b](https://github.com/newrelic/nr-labs-widget-pack/commit/98bd90bc869e4107893a24817a67aa5193652a4e))
+
 # [1.58.0](https://github.com/newrelic/nr-labs-widget-pack/compare/v1.57.0...v1.58.0) (2025-08-25)
 
 
