@@ -1,17 +1,82 @@
-.EmptyState,
-.ErrorState {
+// Cumulative chart container and Recharts styling
+.cumulative-chart-container {
+    width: 100%;
     height: 100%;
-    text-align: center;
 
-    &-cardBody {
-        height: 100%;
-        box-sizing: border-box;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
+    --grid-color: #afafaf;
+    --axis-color: #6b7280;
+    --tick-color: #9ca3af;
+    --tooltip-bg: #1d252c;
+    --tooltip-border: #3a3f47;
+    --tooltip-label: #e5e7eb;
+    --legend-hidden-color: #6b7280;
+    --warning-threshold-color: #ffd23d;
+    --critical-threshold-color: #df2d24;
+    --healthy-threshold-color: #02865b;
+
+    // Recharts overrides for similar nr1 styling
+    .recharts-wrapper {
+        font-family: 'Open Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    }
+
+    .recharts-cartesian-grid-horizontal line {
+        stroke: var(--grid-color);
+    }
+
+    .recharts-tooltip-wrapper {
+        .recharts-default-tooltip {
+            background-color: var(--tooltip-bg) !important;
+            border-color: var(--tooltip-border) !important;
+            border-radius: 4px;
+            padding: 8px 12px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+
+            .recharts-tooltip-label {
+                color: var(--tooltip-label);
+                margin-bottom: 4px;
+                font-weight: 600;
+            }
+
+            .recharts-tooltip-item {
+                color: var(--tooltip-label);
+                padding: 2px 0;
+            }
+
+            .recharts-tooltip-item-name,
+            .recharts-tooltip-item-value {
+                color: inherit;
+            }
+        }
+    }
+
+    .recharts-legend-wrapper {
+        .recharts-legend-item {
+            cursor: pointer;
+
+            .recharts-legend-item-text {
+                color: var(--tick-color) !important;
+                font-size: 12px;
+            }
+        }
+    }
+
+    .recharts-xAxis,
+    .recharts-yAxis {
+        .recharts-cartesian-axis-tick-value {
+            fill: var(--tick-color);
+            font-size: 11px;
+        }
     }
 }
 
-.ErrorState-headingText {
-    color: darkgrey;
+[data-color-scheme='light'] {
+    .cumulative-chart-container {
+        --grid-color: #e5e7eb;
+        --axis-color: #9ca3af;
+        --tick-color: #6b7280;
+        --tooltip-bg: #ffffff;
+        --tooltip-border: #e5e7eb;
+        --tooltip-label: #1f2937;
+        --legend-hidden-color: #9ca3af;
+    }
 }

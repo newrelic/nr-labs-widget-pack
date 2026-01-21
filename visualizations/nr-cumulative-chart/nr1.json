@@ -23,6 +23,58 @@
         "type": "nrql"
       },
       {
+        "name": "xFormat",
+        "title": "X Axis Date Format (default: hh:mm)",
+        "description": "The x-axis format is powered by dayjs. View their documentation for other configuration options.",
+        "type": "string"
+      },
+      {
+        "name": "units",
+        "title": "Y-Axis Unit (default: count)",
+        "description": "Unit of measurement for data being plotted on the Y-axis.",
+        "type": "enum",
+        "items": [
+          {
+            "title": "Count",
+            "value": "COUNT"
+          },
+          {
+            "title": "Bytes",
+            "value": "BYTES"
+          },
+          {
+            "title": "Milliseconds",
+            "value": "MILLISECONDS"
+          },
+          {
+            "title": "Seconds",
+            "value": "SECONDS"
+          },
+          {
+            "title": "Percentage",
+            "value": "PERCENTAGE"
+          }
+        ]
+      },
+      {
+        "name": "criticalThreshold",
+        "title": "Threshold - Critical",
+        "description": "Range of values (or single value) that renders a critical state background",
+        "type": "string"
+      },
+      {
+        "name": "warningThreshold",
+        "title": "Threshold - Warning",
+        "description": "Range of values (or single value) that renders a warning state background",
+        "type": "string"
+      },
+      {
+        "name": "healthyThreshold",
+        "title": "Threshold - Healthy",
+        "description": "Range of values (or single value) that renders a healthy state background",
+        "type": "string"
+      },
+      {
         "name": "chartType",
         "title": "Chart Type (default: line)",
         "description": "",
