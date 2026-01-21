@@ -1,3 +1,10 @@
+## [1.58.2](https://github.com/newrelic/nr-labs-widget-pack/compare/v1.58.1...v1.58.2) (2026-01-21)
+
+
+### Bug Fixes
+
+* cumulative timeseries predict support;more chart opts ([0156aa0](https://github.com/newrelic/nr-labs-widget-pack/commit/0156aa0c968fc9186fe3edb1f97ce13688a148d2))
+
 ## [1.58.1](https://github.com/newrelic/nr-labs-widget-pack/compare/v1.58.0...v1.58.1) (2026-01-14)
 
 
