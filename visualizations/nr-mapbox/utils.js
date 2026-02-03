@@ -1,6 +1,23 @@
 const cities = require('./cities.json');
 
 export const excludedKeys = ['entity.guid', 'isWorkload'];
+export const excludedStrings = [
+  'name:',
+  'rotate:',
+  'facet',
+  'locName',
+  'data',
+  'mapWidget.coordinates',
+  'threshold_',
+  'tooltip_',
+  'dash_',
+  'popup_',
+  'geo',
+  'link',
+  'icon_',
+  'value',
+  'custom_color'
+];
 
 export const evaluateMarker = (sample, markerThresholds) => {
   if (sample && markerThresholds && markerThresholds.length > 0) {
@@ -20,6 +37,7 @@ export const evaluateMarker = (sample, markerThresholds) => {
         nullHandling,
         zeroHandling,
         emptyHandling,
+        status,
         markerColor,
         bgColor,
         fontColor,
@@ -29,6 +47,7 @@ export const evaluateMarker = (sample, markerThresholds) => {
       } = sortedThresholds[z];
 
       const marker = {
+        status: status || null,
         markerColor,
         bgColor,
         fontColor,

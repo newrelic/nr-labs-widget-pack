@@ -36,10 +36,20 @@ const timeRangeToNrql = timeRange => {
   }
 };
 
+// Format NRQL query for embedding in GraphQL query param
+const sanitizedNrql = query => {
+  return query
+    .replace(/\r?\n/g, ' ') // Replace newlines with spaces
+    .replace(/\s+/g, ' ') // Collapse multiple spaces into one
+    .trim() // Remove leading/trailing whitespace
+    .replace(/\\/g, '\\\\') // Escape backslashes
+    .replace(/"/g, '\\"'); // Escape double quotes
+};
+
 const gqlNrqlQuery = (accountId, query) => `{
   actor {
     account(id: ${accountId}) {
-      nrql(query: "${query}", timeout: 120) {
+      nrql(query: "${sanitizedNrql(query)}", timeout: 120) {
         results
       }
     }
@@ -54,12 +64,16 @@ function MapSystemRoot(props) {
     pollInterval,
     mapSystem,
     showDocs,
-    debugEnabled
+    debugEnabled,
+    regionQuery,
+    regionAccountId,
+    enableRegionTimePicker = true
   } = props;
   const [errors, setErrors] = useState([]);
   const [loading, setLoading] = useState(true);
   // const [fetching, setFetching] = useState(false);
   const [mapLocations, setMapLocations] = useState([]);
+  const [regionData, setRegionData] = useState([]);
   const { filters } = useContext(NerdletStateContext);
   const platformContext = useContext(PlatformStateContext);
   const { timeRange } = platformContext;
@@ -99,9 +113,9 @@ function MapSystemRoot(props) {
 
     if (errors.length === 0) {
       // eslint-disable-next-line
-      console.log(`fetching data @ ${new Date().toLocaleTimeString()}`);
-      // build array of promises to fetch data
+      debugEnabled && console.log(`fetching data @ ${new Date().toLocaleTimeString()}`);
 
+      // build array of promises to fetch data
       let outerQuery = '';
       const dataPromises = nrqlQueries.map(nrql => {
         const { query, accountId, enableFilters, enableTimePicker } = nrql;
@@ -128,7 +142,12 @@ function MapSystemRoot(props) {
       const cleanData = nrdbResults
         .filter(result => result.status === 'fulfilled')
         .map(result => {
-          // console.log(result.value?.data?.actor?.account?.nrql);
+          if (result.value?.error) {
+            const errorMessage =
+              result.value.error.message || String(result.value.error);
+            setErrors([{ name: 'DataFetchError', errors: [errorMessage] }]);
+            return [];
+          }
           return result.value?.data?.actor?.account?.nrql?.results;
         })
         .filter(a => a)
@@ -162,6 +181,9 @@ function MapSystemRoot(props) {
 
       if (debugEnabled) {
         // eslint-disable-next-line
+        console.log('rawResponse=>', nrdbResults);
+
+        // eslint-disable-next-line
         console.log('processedData=>', cleanData);
       }
 
@@ -194,48 +216,121 @@ function MapSystemRoot(props) {
       });
 
       setMapLocations(newMapLocations);
-    }
 
-    // setFetching(false);
-  };
+      if (regionQuery && regionAccountId) {
+        try {
+          let regionQueryStr = regionQuery;
+          if (enableRegionTimePicker) {
+            regionQueryStr += ` ${timeRangeStr}`;
+          }
 
-  useEffect(async () => {
-    setLoading(true);
-    const tempErrors = [];
+          if (debugEnabled) {
+            // eslint-disable-next-line
+            console.log('Fetching region data:', regionQueryStr);
+          }
 
-    if (mapSystem === 'mapbox' && !mapBoxToken) {
-      tempErrors.push({ name: 'Map Box Access Token required' });
-    }
+          const regionResult = await NerdGraphQuery.query({
+            query: gqlNrqlQuery(regionAccountId, regionQueryStr)
+          });
 
-    nrqlQueries.forEach((nrql, index) => {
-      const lowerQuery = (nrql.query || '').toLowerCase();
-      const errorObj = { name: ` Query ${index + 1}`, errors: [] };
+          const regionResults =
+            regionResult?.data?.actor?.account?.nrql?.results || [];
 
-      if (!lowerQuery) {
-        errorObj.errors.push(`Query is undefined`);
-      } else {
-        // if (!lowerQuery.includes('facet')) {
-        //   tempErrors.push(`${index + 1}: Query should contain facet`);
-        // }
-        // eslint-disable-next-line
-        if (!lowerQuery.includes('name:')) {
-          errorObj.errors.push(
-            `Query should specify a name eg. "SELECT latest(flightNo) as 'name:Flight No' FROM..."`
-          );
+          // Process region results - extract name: prefix fields and tooltip_header
+          const processedRegions = regionResults.map(region => {
+            // Find name: prefixed field (like markers do)
+            let regionName = region.name || region.region_name;
+            let tooltipHeader = region.tooltip_header;
+
+            Object.keys(region).forEach(key => {
+              if (key.startsWith('name:')) {
+                regionName = region[key];
+                // Also set as tooltip_header if not already set
+                if (!tooltipHeader) {
+                  tooltipHeader = region[key];
+                }
+              }
+            });
+
+            // Fall back to facet if no name found
+            if (!regionName && region.facet) {
+              regionName = Array.isArray(region.facet)
+                ? region.facet[0]
+                : region.facet;
+            }
+
+            return {
+              ...region,
+              name: regionName,
+              tooltip_header: tooltipHeader,
+              value: region.value || region.count || 0
+            };
+          });
+
+          if (debugEnabled) {
+            // eslint-disable-next-line
+            console.log('Region data:', processedRegions);
+          }
+
+          setRegionData(processedRegions);
+        } catch (err) {
+          // eslint-disable-next-line no-console
+          console.error('Error fetching region data:', err);
+          setRegionData([]);
         }
       }
+    }
 
-      if (!nrql.accountId) errorObj.errors.push(`AccountID is undefined`);
+    // setFetching(false)
+  };
 
-      if (errorObj.errors.length > 0) {
-        tempErrors.push(errorObj);
+  useEffect(() => {
+    const validateConfig = () => {
+      const tempErrors = [];
+
+      if (mapSystem === 'mapbox' && !mapBoxToken) {
+        tempErrors.push({ name: 'Map Box Access Token required' });
       }
-    });
 
-    setErrors(tempErrors);
+      nrqlQueries.forEach((nrql, index) => {
+        const lowerQuery = (nrql.query || '').toLowerCase();
+        const errorObj = { name: ` Query ${index + 1}`, errors: [] };
 
-    setLoading(false);
-  }, [nrqlQueries, mapBoxToken]);
+        if (!lowerQuery) {
+          errorObj.errors.push(`Query is undefined`);
+        } else {
+          // if (!lowerQuery.includes('facet')) {
+          //   tempErrors.push(`${index + 1}: Query should contain facet`);
+          // }
+
+          // eslint-disable-next-line
+          if (!lowerQuery.includes('name:')) {
+            errorObj.errors.push(
+              `Query should specify a name eg. "SELECT latest(flightNo) as 'name:Flight No' FROM..."`
+            );
+          }
+        }
+
+        if (nrql.enableTimePicker && lowerQuery.includes('since')) {
+          errorObj.errors.push(
+            'Query should not include "since" when time picker is enabled'
+          );
+        }
+
+        if (!nrql.accountId) errorObj.errors.push(`AccountID is undefined`);
+
+        if (errorObj.errors.length > 0) {
+          tempErrors.push(errorObj);
+        }
+      });
+
+      setErrors(tempErrors);
+      setLoading(false);
+    };
+
+    setLoading(true);
+    validateConfig();
+  }, [nrqlQueries, mapBoxToken, mapSystem]);
 
   if (loading) {
     return <Spinner />;
@@ -253,6 +348,7 @@ function MapSystemRoot(props) {
         <LeafletRoot
           {...props}
           mapLocations={mapLocations}
+          regionData={regionData}
           setWorkloadStatus={setWorkloadStatus}
         />
       );

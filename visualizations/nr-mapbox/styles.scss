@@ -1,4 +1,5 @@
 @import url("https://unpkg.com/leaflet@1.9.4/dist/leaflet.css");
+@import "~react-leaflet-markercluster/dist/styles.min.css";
 
 .EmptyState,
 .ErrorState {
@@ -21,4 +22,81 @@
 
 .mapboxgl-popup-close-button{
     display: none;
+}
+
+// Custom marker cluster styles
+.marker-cluster-custom {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: transparent;
+
+  .outerPie,
+  .innerPie {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    border-radius: 50%;
+    line-height: 42px;
+    color: #ffffff;
+    background-color: inherit;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    &.innerPie {
+      width: 42px;
+      height: 42px;
+      line-height: 42px;
+    }
+
+    &.outerPie {
+      width: 54px;
+      height: 54px;
+    }
+  }
+
+  span {
+    font-size: 1em;
+    font-weight: 600;
+  }
+}
+
+// Custom marker (single) styles
+.custom-marker-icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background-clip: padding-box;
+  border-radius: 50%;
+
+  div {
+    width: 42px;
+    height: 42px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    font-size: 0.9em;
+    font-weight: 600;
+  }
+}
+
+// High density circle marker tooltip adjustments
+.leaflet-tooltip {
+  font-size: 12px;
+  padding: 4px 8px;
+}
+
+// Region heatmap styles
+.leaflet-interactive {
+  cursor: pointer;
+}
+
+// tooltip buttons
+.drilldown-btn {
+    padding-top: 4px;
 }
