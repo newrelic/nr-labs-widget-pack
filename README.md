@@ -521,8 +521,6 @@ Click on the short description in each section to view chart details.
   | `city` | No* | City name for automatic coordinate lookup from built-in database |
   | `name:YOUR_LABEL` | Recommended | Display name for the marker (e.g., `latest(city) as 'name:City'`) |
   | `rotate:YOUR_FIELD` | No | Rotation angle in degrees (Mapbox only) |
-
-  > *At least one location method is required: `lat`/`lng`, `latitude`/`longitude`, `coordinates`, or `city`
   | **Value & Display** | | |
   | `value` | No | Primary metric value used for heatmap gradients and marker labels |
   | `value_precision` | No | Decimal places for `value` when no `icon_label` is provided |
@@ -557,7 +555,7 @@ Click on the short description in each section to view chart details.
 
   | Field Name | Required | Description |
   |------------|----------|-------------|
-  | **Region Identifiers** (one required) | | |
+  | **Region Identifiers** | | |
   | `geoISOCountry` | Yes* | ISO 3166-1 alpha-2 or alpha-3 country code (e.g., "US", "USA", "GB", "GBR") |
   | `geoUSState` | Yes* | US state: 2-letter code, FIPS number, or full name (e.g., "CA", "06", "California") |
   | `geoUKRegion` | Yes* | UK region name (e.g., "London", "Scotland", "Wales", "Northern Ireland") |
