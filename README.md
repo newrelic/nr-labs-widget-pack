@@ -540,10 +540,11 @@ Click on the short description in each section to view chart details.
   | `tooltip_header` | No | Title displayed at the top of the popup (use "NONE" to hide) |
   | `tooltip_*` | No | Any field prefixed with `tooltip_` is auto-displayed in popup. Label is derived from field name (e.g., `tooltip_error_rate` → "Error rate"). Separate words with underscores. |
   | **Navigation & Linking** | | |
-  | `link` | No | External URL - clicking marker opens this URL in a new tab |
+  | `link` | No | External URL - adds "Open Link" button to popup |
   | `dash_guid` | No | New Relic dashboard GUID - adds "Open Dashboard" button to popup |
   | `dash_filter` | No | Filter string to apply when opening dashboard (e.g., `'region = \'US-West\''`) |
   | `dash_variables` | No | JSON string of dashboard variables (e.g., `'{"env": "prod"}'`) |
+  | `entityGuid` or `entity.guid` | No | Entity associated with marker - adds "Open Entity" button to popup |
   | **Region Override** | | |
   | `custom_color` | No | Hex color code to override marker/region color (e.g., `'#FF5733'`) |
 
