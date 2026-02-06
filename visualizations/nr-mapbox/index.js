@@ -117,7 +117,7 @@ function MapSystemRoot(props) {
 
       // build array of promises to fetch data
       let outerQuery = '';
-      const dataPromises = nrqlQueries.map(nrql => {
+      const dataPromises = nrqlQueries.map((nrql, queryIndex) => {
         const { query, accountId, enableFilters, enableTimePicker } = nrql;
         let newQuery = query;
         outerQuery = query;
@@ -134,24 +134,30 @@ function MapSystemRoot(props) {
 
         return NerdGraphQuery.query({
           query: gqlNrqlQuery(accountId, newQuery)
-        });
+        }).then(result => ({
+          result,
+          queryIndex,
+          useNameAsLabel: nrql.useNameAsLabel || false
+        }));
       });
 
       const nrdbResults = await Promise.allSettled(dataPromises);
 
       const cleanData = nrdbResults
         .filter(result => result.status === 'fulfilled')
-        .map(result => {
-          if (result.value?.error) {
+        .flatMap(result => {
+          const { result: queryResult, useNameAsLabel } = result.value;
+          if (queryResult?.error) {
             const errorMessage =
-              result.value.error.message || String(result.value.error);
+              queryResult.error.message || String(queryResult.error);
             setErrors([{ name: 'DataFetchError', errors: [errorMessage] }]);
             return [];
           }
-          return result.value?.data?.actor?.account?.nrql?.results;
+          const results =
+            queryResult?.data?.actor?.account?.nrql?.results || [];
+          // Attach useNameAsLabel to each data point
+          return results.map(r => ({ ...r, _useNameAsLabel: useNameAsLabel }));
         })
-        .filter(a => a)
-        .flat()
         .filter(r => {
           Object.keys(r).forEach(key => {
             if (key.startsWith('latest.')) {

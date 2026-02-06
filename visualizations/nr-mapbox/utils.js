@@ -1,6 +1,6 @@
 const cities = require('./cities.json');
 
-export const excludedKeys = ['entity.guid', 'isWorkload'];
+export const excludedKeys = ['entity.guid', 'entityGuid', 'isWorkload'];
 export const excludedStrings = [
   'name:',
   'rotate:',
@@ -10,13 +10,14 @@ export const excludedStrings = [
   'mapWidget.coordinates',
   'threshold_',
   'tooltip_',
-  'dash_',
+  'dash',
   'popup_',
   'geo',
   'link',
   'icon_',
   'value',
-  'custom_color'
+  'custom_color',
+  '_useNameAsLabel'
 ];
 
 export const evaluateMarker = (sample, markerThresholds) => {

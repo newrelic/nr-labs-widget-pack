@@ -57,6 +57,12 @@
           "type": "nrql"
         },
         {
+          "name": "useNameAsLabel",
+          "title": "Use Name As Label",
+          "description": "Use the 'name:' alias as the label for markers (doesn't apply to HD mode)",
+          "type": "boolean"
+        },
+        {
           "name": "enableFilters",
           "title": "Enable dashboard filters",
           "description": "Allows the use of dashboard filters",
@@ -418,7 +424,7 @@
     {
       "name": "regionQuery",
       "title": "Region Query (NRQL)",
-      "description": "Separate NRQL query for region data. Use geoUSState or geoUKRegion fields to match GeoJSON.",
+      "description": "Separate NRQL query for region data. Use geoISOCountry, geoUSState, geoUKRegion, or geoCANProvince fields to match GeoJSON.",
       "type": "nrql"
     },
     {

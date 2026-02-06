@@ -344,6 +344,7 @@ Click on the short description in each section to view chart details.
   - **geoISOCountry**: ISO 3166-1 alpha-2 or alpha-3 country code (e.g., "US", "USA", "GB", "GBR")
   - **geoUSState**: US state 2-letter code, FIPS number, or full name (e.g., "CA", "06", "California")
   - **geoUKRegion**: UK region name (e.g., "London", "Scotland", "Wales")
+  - **geoCANProvince**: Canadian province 2-letter code, Stats Canada ID, or full name (e.g., "ON", "35", "Ontario")
 
   Configure regional heatmaps:
   - **Region Query**: Separate NRQL query for region data
@@ -406,6 +407,7 @@ Click on the short description in each section to view chart details.
   | **NRQL Queries** (collection) | | | |
   | Account ID | account-id | - | Account ID to run the query against |
   | Query | nrql | - | NRQL query for marker data (must include `name:` alias and lat/lng) |
+  | Use Name As Label | boolean | false | Display the `name:` value as a persistent label next to each marker (does not apply to high density mode) |
   | Enable Dashboard Filters | boolean | false | Apply dashboard filter bar to this query |
   | Enable Time Picker | boolean | false | Apply dashboard time picker to this query. Remove `SINCE` clause if enabled. |
   | **Map View** | | | |
@@ -445,7 +447,7 @@ Click on the short description in each section to view chart details.
   | High Density Mode | boolean | false | Use lightweight CircleMarkers for datasets with 1000+ points |
   | High Density Radius | number | 6 | Circle radius in pixels for high density mode |
   | **Regional Heatmaps** | | | |
-  | Region Query | nrql | - | Separate NRQL query for region data (use geoISOCountry, geoUSState, or geoUKRegion) |
+  | Region Query | nrql | - | Separate NRQL query for region data (use geoISOCountry, geoUSState, geoUKRegion, or geoCANProvince) |
   | Region Account ID | account-id | - | Account ID for the region query |
   | Enable Region Time Picker | boolean | true | Apply dashboard time picker to region query. Remove `SINCE` clause if enabled. |
   | Region Colors | string | - | Comma-separated hex colors for region gradient (e.g., "#420052,#6C0485,#FFA022") |
@@ -540,10 +542,10 @@ Click on the short description in each section to view chart details.
   | `tooltip_header` | No | Title displayed at the top of the popup (use "NONE" to hide) |
   | `tooltip_*` | No | Any field prefixed with `tooltip_` is auto-displayed in popup. Label is derived from field name (e.g., `tooltip_error_rate` → "Error rate"). Separate words with underscores. |
   | **Navigation & Linking** | | |
-  | `link` | No | External URL - adds "Open Link" button to popup |
-  | `dash_guid` | No | New Relic dashboard GUID - adds "Open Dashboard" button to popup |
-  | `dash_filter` | No | Filter string to apply when opening dashboard (e.g., `'region = \'US-West\''`) |
-  | `dash_variables` | No | JSON string of dashboard variables (e.g., `'{"env": "prod"}'`) |
+  | `link_<name>` | No | External URL with custom label. Multiple links supported (e.g., `'https://example.com' as 'link_support'` → "Support" link). Label derived from `<name>` using sentence case. |
+  | `dash_guid_<name>` | No | Dashboard GUID with custom label. Multiple dashboards supported (e.g., `'NDEyMDg...' as 'dash_guid_overview'` → "Overview" link). |
+  | `dash_filter_<name>` | No | Filter string for matching dashboard `<name>` (e.g., `'region = \'US-West\'' as 'dash_filter_overview'`). |
+  | `dash_variables_<name>` | No | JSON string of variables for matching dashboard `<name>` (e.g., `'{"env": "prod"}' as 'dash_variables_overview'`). |
   | `entityGuid` or `entity.guid` | No | Entity associated with marker - adds "Open Entity" button to popup |
   | **Region Override** | | |
   | `custom_color` | No | Hex color code to override marker/region color (e.g., `'#FF5733'`) |
@@ -560,13 +562,14 @@ Click on the short description in each section to view chart details.
   | `geoISOCountry` | Yes* | ISO 3166-1 alpha-2 or alpha-3 country code (e.g., "US", "USA", "GB", "GBR") |
   | `geoUSState` | Yes* | US state: 2-letter code, FIPS number, or full name (e.g., "CA", "06", "California") |
   | `geoUKRegion` | Yes* | UK region name (e.g., "London", "Scotland", "Wales", "Northern Ireland") |
+  | `geoCANProvince` | Yes* | Canadian province: 2-letter code, Stats Canada ID, or full name (e.g., "ON", "35", "Ontario") |
   | **Value & Display** | | |
   | `value` | No | Metric value for heatmap coloring |
   | `tooltip_header` | No | Override default region name in tooltip (use "NONE" or "" to hide) |
   | `tooltip_*` | No | Additional tooltip fields (same as markers) |
   | `custom_color` | No | Hex color to override heatmap color for this region |
 
-  > *Only one of `geoISOCountry`, `geoUSState`, or `geoUKRegion` is required for region queries.
+  > *Only one of `geoISOCountry`, `geoUSState`, `geoUKRegion`, or `geoCANProvince` is required for region queries.
 
   ---
 
@@ -639,26 +642,29 @@ Click on the short description in each section to view chart details.
   SINCE 30 minutes ago LIMIT MAX
   ```
 
-  ##### Dashboard Filtering/Variables
-  Adds a navigation button to marker tooltip that opens a related dashboard with context:
+  ##### Dashboard & Link Deep-Linking
+  Add multiple dashboard and link navigation buttons to marker popups. The suffix after the underscore becomes the display label (e.g., `dash_guid_overview` → "Overview", `link_support_portal` → "Support portal"):
   ```sql
   FROM PageView 
   SELECT count(*) as 'value', 
          latest(appName) as 'name:app', 
-         'NDEyMDg...' as 'dash_guid', 
-         latest(concat('city= \'',city, '\'')) as 'dash_filter', 
-         latest(concat('{"cc": "', countryCode, '"}')) as 'dash_variables' 
+         'NDEyMDg...' as 'dash_guid_overview', 
+         latest(concat('city= \'',city, '\'')) as 'dash_filter_overview', 
+         latest(concat('{"cc": "', countryCode, '"}')) as 'dash_variables_overview',
+         'QWRTY...' as 'dash_guid_errors',
+         'https://status.example.com' as 'link_status_page'
   FACET string(asnLatitude, 5) as 'lat', string(asnLongitude, 5) as 'lng' 
   SINCE 1 day ago LIMIT 100
   ```
 
   ##### External URL Links
-  Adds a navigation button to marker tooltip that opens external url:
+  Add multiple external link buttons to marker popups:
   ```sql
   FROM StoreMetrics 
   SELECT latest(revenue) as 'value',
          latest(storeName) as 'name:Store',
-         latest(concat('https://internal.mycompany.com/stores/', storeId)) as 'link',
+         latest(concat('https://internal.mycompany.com/stores/', storeId)) as 'link_store_details',
+         'https://support.mycompany.com' as 'link_support',
          latest(revenue) as 'tooltip_revenue',
          latest(manager) as 'tooltip_manager'
   FACET string(lat, precision: 5) as 'lat', string(lng, precision: 5) as 'lng'
@@ -719,10 +725,6 @@ Click on the short description in each section to view chart details.
     -- Value for heatmap and labels
     rate(count(*), 1 hour) as 'value',
     
-    -- Location
-    latest(lat) as 'latitude',
-    latest(lng) as 'longitude',
-    
     -- Marker label with formatting
     rate(count(*)/1000, 1 hour) as 'icon_label',
     1 as 'icon_label_precision',
@@ -735,9 +737,13 @@ Click on the short description in each section to view chart details.
     average(duration)*1000 as 'tooltip_avg_duration_ms',
     percentage(count(*), WHERE error IS true) as 'tooltip_error_rate',
     
-    -- Dashboard navigation
-    'ABC123' as 'dash_guid',
-    latest(concat('storeId = \'', storeId, '\'')) as 'dash_filter'
+    -- Dashboard navigation (multiple dashboards supported)
+    'ABC123' as 'dash_guid_overview',
+    latest(concat('storeId = \'', storeId, '\'')) as 'dash_filter_overview',
+    'XYZ789' as 'dash_guid_performance',
+    
+    -- External links
+    'https://support.example.com' as 'link_support'
     
   FACET string(lat, precision: 5) as 'lat', string(lng, precision: 5) as 'lng'
   LIMIT MAX

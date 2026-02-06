@@ -5,7 +5,8 @@ import {
   Popup,
   TileLayer,
   CircleMarker,
-  GeoJSON
+  GeoJSON,
+  Tooltip
 } from 'react-leaflet';
 import MarkerClusterGroup from 'react-leaflet-markercluster';
 import 'react-leaflet-markercluster/dist/styles.min.css';
@@ -13,7 +14,7 @@ import 'leaflet-color-markers';
 import 'leaflet/dist/leaflet.css';
 import { Icon } from 'leaflet';
 
-import { Button } from 'nr1';
+import { Link, navigation } from 'nr1';
 import { excludedKeys, excludedStrings, parseLatLngBounds } from '../utils';
 import { useCustomColors, Status } from './hooks/useCustomColors';
 import { useHeatmap } from './hooks/useHeatmap';
@@ -78,7 +79,11 @@ function LeafletRoot(props) {
     hideMarkers = false
   } = props;
 
-  const { openDashboard, hasDashboardLink } = useOpenDashboard();
+  const {
+    openDashboard,
+    extractDashboardConfigs,
+    extractLinkConfigs
+  } = useOpenDashboard();
   const { customColors } = useCustomColors(markerColors);
   const customColorsRef = useRef(customColors);
 
@@ -235,55 +240,57 @@ function LeafletRoot(props) {
               })}
           {(popupData['entity.guid'] || popupData.entityGuid) && (
             <div className="drilldown-btn">
-              <Button
-                type={Button.TYPE.PRIMARY}
-                onClick={() => {
-                  window.open(
-                    `https://one.newrelic.com/redirect/entity/${popupData[
-                      'entity.guid'
-                    ] || popupData.entityGuid}`
-                  );
-                }}
+              <Link
+                to={`https://one.newrelic.com/redirect/entity/${popupData[
+                  'entity.guid'
+                ] || popupData.entityGuid}`}
               >
                 Open Entity
-              </Button>
+              </Link>
             </div>
           )}
-          {hasDashboardLink(popupData) && (
-            <div className="drilldown-btn">
-              <Button
-                type={Button.TYPE.PRIMARY}
-                onClick={() => openDashboard(popupData)}
+          {extractDashboardConfigs(popupData).map(config => (
+            <div className="drilldown-btn" key={`dash-${config.name}`}>
+              <Link
+                to={navigation.getOpenLauncherLocation({
+                  id: 'dashboards.detail'
+                })}
+                onClick={e => {
+                  e.preventDefault();
+                  openDashboard(config);
+                }}
               >
-                Open Dashboard
-              </Button>
+                {config.label}
+              </Link>
             </div>
-          )}
-
+          ))}
           {popupData.isWorkload && (
             <div className="drilldown-btn">
-              <Button
-                type={Button.TYPE.PRIMARY}
-                onClick={() => workloadStatusSetter(popupData)}
+              <Link
+                to="#"
+                onClick={e => {
+                  e.preventDefault();
+                  workloadStatusSetter(popupData);
+                }}
               >
                 View Workload
-              </Button>
+              </Link>
             </div>
           )}
-          {popupData.link && (
-            <div className="drilldown-btn">
-              <Button
-                type={Button.TYPE.PRIMARY}
-                onClick={() => window.open(popupData.link, '_blank')}
-              >
-                Open Link
-              </Button>
+          {extractLinkConfigs(popupData).map(config => (
+            <div className="drilldown-btn" key={`link-${config.name}`}>
+              <Link to={config.url}>{config.label}</Link>
             </div>
-          )}
+          ))}
         </div>
       );
     },
-    [enableAutoTooltip, hasDashboardLink, openDashboard]
+    [
+      enableAutoTooltip,
+      extractDashboardConfigs,
+      extractLinkConfigs,
+      openDashboard
+    ]
   );
 
   const renderMarkers = useCallback(() => {
@@ -301,6 +308,7 @@ function LeafletRoot(props) {
       const locName = data[`name:${targetName}`];
       const rotate = data[`rotate:${targetRotate}`];
       const coordinates = data['mapWidget.coordinates'];
+      const useNameAsLabel = data._useNameAsLabel;
 
       if (!coordinates || isNaN(coordinates.lat) || isNaN(coordinates.lng)) {
         // eslint-disable-next-line no-console
@@ -434,6 +442,16 @@ function LeafletRoot(props) {
               {renderPopupContent(popupData, setWorkloadStatus)}
             </Popup>
           </MarkerPopup>
+          {useNameAsLabel && locName && (
+            <Tooltip
+              permanent
+              direction="right"
+              offset={[12, 0]}
+              className="marker-name-label"
+            >
+              {locName}
+            </Tooltip>
+          )}
         </Marker>
       );
     });
@@ -521,6 +539,7 @@ function LeafletRoot(props) {
       const regionKey = `${region.geoISOCountry ||
         region.geoUSState ||
         region.geoUKRegion ||
+        region.geoCANProvince ||
         region.name ||
         `region-${index}`}-${gradientKey}`;
 
@@ -542,17 +561,32 @@ function LeafletRoot(props) {
               ) : (
                 <>Value: {region.value}</>
               )}
-              {hasDashboardLink(region) && (
-                <div style={{ marginTop: '8px' }}>
-                  <Button
-                    type={Button.TYPE.NORMAL}
-                    sizeType={Button.SIZE_TYPE.SMALL}
-                    onClick={() => openDashboard(region)}
+              {extractDashboardConfigs(region).map(config => (
+                <div
+                  style={{ marginTop: '8px' }}
+                  key={`region-dash-${config.name}`}
+                >
+                  <Link
+                    to={navigation.getOpenLauncherLocation({
+                      id: 'dashboards.detail'
+                    })}
+                    onClick={e => {
+                      e.preventDefault();
+                      openDashboard(config);
+                    }}
                   >
-                    Open Dashboard
-                  </Button>
+                    {config.label}
+                  </Link>
                 </div>
-              )}
+              ))}
+              {extractLinkConfigs(region).map(config => (
+                <div
+                  style={{ marginTop: '8px' }}
+                  key={`region-link-${config.name}`}
+                >
+                  <Link to={config.url}>{config.label}</Link>
+                </div>
+              ))}
             </div>
           </Popup>
         </GeoJSON>
@@ -564,13 +598,16 @@ function LeafletRoot(props) {
     getRegionGradientColor,
     regionGradient,
     enableAutoTooltip,
-    hasDashboardLink,
+    extractDashboardConfigs,
+    extractLinkConfigs,
     openDashboard
   ]);
 
   return (
     <>
       <Map
+        key={`map-${maxBoundsNorthEast || 'none'}-${maxBoundsSouthWest ||
+          'none'}`}
         style={{ height: '100vh', width: '100vw' }}
         center={position}
         zoom={!initialZoom || isNaN(initialZoom) ? 4 : parseFloat(initialZoom)}

@@ -118,8 +118,24 @@ export default function Docs() {
                   mode
                 </li>
                 <li>
-                  <code>'link'</code> - External URL to open when marker is
-                  clicked
+                  <code>'dash_guid_&lt;name&gt;'</code> - Dashboard entity GUID
+                  for navigation (e.g., <code>'dash_guid_overview'</code>)
+                </li>
+                <li>
+                  <code>'dash_filter_&lt;name&gt;'</code> - Optional dashboard
+                  filter matching <code>&lt;name&gt;</code> (e.g.,{' '}
+                  <code>'dash_filter_overview'</code>)
+                </li>
+                <li>
+                  <code>'dash_variables_&lt;name&gt;'</code> - Optional
+                  dashboard variables as JSON string matching{' '}
+                  <code>&lt;name&gt;</code> (e.g.,{' '}
+                  <code>'dash_variables_overview'</code>)
+                </li>
+                <li>
+                  <code>'link_&lt;name&gt;'</code> - External URL link rendered
+                  in marker popup (e.g., <code>'link_support'</code>,{' '}
+                  <code>'link_docs'</code>)
                 </li>
                 <li>
                   <code>'custom_color'</code> - Hex color to override marker
@@ -158,8 +174,10 @@ export default function Docs() {
             <b>Region Heatmaps</b>
             <br />
             Display data aggregated by geographic regions (countries, US states,
-            UK regions). Use the <code>regionQuery</code> configuration to
-            specify a separate NRQL query for region data.
+            UK regions, Canadian provinces). Use the <code>
+              regionQuery
+            </code>{' '}
+            configuration to specify a separate NRQL query for region data.
             <Spacing type={[Spacing.TYPE.MEDIUM, Spacing.TYPE.LARGE]}>
               <ul>
                 <li>
@@ -173,6 +191,10 @@ export default function Docs() {
                 <li>
                   <b>geoUKRegion</b>: UK region name (e.g., "London",
                   "Scotland", "Wales")
+                </li>
+                <li>
+                  <b>geoCANProvince</b>: Canadian province 2-letter code, Stats
+                  Canada ID, or full name (e.g., "ON", "35", "Ontario")
                 </li>
               </ul>
             </Spacing>
@@ -220,24 +242,51 @@ export default function Docs() {
             </Spacing>
             <br />
             <br />
-            <b>Dashboard Deep-linking</b>
+            <b>Dashboard &amp; Link Deep-linking</b>
             <br />
-            Add dashboard navigation buttons to marker popups by including these
-            fields in your query:
+            Add dashboard and link navigation to marker popups by including
+            prefixed fields in your query. Multiple dashboards and links can be
+            defined — the underscore-separated suffix becomes the display label
+            (e.g., <code>dash_guid_analytics</code> → "Analytics",{' '}
+            <code>link_support_portal</code> → "Support portal").
             <Spacing type={[Spacing.TYPE.MEDIUM, Spacing.TYPE.LARGE]}>
               <ul>
                 <li>
-                  <code>dash_guid</code>: Dashboard entity GUID to open
+                  <code>dash_guid_&lt;name&gt;</code>: Dashboard entity GUID
+                  (e.g., <code>'NDXX...' as 'dash_guid_overview'</code>)
                 </li>
                 <li>
-                  <code>dash_filter</code>: (optional) Filter string to apply
-                  (e.g., "region = 'US-West'")
+                  <code>dash_filter_&lt;name&gt;</code>: (optional) Filter
+                  string matching the same <code>&lt;name&gt;</code> (e.g.,{' '}
+                  <code>"region = 'US-West'" as 'dash_filter_overview'</code>)
                 </li>
                 <li>
-                  <code>dash_variables</code>: (optional) JSON string of
-                  dashboard variables (e.g., '&#123;"env": "prod"&#125;')
+                  <code>dash_variables_&lt;name&gt;</code>: (optional) JSON
+                  string of dashboard variables matching the same{' '}
+                  <code>&lt;name&gt;</code> (e.g.,{' '}
+                  <code>
+                    '&#123;"env": "prod"&#125;' as 'dash_variables_overview'
+                  </code>
+                  )
+                </li>
+                <li>
+                  <code>link_&lt;name&gt;</code>: External URL displayed as a
+                  clickable link (e.g.,{' '}
+                  <code>'https://example.com' as 'link_docs'</code>)
                 </li>
               </ul>
+            </Spacing>
+            Example with multiple dashboards and a link:
+            <br />
+            <Spacing type={[Spacing.TYPE.MEDIUM, Spacing.TYPE.LARGE]}>
+              <code>
+                FROM PageView SELECT count(*) as 'value', latest(appName) as
+                'name:app', 'NDEyMDg...' as 'dash_guid_overview',
+                latest(concat('city= \'',city, '\'')) as 'dash_filter_overview',
+                'QWRTY...' as 'dash_guid_errors', 'https://status.example.com'
+                as 'link_status_page' FACET string(asnLatitude, 5) as 'lat',
+                string(asnLongitude, 5) as 'lng' SINCE 1 day ago LIMIT 100
+              </code>
             </Spacing>
             <br />
             <b>Marker Thresholds &amp; Status Colors</b>
@@ -288,6 +337,17 @@ export default function Docs() {
                 </li>
               </ul>
             </Spacing>
+            <br />
+            <br />
+            <b>Marker Name Labels</b>
+            <br />
+            Display the <code>name:</code> value as a persistent label next to
+            each marker. Enable <code>Use Name As Label</code> in the NRQL
+            Queries configuration for each query where you want labels to
+            appear. Labels appear to the right of markers and are always visible
+            (unlike tooltips which require hovering).
+            <br />
+            <b>Note:</b> Labels do not display in High Density mode.
             <br />
             <br />
             <b>Marker Clustering</b>

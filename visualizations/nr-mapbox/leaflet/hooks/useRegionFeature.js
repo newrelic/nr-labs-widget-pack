@@ -9,9 +9,10 @@ let geoDataPromise = null;
 let countryByISO = new Map();
 let usStateByIdentifier = new Map();
 let ukRegionByName = new Map();
+let canProvinceByIdentifier = new Map();
 
 // Build from static GeoJSON data
-const buildLookupMaps = (countries, usStates, ukRegions) => {
+const buildLookupMaps = (countries, usStates, ukRegions, canProvinces) => {
   // Country lookup
   countryByISO = new Map();
   countries.features.forEach(f => {
@@ -45,6 +46,21 @@ const buildLookupMaps = (countries, usStates, ukRegions) => {
     }
   });
 
+  // Canada Province lookup
+  canProvinceByIdentifier = new Map();
+  canProvinces.features.forEach(f => {
+    if (f.properties?.id) {
+      canProvinceByIdentifier.set(f.properties.id, f);
+    }
+
+    if (f.properties?.code) {
+      canProvinceByIdentifier.set(f.properties.code, f);
+    }
+
+    if (f.properties?.name) {
+      canProvinceByIdentifier.set(f.properties.name, f);
+    }
+  });
   geoDataLoaded = true;
 };
 
@@ -59,17 +75,20 @@ const loadGeoData = async () => {
       const [
         countriesModule,
         usStatesModule,
-        ukRegionsModule
+        ukRegionsModule,
+        canProvincesModule
       ] = await Promise.all([
         import('../geo/countries.geojson.json'),
         import('../geo/us-states'),
-        import('../geo/uk-regions/all-uk-regions')
+        import('../geo/uk-regions/all-uk-regions'),
+        import('../geo/can-provinces/ca.geojson.json')
       ]);
 
       buildLookupMaps(
         countriesModule.default,
         usStatesModule.default,
-        ukRegionsModule.default
+        ukRegionsModule.default,
+        canProvincesModule.default
       );
 
       return true;
@@ -106,6 +125,7 @@ export function useGeoDataLoader(regionHeatmapSteps) {
  * - geoISOCountry: ISO 3166-1 alpha-2 or alpha-3 country codes (e.g., "USA" or "US")
  * - geoUSState: US state 2 letter code, number or name (e.g., "CA", "06", "California")
  * - geoUKRegion: UK region name (e.g., "London", "Scotland")
+ * - geoCANProvince: Canada province code, number or name (e.g., "ON", "08", "Ontario")
  */
 export function useRegionFeature(location) {
   return useMemo(() => {
@@ -132,9 +152,21 @@ export function useRegionFeature(location) {
         return feature;
       }
     }
+    // Canada Province lookup by code, number, or name (O(1) using Map)
+    else if (location.geoCANProvince) {
+      const feature = canProvinceByIdentifier.get(location.geoCANProvince);
+      if (feature) {
+        return feature;
+      }
+    }
 
     return null;
-  }, [location?.geoISOCountry, location?.geoUSState, location?.geoUKRegion]);
+  }, [
+    location?.geoISOCountry,
+    location?.geoUSState,
+    location?.geoUKRegion,
+    location?.geoCANProvince
+  ]);
 }
 
 // Find a region feature by identifier (non-hook version for batch processing)
@@ -160,6 +192,14 @@ export function findRegionFeature(location) {
   // UK Region lookup by name (O(1) using Map)
   if (location.geoUKRegion) {
     const feature = ukRegionByName.get(location.geoUKRegion);
+    if (feature) {
+      return feature;
+    }
+  }
+
+  // Canada Province lookup by code, number, or name (O(1) using Map)
+  if (location.geoCANProvince) {
+    const feature = canProvinceByIdentifier.get(location.geoCANProvince);
     if (feature) {
       return feature;
     }
