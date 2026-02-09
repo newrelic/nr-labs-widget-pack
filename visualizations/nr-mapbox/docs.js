@@ -118,6 +118,14 @@ export default function Docs() {
                   mode
                 </li>
                 <li>
+                  <code>'tooltip_header'</code> - Custom tooltip title (use
+                  "NONE" to hide header)
+                </li>
+                <li>
+                  <code>'tooltip_*'</code> - Any field prefixed with "tooltip_"
+                  will be auto-displayed in popup with formatted labels
+                </li>
+                <li>
                   <code>'dash_guid_&lt;name&gt;'</code> - Dashboard entity GUID
                   for navigation (e.g., <code>'dash_guid_overview'</code>)
                 </li>
@@ -289,6 +297,7 @@ export default function Docs() {
               </code>
             </Spacing>
             <br />
+            <br />
             <b>Marker Thresholds &amp; Status Colors</b>
             <br />
             Configure threshold rules via the <b>Marker Thresholds</b> UI
@@ -337,7 +346,6 @@ export default function Docs() {
                 </li>
               </ul>
             </Spacing>
-            <br />
             <br />
             <b>Marker Name Labels</b>
             <br />

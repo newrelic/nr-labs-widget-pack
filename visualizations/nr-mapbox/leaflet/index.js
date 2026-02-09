@@ -32,12 +32,6 @@ import {
   DEFAULT_HD_RADIUS
 } from './constants';
 
-// Wrapper that holds location data for cluster access
-// eslint-disable-next-line no-unused-vars
-const MarkerPopup = ({ location, children }) => {
-  return children;
-};
-
 // Map common color names to hex values
 const commonColorToHex = {
   blue: '#2A81CB',
@@ -432,16 +426,15 @@ function LeafletRoot(props) {
         <Marker
           icon={icon}
           key={mapIndex}
+          data={location}
           style={{
             transform: rotate ? `rotate(${rotate}deg)` : undefined
           }}
           position={[lat, lng]}
         >
-          <MarkerPopup location={location}>
-            <Popup position={[lat, lng]}>
-              {renderPopupContent(popupData, setWorkloadStatus)}
-            </Popup>
-          </MarkerPopup>
+          <Popup position={[lat, lng]} location={location}>
+            {renderPopupContent(popupData, setWorkloadStatus)}
+          </Popup>
           {useNameAsLabel && locName && (
             <Tooltip
               permanent

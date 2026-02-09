@@ -67,7 +67,7 @@ function MapSystemRoot(props) {
     debugEnabled,
     regionQuery,
     regionAccountId,
-    enableRegionTimePicker = true
+    enableRegionTimePicker = false
   } = props;
   const [errors, setErrors] = useState([]);
   const [loading, setLoading] = useState(true);

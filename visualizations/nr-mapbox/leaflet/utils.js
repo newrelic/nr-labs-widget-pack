@@ -40,11 +40,13 @@ function aggregateStatusCounts(locations) {
     CRITICAL: 0
   };
 
-  locations.forEach(location => {
+  locations.forEach(marker => {
+    // Try multiple paths to find the status
     const status =
-      location?.options?.children?.props?.location?.status ||
-      location?.options?.children?.props?.status ||
-      location?.status ||
+      marker?.options?.data?.status ||
+      marker?.options?.children?.props?.location?.status ||
+      marker?.options?.children?.props?.status ||
+      marker?.status ||
       Status.NONE;
 
     if (status in statusCounts) {
@@ -109,7 +111,9 @@ function calculateAggregatedLabel(cluster, aggregationMode) {
   let valueCount = 0;
 
   cluster.getAllChildMarkers().forEach(child => {
+    // Try multiple paths to find the location data
     const location =
+      child.options?.data ||
       child.options?.children?.props?.location ||
       child.options?.children?.props ||
       {};

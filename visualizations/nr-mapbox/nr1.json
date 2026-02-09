@@ -340,6 +340,18 @@
       ]
     },
     {
+      "name": "markerColors",
+      "title": "Marker colors",
+      "description": "A comma separated list of hex colours in the order: cluster,no-status,ok,warning,critical. For heatmap mode, provide color stops.",
+      "type": "string"
+    },
+    {
+      "name": "enableClustering",
+      "title": "Enable Marker Clustering",
+      "description": "Toggle marker clustering on/off (default: off)",
+      "type": "boolean"
+    },
+    {
       "name": "markerAggregation",
       "title": "Marker aggregation",
       "description": "Display value of clustered markers",
@@ -366,18 +378,6 @@
           "value": "min"
         }
       ]
-    },
-    {
-      "name": "markerColors",
-      "title": "Marker colors",
-      "description": "A comma separated list of hex colours in the order: cluster,no-status,ok,warning,critical. For heatmap mode, provide color stops.",
-      "type": "string"
-    },
-    {
-      "name": "enableClustering",
-      "title": "Enable Marker Clustering",
-      "description": "Toggle marker clustering on/off (default: off)",
-      "type": "boolean"
     },
     {
       "name": "disableClusterZoom",

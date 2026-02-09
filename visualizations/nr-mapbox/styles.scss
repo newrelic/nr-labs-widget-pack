@@ -31,36 +31,38 @@
   align-items: center;
   background: transparent;
 
-  .outerPie,
+  .outerPie {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 54px;
+    height: 54px;
+  }
+
   .innerPie {
     display: flex;
     justify-content: center;
     align-items: center;
     text-align: center;
     border-radius: 50%;
-    line-height: 42px;
-    color: #ffffff;
-    background-color: inherit;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    width: 42px;
+    height: 42px;
+    overflow: hidden;
 
-    &.innerPie {
-      width: 42px;
-      height: 42px;
-      line-height: 42px;
+    span {
+      font-size: 0.90em;
+      font-weight: 600;
+      line-height: 1.1;
+      max-width: 38px;
+      word-break: break-word;
+      text-align: center;
     }
-
-    &.outerPie {
-      width: 54px;
-      height: 54px;
-    }
-  }
-
-  span {
-    font-size: 1em;
-    font-weight: 600;
   }
 }
 
@@ -111,4 +113,42 @@
     font-weight: 500;
     white-space: nowrap;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+// Popup content styling - truncate long text with hover to expand
+.leaflet-popup-content {
+    max-width: 250px;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    
+    // Truncate long values with ellipsis
+    span, div:not(.drilldown-btn) {
+        display: block;
+        max-width: 100%;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        
+        // Expand on hover to show full text
+        &:hover {
+            white-space: normal;
+            overflow: visible;
+            word-break: break-word;
+        }
+    }
+    
+    // Keep header bold styling visible
+    span[style*="bold"] {
+        font-weight: bold;
+    }
+    
+    // Ensure links in drilldown buttons are visible
+    .drilldown-btn {
+        white-space: normal;
+        overflow: visible;
+        
+        a {
+            display: inline;
+        }
+    }
 }
