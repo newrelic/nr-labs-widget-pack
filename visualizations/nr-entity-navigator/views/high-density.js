@@ -26,7 +26,9 @@ const HighDensity = ({ entities, totalCount, showAlertingOnly }) => {
                 key={i}
                 status={e.alertSeverity}
                 permalink={e.permalink}
+                entityGuid={e.guid}
                 entityName={e.name}
+                accountId={e.account?.id}
                 dataMode={false}
               />
             }
