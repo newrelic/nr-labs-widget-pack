@@ -23,8 +23,10 @@ const DataMode = ({ entities, displayCount, totalCount, showAlertingOnly }) => {
           <EntityWidget
             key={i}
             status={e.alertSeverity}
-            permalink={e.permalink}
+            entityGuid={e.guid}
             entityName={e.name}
+            permalink={e.permalink}
+            accountId={e.account?.id}
             goldenMetrics={e.goldenMetricsData}
             goldenMetricLength={e.goldenMetricsData?.length || 0}
             dataMode
@@ -37,7 +39,9 @@ const DataMode = ({ entities, displayCount, totalCount, showAlertingOnly }) => {
             key="last"
             status="NOT_CONFIGURED"
             permalink="remainderCount"
+            entityGuid={null}
             entityName={`${remainingCount} more`}
+            accountId={null}
             goldenMetricLength={domainGoldenSignalLength}
             dataMode
           />

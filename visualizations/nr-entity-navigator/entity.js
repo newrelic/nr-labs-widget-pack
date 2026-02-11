@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { navigation } from 'nr1';
 
 const STATUSES = {
   NOT_ALERTING: 'success',
@@ -28,11 +29,19 @@ const EntityWidget = ({
   status = STATUSES.NOT_CONFIGURED,
   permalink,
   entityName = '',
+  entityGuid,
+  accountId,
   goldenMetrics = [],
   goldenMetricLength,
   dataMode = false
 }) => {
   const statusClass = STATUSES[status] || STATUSES.NOT_CONFIGURED;
+
+  const platformState = {
+    accountId: accountId
+  };
+
+  const region = permalink && permalink.includes('eu') ? 'eu.' : '';
 
   if (dataMode) {
     return (
@@ -40,7 +49,16 @@ const EntityWidget = ({
         className={`status-icon-large ${statusClass} ${
           permalink === 'remainderCount' ? '' : 'clickable'
         }`}
-        onClick={() => window.open(permalink, '_blank')}
+        onClick={() => {
+          const loc =
+            permalink !== 'remainderCount'
+              ? navigation.getOpenEntityLocation(entityGuid, { platformState })
+              : null;
+          if (!loc) return;
+
+          const url = `https://one.${region}newrelic.com${loc.pathname}${loc.search}`;
+          window.open(url, '_blank', 'noreferrer');
+        }}
       >
         <div
           className={`data-container ${
@@ -80,15 +98,26 @@ const EntityWidget = ({
   return (
     <div
       className={`status-icon-small ${statusClass}`}
-      onClick={() => window.open(permalink, '_blank')}
+      onClick={() => {
+        const loc =
+          permalink !== 'remainderCount'
+            ? navigation.getOpenEntityLocation(entityGuid, { platformState })
+            : null;
+        if (!loc) return;
+
+        const url = `https://one.${region}newrelic.com${loc.pathname}${loc.search}`;
+        window.open(url, '_blank', 'noreferrer');
+      }}
     />
   );
 };
 
 EntityWidget.propTypes = {
   status: PropTypes.oneOf(Object.values(STATUSES)),
-  permalink: PropTypes.string,
+  accountId: PropTypes.number,
   entityName: PropTypes.string,
+  entityGuid: PropTypes.string,
+  permalink: PropTypes.string,
   goldenMetrics: PropTypes.array,
   goldenMetricLength: PropTypes.number,
   dataMode: PropTypes.bool
