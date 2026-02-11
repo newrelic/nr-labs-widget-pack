@@ -220,6 +220,14 @@ export default function Docs() {
               </code>
             </Spacing>
             <br />
+            <a
+              href="https://github.com/newrelic/nr-labs-widget-pack/?tab=readme-ov-file#region-heatmap-example"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              For a more in-depth explanation, visit the Region Heatmap Example
+            </a>
+            <br />
             <br />
             <b>Auto-generated Tooltips</b>
             <br />

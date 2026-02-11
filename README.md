@@ -497,7 +497,7 @@ Click on the short description in each section to view chart details.
   - **Steps should be ≥ number of colors** for best visual results
   - If `regionHeatmapSteps = 0`, regions won't render regardless of `regionColors` setting
 
-  **Recommended Configuration:**
+  **Recommended Starting Configuration:**
   ```
   regionHeatmapSteps: 10
   regionColors: #420052,#6C0485,#FFA022
