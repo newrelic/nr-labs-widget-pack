@@ -1,3 +1,10 @@
+## [1.58.3](https://github.com/newrelic/nr-labs-widget-pack/compare/v1.58.2...v1.58.3) (2026-02-11)
+
+
+### Bug Fixes
+
+* onClick includes nav props (accountId) ([2eb7670](https://github.com/newrelic/nr-labs-widget-pack/commit/2eb7670ccffeb2fb8b2c84e2ce3e81e8e6c48cbc))
+
 ## [1.58.2](https://github.com/newrelic/nr-labs-widget-pack/compare/v1.58.1...v1.58.2) (2026-01-21)
 
 
