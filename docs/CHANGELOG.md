@@ -1,3 +1,15 @@
+# [1.59.0](https://github.com/newrelic/nr-labs-widget-pack/compare/v1.58.3...v1.59.0) (2026-02-20)
+
+
+### Bug Fixes
+
+* multiple link support;canada geo lookups ([e121741](https://github.com/newrelic/nr-labs-widget-pack/commit/e1217416660e2cc6bea1f8b3b0479e80420b5c39))
+
+
+### Features
+
+* mapbox enhancements ([bbc9a20](https://github.com/newrelic/nr-labs-widget-pack/commit/bbc9a204a1b306125bc43bfde4aed2b27ae435f3))
+
 ## [1.58.3](https://github.com/newrelic/nr-labs-widget-pack/compare/v1.58.2...v1.58.3) (2026-02-11)
 
 
