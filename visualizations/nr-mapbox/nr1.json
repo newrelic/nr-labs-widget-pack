@@ -41,6 +41,7 @@
     {
       "name": "nrqlQueries",
       "title": "NRQL Queries",
+      "description": "NRQL queries for marker data (must include `name:` alias and lat/lng)",
       "type": "collection",
       "items": [
         {
@@ -54,6 +55,12 @@
           "title": "Query",
           "description": "NRQL query for the visualization",
           "type": "nrql"
+        },
+        {
+          "name": "useNameAsLabel",
+          "title": "Use Name As Label (leaflet only)",
+          "description": "Use the 'name:' alias as the label for markers (doesn't apply to HD mode)",
+          "type": "boolean"
         },
         {
           "name": "enableFilters",
@@ -72,7 +79,7 @@
     {
       "name": "pollInterval",
       "title": "Select Poll Interval (seconds) default 60s",
-      "description": "",
+      "description": "Rate at which the data is refreshed",
       "type": "enum",
       "items": [
         {
@@ -112,55 +119,71 @@
     {
       "name": "initialLat",
       "title": "Initial Latitude",
-      "description": "",
+      "description": "Initial latitude for the map center",
       "type": "string"
     },
     {
       "name": "initialLong",
       "title": "Initial Longitude",
-      "description": "",
+      "description": "Initial longitude for the map center",
       "type": "string"
     },
     {
       "name": "initialZoom",
       "title": "Initial Zoom",
-      "description": "",
+      "description": "Initial zoom level for the map center (1=world, 18=street level)",
       "type": "number"
     },
     {
       "name": "maxBoundsSouthWest",
-      "title": "Max Bounds - Southwest corner eg. '35.5249, -124.6694' - Northeast config required, refresh to apply",
+      "title": "Max Bounds - Southwest corner eg. '35.5249, -124.6694' - Northeast config required",
       "description": "Restricts the view to the given geographical bounds, bouncing the user back if the user tries to pan outside the view",
       "type": "string"
     },
     {
       "name": "maxBoundsNorthEast",
-      "title": "Max Bounds - Northeast corner eg. '40.0249, -120.1694' - Southeast config required, refresh to apply",
+      "title": "Max Bounds - Northeast corner eg. '40.0249, -120.1694' - Southeast config required",
       "description": "Restricts the view to the given geographical bounds, bouncing the user back if the user tries to pan outside the view",
       "type": "string"
     },
     {
       "name": "defaultMarkerColor",
-      "title": "Default Marker Color (refresh)",
-      "description": "",
+      "title": "Default Marker Color",
+      "description": "Fallback color for markers without threshold match (e.g., 'green', 'blue', '#FF5733')",
       "type": "string"
+    },
+    {
+      "name": "markerStyle",
+      "title": "Marker Style (leaflet only)",
+      "description": "Visual style for markers: pin (default) or circle (modern)",
+      "type": "enum",
+      "items": [
+        {
+          "title": "Pin (Classic)",
+          "value": "pin"
+        },
+        {
+          "title": "Circle (Modern)",
+          "value": "circle"
+        }
+      ]
     },
     {
       "name": "defaultMarkerImgURL",
       "title": "Default Marker Image URL (overrides default marker color)",
-      "description": "",
+      "description": "Custom marker icon URL (overrides color)",
       "type": "string"
     },
     {
       "name": "defaultImgWidth",
       "title": "Image width (default 25)",
-      "description": "",
+      "description": "Marker icon width in pixels",
       "type": "number"
     },
     {
       "name": "defaultImgHeight",
       "title": "Image height (default 25)",
-      "description": "",
+      "description": "Marker icon height in pixels",
       "type": "number"
     },
     {
@@ -267,6 +290,30 @@
           "type": "boolean"
         },
         {
+          "name": "status",
+          "title": "Status (for cluster aggregation) (leaflet only)",
+          "description": "Set marker status for cluster pie chart visualization",
+          "type": "enum",
+          "items": [
+            {
+              "title": "None (no status)",
+              "value": "NONE"
+            },
+            {
+              "title": "OK",
+              "value": "OK"
+            },
+            {
+              "title": "Warning",
+              "value": "WARNING"
+            },
+            {
+              "title": "Critical",
+              "value": "CRITICAL"
+            }
+          ]
+        },
+        {
           "name": "markerColor",
           "title": "Marker Color",
           "description": "",
@@ -291,6 +338,112 @@
           "type": "number"
         }
       ]
+    },
+    {
+      "name": "markerColors",
+      "title": "Marker colors (leaflet only)",
+      "description": "A comma separated list of hex colours in the order: cluster,no-status,ok,warning,critical. For heatmap mode, provide color stops.",
+      "type": "string"
+    },
+    {
+      "name": "enableClustering",
+      "title": "Enable Marker Clustering (leaflet only)",
+      "description": "Toggle marker clustering on/off (default: off)",
+      "type": "boolean"
+    },
+    {
+      "name": "markerAggregation",
+      "title": "Marker aggregation (leaflet only)",
+      "description": "Display value of clustered markers",
+      "type": "enum",
+      "items": [
+        {
+          "title": "Show count of markers",
+          "value": "count"
+        },
+        {
+          "title": "Show sum of markers",
+          "value": "sum"
+        },
+        {
+          "title": "Show mean average of markers",
+          "value": "average"
+        },
+        {
+          "title": "Show max of markers",
+          "value": "max"
+        },
+        {
+          "title": "Show min of markers",
+          "value": "min"
+        }
+      ]
+    },
+    {
+      "name": "disableClusterZoom",
+      "title": "Disable Clustering at Zoom Level (leaflet only)",
+      "description": "Zoom level at which clustering is disabled and all markers are shown (default: 7)",
+      "type": "number"
+    },
+    {
+      "name": "heatmapSteps",
+      "title": "Marker Heatmap Steps (leaflet only)",
+      "description": "Number of color steps for marker heatmap gradient. Set to 0 or leave empty to disable heatmap mode.",
+      "type": "number"
+    },
+    {
+      "name": "highDensityMode",
+      "title": "High Density Mode (leaflet only)",
+      "description": "Enable performance-optimized rendering using CircleMarkers for large datasets (1000+ points)",
+      "type": "boolean"
+    },
+    {
+      "name": "highDensityRadius",
+      "title": "High Density Circle Radius (leaflet only)",
+      "description": "Radius in pixels for high density mode markers (default: 6)",
+      "type": "number"
+    },
+    {
+      "name": "regionHeatmapSteps",
+      "title": "Region Heatmap Steps (leaflet only)",
+      "description": "Number of color steps for region heatmap. Set to 0 or leave empty to disable.",
+      "type": "number"
+    },
+    {
+      "name": "regionColors",
+      "title": "Region Heatmap Colors (leaflet only)",
+      "description": "Comma separated hex colors for region heatmap gradient stops",
+      "type": "string"
+    },
+    {
+      "name": "regionAccountId",
+      "title": "Region Query Account ID (leaflet only)",
+      "description": "Account ID for the region query (defaults to first marker query account)",
+      "type": "account-id"
+    },
+    {
+      "name": "regionQuery",
+      "title": "Region Query (NRQL) (leaflet only)",
+      "description": "Separate NRQL query for region data. Use geoISOCountry, geoUSState, geoUKRegion, or geoCANProvince fields to match GeoJSON.",
+      "type": "nrql"
+    },
+    {
+      "name": "enableRegionTimePicker",
+      "title": "Enable Time Picker for Region Query (leaflet only)",
+      "description": "Apply the dashboard time picker to the region query",
+      "type": "boolean"
+    },
+    {
+      "name": "hideMarkers",
+      "title": "Disable Markers (default: false) (leaflet only)",
+      "description": "Toggle to hide all markers/clusters on the map - useful to only show region heatmap",
+      "type": "boolean"
+    },
+    {
+      "name": "enableAutoTooltip",
+      "title": "Auto-generate Tooltips (default: false) (leaflet only)",
+      "description": "Automatically generate tooltip content from tooltip_* prefixed fields in query results",
+      "type": "boolean"
     }
   ]
 }
