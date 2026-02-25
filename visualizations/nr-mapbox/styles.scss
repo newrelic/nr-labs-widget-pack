@@ -115,6 +115,62 @@
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
 }
 
+// Weather legend – rendered as an overlay in the bottom-right corner
+.weather-legend {
+  position: absolute;
+  bottom: 30px;
+  right: 10px;
+  z-index: 1000;
+  background: rgba(255, 255, 255, 0.88);
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  border-radius: 6px;
+  padding: 8px 12px;
+  min-width: 200px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.18);
+  pointer-events: auto;
+  font-family: inherit;
+
+  &__title {
+    font-size: 11px;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 5px;
+    text-align: center;
+    letter-spacing: 0.3px;
+    text-transform: uppercase;
+  }
+
+  &__bar {
+    height: 10px;
+    border-radius: 3px;
+    width: 100%;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    // Map pan/zoom shouldn't be blocked by the gradient bar
+    pointer-events: none;
+  }
+
+  &__labels {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 3px;
+    font-size: 10px;
+    color: #555;
+    // Labels are non-interactive
+    pointer-events: none;
+  }
+
+  &__toggle {
+    display: flex;
+    justify-content: center;
+    margin-top: 6px;
+
+    // Scale down the nr1 SegmentedControl to fit the compact legend
+    .nr1--segmented-control {
+      font-size: 10px;
+    }
+  }
+}
+
 // Popup content styling - truncate long text with hover to expand
 .leaflet-popup-content {
     max-width: 250px;
@@ -151,4 +207,87 @@
             display: inline;
         }
     }
+}
+
+// Inclement weather alert popup
+.weather-alert-popup {
+  .weather-alert-popup__header {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 6px;
+
+    .weather-alert-popup__event {
+      font-weight: 700;
+      font-size: 13px;
+      flex: 1;
+      white-space: normal;
+      overflow: visible;
+      text-overflow: unset;
+    }
+  }
+
+  .severity-badge {
+    display: inline-block;
+    padding: 1px 6px;
+    border-radius: 10px;
+    font-size: 10px;
+    font-weight: 700;
+    color: #fff;
+    letter-spacing: 0.3px;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  .weather-alert-popup__area {
+    font-size: 11px;
+    color: #555;
+    margin-bottom: 4px;
+    white-space: normal;
+    overflow: visible;
+    text-overflow: unset;
+  }
+
+  .weather-alert-popup__times {
+    font-size: 11px;
+    color: #666;
+    margin-bottom: 6px;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 1px 6px;
+
+    strong {
+      color: #444;
+    }
+  }
+
+  .weather-alert-popup__headline {
+    font-size: 12px;
+    font-style: italic;
+    color: #333;
+    margin-bottom: 6px;
+    white-space: normal;
+    overflow: visible;
+    text-overflow: unset;
+  }
+
+  .weather-alert-popup__instruction {
+    font-size: 11px;
+    color: #444;
+    white-space: normal;
+    overflow: visible;
+    text-overflow: unset;
+    max-height: 80px;
+    overflow-y: auto;
+    border-top: 1px solid #eee;
+    padding-top: 4px;
+    margin-top: 4px;
+  }
+
+  .weather-alert-popup__link {
+    display: block;
+    margin-top: 6px;
+    font-size: 11px;
+    font-weight: 600;
+  }
 }

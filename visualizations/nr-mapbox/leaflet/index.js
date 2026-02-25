@@ -1,4 +1,10 @@
-import React, { useMemo, useEffect, useRef, useCallback } from 'react';
+import React, {
+  useMemo,
+  useEffect,
+  useRef,
+  useCallback,
+  useState
+} from 'react';
 import {
   Map,
   Marker,
@@ -24,13 +30,17 @@ import { generateTooltipConfig, getTooltipHeader } from './tooltipUtils';
 import {
   createClusterCustomIcon,
   createCustomIcon,
-  formatMarkerValue
+  formatMarkerValue,
+  createWeatherAlertIcon
 } from './utils';
 import {
   DEFAULT_DISABLE_CLUSTER_ZOOM,
   HIGH_DENSITY_THRESHOLD,
-  DEFAULT_HD_RADIUS
+  DEFAULT_HD_RADIUS,
+  SEVERITY_COLORS
 } from './constants';
+import { useWeatherAlerts } from './hooks/useWeatherAlerts';
+import WeatherLegend from './weatherLayerLegend';
 
 // Map common color names to hex values
 const commonColorToHex = {
@@ -60,6 +70,12 @@ function LeafletRoot(props) {
     maxBoundsNorthEast,
     setWorkloadStatus,
     markerAggregation,
+    enableWeatherLayer,
+    openWeatherApiKey,
+    weatherLayerType = 'precipitation_cls',
+    weatherOpacity,
+    weatherMaxZoom,
+    showWeatherLegend = false,
     markerColors,
     enableClustering = false,
     disableClusterZoom,
@@ -70,7 +86,9 @@ function LeafletRoot(props) {
     regionHeatmapSteps,
     regionData,
     enableAutoTooltip = false,
-    hideMarkers = false
+    hideMarkers = false,
+    enableInclementWeatherEvents = false,
+    weatherAlertMinSeverity = 'Minor'
   } = props;
 
   const {
@@ -80,6 +98,30 @@ function LeafletRoot(props) {
   } = useOpenDashboard();
   const { customColors } = useCustomColors(markerColors);
   const customColorsRef = useRef(customColors);
+
+  // Viewport bounds for weather alert fetching
+  const [mapBounds, setMapBounds] = useState(null);
+  const mapRef = useRef(null);
+  const boundsDebounceRef = useRef(null);
+
+  const handleMapViewChange = useCallback(() => {
+    clearTimeout(boundsDebounceRef.current);
+    boundsDebounceRef.current = setTimeout(() => {
+      if (mapRef.current && mapRef.current.leafletElement) {
+        setMapBounds(mapRef.current.leafletElement.getBounds());
+      }
+    }, 500);
+  }, []);
+
+  // Inclement weather alerts from NWS
+  const { alerts: weatherAlerts } = useWeatherAlerts({
+    enabled: enableInclementWeatherEvents,
+    minSeverity: weatherAlertMinSeverity,
+    mapBounds
+  });
+
+  // Weather layer active state
+  const weatherActive = !!(enableWeatherLayer && openWeatherApiKey);
 
   // Lazily load GeoJSON data only when region heatmaps are enabled
   const geoDataLoaded = useGeoDataLoader(regionHeatmapSteps);
@@ -493,6 +535,52 @@ function LeafletRoot(props) {
       .filter(region => region.geometry);
   }, [regionData, geoDataLoaded]);
 
+  // Weather layer
+  const renderWeatherLayer = useCallback(() => {
+    const safeLayerType = (weatherLayerType ?? 'precipitation_cls')
+      .toString()
+      .trim();
+    const safeApiKey = (openWeatherApiKey ?? '').toString().trim();
+
+    let safeOpacity = 0.7;
+    if (
+      weatherOpacity !== '' &&
+      weatherOpacity !== null &&
+      weatherOpacity !== undefined
+    ) {
+      const parsedOpacity = Number(weatherOpacity);
+      if (Number.isFinite(parsedOpacity)) {
+        safeOpacity = Math.max(0, Math.min(1, parsedOpacity));
+      }
+    }
+
+    let safeNativeMaxZoom = 12;
+    if (
+      weatherMaxZoom !== '' &&
+      weatherMaxZoom !== null &&
+      weatherMaxZoom !== undefined
+    ) {
+      const parsedWeatherMaxZoom = Number(weatherMaxZoom);
+      if (Number.isFinite(parsedWeatherMaxZoom)) {
+        safeNativeMaxZoom = Math.max(1, Math.min(22, parsedWeatherMaxZoom));
+      }
+    }
+
+    if (!safeLayerType || !safeApiKey) return null;
+
+    return (
+      <TileLayer
+        url={`https://tile.openweathermap.org/map/${safeLayerType}/{z}/{x}/{y}.png?appid=${safeApiKey}`}
+        opacity={safeOpacity}
+        maxNativeZoom={safeNativeMaxZoom}
+        updateWhenIdle
+        updateWhenZooming={false}
+        keepBuffer={2}
+        attribution='Weather data &copy; <a href="https://openweathermap.org">OpenWeatherMap</a>'
+      />
+    );
+  }, [weatherLayerType, weatherOpacity, weatherMaxZoom, openWeatherApiKey]);
+
   // Region heatmaps
   const renderRegions = useCallback(() => {
     if (
@@ -596,21 +684,101 @@ function LeafletRoot(props) {
     openDashboard
   ]);
 
+  // Render inclement weather alert markers from NWS
+  const renderWeatherAlerts = useCallback(() => {
+    if (
+      !enableInclementWeatherEvents ||
+      !weatherAlerts ||
+      weatherAlerts.length === 0
+    ) {
+      return null;
+    }
+
+    return weatherAlerts.map(alert => {
+      const {
+        id,
+        centroid,
+        event,
+        severity,
+        headline,
+        areaDesc,
+        onset,
+        expires,
+        nwsUrl
+      } = alert;
+      const icon = createWeatherAlertIcon(alert);
+      const severityColor =
+        SEVERITY_COLORS[severity] || SEVERITY_COLORS.Unknown;
+
+      const formatTime = iso => {
+        if (!iso) return 'N/A';
+        try {
+          return new Date(iso).toLocaleString(undefined, {
+            month: 'short',
+            day: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit'
+          });
+        } catch (_) {
+          return iso;
+        }
+      };
+
+      return (
+        <Marker key={id} position={[centroid.lat, centroid.lng]} icon={icon}>
+          <Popup>
+            <div className="weather-alert-popup">
+              <div className="weather-alert-popup__header">
+                <span className="weather-alert-popup__event">{event}</span>
+                <span
+                  className="severity-badge"
+                  style={{ backgroundColor: severityColor }}
+                >
+                  {severity}
+                </span>
+              </div>
+              {areaDesc && (
+                <div className="weather-alert-popup__area">{areaDesc}</div>
+              )}
+              <div className="weather-alert-popup__times">
+                <strong>Onset:</strong> <span>{formatTime(onset)}</span>
+                <strong>Expires:</strong> <span>{formatTime(expires)}</span>
+              </div>
+              {headline && (
+                <div className="weather-alert-popup__headline">{headline}</div>
+              )}
+              {nwsUrl && (
+                <Link className="weather-alert-popup__link" to={nwsUrl}>
+                  View on NWS
+                </Link>
+              )}
+            </div>
+          </Popup>
+        </Marker>
+      );
+    });
+  }, [enableInclementWeatherEvents, weatherAlerts]);
+
   return (
-    <>
+    <div style={{ position: 'relative', height: '100vh', width: '100vw' }}>
       <Map
         key={`map-${maxBoundsNorthEast || 'none'}-${maxBoundsSouthWest ||
-          'none'}`}
-        style={{ height: '100vh', width: '100vw' }}
+          'none'}-${weatherActive ? 'weather' : 'base'}`}
+        style={{ height: '100%', width: '100%' }}
         center={position}
         zoom={!initialZoom || isNaN(initialZoom) ? 4 : parseFloat(initialZoom)}
         maxBounds={maxBounds}
+        ref={mapRef}
+        onMoveEnd={handleMapViewChange}
+        onZoomEnd={handleMapViewChange}
       >
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
+        {weatherActive && renderWeatherLayer()}
         {renderRegions()}
+        {enableInclementWeatherEvents && renderWeatherAlerts()}
         {!hideMarkers &&
           (shouldCluster ? (
             <MarkerClusterGroup
@@ -633,7 +801,10 @@ function LeafletRoot(props) {
             renderMarkers()
           ))}
       </Map>
-    </>
+      {weatherActive && showWeatherLegend && (
+        <WeatherLegend layerType={weatherLayerType || 'precipitation_new'} />
+      )}
+    </div>
   );
 }
 

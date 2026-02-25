@@ -386,6 +386,69 @@ export default function Docs() {
                 </li>
               </ul>
             </Spacing>
+            <br />
+            <b>Weather Overlay</b>
+            <br />
+            Overlay real-time weather data from{' '}
+            <a
+              href="https://openweathermap.org/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              OpenWeatherMap
+            </a>{' '}
+            on the map. Requires a free API key — sign up at{' '}
+            <a
+              href="https://openweathermap.org/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              openweathermap.org
+            </a>
+            .
+            <Spacing type={[Spacing.TYPE.MEDIUM, Spacing.TYPE.LARGE]}>
+              <ul>
+                <li>
+                  Enable via <code>enableWeatherLayer</code> and provide your
+                  key in <code>openWeatherApiKey</code>
+                </li>
+                <li>
+                  <code>weatherLayerType</code>: Choose from Precipitation
+                  (classic &amp; new), Snow, Clouds (classic &amp; new),
+                  Temperature (classic &amp; new), Pressure, or Wind (default:
+                  precipitation_cls)
+                </li>
+                <li>
+                  <code>weatherOpacity</code>: Layer opacity 0–1 (default: 0.7)
+                </li>
+                <li>
+                  <code>weatherMaxZoom</code>: Maximum zoom level at which the
+                  weather layer is visible (default: 12)
+                </li>
+                <li>
+                  <code>showWeatherLegend</code>: Toggle a color-scale legend
+                  for the active weather layer (default: false)
+                </li>
+              </ul>
+            </Spacing>
+            <br />
+            <b>Inclement Weather Events (US only)</b>
+            <br />
+            Plot active National Weather Service (NWS) weather alert polygons
+            directly on the map. Alerts refresh automatically every 5 minutes
+            and require no additional API key.
+            <Spacing type={[Spacing.TYPE.MEDIUM, Spacing.TYPE.LARGE]}>
+              <ul>
+                <li>
+                  Enable via <code>enableInclementWeatherEvents</code>{' '}
+                  configuration option
+                </li>
+                <li>
+                  <code>weatherAlertMinSeverity</code>: Filter by minimum
+                  severity — Minor (show all), Moderate, Severe, or Extreme only
+                </li>
+              </ul>
+            </Spacing>
           </BlockText>
         </CardBody>
       </Card>

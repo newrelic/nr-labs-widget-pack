@@ -4,6 +4,27 @@ export const DEFAULT_DISABLE_CLUSTER_ZOOM = 7; // default zoom level to disable 
 export const HIGH_DENSITY_THRESHOLD = 1000; // auto-enable HD mode above this count
 export const DEFAULT_HD_RADIUS = 6; // default circle radius for high density mode
 
+// Inclement weather alert constants
+export const WEATHER_ALERT_POLL_MS = 300000; // 5 minutes
+export const NWS_ALERTS_URL =
+  'https://api.weather.gov/alerts/active?status=actual';
+
+export const SEVERITY_LEVELS = {
+  Minor: 1,
+  Moderate: 2,
+  Severe: 3,
+  Extreme: 4,
+  Unknown: 0
+};
+
+export const SEVERITY_COLORS = {
+  Extreme: '#CB2B3E',
+  Severe: '#CB8427',
+  Moderate: '#b8a60a',
+  Minor: '#2A81CB',
+  Unknown: '#7B7B7B'
+};
+
 export const COLORS = {
   NONE: {
     color: '#0c74df',
