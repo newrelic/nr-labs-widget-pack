@@ -197,28 +197,28 @@
           "value": null
         },
         {
-          "title": "streets-v11",
-          "value": "mapbox://styles/mapbox/streets-v11"
+          "title": "streets-v12",
+          "value": "mapbox://styles/mapbox/streets-v12"
         },
         {
-          "title": "outdoors-v11",
-          "value": "mapbox://styles/mapbox/outdoors-v11"
+          "title": "outdoors-v12",
+          "value": "mapbox://styles/mapbox/outdoors-v12"
         },
         {
-          "title": "light-v10",
-          "value": "mapbox://styles/mapbox/light-v10"
+          "title": "light-v11",
+          "value": "mapbox://styles/mapbox/light-v11"
         },
         {
-          "title": "dark-v10",
-          "value": "mapbox://styles/mapbox/dark-v10"
+          "title": "dark-v11",
+          "value": "mapbox://styles/mapbox/dark-v11"
         },
         {
           "title": "satellite-v9",
           "value": "mapbox://styles/mapbox/satellite-v9"
         },
         {
-          "title": "satellite-streets-v11",
-          "value": "mapbox://styles/mapbox/satellite-streets-v11"
+          "title": "satellite-streets-v12",
+          "value": "mapbox://styles/mapbox/satellite-streets-v12"
         },
         {
           "title": "navigation-day-v1",
