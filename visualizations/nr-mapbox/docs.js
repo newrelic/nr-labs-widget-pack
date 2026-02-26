@@ -39,6 +39,67 @@ export default function Docs() {
         </CardBody>
       </Card>
       <Card collapsible defaultCollapsed>
+        <CardHeader title="Mapbox Token" />
+        <CardBody style={{ marginLeft: '35px' }}>
+          <BlockText spacingType={[BlockText.SPACING_TYPE.MEDIUM]}>
+            A Mapbox Access Token is required when using the Mapbox map
+            provider. You can create one at{' '}
+            <a
+              href="https://account.mapbox.com"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              account.mapbox.com
+            </a>
+            .
+            <br />
+            <br />
+            <b>SECURITY NOTE:</b> The Mapbox token is stored and transmitted as
+            plaintext within the New Relic platform. It is visible in the
+            visualization configuration and in browser network requests. To
+            minimize risk, it is strongly recommended to:
+            <Spacing type={[Spacing.TYPE.MEDIUM, Spacing.TYPE.EXTRA_LARGE]}>
+              <ul>
+                <li>
+                  <b>Use only the minimum required public scopes:</b>
+                  <ul>
+                    <li>
+                      <code>STYLES:TILES</code> — serve map tiles
+                    </li>
+                    <li>
+                      <code>STYLES:READ</code> — read map styles
+                    </li>
+                    <li>
+                      <code>FONTS:READ</code> — render map fonts
+                    </li>
+                    <li>
+                      <code>VISION:READ</code> — GeolocateControl (user
+                      location)
+                    </li>
+                  </ul>
+                  Do <b>not</b> enable any secret scopes or write permissions.
+                </li>
+                <br />
+                <li>
+                  <b>Restrict allowed URLs</b> to the New Relic origins where
+                  this viz will run. Note: Mapbox does not support wildcards —
+                  each origin must be listed exactly:
+                  <ul>
+                    <li>
+                      <code>https://one.newrelic.com</code>
+                    </li>
+                    <li>
+                      <code>https://one.eu.newrelic.com</code>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+            </Spacing>
+          </BlockText>
+        </CardBody>
+      </Card>
+
+      <Card collapsible defaultCollapsed>
         <CardHeader title="Query Syntax" />
         <CardBody style={{ marginLeft: '35px' }}>
           <BlockText spacingType={[BlockText.SPACING_TYPE.MEDIUM]}>
@@ -383,6 +444,75 @@ export default function Docs() {
                 <li>
                   <code>disableClusterZoom</code>: Zoom level at which
                   clustering stops
+                </li>
+              </ul>
+            </Spacing>
+            <br />
+            <b>Weather Overlay</b>
+            <br />
+            Overlay real-time weather data from{' '}
+            <a
+              href="https://openweathermap.org/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              OpenWeatherMap
+            </a>{' '}
+            on the map. Requires a free API key — sign up at{' '}
+            <a
+              href="https://openweathermap.org/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              openweathermap.org
+            </a>
+            . <b>SECURITY NOTE:</b> This key is transmitted client-side and
+            visible in browser network requests; OpenWeatherMap is read-only so
+            no destructive actions are possible. Though, if you are using a paid
+            subscription of OWM, it's recommended you do not use this feature as
+            any exposure of your key could incur costs (e.g., someone could use
+            your key to make requests that would be billed to you). Note that
+            this project only allows usage of the 1.0 (free) API.
+            <Spacing type={[Spacing.TYPE.MEDIUM, Spacing.TYPE.LARGE]}>
+              <ul>
+                <li>
+                  Enable via <code>enableWeatherLayer</code> and provide your
+                  key in <code>openWeatherApiKey</code>
+                </li>
+                <li>
+                  <code>weatherLayerType</code>: Choose from Precipitation
+                  (classic &amp; new), Snow, Clouds (classic &amp; new),
+                  Temperature (classic &amp; new), Pressure, or Wind (default:
+                  precipitation_cls)
+                </li>
+                <li>
+                  <code>weatherOpacity</code>: Layer opacity 0–1 (default: 0.7)
+                </li>
+                <li>
+                  <code>weatherMaxZoom</code>: Maximum zoom level at which the
+                  weather layer is visible (default: 12)
+                </li>
+                <li>
+                  <code>showWeatherLegend</code>: Toggle a color-scale legend
+                  for the active weather layer (default: false)
+                </li>
+              </ul>
+            </Spacing>
+            <br />
+            <b>Inclement Weather Events (US only)</b>
+            <br />
+            Plot active National Weather Service (NWS) weather alert polygons
+            directly on the map. Alerts refresh automatically every 5 minutes
+            and require no additional API key.
+            <Spacing type={[Spacing.TYPE.MEDIUM, Spacing.TYPE.LARGE]}>
+              <ul>
+                <li>
+                  Enable via <code>enableInclementWeatherEvents</code>{' '}
+                  configuration option
+                </li>
+                <li>
+                  <code>weatherAlertMinSeverity</code>: Filter by minimum
+                  severity — Minor (show all), Moderate, Severe, or Extreme only
                 </li>
               </ul>
             </Spacing>

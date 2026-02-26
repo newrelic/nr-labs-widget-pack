@@ -48,7 +48,7 @@ function MapBoxRoot(props) {
         }}
         // ref={this.mapRef}
         mapboxAccessToken={mapBoxToken}
-        mapStyle={mapStyle || 'mapbox://styles/mapbox/streets-v11'}
+        mapStyle={mapStyle || 'mapbox://styles/mapbox/streets-v12'}
         // onViewportChange={viewport =>
         //   this.handleViewportChanged(viewport, updateMapContext)
         // }

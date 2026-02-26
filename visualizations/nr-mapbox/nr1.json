@@ -197,28 +197,28 @@
           "value": null
         },
         {
-          "title": "streets-v11",
-          "value": "mapbox://styles/mapbox/streets-v11"
+          "title": "streets-v12",
+          "value": "mapbox://styles/mapbox/streets-v12"
         },
         {
-          "title": "outdoors-v11",
-          "value": "mapbox://styles/mapbox/outdoors-v11"
+          "title": "outdoors-v12",
+          "value": "mapbox://styles/mapbox/outdoors-v12"
         },
         {
-          "title": "light-v10",
-          "value": "mapbox://styles/mapbox/light-v10"
+          "title": "light-v11",
+          "value": "mapbox://styles/mapbox/light-v11"
         },
         {
-          "title": "dark-v10",
-          "value": "mapbox://styles/mapbox/dark-v10"
+          "title": "dark-v11",
+          "value": "mapbox://styles/mapbox/dark-v11"
         },
         {
           "title": "satellite-v9",
           "value": "mapbox://styles/mapbox/satellite-v9"
         },
         {
-          "title": "satellite-streets-v11",
-          "value": "mapbox://styles/mapbox/satellite-streets-v11"
+          "title": "satellite-streets-v12",
+          "value": "mapbox://styles/mapbox/satellite-streets-v12"
         },
         {
           "title": "navigation-day-v1",
@@ -376,6 +376,110 @@
         {
           "title": "Show min of markers",
           "value": "min"
+        }
+      ]
+    },
+    {
+      "name": "enableWeatherLayer",
+      "title": "Enable Weather Overlay (leaflet only)",
+      "description": "Adds the current weather forecast as a map layer (default: false)",
+      "type": "boolean"
+    },
+    {
+      "name": "openWeatherApiKey",
+      "title": "OpenWeather API Key (leaflet only)",
+      "description": "Go to https://openweathermap.org/ and sign up to get an API key",
+      "type": "string"
+    },
+    {
+      "name": "weatherLayerType",
+      "title": "Weather Layer Type (leaflet only)",
+      "description": "Type of weather layer to display (default: precipitation)",
+      "type": "enum",
+      "items": [
+        {
+          "title": "Precipitation Classic",
+          "value": "precipitation_cls"
+        },
+        {
+          "title": "Precipitation",
+          "value": "precipitation_new"
+        },
+        {
+          "title": "Snow",
+          "value": "snow"
+        },
+        {
+          "title": "Clouds",
+          "value": "clouds_new"
+        },
+        {
+          "title": "Clouds Classic",
+          "value": "clouds_cls"
+        },
+        {
+          "title": "Temperature",
+          "value": "temp_new"
+        },
+        {
+          "title": "Temperature Classic",
+          "value": "temp"
+        },
+        {
+          "title": "Pressure",
+          "value": "pressure_new"
+        },
+        {
+          "title": "Wind",
+          "value": "wind_new"
+        }
+      ]
+    },
+    {
+      "name": "weatherOpacity",
+      "title": "Weather Layer Opacity (leaflet only)",
+      "description": "Opacity for the weather layer - 0 to 1 (default: 0.7)",
+      "type": "number"
+    },
+    {
+      "name": "weatherMaxZoom",
+      "title": "Weather Layer Max Zoom (leaflet only)",
+      "description": "Maximum zoom level for the weather layer (default: 12)",
+      "type": "number"
+    },
+    {
+      "name": "showWeatherLegend",
+      "title": "Show Weather Legend (leaflet only)",
+      "description": "Display a color-scale legend for the active weather layer (default: false)",
+      "type": "boolean"
+    },
+    {
+      "name": "enableInclementWeatherEvents",
+      "title": "Enable Inclement Weather Events (US only) (leaflet only)",
+      "description": "Plot active weather alerts from the NWS (refreshed every 5 min)",
+      "type": "boolean"
+    },
+    {
+      "name": "weatherAlertMinSeverity",
+      "title": "Minimum Weather Event Severity (leaflet only)",
+      "description": "Show weather alerts at or above this severity level (default: Minor = show all)",
+      "type": "enum",
+      "items": [
+        {
+          "title": "Minor (show all)",
+          "value": "Minor"
+        },
+        {
+          "title": "Moderate",
+          "value": "Moderate"
+        },
+        {
+          "title": "Severe",
+          "value": "Severe"
+        },
+        {
+          "title": "Extreme only",
+          "value": "Extreme"
         }
       ]
     },

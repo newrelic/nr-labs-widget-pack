@@ -306,7 +306,7 @@ Click on the short description in each section to view chart details.
   #### Overview
   <img src="screenshots/mapbox_01.png" height="450" alt="Map screenshot" />
 
-  Supports multiple NRQL queries, custom markers, dynamic clustering, threshold-based status colors, high-density rendering, regional heatmaps, custom tooltips, dashboard/external page linkage, and marker aggregation.
+  Supports multiple NRQL queries, custom markers, dynamic clustering, threshold-based status colors, high-density rendering, regional heatmaps, custom tooltips, dashboard/external page linkage, marker aggregation, real-time weather overlays, and US NWS inclement weather event alerts.
 
   #### Features
 
@@ -371,10 +371,45 @@ Click on the short description in each section to view chart details.
   - **max**: Maximum value
   - **count**: Count of data points
 
+  ##### Weather Overlay (Leaflet only)
+  Overlay real-time weather data from [OpenWeatherMap](https://openweathermap.org/) on the map. Requires a free OpenWeatherMap API key.
+
+  Available weather layer types:
+  - **Precipitation** (classic & new)
+  - **Snow**
+  - **Clouds** (classic & new)
+  - **Temperature** (classic & new)
+  - **Pressure**
+  - **Wind**
+
+  Configure the weather overlay:
+  - **Enable Weather Overlay**: Toggle weather layer on/off
+  - **OpenWeather API Key**: Required — sign up at https://openweathermap.org/
+      > **SECURITY NOTE:** This key is stored and trasmitted as plaintext. OpenWeatherMap's API is read-only (no write or destructive API calls are possible). Though, if you are using a paid subscription of OWM, it's recommended you do not use this feature as any exposure of your key could incur costs (e.g., someone could use your key to make requests that would be billed to you). Note that this project only uses the 1.0 (free) API.
+  - **Weather Layer Type**: Type of weather data to display (default: Precipitation new)
+  - **Weather Layer Opacity**: Opacity for the layer, 0–1 (default: 0.7)
+  - **Weather Layer Max Zoom**: Maximum zoom level for the weather layer (default: 12)
+  - **Show Weather Legend**: Toggle the color-scale legend for the active layer (default: on)
+
+  ##### Inclement Weather Events / NWS Alerts (US only, Leaflet only)
+  Plot active [National Weather Service (NWS)](https://www.weather.gov/) weather alert polygons directly on the map. Alerts refresh automatically every 5 minutes and require no additional API key.
+
+  - **Enable Inclement Weather Events**: Toggle NWS alert polygons on/off
+  - **Minimum Weather Event Severity**: Filter alerts by minimum severity — Minor (show all), Moderate, Severe, or Extreme only
+
   #### Requirements
   In order to use this chart, there are a key few requirements:
   - Leaflet requires no additional api key to setup (default)
   - Map Box provides additional features, but will require an Access Token from https://account.mapbox.com/auth/signup/
+
+  > **SECURITY NOTE:** The Mapbox token is stored and transmitted as **plaintext** within the New Relic platform. It is visible in the visualization configuration and in browser network requests. To minimize risk:
+  > - **Enable only the minimum required public scopes:** `STYLES:TILES`, `STYLES:READ`, `FONTS:READ`, and `VISION:READ`. Do **not** enable any secret scopes or write permissions.
+  > - **Restrict allowed URLs** to the New Relic origins where this viz will run. Note that Mapbox does not support wildcards — each origin must be listed exactly:
+  >   - `https://one.newrelic.com`
+  >   - `https://one.eu.newrelic.com`
+  
+  > See [Mapbox Token Docs](https://docs.mapbox.com/accounts/guides/tokens/#requirements-and-limitations) for more information.
+
   - Marker query should contain one alias with 'name:SOME_VALUE' which will be used as the marker name
   - Marker query must provide location data using **one** of the following `facet` methods:
     1. **lat/lng** (recommended): Use `precision` to ensure values aren't rounded
@@ -402,7 +437,7 @@ Click on the short description in each section to view chart details.
   | Show Documentation | boolean | false | Display inline documentation within the widget |
   | Debug Mode | boolean | false | Log additional information to the browser console for troubleshooting |
   | Map Provider | enum | leaflet | Choose between Leaflet (free, no setup) or Mapbox (requires token, more styles) |
-  | Mapbox Access Token | string | - | Required for Mapbox provider. Get one at https://account.mapbox.com |
+  | Mapbox Access Token | string | - | Required for Mapbox provider. Get one at https://account.mapbox.com. **Stored as plaintext** — use minimum public scopes only (`STYLES:TILES`, `STYLES:READ`, `FONTS:READ`, `VISION:READ`) and restrict token URLs to `https://one.newrelic.com` and `https://one.eu.newrelic.com`. |
   | Poll Interval | enum | 60s | How often to refresh data (5s, 10s, 15s, 30s, 45s, 1m, 5m) |
   | **NRQL Queries** (collection) | | | |
   | Account ID | account-id | - | Account ID to run the query against |
@@ -425,6 +460,15 @@ Click on the short description in each section to view chart details.
   | Default Image Height | number | 41 | Marker icon height in pixels |
   | Marker Colors | string | - | Comma-separated hex colors in order: cluster, no-status, ok, warning, critical. Useful for overriding threshold status default colors in bulk (instead of specifying markerColor for each threshold one by one). |
   | Marker Aggregation | enum | count | How to aggregate clustered markers: count, sum, average, max, min |
+  | **Weather Overlay (Leaflet only)** | | | |
+  | Enable Weather Overlay | boolean | false | Overlay real-time weather data from OpenWeatherMap on the map |
+  | OpenWeather API Key | string | - | Required for weather overlay. Sign up at https://openweathermap.org/ |
+  | Weather Layer Type | enum | precipitation_cls | Type of weather layer to display: Precipitation (classic/new), Snow, Clouds (classic/new), Temperature (classic/new), Pressure, Wind |
+  | Weather Layer Opacity | number | 0.7 | Opacity for the weather layer (0–1) |
+  | Weather Layer Max Zoom | number | 12 | Maximum zoom level at which the weather layer is visible |
+  | Show Weather Legend | boolean | false | Display a color-scale legend for the active weather layer |
+  | Enable Inclement Weather Events | boolean | false | Plot active US NWS weather alert polygons on the map (refreshed every 5 min, no API key required) |
+  | Minimum Weather Event Severity | enum | Minor | Minimum NWS alert severity to show: Minor (all), Moderate, Severe, Extreme only |
   | **Marker Thresholds** (collection) | | | |
   | Priority | number | 99999 | Evaluation order (0 = highest priority, evaluated first) |
   | Target Attribute | string | - | Query field to evaluate (e.g., "count", "errorRate") |
