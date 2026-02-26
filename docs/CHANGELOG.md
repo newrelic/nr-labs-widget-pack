@@ -1,3 +1,15 @@
+# [1.60.0](https://github.com/newrelic/nr-labs-widget-pack/compare/v1.59.0...v1.60.0) (2026-02-26)
+
+
+### Bug Fixes
+
+* deprecated mapbox styles;key/token docs ([ce402ce](https://github.com/newrelic/nr-labs-widget-pack/commit/ce402ce1bce879e7234e2b8b829554895a393848))
+
+
+### Features
+
+* add weather layers/events to leaflet map ([4a938b4](https://github.com/newrelic/nr-labs-widget-pack/commit/4a938b4dc9d6eeca5f3731453665b5eb94bdf384))
+
 # [1.59.0](https://github.com/newrelic/nr-labs-widget-pack/compare/v1.58.3...v1.59.0) (2026-02-20)
 
 
