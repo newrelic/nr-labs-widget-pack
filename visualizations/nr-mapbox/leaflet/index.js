@@ -274,17 +274,18 @@ function LeafletRoot(props) {
                 }
                 return null;
               })}
-          {(popupData['entity.guid'] || popupData.entityGuid) && (
-            <div className="drilldown-btn">
-              <Link
-                to={`https://one.newrelic.com/redirect/entity/${popupData[
-                  'entity.guid'
-                ] || popupData.entityGuid}`}
-              >
-                Open Entity
-              </Link>
-            </div>
-          )}
+          {(popupData['entity.guid'] || popupData.entityGuid) &&
+            !popupData.isWorkload && (
+              <div className="drilldown-btn">
+                <Link
+                  to={`https://one.newrelic.com/redirect/entity/${popupData[
+                    'entity.guid'
+                  ] || popupData.entityGuid}`}
+                >
+                  Open Entity
+                </Link>
+              </div>
+            )}
           {extractDashboardConfigs(popupData).map(config => (
             <div className="drilldown-btn" key={`dash-${config.name}`}>
               <Link
