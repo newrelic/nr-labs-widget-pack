@@ -1,3 +1,10 @@
+## [1.60.1](https://github.com/newrelic/nr-labs-widget-pack/compare/v1.60.0...v1.60.1) (2026-03-20)
+
+
+### Bug Fixes
+
+* workload guid parsing;conflicts with open entity btn ([fa3fb11](https://github.com/newrelic/nr-labs-widget-pack/commit/fa3fb11c9b94e485ffb187f69e1df446d18e20e6))
+
 # [1.60.0](https://github.com/newrelic/nr-labs-widget-pack/compare/v1.59.0...v1.60.0) (2026-02-26)
 
 
