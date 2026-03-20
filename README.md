@@ -591,6 +591,7 @@ Click on the short description in each section to view chart details.
   | `dash_filter_<name>` | No | Filter string for matching dashboard `<name>` (e.g., `'region = \'US-West\'' as 'dash_filter_overview'`). |
   | `dash_variables_<name>` | No | JSON string of variables for matching dashboard `<name>` (e.g., `'{"env": "prod"}' as 'dash_variables_overview'`). |
   | `entityGuid` or `entity.guid` | No | Entity associated with marker - adds "Open Entity" button to popup |
+  | `workloadGuid` | No | Workload associated with marker - adds "View Workload" button to popup. Only displays when `WorkloadStatus` eventType is queried |
   | **Region Override** | | |
   | `custom_color` | No | Hex color code to override marker/region color (e.g., `'#FF5733'`) |
 

@@ -1,6 +1,11 @@
 const cities = require('./cities.json');
 
-export const excludedKeys = ['entity.guid', 'entityGuid', 'isWorkload'];
+export const excludedKeys = [
+  'entity.guid',
+  'entityGuid',
+  'workloadGuid',
+  'isWorkload'
+];
 export const excludedStrings = [
   'name:',
   'rotate:',

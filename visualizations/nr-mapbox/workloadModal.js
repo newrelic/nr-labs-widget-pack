@@ -66,6 +66,7 @@ export default function WorkloadModal({ workloadStatus, setWorkloadStatus }) {
   const [workloadData, setWorkloadData] = useState(null);
 
   useEffect(async () => {
+    if (!workloadStatus) return;
     setLoading(true);
     console.log('Loading workload ->', workloadStatus); // eslint-disable-line
     await getWorkloadData();
@@ -73,7 +74,7 @@ export default function WorkloadModal({ workloadStatus, setWorkloadStatus }) {
   }, [workloadStatus]);
 
   const getWorkloadData = () => {
-    const workloadGuids = [workloadStatus['entity.guid']];
+    const workloadGuids = [workloadStatus.workloadGuid];
     // const workloadGuids = ['MTYwNjg2MnxOUjF8V09SS0xPQUR8MjI0MDk4'];
 
     return new Promise(resolve => {
@@ -143,7 +144,8 @@ export default function WorkloadModal({ workloadStatus, setWorkloadStatus }) {
         type={Button.TYPE.NORMAL}
         onClick={() => {
           window.open(
-            `https://one.newrelic.com/redirect/entity/${workloadData['entity.guid']}`
+            `https://one.newrelic.com/redirect/entity/${workloadStatus?.workloadGuid ||
+              null}`
           );
         }}
       >
@@ -157,7 +159,8 @@ export default function WorkloadModal({ workloadStatus, setWorkloadStatus }) {
           <>
             <Table
               items={(
-                workloadData?.['entity.guid']?.relatedEntities?.results || []
+                workloadData?.[workloadStatus?.workloadGuid]?.relatedEntities
+                  ?.results || []
               ).map(res => {
                 const entity = res?.target?.entity || {};
                 return entity;
