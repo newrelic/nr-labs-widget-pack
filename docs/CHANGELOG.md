@@ -1,3 +1,10 @@
+## [1.60.2](https://github.com/newrelic/nr-labs-widget-pack/compare/v1.60.1...v1.60.2) (2026-03-23)
+
+
+### Bug Fixes
+
+* map viz bugs;minor enhancements ([3867f0b](https://github.com/newrelic/nr-labs-widget-pack/commit/3867f0b6feeb20da732160e92837bc50fa72ed82))
+
 ## [1.60.1](https://github.com/newrelic/nr-labs-widget-pack/compare/v1.60.0...v1.60.1) (2026-03-20)
 
 
