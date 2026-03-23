@@ -202,6 +202,11 @@ export default function Docs() {
                   <code>'dash_variables_overview'</code>)
                 </li>
                 <li>
+                  <code>'dash_tab_guid_&lt;name&gt;'</code> - (optional)
+                  Dashboard tab entity GUID for navigation (e.g.,{' '}
+                  <code>'dash_tab_guid_overview'</code>)
+                </li>
+                <li>
                   <code>'link_&lt;name&gt;'</code> - External URL link rendered
                   in marker popup (e.g., <code>'link_support'</code>,{' '}
                   <code>'link_docs'</code>)
@@ -345,6 +350,11 @@ export default function Docs() {
                     '&#123;"env": "prod"&#125;' as 'dash_variables_overview'
                   </code>
                   )
+                </li>
+                <li>
+                  <code>dash_tab_guid_&lt;name&gt;</code>: (optional) Dashboard
+                  tab entity GUID (e.g.,{' '}
+                  <code>'ABC123...' as 'dash_tab_guid_overview'</code>)
                 </li>
                 <li>
                   <code>link_&lt;name&gt;</code>: External URL displayed as a

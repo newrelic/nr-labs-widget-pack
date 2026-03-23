@@ -297,3 +297,47 @@ export const parseLatLngBoundsForMapbox = (
     return undefined;
   }
 };
+
+/**
+ * Extract ordered aliases from a NRQL query string.
+ * Matches: as 'alias', as "alias", and as alias patterns.
+ * Returns aliases in the order they appear in the query (SELECT order).
+ */
+export function extractNrqlAliases(query) {
+  if (!query) return [];
+  const aliases = [];
+  // Match AS followed by single-quoted, double-quoted, or unquoted alias
+  // Single-quoted: handles escaped quotes (\') inside
+  const regex = /\bAS\s+(?:'((?:[^'\\]|\\.)*)'|"((?:[^"\\]|\\.)*)"|([\w][\w\s]*))/gi;
+  let match;
+  while ((match = regex.exec(query)) !== null) {
+    const alias = match[1] ?? match[2] ?? match[3];
+    // Unescape escaped single/double quotes and trim trailing whitespace from unquoted aliases
+    aliases.push(
+      alias
+        .replace(/\\'/g, "'")
+        .replace(/\\"/g, '"')
+        .trim()
+    );
+  }
+  return aliases;
+}
+
+/**
+ * Rebuild an object with keys reordered to match orderedKeys first,
+ * followed by any remaining keys not in orderedKeys.
+ */
+export function reorderObjectKeys(obj, orderedKeys) {
+  const reordered = {};
+  orderedKeys.forEach(key => {
+    if (key in obj) {
+      reordered[key] = obj[key];
+    }
+  });
+  Object.keys(obj).forEach(key => {
+    if (!(key in reordered)) {
+      reordered[key] = obj[key];
+    }
+  });
+  return reordered;
+}

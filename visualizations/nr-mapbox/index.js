@@ -7,7 +7,12 @@ import {
 } from 'nr1';
 import { useInterval } from '@mantine/hooks';
 
-import { deriveLatLng, evaluateMarker } from './utils';
+import {
+  deriveLatLng,
+  evaluateMarker,
+  extractNrqlAliases,
+  reorderObjectKeys
+} from './utils';
 import Docs from './docs';
 import ErrorState from '../../shared/ErrorState';
 import MapBoxRoot from './mapbox';
@@ -67,7 +72,8 @@ function MapSystemRoot(props) {
     debugEnabled,
     regionQuery,
     regionAccountId,
-    enableRegionTimePicker = false
+    enableRegionTimePicker = false,
+    disableTooltipSorting = false
   } = props;
   const [errors, setErrors] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -137,7 +143,8 @@ function MapSystemRoot(props) {
         }).then(result => ({
           result,
           queryIndex,
-          useNameAsLabel: nrql.useNameAsLabel || false
+          useNameAsLabel: nrql.useNameAsLabel || false,
+          originalQuery: query
         }));
       });
 
@@ -146,7 +153,11 @@ function MapSystemRoot(props) {
       const cleanData = nrdbResults
         .filter(result => result.status === 'fulfilled')
         .flatMap(result => {
-          const { result: queryResult, useNameAsLabel } = result.value;
+          const {
+            result: queryResult,
+            useNameAsLabel,
+            originalQuery
+          } = result.value;
           if (queryResult?.error) {
             const errorMessage =
               queryResult.error.message || String(queryResult.error);
@@ -155,8 +166,12 @@ function MapSystemRoot(props) {
           }
           const results =
             queryResult?.data?.actor?.account?.nrql?.results || [];
-          // Attach useNameAsLabel to each data point
-          return results.map(r => ({ ...r, _useNameAsLabel: useNameAsLabel }));
+          // Attach useNameAsLabel and originalQuery to each data point
+          return results.map(r => ({
+            ...r,
+            _useNameAsLabel: useNameAsLabel,
+            _originalQuery: originalQuery
+          }));
         })
         .filter(r => {
           Object.keys(r).forEach(key => {
@@ -183,6 +198,15 @@ function MapSystemRoot(props) {
           }
 
           return false;
+        })
+        .map(r => {
+          const originalQuery = r._originalQuery;
+          delete r._originalQuery;
+          if (disableTooltipSorting && originalQuery) {
+            const aliases = extractNrqlAliases(originalQuery);
+            return reorderObjectKeys(r, aliases);
+          }
+          return r;
         });
 
       if (debugEnabled) {

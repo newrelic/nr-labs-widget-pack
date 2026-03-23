@@ -88,7 +88,8 @@ function LeafletRoot(props) {
     enableAutoTooltip = false,
     hideMarkers = false,
     enableInclementWeatherEvents = false,
-    weatherAlertMinSeverity = 'Minor'
+    weatherAlertMinSeverity = 'Minor',
+    openDashboardsAsUrl = false
   } = props;
 
   const {
@@ -220,6 +221,9 @@ function LeafletRoot(props) {
       ? undefined
       : parseLatLngBounds(maxBoundsSouthWest, maxBoundsNorthEast);
 
+  // Disable Leaflet's auto-pan when maxBounds is active.
+  const autoPanEnabled = !maxBounds;
+
   const polygonOptions = useMemo(
     () => ({
       fillColor: customColors[Status.CLUSTER].borderColor,
@@ -254,10 +258,12 @@ function LeafletRoot(props) {
           )}
           {tooltipConfig.length > 0
             ? tooltipConfig.map(({ label, queryField }) => (
-                <React.Fragment key={queryField}>
-                  {label}: {popupData[queryField]}
-                  <br />
-                </React.Fragment>
+                <div
+                  key={queryField}
+                  title={String(popupData[queryField] ?? '')}
+                >
+                  <strong>{label}</strong>: {popupData[queryField]}
+                </div>
               ))
             : // tooltip field rendering
               Object.keys(popupData).map(key => {
@@ -266,10 +272,9 @@ function LeafletRoot(props) {
                 );
                 if (!excludedKeys.includes(key) && !containsExcludedString) {
                   return (
-                    <React.Fragment key={key}>
-                      {key}: {popupData[key]}
-                      <br />
-                    </React.Fragment>
+                    <div key={key} title={String(popupData[key] ?? '')}>
+                      <strong>{key}</strong>: {popupData[key]}
+                    </div>
                   );
                 }
                 return null;
@@ -293,7 +298,7 @@ function LeafletRoot(props) {
                 })}
                 onClick={e => {
                   e.preventDefault();
-                  openDashboard(config);
+                  openDashboard(config, openDashboardsAsUrl);
                 }}
               >
                 {config.label}
@@ -325,7 +330,8 @@ function LeafletRoot(props) {
       enableAutoTooltip,
       extractDashboardConfigs,
       extractLinkConfigs,
-      openDashboard
+      openDashboard,
+      openDashboardsAsUrl
     ]
   );
 
@@ -379,7 +385,7 @@ function LeafletRoot(props) {
             stroke={radius >= 8}
             fillOpacity={radius < 8 ? 1 : 0.7}
           >
-            <Popup position={[lat, lng]}>
+            <Popup position={[lat, lng]} autoPan={autoPanEnabled}>
               {renderPopupContent(popupData, setWorkloadStatus)}
             </Popup>
           </CircleMarker>
@@ -474,7 +480,11 @@ function LeafletRoot(props) {
           }}
           position={[lat, lng]}
         >
-          <Popup position={[lat, lng]} location={location}>
+          <Popup
+            position={[lat, lng]}
+            location={location}
+            autoPan={autoPanEnabled}
+          >
             {renderPopupContent(popupData, setWorkloadStatus)}
           </Popup>
           {useNameAsLabel && locName && (
@@ -503,7 +513,8 @@ function LeafletRoot(props) {
     defaultImgHeight,
     markerStyle,
     renderPopupContent,
-    setWorkloadStatus
+    setWorkloadStatus,
+    autoPanEnabled
   ]);
 
   // Process region data to include GeoJSON features only when geoDataLoaded is true
@@ -626,7 +637,7 @@ function LeafletRoot(props) {
 
       return (
         <GeoJSON key={regionKey} data={region.geometry} style={style}>
-          <Popup>
+          <Popup autoPan={autoPanEnabled}>
             <div>
               <strong>
                 {regionHeader || region.name || `Region ${index + 1}`}
@@ -634,13 +645,17 @@ function LeafletRoot(props) {
               <br />
               {tooltipConfig.length > 0 ? (
                 tooltipConfig.map(({ label, queryField }) => (
-                  <React.Fragment key={queryField}>
+                  <div
+                    key={queryField}
+                    title={String(region[queryField] ?? '')}
+                  >
                     {label}: {region[queryField]}
-                    <br />
-                  </React.Fragment>
+                  </div>
                 ))
               ) : (
-                <>Value: {region.value}</>
+                <div title={String(region.value ?? '')}>
+                  Value: {region.value}
+                </div>
               )}
               {extractDashboardConfigs(region).map(config => (
                 <div
@@ -653,7 +668,7 @@ function LeafletRoot(props) {
                     })}
                     onClick={e => {
                       e.preventDefault();
-                      openDashboard(config);
+                      openDashboard(config, openDashboardsAsUrl);
                     }}
                   >
                     {config.label}
@@ -681,7 +696,9 @@ function LeafletRoot(props) {
     enableAutoTooltip,
     extractDashboardConfigs,
     extractLinkConfigs,
-    openDashboard
+    openDashboard,
+    openDashboardsAsUrl,
+    autoPanEnabled
   ]);
 
   // Render inclement weather alert markers from NWS

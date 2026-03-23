@@ -362,6 +362,7 @@ Click on the short description in each section to view chart details.
   - **dash_guid**: Dashboard entity GUID to open
   - **dash_filter**: (optional) Filter string to apply to the dashboard
   - **dash_variables**: (optional) JSON string of dashboard variables
+  - **dash_tab_guid**: (optional) Dashboard tab GUID to open that resides in dashboard entity. This can be found in the JSON of the dashboard via `Manage JSON` button when clicking the ellipses button at the top right of a dashboard.
 
   ##### Marker Aggregation
   When multiple data points share the same location, aggregate their values using:
@@ -500,6 +501,8 @@ Click on the short description in each section to view chart details.
   | Disable Markers | boolean | false | Disable markers (including clusters) from rendering. Useful when only rendering heatmaps |
   | **Tooltips & Links** | | | |
   | Enable Auto Tooltip | boolean | false | Auto-generate tooltip content from fields prefixed with `tooltip_` |
+  | Disable Tooltip Sorting | boolean | false | Disables alphabetical sorting of links/tooltips. User defined order via NRQL query is used instead. |
+  | Open Dashboards as URL | boolean | false | Navigates the page directly to the dashboard UI, rather than opening dashboard as an overlay/modal. |
 
   #### Region Heatmap Example
 
@@ -590,6 +593,7 @@ Click on the short description in each section to view chart details.
   | `dash_guid_<name>` | No | Dashboard GUID with custom label. Multiple dashboards supported (e.g., `'NDEyMDg...' as 'dash_guid_overview'` → "Overview" link). |
   | `dash_filter_<name>` | No | Filter string for matching dashboard `<name>` (e.g., `'region = \'US-West\'' as 'dash_filter_overview'`). |
   | `dash_variables_<name>` | No | JSON string of variables for matching dashboard `<name>` (e.g., `'{"env": "prod"}' as 'dash_variables_overview'`). |
+  | `dash_tab_guid_<name>` | No | Dashboard tab GUID of matching dashboard `<name>` (e.g., `'NDEyMDg...' as 'dash_tab_guid_overview'`. |
   | `entityGuid` or `entity.guid` | No | Entity associated with marker - adds "Open Entity" button to popup |
   | **Region Override** | | |
   | `custom_color` | No | Hex color code to override marker/region color (e.g., `'#FF5733'`) |
@@ -785,6 +789,7 @@ Click on the short description in each section to view chart details.
     'ABC123' as 'dash_guid_overview',
     latest(concat('storeId = \'', storeId, '\'')) as 'dash_filter_overview',
     'XYZ789' as 'dash_guid_performance',
+    'GHSJD93...' as 'dash_tab_guid_overview',
     
     -- External links
     'https://support.example.com' as 'link_support'
