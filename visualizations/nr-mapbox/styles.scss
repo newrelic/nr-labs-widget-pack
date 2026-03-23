@@ -171,26 +171,21 @@
   }
 }
 
-// Popup content styling - truncate long text with hover to expand
+// Popup content styling - truncate long text; full value shown via native tooltip on hover
 .leaflet-popup-content {
     max-width: 250px;
+    max-height: 200px;
+    overflow-y: auto;
     word-wrap: break-word;
     overflow-wrap: break-word;
     
-    // Truncate long values with ellipsis
+    // Truncate long values with ellipsis (title attribute provides full value on hover)
     span, div:not(.drilldown-btn) {
         display: block;
         max-width: 100%;
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
-        
-        // Expand on hover to show full text
-        &:hover {
-            white-space: normal;
-            overflow: visible;
-            word-break: break-word;
-        }
     }
     
     // Keep header bold styling visible

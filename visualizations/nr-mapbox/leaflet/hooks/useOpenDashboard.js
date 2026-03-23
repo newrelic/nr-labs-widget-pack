@@ -1,14 +1,14 @@
 import { useCallback } from 'react';
 import { navigation } from 'nr1';
-import { sentenceCase } from '../tooltipUtils';
 
 /**
  * Extract named dashboard configs from data fields using the prefix pattern:
  *   dash_guid_<name>   – dashboard entity GUID
  *   dash_filter_<name> – optional filter string
  *   dash_variables_<name> – optional JSON variables
+ *   dash_tab_guid_<name> – optional default tab GUID
  *
- * Returns an array of { name, label, guid, filter, variables }.
+ * Returns an array of { name, label, guid, filter, variables, defaultTab }.
  */
 export function extractDashboardConfigs(data) {
   if (!data) return [];
@@ -26,6 +26,7 @@ export function extractDashboardConfigs(data) {
 
     const filterKey = `dash_filter_${name}`;
     const variablesKey = `dash_variables_${name}`;
+    const defaultTabKey = `dash_tab_guid_${name}`;
 
     let variables = {};
     const rawVars = data[variablesKey];
@@ -40,10 +41,11 @@ export function extractDashboardConfigs(data) {
 
     configs[name] = {
       name,
-      label: sentenceCase(name),
+      label: name,
       guid,
       filter: data[filterKey] || '',
-      variables
+      variables,
+      defaultTab: data[defaultTabKey] || ''
     };
   });
 
@@ -72,7 +74,7 @@ export function extractLinkConfigs(data) {
 
     configs.push({
       name,
-      label: sentenceCase(name),
+      label: name,
       url
     });
   });
@@ -84,12 +86,12 @@ export function extractLinkConfigs(data) {
 export function useOpenDashboard() {
   /**
    * Open a dashboard from an extracted config object.
-   * Accepts { guid, filter, variables }.
+   * Accepts { guid, filter, variables, defaultTab }.
    */
-  const openDashboard = useCallback(config => {
+  const openDashboard = useCallback((config, openInNewTab) => {
     if (!config) return;
 
-    const { guid, filter, variables } = config;
+    const { guid, filter, variables, defaultTab } = config;
 
     if (!guid) {
       // eslint-disable-next-line no-console
@@ -98,17 +100,33 @@ export function useOpenDashboard() {
     }
 
     try {
-      navigation.openStackedNerdlet({
-        id: 'dashboards.detail',
-        urlState: {
-          entityGuid: guid,
-          ...(filter && { filters: filter }),
-          ...(variables &&
-            Object.keys(variables).length > 0 && {
-              selectedVariables: variables
-            })
-        }
-      });
+      if (openInNewTab) {
+        navigation.openNerdlet({
+          id: 'dashboards.detail',
+          urlState: {
+            entityGuid: guid,
+            ...(filter && { filters: filter }),
+            ...(variables &&
+              Object.keys(variables).length > 0 && {
+                selectedVariables: variables
+              }),
+            ...(defaultTab && { selectedPage: defaultTab })
+          }
+        });
+      } else {
+        navigation.openStackedNerdlet({
+          id: 'dashboards.detail',
+          urlState: {
+            entityGuid: guid,
+            ...(filter && { filters: filter }),
+            ...(variables &&
+              Object.keys(variables).length > 0 && {
+                selectedVariables: variables
+              }),
+            ...(defaultTab && { selectedPage: defaultTab })
+          }
+        });
+      }
     } catch (e) {
       // eslint-disable-next-line no-console
       console.error('Failed to open dashboard:', e);

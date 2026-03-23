@@ -548,6 +548,18 @@
       "title": "Auto-generate Tooltips (default: false) (leaflet only)",
       "description": "Automatically generate tooltip content from tooltip_* prefixed fields in query results",
       "type": "boolean"
+    },
+    {
+      "name": "disableTooltipSorting",
+      "title": "Disable Tooltip Sorting (default: false) (leaflet only)",
+      "description": "When enabled, tooltip fields are displayed in the order defined in the NRQL SELECT clause instead of being alphabetically sorted",
+      "type": "boolean"
+    },
+    {
+      "name": "openDashboardsAsUrl",
+      "title": "Open Dashboards as URL (default: false) (leaflet only)",
+      "description": "When enabled, dashboards opened from tooltips will navigate to the dashboard UI directly (not as a modal)",
+      "type": "boolean"
     }
   ]
 }

@@ -5,17 +5,6 @@
  * prefixed with "tooltip_"
  */
 
-// Convert a string to sentence case (i.e - "some_field_name" -> "Some field name")
-export function sentenceCase(str) {
-  if (!str) return '';
-
-  // Replace underscores and hyphens w/ spaces
-  const cleaned = str.replace(/[_-]/g, ' ');
-
-  // Camel-case
-  return cleaned.charAt(0).toUpperCase() + cleaned.slice(1).toLowerCase();
-}
-
 // Generate tooltip configuration from data fields
 export function generateTooltipConfig(data) {
   if (!data) return [];
@@ -32,7 +21,7 @@ export function generateTooltipConfig(data) {
       const fieldName = key.replace('tooltip_', '');
 
       tooltipConfig.push({
-        label: sentenceCase(fieldName),
+        label: fieldName,
         queryField: key
       });
     }
