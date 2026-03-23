@@ -1,6 +1,5 @@
 import { useCallback } from 'react';
 import { navigation } from 'nr1';
-// import { sentenceCase } from '../tooltipUtils';
 
 /**
  * Extract named dashboard configs from data fields using the prefix pattern:
