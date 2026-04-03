@@ -1,3 +1,10 @@
+## [1.60.3](https://github.com/newrelic/nr-labs-widget-pack/compare/v1.60.2...v1.60.3) (2026-04-03)
+
+
+### Bug Fixes
+
+* add tooltip width prop ([fe3f9ee](https://github.com/newrelic/nr-labs-widget-pack/commit/fe3f9ee517e9e754e71b2b13f5a115b32663767c))
+
 ## [1.60.2](https://github.com/newrelic/nr-labs-widget-pack/compare/v1.60.1...v1.60.2) (2026-03-23)
 
 
