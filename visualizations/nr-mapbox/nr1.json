@@ -550,6 +550,12 @@
       "type": "boolean"
     },
     {
+      "name": "tooltipWidth",
+      "title": "Tooltip Width (leaflet only)",
+      "description": "Width of the tooltip in pixels",
+      "type": "number"
+    },
+    {
       "name": "disableTooltipSorting",
       "title": "Disable Tooltip Sorting (default: false) (leaflet only)",
       "description": "When enabled, tooltip fields are displayed in the order defined in the NRQL SELECT clause instead of being alphabetically sorted",

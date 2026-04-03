@@ -86,6 +86,7 @@ function LeafletRoot(props) {
     regionHeatmapSteps,
     regionData,
     enableAutoTooltip = false,
+    tooltipWidth = 80,
     hideMarkers = false,
     enableInclementWeatherEvents = false,
     weatherAlertMinSeverity = 'Minor',
@@ -224,6 +225,37 @@ function LeafletRoot(props) {
   // Disable Leaflet's auto-pan when maxBounds is active.
   const autoPanEnabled = !maxBounds;
 
+  const effectiveTooltipWidth = useMemo(() => {
+    if (
+      tooltipWidth === '' ||
+      tooltipWidth === null ||
+      tooltipWidth === undefined
+    ) {
+      return null;
+    }
+
+    const parsedTooltipWidth = Number(tooltipWidth);
+    if (!Number.isFinite(parsedTooltipWidth) || parsedTooltipWidth <= 0) {
+      return null;
+    }
+
+    return parsedTooltipWidth;
+  }, [tooltipWidth]);
+
+  const markerPopupProps = useMemo(() => {
+    if (!effectiveTooltipWidth) {
+      return {
+        className: 'marker-popup'
+      };
+    }
+
+    return {
+      className: 'marker-popup marker-popup--custom-width',
+      minWidth: effectiveTooltipWidth,
+      maxWidth: effectiveTooltipWidth
+    };
+  }, [effectiveTooltipWidth]);
+
   const polygonOptions = useMemo(
     () => ({
       fillColor: customColors[Status.CLUSTER].borderColor,
@@ -361,6 +393,7 @@ function LeafletRoot(props) {
 
       const { lat, lng } = coordinates;
       const popupData = { ...data, locName, lng, lat };
+      const popupWidthKey = effectiveTooltipWidth || 'default';
 
       // Determine color based on heatmap or status
       let markerColor;
@@ -386,7 +419,12 @@ function LeafletRoot(props) {
             stroke={radius >= 8}
             fillOpacity={radius < 8 ? 1 : 0.7}
           >
-            <Popup position={[lat, lng]} autoPan={autoPanEnabled}>
+            <Popup
+              key={`hd-popup-${mapIndex}-${popupWidthKey}`}
+              position={[lat, lng]}
+              autoPan={autoPanEnabled}
+              {...markerPopupProps}
+            >
               {renderPopupContent(popupData, setWorkloadStatus)}
             </Popup>
           </CircleMarker>
@@ -482,9 +520,11 @@ function LeafletRoot(props) {
           position={[lat, lng]}
         >
           <Popup
+            key={`marker-popup-${mapIndex}-${popupWidthKey}`}
             position={[lat, lng]}
             location={location}
             autoPan={autoPanEnabled}
+            {...markerPopupProps}
           >
             {renderPopupContent(popupData, setWorkloadStatus)}
           </Popup>
@@ -515,6 +555,8 @@ function LeafletRoot(props) {
     markerStyle,
     renderPopupContent,
     setWorkloadStatus,
+    markerPopupProps,
+    effectiveTooltipWidth,
     autoPanEnabled
   ]);
 
