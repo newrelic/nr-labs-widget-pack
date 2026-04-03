@@ -204,6 +204,12 @@
     }
 }
 
+    .leaflet-popup.marker-popup--custom-width {
+      .leaflet-popup-content {
+        max-width: none;
+      }
+    }
+
 // Inclement weather alert popup
 .weather-alert-popup {
   .weather-alert-popup__header {
