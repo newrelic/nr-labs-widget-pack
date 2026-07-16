@@ -372,6 +372,12 @@ Click on the short description in each section to view chart details.
   - **max**: Maximum value
   - **count**: Count of data points
 
+  ##### Custom Tile Layers (Leaflet only)
+  Use a different map tile provider instead of the default OpenStreetMap tiles.
+
+  - **Map Tile Layer URL**: URL template for the map tile layer (default: `https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png`)
+  - **Map Tile Layer Attribution**: Attribution text/HTML shown for the map tile layer (default: `&copy; OpenStreetMap contributors`)
+
   ##### Weather Overlay (Leaflet only)
   Overlay real-time weather data from [OpenWeatherMap](https://openweathermap.org/) on the map. Requires a free OpenWeatherMap API key.
 

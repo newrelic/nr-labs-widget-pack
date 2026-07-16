@@ -90,8 +90,17 @@ function LeafletRoot(props) {
     hideMarkers = false,
     enableInclementWeatherEvents = false,
     weatherAlertMinSeverity = 'Minor',
-    openDashboardsAsUrl = false
+    openDashboardsAsUrl = false,
+    mapLayerUrl,
+    mapLayerAttribution
   } = props;
+
+  const safeMapLayerUrl =
+    mapLayerUrl ?? 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
+
+  const safeMapLayerAttribution =
+    mapLayerAttribution ??
+    '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors';
 
   const {
     openDashboard,
@@ -833,8 +842,8 @@ function LeafletRoot(props) {
         onZoomEnd={handleMapViewChange}
       >
         <TileLayer
-          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+          attribution={safeMapLayerAttribution}
+          url={safeMapLayerUrl}
         />
         {weatherActive && renderWeatherLayer()}
         {renderRegions()}

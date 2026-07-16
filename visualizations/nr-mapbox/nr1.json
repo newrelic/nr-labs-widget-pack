@@ -147,6 +147,18 @@
       "type": "string"
     },
     {
+      "name": "mapLayerUrl",
+      "title": "Map Tile Layer URL (leaflet only)",
+      "description": "URL template for the map tile layer (default: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png')",
+      "type": "string"
+    },
+    {
+      "name": "mapLayerAttribution",
+      "title": "Map Tile Layer Attribution (leaflet only)",
+      "description": "Attribution text/HTML shown for the map tile layer (default: '&copy; OpenStreetMap contributors')",
+      "type": "string"
+    },
+    {
       "name": "defaultMarkerColor",
       "title": "Default Marker Color",
       "description": "Fallback color for markers without threshold match (e.g., 'green', 'blue', '#FF5733')",
