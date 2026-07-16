@@ -1,3 +1,10 @@
+# [1.61.0](https://github.com/newrelic/nr-labs-widget-pack/compare/v1.60.3...v1.61.0) (2026-07-16)
+
+
+### Features
+
+* add configurable tile layer URL and attribution to Map widget (Leaflet) ([50464ed](https://github.com/newrelic/nr-labs-widget-pack/commit/50464ed7a335ce15c188f82cb25fb68ffcbb866f))
+
 ## [1.60.3](https://github.com/newrelic/nr-labs-widget-pack/compare/v1.60.2...v1.60.3) (2026-04-03)
 
 
