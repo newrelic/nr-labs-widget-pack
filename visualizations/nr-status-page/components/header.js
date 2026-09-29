@@ -8,7 +8,15 @@ const Header = ({
   statusPalPageLink,
   accountId
 }) => {
-  const commonProviders = ['statusPage', 'google', 'statusIO', 'rss'];
+  const commonProviders = [
+    'statusPage',
+    'google',
+    'statusIO',
+    'rss',
+    'azure',
+    'okta',
+    'oci'
+  ];
 
   const handleHeaderClick = () => {
     if (provider === 'nrql') {
@@ -49,6 +57,28 @@ const Header = ({
           type: Toast.TYPE.CRITICAL
         });
       }
+    }
+
+    if (provider === 'apple') {
+      window
+        .open('https://www.apple.com/support/systemstatus/', '_blank')
+        .focus();
+    }
+
+    if (provider === 'awsHealth') {
+      window
+        .open('https://health.aws.amazon.com/health/status', '_blank')
+        .focus();
+    }
+
+    if (provider === 'azure') {
+      window
+        .open('https://azure.status.microsoft/en-us/status', '_blank')
+        .focus();
+    }
+
+    if (provider === 'okta') {
+      window.open('https://status.okta.com/', '_blank').focus();
     }
 
     if (commonProviders.includes(provider)) {

@@ -3,7 +3,7 @@ import { Button, Icon } from 'nr1';
 import dayjs from 'dayjs';
 
 function setTimelineSymbol(incidentImpact) {
-  switch (incidentImpact.toLowerCase()) {
+  switch ((incidentImpact || '').toLowerCase()) {
     case 'unknown':
       return (
         <Icon
@@ -16,7 +16,7 @@ function setTimelineSymbol(incidentImpact) {
       return (
         <Icon
           className="timeline-item-symbol-icon"
-          color="#464e4e"
+          color="#9C5400"
           type={Icon.TYPE.HARDWARE_AND_SOFTWARE__SOFTWARE__APPLICATION__S_OK}
         />
       );
@@ -52,8 +52,16 @@ function setTimelineSymbol(incidentImpact) {
       return (
         <Icon
           className="timeline-item-symbol-icon"
-          color="#3ca653"
+          color="#9C5400"
           type={Icon.TYPE.DATE_AND_TIME__DATE_AND_TIME__TIME__A_REMOVE}
+        />
+      );
+    default:
+      return (
+        <Icon
+          className="timeline-item-symbol-icon"
+          color="#464e4e"
+          type={Icon.TYPE.HARDWARE_AND_SOFTWARE__SOFTWARE__BROWSER}
         />
       );
   }

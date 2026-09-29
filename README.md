@@ -819,7 +819,7 @@ Click on the short description in each section to view chart details.
   <img src="screenshots/status_page_01.png" height="250" alt="Status Page screenshot" />
 
    #### Overview
-   Use the Status Page widget to display a single status feed in a dashboard. Currently supported providers are Status Page, Google, Status IO, NRQL, New Relic Workload, RSS, and Status Pal.
+   Use the Status Page widget to display a single status feed in a dashboard. Currently supported providers are Status Page, Google, Status IO, NRQL, New Relic Workload, RSS, Status Pal, Apple System Status, AWS Health, Azure, Okta, and Oracle Cloud Infrastructure. Microsoft 365 is also supported, via the RSS Feed provider.
 
    Clicking the header will navigate to the status page configured in a new tab. Clicking the current status or any of the most 5 recent incidents will open a modal with more details on the incident selected, or a list of all past incidents.
 
@@ -828,13 +828,11 @@ Click on the short description in each section to view chart details.
   #### Requirements
   In order to use this chart, there are a few requirements:
   - A provider, service title/image, and status input must be filled in at minimum
-  - A custom CORS proxy can be used to access a status page. The format must include `{url}` in the string that will be replaced with the provided status input. Example:
+  - The CORS Proxy field is optional. A New Relic Labs proxy is applied automatically for the providers that need one to access a status page. Set this field only to override the built-in proxy with your own. The format must include `{url}` in the string that will be replaced with the provided status input. Example:
 
   ```bash
-  https://cors-anywhere.herokuapp.com/{url}
+  https://your-own-cors-proxy.example.com/{url}
   ```
-
- - When using a `Status Pal` provider with no CORS proxy configured, you must request access to the public proxy used in the viz each time the widget is loaded by navigating to `https://cors-anywhere.herokuapp.com` and clicking `request access` button.
 
  #### Example Inputs
 
@@ -872,6 +870,26 @@ Click on the short description in each section to view chart details.
 
   - [galaxygate](https://status.galaxygate.net/) --> From https://status.galaxygate.net/
   - [smtp](https://smtp.statuspal.io) --> From https://smtp.statuspal.io
+
+##### Apple System Status
+  - [https://www.apple.com/support/systemstatus/data/developer/system_status_en_US.js](https://www.apple.com/support/systemstatus/data/developer/system_status_en_US.js)
+
+##### AWS Health
+  - [https://health.aws.amazon.com](https://health.aws.amazon.com)
+
+##### Azure
+  - [https://azure.status.microsoft/en-us/status/feed/](https://azure.status.microsoft/en-us/status/feed/)
+
+##### Microsoft 365
+  Use the **RSS Feed** provider.
+
+  - [https://status.cloud.microsoft/api/feed/mac](https://status.cloud.microsoft/api/feed/mac)
+
+##### Okta
+  - [https://feeds.feedburner.com/OktaStatusRSS](https://feeds.feedburner.com/OktaStatusRSS)
+
+##### Oracle Cloud Infrastructure
+  - [https://ocistatus.oraclecloud.com](https://ocistatus.oraclecloud.com)
 
   ---
 </details>

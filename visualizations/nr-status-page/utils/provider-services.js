@@ -17,6 +17,15 @@ import {
   workloadFormatter,
   workloadIncidentFormatter
 } from '../formatters/workload';
+import { appleFormatter, appleIncidentFormatter } from '../formatters/apple';
+import {
+  awsHealthFormatter,
+  awsHealthIncidentFormatter
+} from '../formatters/aws-health';
+import { azureFormatter, azureIncidentFormatter } from '../formatters/azure';
+import { oktaFormatter, oktaIncidentFormatter } from '../formatters/okta';
+import { ociFormatter, ociIncidentFormatter } from '../formatters/oci';
+import { viaProxy } from './proxy';
 
 const providers = {
   google: {
@@ -93,20 +102,48 @@ const providers = {
       major: 'major',
       maintence: 'maintence'
     },
-    apiURL: 'https://cors-anywhere.herokuapp.com/statuspal.io/api/v2',
+    apiURL: viaProxy('https://statuspal.io/api/v2'),
     name: 'Statuspal',
     summaryFormatter: statusPalFormatter,
     incidentFormatter: statusPalIncidentFormatter
+  },
+  apple: {
+    name: 'Apple System Status',
+    summaryFormatter: appleFormatter,
+    incidentFormatter: appleIncidentFormatter
+  },
+  awsHealth: {
+    summaryUrl: '/public/currentevents',
+    incidentUrl: '/public/currentevents',
+    name: 'AWS Health',
+    summaryFormatter: awsHealthFormatter,
+    incidentFormatter: awsHealthIncidentFormatter
+  },
+  azure: {
+    name: 'Azure',
+    summaryFormatter: azureFormatter,
+    incidentFormatter: azureIncidentFormatter
+  },
+  okta: {
+    name: 'Okta',
+    summaryFormatter: oktaFormatter,
+    incidentFormatter: oktaIncidentFormatter
+  },
+  oci: {
+    summaryUrl: '/api/v2/status.json',
+    incidentUrl: '/api/v2/incident-summary.rss',
+    name: 'Oracle Cloud Infrastructure',
+    summaryFormatter: ociFormatter,
+    incidentFormatter: ociIncidentFormatter
   }
 };
 
+const PROVIDER_KEY_ALIASES = {
+  StatusIO: 'statusIO',
+  statusPageIo: 'statusPage',
+  statusIo: 'statusIO'
+};
+
 export const getProvider = providerKey => {
-  if (providerKey === 'statusPage') {
-    providerKey = 'statusPage';
-  } else if (providerKey === 'StatusIO') {
-    providerKey = 'statusIO';
-  } else if (providerKey === 'statusPal') {
-    providerKey = 'statusPal';
-  }
-  return providers[providerKey];
+  return providers[PROVIDER_KEY_ALIASES[providerKey] || providerKey];
 };

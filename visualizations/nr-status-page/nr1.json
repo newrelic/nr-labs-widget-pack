@@ -47,6 +47,26 @@
           {
             "title": "Status Pal",
             "value": "statusPal"
+          },
+          {
+            "title": "Apple System Status",
+            "value": "apple"
+          },
+          {
+            "title": "AWS Health",
+            "value": "awsHealth"
+          },
+          {
+            "title": "Azure",
+            "value": "azure"
+          },
+          {
+            "title": "Okta",
+            "value": "okta"
+          },
+          {
+            "title": "Oracle Cloud Infrastructure",
+            "value": "oci"
           }
         ]
       },
@@ -71,7 +91,7 @@
       {
         "name": "corsProxy",
         "title": "CORS Proxy",
-        "description": "A CORS proxy to access status page service (Optional)",
+        "description": "Optional. A New Relic Labs proxy is used automatically for providers that require one; set this only to override it with your own CORS proxy.",
         "type": "string"
       },
       {

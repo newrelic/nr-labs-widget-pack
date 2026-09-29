@@ -1,3 +1,5 @@
+import { buildColumnIncidentUpdates } from './incident-utils';
+
 const WorkloadSeverityToKnown = {
   0: 'none',
   1: 'minor',
@@ -6,12 +8,13 @@ const WorkloadSeverityToKnown = {
 };
 
 export const workloadFormatter = data => {
-  let statusCode = WorkloadSeverityToKnown.None;
+  let statusCode = 'none';
   let status = 'All Systems Operational';
 
-  if (data.results[0].events.length > 0) {
-    const incident = data.results[0].events[0];
-    statusCode = WorkloadSeverityToKnown[incident.EventStatus];
+  const events = data?.results?.[0]?.events || [];
+  if (events.length > 0) {
+    const incident = events[0];
+    statusCode = WorkloadSeverityToKnown[Number(incident.EventStatus)];
 
     if (statusCode === undefined || statusCode === 'none') {
       statusCode = 'none';
@@ -29,28 +32,45 @@ export const workloadFormatter = data => {
   };
 };
 
-const launcherURL = `https://one.newrelic.com/launcher/nr1-core.explorer/?launcher=eyJ3bEZpbHRlcnMiOiIifQ==`;
+// Region-specific: launcher deep links only resolve against one.newrelic.com.
+// EU/gov accounts will need their own regional host here.
+const LAUNCHER_FILTERS_BLOB = btoa(JSON.stringify({ wlFilters: '' }));
+const launcherURL = `https://one.newrelic.com/launcher/nr1-core.explorer/?launcher=${LAUNCHER_FILTERS_BLOB}`;
+
+const buildWorkloadDetailsPaneBlob = workloadGuid => {
+  const pane = {
+    nerdletId: 'workloads.detail',
+    entityGuid: workloadGuid,
+    isOverview: true,
+    referrers: {
+      launcherId: 'nr1-core.explorer',
+      nerdletId: 'nr1-core.listing'
+    },
+    entitiesViewMode: 'HDV'
+  };
+  try {
+    return btoa(JSON.stringify(pane));
+  } catch {
+    return null;
+  }
+};
 
 export const workloadIncidentFormatter = data => {
-  return data.results[0].events.map(incident => {
-    const incident_updates = [];
-    let incidentCode = WorkloadSeverityToKnown[incident.EventStatus];
+  const paneBlob = buildWorkloadDetailsPaneBlob(data?.workloadGuid);
+  const unhealthyEvents = data?.results?.[0]?.events.filter(
+    event => Number(event.EventStatus) > 0
+  );
 
-    Object.entries(incident).forEach(([key, value]) => {
-      if (key === 'EventStatus') {
-        const encodeURL = `{"nerdletId":"workloads.detail","entityGuid":"${data.workloadGuid}","isOverview":true,"referrers":{"launcherId":"nr1-core.explorer","nerdletId":"nr1-core.listing"},"entitiesViewMode":"HDV"}`;
-        incident_updates.push({
+  return (unhealthyEvents || []).map(incident => {
+    const incident_updates = buildColumnIncidentUpdates(incident, {
+      EventStatus: () =>
+        paneBlob && {
           created_at: incident.EventTimeStamp,
           body: 'Workload Details',
-          link_url: `${launcherURL}&pane=${btoa(encodeURL)}`
-        });
-      } else if (!key.toLowerCase().includes('timestamp')) {
-        incident_updates.push({
-          created_at: incident.EventTimeStamp,
-          body: `${key}: ${value}`
-        });
-      }
+          link_url: `${launcherURL}&pane=${paneBlob}`
+        }
     });
+    let incidentCode = WorkloadSeverityToKnown[Number(incident.EventStatus)];
 
     if (incidentCode === undefined) {
       incidentCode = 'none';
