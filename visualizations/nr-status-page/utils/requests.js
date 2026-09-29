@@ -32,7 +32,7 @@ const _fetchNrqlData = async (accountId, query) => {
 };
 
 const _fetchWorkloadData = async (accountId, guid) => {
-  const query = `SELECT EventTimeStamp, EventName, EventStatus, Workload FROM (SELECT earliest(timestamp) AS EventTimeStamp, latest(timestamp) AS EventTimeStamp, latest(statusValue) AS EventName, latest(entity.name) AS Workload FROM WorkloadStatus WHERE workloadGuid = '${guid}' FACET statusValueCode AS EventStatus, dateOf(timestamp) LIMIT 100) ORDER BY EventTimeStamp DESC SINCE 2 WEEKS AGO LIMIT 100`;
+  const query = `SELECT EventTimeStamp, EventName, EventStatus, Workload FROM (SELECT earliest(timestamp) AS EventTimeStamp, latest(timestamp) AS EventTimeStamp, latest(statusValue) AS EventName, latest(entity.name) AS Workload FROM WorkloadStatus WHERE workloadGuid = '${guid}' FACET statusValueCode AS EventStatus, dateOf(timestamp) LIMIT 100) ORDER BY EventTimeStamp DESC SINCE 4 WEEKS AGO LIMIT 100`;
   let resp;
   try {
     resp = await NrqlQuery.query({
