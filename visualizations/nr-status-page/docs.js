@@ -23,7 +23,8 @@ export default function Docs() {
           <BlockText spacingType={[BlockText.SPACING_TYPE.MEDIUM]}>
             Use the Status Page chart to display a single status feed in a
             dashboard. Currently supported providers are Status Page, Google,
-            Status IO, NRQL, New Relic Workload, RSS, and Status Pal.
+            Status IO, NRQL, New Relic Workload, RSS, Status Pal, Apple, AWS,
+            Azure, OCI, and Okta.
           </BlockText>
         </CardBody>
       </Card>
@@ -47,6 +48,9 @@ export default function Docs() {
                   </li>
                   <li>
                     <a>https://jira-software.status.atlassian.com</a>
+                  </li>
+                  <li>
+                    <a>https://status.newrelic.com</a>
                   </li>
                 </ul>
               </>
@@ -135,6 +139,63 @@ export default function Docs() {
                   </li>
                   <li>
                     `smtp` from <a>https://smtp.statuspal.io</a>
+                  </li>
+                </ul>
+              </>
+            </Spacing>
+            <br />
+            <Spacing type={[Spacing.TYPE.MEDIUM, Spacing.TYPE.EXTRA_LARGE]}>
+              <>
+                <h4>Apple</h4>
+                <ul className="docs-list">
+                  <li>
+                    <a>
+                      https://www.apple.com/support/systemstatus/data/developer/system_status_en_US.js
+                    </a>
+                  </li>
+                </ul>
+              </>
+            </Spacing>
+            <br />
+            <Spacing type={[Spacing.TYPE.MEDIUM, Spacing.TYPE.EXTRA_LARGE]}>
+              <>
+                <h4>AWS</h4>
+                <ul className="docs-list">
+                  <li>
+                    <a>https://health.aws.amazon.com</a>
+                  </li>
+                </ul>
+              </>
+            </Spacing>
+            <br />
+            <Spacing type={[Spacing.TYPE.MEDIUM, Spacing.TYPE.EXTRA_LARGE]}>
+              <>
+                <h4>Azure</h4>
+                <ul className="docs-list">
+                  <li>
+                    <a>https://azure.status.microsoft/en-us/status/feed/</a>
+                  </li>
+                </ul>
+              </>
+            </Spacing>
+            <br />
+            <Spacing type={[Spacing.TYPE.MEDIUM, Spacing.TYPE.EXTRA_LARGE]}>
+              <>
+                <h4>OCI</h4>
+                <ul className="docs-list">
+                  <li>
+                    <a>https://ocistatus.oraclecloud.com</a>
+                  </li>
+                </ul>
+              </>
+            </Spacing>
+            <br />
+            <Spacing type={[Spacing.TYPE.MEDIUM, Spacing.TYPE.EXTRA_LARGE]}>
+              <>
+                <h4>Okta</h4>
+                <ul className="docs-list">
+                  <li>
+                    <a>https://feeds.feedburner.com/OktaStatusRSS</a>
                   </li>
                 </ul>
               </>

@@ -5,6 +5,7 @@ import Summary from './components/summary';
 import Incidents from './components/incidents';
 import IncidentDrilldown from './components/incident-drilldown';
 import { fetchData } from './utils/requests';
+import { isProxyableUrl } from './utils/proxy';
 import { EmptyState, Spinner } from 'nr1';
 import { useInterval } from '@mantine/hooks';
 import {
@@ -12,6 +13,23 @@ import {
   uniformSummaryData
 } from './utils/format-service';
 import Docs from './docs';
+
+const NON_URL_PROVIDERS = ['nrql', 'workload', 'statusPal'];
+
+const THIRTY_DAYS_MS = 30 * 24 * 60 * 60 * 1000;
+// AWS Health and Azure only ever expose currently-active events, so a date
+// filter on those two can empty an otherwise-valid widget.
+const PROVIDERS_WITHOUT_HISTORY = ['awsHealth', 'azure'];
+
+const withinRollingWindow = (incidents, providerKey) => {
+  if (!Array.isArray(incidents)) return incidents;
+  if (PROVIDERS_WITHOUT_HISTORY.includes(providerKey)) return incidents;
+  const boundary = Date.now() - THIRTY_DAYS_MS;
+  return incidents.filter(incident => {
+    const created = new Date(incident?.created_at).getTime();
+    return Number.isNaN(created) ? true : created >= boundary;
+  });
+};
 
 const StatusPage = ({
   showDocs,
@@ -64,6 +82,8 @@ const StatusPage = ({
         errors.push(
           'CORS Proxy must end with string `/{url}` in order to properly form final URL'
         );
+      } else if (!isProxyableUrl(corsProxy.split('{url}')[0])) {
+        errors.push('CORS Proxy must use https://');
       }
     }
 
@@ -85,19 +105,25 @@ const StatusPage = ({
           errors.push('AccountId required when Workload provider selected');
         }
       }
+
+      if (
+        !NON_URL_PROVIDERS.includes(provider) &&
+        !isProxyableUrl(statusInput)
+      ) {
+        errors.push('Status page URL must use https://');
+      }
     }
 
     setInputErrors(errors);
-  }, [provider, statusInput, serviceTitle, accountId]);
+  }, [provider, statusInput, serviceTitle, accountId, corsProxy]);
 
   const getData = async () => {
-    let finalStatusInput = statusInput;
-
-    if (corsProxy) {
-      finalStatusInput = corsProxy.replace('{url}', statusInput);
-    }
-
-    const results = await fetchData(provider, finalStatusInput, accountId);
+    const results = await fetchData(
+      provider,
+      statusInput,
+      accountId,
+      corsProxy
+    );
     if (typeof results === 'string') {
       setSummaryData(null);
       setIncidentsData(null);
@@ -108,17 +134,29 @@ const StatusPage = ({
       setSummaryData(uniformSummaryData(provider, results.summary));
     }
     if (results.incidents) {
-      setIncidentsData(uniformIncidentData(provider, results.incidents));
+      setIncidentsData(
+        withinRollingWindow(
+          uniformIncidentData(provider, results.incidents),
+          provider
+        )
+      );
     }
 
     if (results.all) {
       setSummaryData(uniformSummaryData(provider, results.all));
-      setIncidentsData(uniformIncidentData(provider, results.all));
+      setIncidentsData(
+        withinRollingWindow(
+          uniformIncidentData(provider, results.all),
+          provider
+        )
+      );
     }
 
     if (!results.summary && !results.incidents) {
       setSummaryData(uniformSummaryData(provider, results));
-      setIncidentsData(uniformIncidentData(provider, results));
+      setIncidentsData(
+        withinRollingWindow(uniformIncidentData(provider, results), provider)
+      );
     }
 
     if (loading) {

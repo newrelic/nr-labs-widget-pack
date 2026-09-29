@@ -7,3 +7,8 @@ tmp
 *.tar.gz
 .DS_Store
 *:Zone.Id*
+.bundle-analyzer/
+
+.codegraph/
+.claude/
+CLAUDE.md
