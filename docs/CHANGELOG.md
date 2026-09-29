@@ -1,3 +1,11 @@
+## [1.61.1](https://github.com/newrelic/nr-labs-widget-pack/compare/v1.61.0...v1.61.1) (2026-09-29)
+
+
+### Bug Fixes
+
+* status-page updates for parity with nr1 app ([bb0930e](https://github.com/newrelic/nr-labs-widget-pack/commit/bb0930e0b04652a29a99f53ef4bf8888d463640b))
+* workload severity bug ([fe80887](https://github.com/newrelic/nr-labs-widget-pack/commit/fe808879c26e41f77308cf610ab851b955097550))
+
 # [1.61.0](https://github.com/newrelic/nr-labs-widget-pack/compare/v1.60.3...v1.61.0) (2026-07-16)
 
 
