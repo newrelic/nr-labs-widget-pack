@@ -57,7 +57,9 @@ const buildWorkloadDetailsPaneBlob = workloadGuid => {
 
 export const workloadIncidentFormatter = data => {
   const paneBlob = buildWorkloadDetailsPaneBlob(data?.workloadGuid);
-  const unhealthyEvents = data?.results?.[0]?.events.filter(event => Number(event.EventStatus) > 0);
+  const unhealthyEvents = data?.results?.[0]?.events.filter(
+    event => Number(event.EventStatus) > 0
+  );
 
   return (unhealthyEvents || []).map(incident => {
     const incident_updates = buildColumnIncidentUpdates(incident, {
