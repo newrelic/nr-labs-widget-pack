@@ -1,12 +1,20 @@
-import React from 'react';
-import { NerdletStateContext } from 'nr1';
+import React, { useContext, useEffect } from 'react';
+import { NerdletStateContext, BlockText } from 'nr1';
+import toSafeUrl from '../../shared/toSafeUrl';
 
-export default class LinkWrapper extends React.Component {
-  render() {
-    return (
-      <NerdletStateContext.Consumer>
-        {nerdletState => window.location.replace(nerdletState.url)}
-      </NerdletStateContext.Consumer>
-    );
+export default function LinkWrapper() {
+  const nerdletState = useContext(NerdletStateContext);
+  const safeUrl = toSafeUrl(nerdletState?.url);
+
+  useEffect(() => {
+    if (safeUrl) {
+      window.location.replace(safeUrl);
+    }
+  }, [safeUrl]);
+
+  if (!safeUrl) {
+    return <BlockText>Link must be an http(s) URL.</BlockText>;
   }
+
+  return null;
 }
