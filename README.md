@@ -924,13 +924,18 @@ Click on the short description in each section to view chart details.
   #### Overview
   Incorporate buttons into your dashboards, with configurable onClick actions.
 
-  #### Example w/ Stacked Nerdlet
-  ```
-  Nerdlet Id: service-maps.home
+  #### Action Types
+  Each action is rendered as one button. Set the **Action Type**, then fill in the **Nerdlet ID or Hyperlink** (`id`) field, plus optional **JSON URL State** for `Stacked Nerdlet ID`.
 
-  URL State
-  {"entityGuid":"MTYwNjg2MnxBUE18QVBQTElDQVRJT058NjI2OTA3NjE"}
-  ```
+  | Action Type | Description | Example |
+  | --- | --- | --- |
+  | Stacked Nerdlet ID | Opens a nerdlet in a stacked pane, optionally with JSON URL state. | ID: `service-maps.home`<br>JSON URL State: `{"entityGuid":"MTYwNjg2MnxBUE18QVBQTElDQVRJT058NjI2OTA3NjE"}` |
+  | Stacked Entity GUID | Opens the entity with the given GUID in a stacked pane. | `MTYwNjg2MnxBUE18QVBQTElDQVRJT058NjI2OTA3NjE` |
+  | Hyperlink | Opens an http(s) URL in a new browser tab. | `https://docs.newrelic.com` |
+  | Stacked Link (experimental) | Opens an http(s) URL inside a stacked pane; the site must allow being framed by the platform. | `n/a` |
+  | Window URL Replace (experimental) | Replaces the widget's current page with an http(s) URL; the same framing limits apply. |  `n/a` |
+
+  URL-based actions and **Immediate URL Replace** accept only `http` and `https` URLs; any other scheme shows an error and does nothing.
   ---
 </details>
 
