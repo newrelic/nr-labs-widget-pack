@@ -1,3 +1,10 @@
+## [1.61.2](https://github.com/newrelic/nr-labs-widget-pack/compare/v1.61.1...v1.61.2) (2026-10-28)
+
+
+### Bug Fixes
+
+* **nr-action-loader:** block non-http(s) URLs ([0a8b0e7](https://github.com/newrelic/nr-labs-widget-pack/commit/0a8b0e71f81d8fa2a8e58aea014d63e2da406236))
+
 ## [1.61.1](https://github.com/newrelic/nr-labs-widget-pack/compare/v1.61.0...v1.61.1) (2026-09-29)
 
 
