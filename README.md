@@ -299,6 +299,51 @@ Click on the short description in each section to view chart details.
   ---
 </details>
 
+### Flow Chart
+<details>
+
+  <summary>Render the flow of values from source to target attributes as a Sankey diagram.</summary>
+
+  <img src="screenshots/flow_chart_01.png" height="450" alt="Flow chart screenshot" />
+
+   #### Overview
+   Use the Flow Chart to visualize how values move between entities or stages in a process, such as the next page visited after a landing page, or traffic between services.
+
+   Each query result row becomes one link. The first `FACET` attribute is the source, the second is the target, and the single aggregate function sets the link value. Names are shared across both columns, so a value that is both a target and a source creates a multi-level flow (A → B → C).
+
+   **NOTE: Cycles (e.g. A → B → A) cannot be drawn and show a "Cycle Detected" error.**
+
+  #### Requirements
+  In order to use this chart, there are a few requirements:
+  - An Account ID
+  - The `FACET` clause must have exactly two attributes: source and target
+  - The `SELECT` clause must have exactly one aggregate function.
+  - Do not use the `TIMESERIES` clause
+  - Do not use `SINCE` when Enable Time Picker is on, as the time range is applied automatically
+  - Set `LIMIT` explicitly, as NRQL facets return 10 results by default
+  - Rows with a value of 0 or less are skipped, and duplicate source/target pairs are summed
+
+  Label prefixes and suffixes can be added as constants in the `SELECT` clause, e.g. `' ms' as 'suffix'` or `'$' as prefix`. They are used for labels only and are removed before the query runs.
+
+  A valid query for the chart could look like this:
+  `FROM PageView SELECT count(*) FACET pageUrl, asn LIMIT 25`
+
+  #### UI Configuration Options
+
+  | Option | Type | Default | Description |
+  |--------|------|---------|-------------|
+  | Show Documentation | boolean | false | Display inline documentation within the widget |
+  | Account ID | account-id | - | Account ID to run the query against |
+  | Query | nrql | - | NRQL query with two `FACET` attributes (source, target) and one aggregate |
+  | Poll Interval | enum | 60s | How often to refresh data (5s, 10s, 15s, 30s, 45s, 1m, 5m) |
+  | Node Label Content | enum | Name only | Show name, name and value, name and percent, or name, value and percent. Percent is the share of total flow leaving the first-level nodes |
+  | Sort Order | enum | Source largest first | Order nodes by source or target value (largest or smallest first), or alphabetically |
+  | Enable Time Picker | boolean | false | Apply dashboard time picker to the query. Remove `SINCE` clause if enabled |
+  | Enable Dashboard Filters | boolean | false | Apply dashboard filter bar to the query |
+
+  ---
+</details>
+
 ### Map Widget
 <details>
   <summary>Plot any data that includes latitude and longitude onto an interactive map, leveraging the Leaflet or Mapbox API.</summary>

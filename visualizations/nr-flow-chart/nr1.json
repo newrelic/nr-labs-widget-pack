@@ -1,0 +1,134 @@
+{
+    "schemaType": "VISUALIZATION",
+    "id": "nr-flow-chart",
+    "displayName": "Flow Chart",
+    "description": "Renders a FACET source, target NRQL query as a Sankey flow chart",
+    "configuration": [
+        {
+            "name": "showDocs",
+            "title": "Show Documentation",
+            "description": "",
+            "type": "boolean"
+        },
+        {
+            "name": "accountId",
+            "title": "Account ID",
+            "description": "Account ID to be associated with the query",
+            "type": "account-id"
+        },
+        {
+            "name": "query",
+            "title": "Query",
+            "description": "NRQL query with two FACET attributes (source, then target) and one aggregate. Set LIMIT explicitly, e.g. FROM PageView SELECT count(*) FACET pageUrl, salesforceCustomerName LIMIT 25",
+            "type": "nrql"
+        },
+        {
+            "name": "pollInterval",
+            "title": "Select Poll Interval (seconds) default 60s",
+            "description": "",
+            "type": "enum",
+            "items": [
+              {
+                "title": "Select",
+                "value": 60
+              },
+              {
+                "title": "5s",
+                "value": 5
+              },
+              {
+                "title": "10s",
+                "value": 10
+              },
+              {
+                "title": "15s",
+                "value": 15
+              },
+              {
+                "title": "30s",
+                "value": 30
+              },
+              {
+                "title": "45s",
+                "value": 45
+              },
+              {
+                "title": "1m",
+                "value": 60
+              },
+              {
+                "title": "5m",
+                "value": 300
+              }
+            ]
+        },
+        {
+            "name": "labelContent",
+            "title": "Node label content",
+            "description": "Text shown under each node name. Add a prefix or suffix to values with constants in the query, e.g. '$' as 'prefix' or ' ms' as 'suffix'. Percent is the share of the total flow leaving the first-level nodes",
+            "type": "enum",
+            "items": [
+              {
+                "title": "Name only",
+                "value": "name"
+              },
+              {
+                "title": "Name and value",
+                "value": "nameValue"
+              },
+              {
+                "title": "Name and percent",
+                "value": "namePercent"
+              },
+              {
+                "title": "Name, value and percent",
+                "value": "all"
+              }
+            ]
+        },
+        {
+            "name": "sortOrder",
+            "title": "Sort order",
+            "description": "Source orders the first-level nodes by value and groups the rest under them. Target does the same from the last level. Alphabetical sorts every node by name. Default: Source, largest first",
+            "type": "enum",
+            "items": [
+              {
+                "title": "Source, largest first",
+                "value": "sourceDesc"
+              },
+              {
+                "title": "Source, smallest first",
+                "value": "sourceAsc"
+              },
+              {
+                "title": "Target, largest first",
+                "value": "targetDesc"
+              },
+              {
+                "title": "Target, smallest first",
+                "value": "targetAsc"
+              },
+              {
+                "title": "Alphabetical, A to Z",
+                "value": "alphaAsc"
+              },
+              {
+                "title": "Alphabetical, Z to A",
+                "value": "alphaDesc"
+              }
+            ]
+        },
+        {
+            "name": "enableTimePicker",
+            "title": "Enable Time Picker",
+            "description": "Allows the use of the time picker",
+            "type": "boolean"
+        },
+        {
+            "name": "enableFilters",
+            "title": "Enable dashboard filters",
+            "description": "Allows the use of dashboard filters",
+            "type": "boolean"
+        }
+    ]
+}
