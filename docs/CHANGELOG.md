@@ -1,3 +1,10 @@
+# [1.62.0](https://github.com/newrelic/nr-labs-widget-pack/compare/v1.61.2...v1.62.0) (2026-11-19)
+
+
+### Features
+
+* add flow chart viz (sankey diagram) ([c8ce3ad](https://github.com/newrelic/nr-labs-widget-pack/commit/c8ce3adbd46b4c1f13b5fa40ce2abd0f8529f1ab))
+
 ## [1.61.2](https://github.com/newrelic/nr-labs-widget-pack/compare/v1.61.1...v1.61.2) (2026-10-28)
 
 
