@@ -17,8 +17,6 @@
         "email": "opensource+nrlabswidgetpack@newrelic.com"
     },
     "dependencies": {
-        "@ant-design/charts": "^1.4.3",
-        "@ant-design/plots": "^1.2.6",
         "@mantine/hooks": "^6.0.0",
         "async": "^3.2.6",
         "chart.js": "^3.9.1",
@@ -47,11 +45,12 @@
     ],
     "devDependencies": {
         "@newrelic/eslint-plugin-newrelic": "^0.3.1",
-        "@semantic-release/changelog": "^5.0.1",
-        "@semantic-release/git": "^9.0.0",
         "eslint": "^6.8.0",
         "prettier": "^1.19.1",
         "react": "17.0.2",
         "react-dom": "17.0.2"
+    },
+    "overrides": {
+        "semver@<5.7.2": "5.7.2"
     }
 }
